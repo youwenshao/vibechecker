@@ -1,4 +1,4 @@
-# Phase 0 evaluation
+# Evaluation
 
 Run from the repository root with the Python 3.12 uv workspace. The registry is the SHA-256 manifest. Every enabled loader verifies local and downloaded files against it. The same commands run on the M6 and in the Modal eval job.
 
@@ -35,3 +35,55 @@ uv run vibechecker-eval sync pull --bucket vibechecker-artifacts --datasets raid
 ```
 
 Training accepts `--commercial-only` and fails explicitly if the resulting training or calibration partition lacks either label. Sources and project usage decisions are recorded in [the verification report](LICENSES.md).
+
+## Deep evaluation
+
+Fit from pinned local checkpoints. `VIBECHECKER_LM` and `VIBECHECKER_ENCODER` point to the Quick models. `VIBECHECKER_PAIR_OBSERVER` points to the base model and `VIBECHECKER_PAIR_PERFORMER` to its instruct counterpart. Sampling, training and validation run locally on the named MLX backend. Use the same file contents on both inference hosts.
+
+```sh
+uv run vibechecker-eval deep --version phase-1 --seed 42 --limit-per-class 96 \
+  --datasets raid raid-attacks asap ellipse liang --model-out eval/artifacts/deep.joblib \
+  --trace-out eval/artifacts/phase-1.metal.json
+```
+
+The fit partitions related RAID prompt variants together and removes duplicate texts across sources. A second group split separates training the heads from training the document stacker. The mixed-document builder splices contiguous excerpts within each partition and derives its sentence labels using the production splitter. ELL heads use publisher-labeled human examples. Unknown backgrounds contribute no ELL training labels. The laundering classifier learns the distinction between the clean and attacked RAID samples. Its evaluation measures this proxy task. The calibration partition fits balanced-prior isotonic curves and band thresholds. `--commercial-only` applies the registry restrictions to both fitting and evaluation.
+
+Test and bake-off validation use different source groups. The scorecard reports mixed-document sentence F1, the document metrics, observed reliability bins, refusal counts, calibration thresholds and confidence intervals for the false-positive rates. Short TOEFL essays count toward refusals. A zero denominator leaves their false-positive rate unmeasured.
+
+The fitted artifact records its training seed, per-class reservoir limit and dataset order under `fit_selection`. A later `--model-in` evaluation can use a larger independent reservoir or a different seed. Its report preserves the original fit settings and records the current evaluation settings under `scope`. Earlier artifacts without this metadata show a null fit selection.
+
+Deep uses the Quick language model for several document features. Its effective token count per prefill appears as `quick_prefill` in both the report and parity trace. Set `VIBECHECKER_QUICK_PREFILL` to reproduce that profile. New fits also record their original prefill under `fit_selection`. Metal and CUDA parity requires the same evaluation prefill. Earlier traces used 64 tokens.
+
+The M6 load gate matches the artifact, version and prefill against the scoring trace. It recomputes nearest-rank p95 from 20 complete 2,000-word Deep streams and 100 complete 1,000-word Quick checks at concurrency five. It also requires a healthy beat-ad job sample before the workload and after each of the 20 rounds.
+
+**Falcon reference reproduction.** Figure 11 reports an AUROC of 0.9933 on the CNN articles paired with LLaMA-2-13B continuations. The job fetches the pinned Falcon base and instruct revisions and verifies the original bf16 shard digests. It uses the first 512 tokens, unmodified text, and the negative Binoculars ratio. The default run selects 64 paired records with seed 42. Set `--pairs 0` for all 2,207 pairs. The subset check uses an absolute tolerance of 0.01 against the published AUROC and reports a paired bootstrap interval. The report records the corpus, selection digest, GPU and measured score. A smaller subset is a plumbing check. [Published paper](https://proceedings.mlr.press/v235/hans24a.html) · [Authors’ experiment](https://github.com/ahans30/Binoculars/blob/c8ae2f90d50ee696418bc71d8d9e5020e5f9d7b8/experiments/jobs.sh)
+
+```sh
+uv run --package vibechecker-modal python -m modal run modal/phase1.py::reproduce --pairs 64
+```
+
+**Quantization selection.** For each model family, score the bf16 reference on an L40S. Account for each of 4, 6 and 8 bits with a scored Metal run or a documented preflight above 18 GiB. Use the same `deep --cohort validation` fit with a distinct `--version` and artifact output for each scored precision. Keep `--pair-family`, seed, dataset order and sample limits fixed. The selector ranks scored candidates that fit within 18 GiB and meet the 5% ESL false-positive gate. It uses essay TPR at 1% FPR, then ESL false-positive rate, then memory usage. The JSON lists differences from bf16 for each scored candidate.
+
+```sh
+uv run vibechecker-eval bakeoff eval/reports/{qwen-bf16,qwen-4,qwen-6,qwen-8}/report.json \
+  --out eval/artifacts/bakeoff.json
+uv run --package vibechecker-modal python -m modal run modal/phase1.py::fit \
+  --observer /weights/observer --performer /weights/performer --version qwen-bf16 \
+  --bf16 --validation --pair-family Qwen2.5-7B --limit 16
+```
+
+The Modal fit uses the same corpus cache, volume and training entry point. Use `--limit` to set the per-class reservoir size. Evaluate the chosen fitted artifact on the test cohort with `--model-in`. For a release run, copy the Metal trace and fitted artifact to CUDA. Supply `--compare-trace`, `--reference-report`, `--bakeoff-report`, `--load-report` and `--enforce` to the Deep evaluator. Pass `--previous` when comparing with a previous Deep release. Missing evidence keeps the release ineligible. Parity compares numeric outcomes and UTF-16 sentence offsets for at least 200 identical documents. The methodology page reads the release's aggregate `eval/reports/phase-1/report.json`. Raw research texts stay in the corpus cache.
+
+A partial bake-off can publish measured Metal candidates while CUDA is unavailable. It returns no selected model, sets `pass` to false and lists missing precision/backend measurements. Include `--rank-provisional` for a separate ordering of the measured candidates that meet the memory and ESL limits.
+
+```sh
+uv run vibechecker-eval bakeoff eval/reports/qwen-4/report.json \
+  --partial --rank-provisional --out eval/artifacts/bakeoff-partial.json
+```
+
+If a candidate was rejected before scoring, record the preflight with `vibechecker-eval memory-preflight --pair-family FAMILY --bits 8 --observed-pid PID --basis "M6 candidate after loading both checkpoints" --out preflight.json` while its process is alive. Alternatively, pass `--projected-bytes BYTES` and give the calculation and its inputs in `--basis`. The command accepts values above 18 GiB. Include the file via `--rejected preflight.json` in either a full or partial bake-off. The report lists documented exclusions and their basis under `preflight_rejections`. Precisions awaiting evidence appear under `missing_measurements`.
+
+```sh
+uv run vibechecker-eval bakeoff eval/reports/{qwen-bf16,qwen-4,qwen-6}/report.json \
+  --rejected eval/reports/phase-1/8bit-memory-preflight.json --out eval/artifacts/bakeoff.json
+```

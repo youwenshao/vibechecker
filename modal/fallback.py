@@ -1,5 +1,6 @@
 """Deploy with uv run --package vibechecker-modal modal deploy modal/fallback.py."""
 
+import os
 from pathlib import Path
 
 import modal
@@ -54,16 +55,24 @@ image = (
 def inference():
     from vibechecker_inference.app import create_app
 
+    if Path("/weights/deep.joblib").is_file():
+        os.environ.setdefault("VIBECHECKER_PAIR_OBSERVER", "/weights/pair/base")
+        os.environ.setdefault("VIBECHECKER_PAIR_PERFORMER", "/weights/pair/instruct")
+        os.environ.setdefault("VIBECHECKER_DEEP_MODEL", "/weights/deep.joblib")
     # Only Metal is allowed to advertise the primary heartbeat.
     return create_app(heartbeat_url="")
 
 
 @app.function(image=image, gpu="L4", volumes={"/weights": weights}, timeout=86400, max_containers=1)
-def evaluate(args: list[str]):
+def evaluate(args: list[str], quick_prefill: int = 64):
     import subprocess
 
     # Explicit operator entry point. Do not expose corpus fetch/training over HTTP.
     try:
+        if args[0] == "deep":
+            os.environ.setdefault("VIBECHECKER_PAIR_OBSERVER", "/weights/pair/base")
+            os.environ.setdefault("VIBECHECKER_PAIR_PERFORMER", "/weights/pair/instruct")
+            os.environ["VIBECHECKER_QUICK_PREFILL"] = str(quick_prefill)
         subprocess.run(["vibechecker-eval", *args], check=True)
     finally:
         weights.commit()

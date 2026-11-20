@@ -27,6 +27,7 @@ class InferenceEvent1(BaseModel):
 
 class Stage(StrEnum):
     quick = 'quick'
+    deep = 'deep'
     scoring = 'scoring'
 
 
@@ -40,6 +41,17 @@ class InferenceEvent2(BaseModel):
     total: int = Field(..., gt=0, le=9007199254740991)
 
 
+class Signal(StrEnum):
+    e1 = 'e1'
+    e2 = 'e2'
+    e3 = 'e3'
+    e4 = 'e4'
+    e5 = 'e5'
+    e6 = 'e6'
+    e7 = 'e7'
+    stylometry = 'stylometry'
+
+
 class Item(BaseModel):
     model_config = ConfigDict(
         extra='forbid',
@@ -47,6 +59,7 @@ class Item(BaseModel):
     start: int = Field(..., ge=0, le=9007199254740991)
     end: int = Field(..., gt=0, le=9007199254740991)
     score: float = Field(..., ge=0.0, le=1.0)
+    signals: list[Signal] = Field(..., max_length=8)
 
 
 class InferenceEvent3(BaseModel):
@@ -54,7 +67,7 @@ class InferenceEvent3(BaseModel):
         extra='forbid',
     )
     type: Literal['sentences']
-    items: list[Item]
+    items: list[Item] = Field(..., min_length=1)
 
 
 class Interval(BaseModel):
@@ -74,11 +87,15 @@ class Band(StrEnum):
 class Id(StrEnum):
     e1 = 'e1'
     e2 = 'e2'
+    e3 = 'e3'
+    e4 = 'e4'
+    e5 = 'e5'
     e6 = 'e6'
+    e7 = 'e7'
     stylometry = 'stylometry'
 
 
-class Signal(BaseModel):
+class Signal1(BaseModel):
     model_config = ConfigDict(
         extra='forbid',
     )
@@ -88,9 +105,50 @@ class Signal(BaseModel):
     samples: list[float] | None = Field(None, max_length=16, min_length=2)
 
 
+class Signals(RootModel[list[Signal1]]):
+    root: list[Signal1] = Field(..., max_length=4, min_length=4)
+
+
+class Signals1Item(BaseModel):
+    model_config = ConfigDict(
+        extra='forbid',
+    )
+    id: Id
+    value: float
+    humanReference: float
+    samples: list[float] | None = Field(None, max_length=16, min_length=2)
+
+
+class Signals1(RootModel[list[Signals1Item]]):
+    root: list[Signals1Item] = Field(..., max_length=8, min_length=8)
+
+
 class Flag(StrEnum):
     invisible = 'invisible'
     homoglyph = 'homoglyph'
+    esl = 'esl'
+    laundering = 'laundering'
+
+
+class Signal2(StrEnum):
+    e1 = 'e1'
+    e2 = 'e2'
+    e3 = 'e3'
+    e4 = 'e4'
+    e5 = 'e5'
+    e6 = 'e6'
+    e7 = 'e7'
+    stylometry = 'stylometry'
+
+
+class Sentence(BaseModel):
+    model_config = ConfigDict(
+        extra='forbid',
+    )
+    start: int = Field(..., ge=0, le=9007199254740991)
+    end: int = Field(..., gt=0, le=9007199254740991)
+    score: float = Field(..., ge=0.0, le=1.0)
+    signals: list[Signal2] = Field(..., max_length=8)
 
 
 class Result(BaseModel):
@@ -101,8 +159,9 @@ class Result(BaseModel):
     interval: Interval
     band: Band
     wordCount: int = Field(..., ge=150, le=5000)
-    signals: list[Signal] = Field(..., max_length=4, min_length=4)
-    flags: list[Flag] = Field(..., max_length=2)
+    signals: Signals | Signals1
+    flags: list[Flag] = Field(..., max_length=4)
+    sentences: list[Sentence] | None = Field(None, min_length=1)
 
 
 class InferenceEvent4(BaseModel):

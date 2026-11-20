@@ -1,28 +1,37 @@
 import { z } from "zod";
 
 export const Backend = z.enum(["mlx-metal", "mlx-cuda", "mlx-cpu"]);
+export const Mode = z.enum(["quick", "deep"]);
+export type Mode = z.infer<typeof Mode>;
 export const AnalyzeRequest = z.strictObject({
   text: z.string().min(1).max(200_000),
-  mode: z.literal("quick"),
+  mode: Mode,
 });
 
+export const SignalId = z.enum(["e1", "e2", "e3", "e4", "e5", "e6", "e7", "stylometry"]);
+export type SignalId = z.infer<typeof SignalId>;
+export const SentenceScore = z.strictObject({
+  start: z.int().nonnegative(),
+  end: z.int().positive(),
+  score: z.number().min(0).max(1),
+  signals: z.array(SignalId).max(8),
+});
+export type SentenceScore = z.infer<typeof SentenceScore>;
 const Index = z.int().min(0).max(100);
+const Signal = z.strictObject({
+  id: SignalId,
+  value: z.number(),
+  humanReference: z.number(),
+  samples: z.array(z.number()).min(2).max(16).optional(),
+});
 export const CheckResult = z.strictObject({
   index: Index,
   interval: z.strictObject({ low: Index, high: Index }),
   band: z.enum(["low", "mixed", "high"]),
   wordCount: z.int().min(150).max(5000),
-  signals: z
-    .array(
-      z.strictObject({
-        id: z.enum(["e1", "e2", "e6", "stylometry"]),
-        value: z.number(),
-        humanReference: z.number(),
-        samples: z.array(z.number()).min(2).max(16).optional(),
-      }),
-    )
-    .length(4),
-  flags: z.array(z.enum(["invisible", "homoglyph"])).max(2),
+  signals: z.union([z.array(Signal).length(4), z.array(Signal).length(8)]),
+  flags: z.array(z.enum(["invisible", "homoglyph", "esl", "laundering"])).max(4),
+  sentences: z.array(SentenceScore).min(1).optional(),
 });
 export type CheckResult = z.infer<typeof CheckResult>;
 export const Version = z.string().regex(/^[a-zA-Z0-9._-]{1,64}$/);
@@ -35,19 +44,13 @@ export const InferenceEvent = z.discriminatedUnion("type", [
   }),
   z.strictObject({
     type: z.literal("progress"),
-    stage: z.enum(["quick", "scoring"]),
+    stage: z.enum(["quick", "deep", "scoring"]),
     done: z.int().nonnegative(),
     total: z.int().positive(),
   }),
   z.strictObject({
     type: z.literal("sentences"),
-    items: z.array(
-      z.strictObject({
-        start: z.int().nonnegative(),
-        end: z.int().positive(),
-        score: z.number().min(0).max(1),
-      }),
-    ),
+    items: z.array(SentenceScore).min(1),
   }),
   z.strictObject({ type: z.literal("result"), result: CheckResult }),
   z.strictObject({

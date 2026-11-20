@@ -1,0 +1,10 @@
+{
+  "experiment": "pair-memory-preflight",
+  "family": "Qwen2.5-7B",
+  "bits": 8,
+  "backend": "mlx-metal",
+  "kind": "projected_footprint",
+  "bytes": 21481742428,
+  "cap_bytes": 19327352832,
+  "basis": "Peak 13866459488 bytes in the 4-bit validation run, plus the change in packed pair size: 2 * (8091987725 - 4284346255) bytes. Shard sizes from mlx-community/Qwen2.5-7B-8bit@7c80b674e40cfecdfde930919cd7bbceafa17aea and its Instruct-8bit counterpart @df11cb390bd674c24a9ddedf19f05bc09f6e0148. Assumes similar non-weight memory."
+}

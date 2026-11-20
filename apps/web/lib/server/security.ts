@@ -1,3 +1,4 @@
+import type { Mode } from "@vibechecker/contracts";
 import { createHash, createHmac, randomUUID, timingSafeEqual } from "node:crypto";
 
 export function env(name: string): string {
@@ -101,7 +102,7 @@ export async function readBody(req: Request, max: number) {
   return new TextDecoder("utf-8", { fatal: true }).decode(Buffer.concat(chunks));
 }
 
-export async function verifyTurnstile(token: string, ip: string) {
+export async function verifyTurnstile(token: string, ip: string, mode: Mode) {
   const override = process.env.TURNSTILE_VERIFY_URL;
   if (
     override &&
@@ -127,6 +128,6 @@ export async function verifyTurnstile(token: string, ip: string) {
   if (!response.ok) throw Error("Verification unavailable");
   const result = await response.json();
   return (
-    result.success === true && result.action === "quick_check" && hosts.includes(result.hostname)
+    result.success === true && result.action === mode + "_check" && hosts.includes(result.hostname)
   );
 }

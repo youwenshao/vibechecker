@@ -10,7 +10,7 @@ from .metrics import Observation, backend_parity, gates, summarize
 from .registry import sha256
 
 
-def sample(stream, limit, seed, count_words, *, quick_length=True):
+def sample(stream, limit, seed, count_words, *, quick_length=True, length_range=None):
     """Reservoir sampling keeps evaluation memory bounded even on the full RAID corpus."""
     selected = defaultdict(list)
     counts, skipped = Counter(), Counter()
@@ -18,7 +18,8 @@ def sample(stream, limit, seed, count_words, *, quick_length=True):
     rng = random.Random(seed)
     for item in stream:
         n = count_words(item.text)
-        if quick_length and not 150 <= n <= 5000:
+        bounds = length_range if length_range is not None else (150, 5000) if quick_length else None
+        if bounds and not bounds[0] <= n <= bounds[1]:
             skipped[f"{item.dataset}/length"] += 1
             continue
         digest = fingerprint(item.text)
@@ -83,13 +84,54 @@ def write_report(report, directory):
         lines.append(f"| {name} | {group['count']} | " + " | ".join(numbers) + f" | {fpr} |")
     lines += [
         "",
-        "## Quick acceptance gates",
+        f"## {report['mode'].title()} acceptance gates",
         "",
         "| Measure | Observed | Gate | Status |",
         "|---|---:|---:|---|",
     ]
     for name, gate in report["gates"]["checks"].items():
         lines.append(f"| {name} | {display(gate['value'])} | {gate['target']} | {gate['status']} |")
+    if report["mode"] == "deep":
+        sentence = report["mixed_sentence_metrics"]
+        fitted = report.get("fit_selection")
+        lines += ["", "## Sampling", ""]
+        if fitted:
+            lines.append(
+                f"Training used seed {fitted['seed']} and a reservoir limit of "
+                f"{fitted['limit_per_class_per_dataset_split']} per class, dataset and split "
+                f"(zero means all rows). Dataset order was {', '.join(fitted['dataset_order'])}."
+            )
+        else:
+            lines.append("The fitted artifact has no recorded training selection.")
+        lines.append(
+            f"Evaluation used seed {report['scope']['seed']} and a reservoir limit of "
+            f"{report['scope']['limit_per_class_per_dataset_split']} on the {report['scope']['cohort']} cohort."
+        )
+        lines.append(
+            f"The Quick LM used {report.get('quick_prefill', 64)} tokens per prefill during evaluation."
+        )
+        lines += [
+            "",
+            "## Sentence and hardware evidence",
+            "",
+            f"Mixed-document F1 was {display(sentence['f1'])} across {sentence['count']} held-out sentences.",
+            f"Metal/CUDA parity: {report['parity'] or 'unmeasured'}.",
+            f"Release eligible: {report['release_ready']}.",
+            "",
+        ]
+        for name, item in report["evidence"].items():
+            status = "passed" if item["pass"] else "failed" if item["report"] else "unmeasured"
+            if name == "quantization" and (item["report"] or {}).get("partial"):
+                status = "incomplete"
+            lines.append(f"- {name}: {status}")
+        if report["skipped"].get("liang/toefl/length"):
+            lines += [
+                "",
+                (
+                    f"The length gate excluded {report['skipped']['liang/toefl/length']} TOEFL essays. "
+                    "A cohort with no eligible essays has no estimated false-positive rate."
+                ),
+            ]
     lines += [
         "",
         "The JSON report includes the input SHA-256 manifest, selection settings, refusal counts and timing.",

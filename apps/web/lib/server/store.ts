@@ -1,4 +1,4 @@
-import type { Backend, CheckResult } from "@vibechecker/contracts";
+import type { Backend, CheckResult, Mode } from "@vibechecker/contracts";
 import { env } from "./security";
 
 async function rest(path: string, payload?: unknown) {
@@ -20,8 +20,8 @@ async function rest(path: string, payload?: unknown) {
   return raw ? JSON.parse(raw) : null;
 }
 
-export async function consumeQuota(device: string, address: string): Promise<boolean> {
-  return (await rest("rpc/consume_quota", { p_device: device, p_address: address })) === true;
+export async function consumeQuota(device: string, address: string, mode: Mode): Promise<boolean> {
+  return (await rest("rpc/consume_quota", { p_device: device, p_address: address, p_mode: mode })) === true;
 }
 export async function spendRetry(hash: string): Promise<boolean> {
   return (await rest("rpc/use_retry", { p_nonce: hash })) === true;
@@ -46,6 +46,7 @@ export async function heartbeat(version: string, time: number) {
   });
 }
 export interface Completed {
+  mode: Mode;
   id: string;
   key: string;
   claimHash: string;
@@ -61,6 +62,7 @@ export async function storeCheck(entry: Completed) {
     p_version: entry.version,
     p_backend: entry.backend,
     p_result: entry.result,
+    p_mode: entry.mode,
   };
   // The check ID makes a retry safe after an ambiguous network timeout.
   try {

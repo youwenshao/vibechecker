@@ -20,6 +20,17 @@ def select_device(requested=None):
     return name, mx.cpu if name == "mlx-cpu" else mx.gpu
 
 
+def _token_reductions(logits, targets):
+    import mlx.core as mx
+
+    selected = mx.take_along_axis(logits, targets, axis=1)
+    log_probs = logits - mx.logsumexp(logits, axis=1, keepdims=True)
+    logp = mx.take_along_axis(log_probs, targets, axis=1)[:, 0]
+    rank = 1 + mx.sum(logits > selected, axis=1)
+    entropy = -mx.sum(mx.exp(log_probs) * log_probs, axis=1)
+    return logp, rank, entropy
+
+
 class MLXBackend:
     def __init__(self, model, name, device, chunk_size=64):
         if chunk_size < 1:
@@ -28,6 +39,19 @@ class MLXBackend:
         self.name = name
         self.device = device
         self.chunk_size = chunk_size
+        self.reduce = _token_reductions
+
+    def set_prefill(self, tokens):
+        import mlx.core as mx
+
+        if tokens < 1:
+            raise ValueError("Quick prefill must be positive")
+        self.chunk_size = tokens
+        # Compile only pure vocabulary reductions. KV cache mutation and host
+        # reads remain outside the graph, so documents never share cache state.
+        self.reduce = (
+            _token_reductions if tokens == 64 else mx.compile(_token_reductions, shapeless=True)
+        )
 
     @classmethod
     def from_path(cls, path: Path, requested=None):
@@ -59,11 +83,7 @@ class MLXBackend:
                 context = mx.array([ids[start:stop]])
                 targets = mx.array(ids[start + 1 : stop + 1])[:, None]
                 logits = self.model(context, cache=cache)[0].astype(mx.float32)
-                selected = mx.take_along_axis(logits, targets, axis=1)
-                log_probs = logits - mx.logsumexp(logits, axis=1, keepdims=True)
-                logp = mx.take_along_axis(log_probs, targets, axis=1)[:, 0]
-                rank = 1 + mx.sum(logits > selected, axis=1)
-                entropy = -mx.sum(mx.exp(log_probs) * log_probs, axis=1)
+                logp, rank, entropy = self.reduce(logits, targets)
                 # Materialize reductions before the next chunk. Holding lazy logits for
                 # an entire essay would use gigabytes for Qwen's 150k-word vocabulary.
                 mx.eval(logp, rank, entropy)

@@ -1,6 +1,7 @@
+import type { Mode } from "@vibechecker/contracts";
 import type { Receipt } from "./check-stream";
 
-export type DeviceCheck = Receipt & { text: string; createdAt: number; expiresAt: number };
+export type DeviceCheck = Receipt & { mode?: Mode; text: string; createdAt: number; expiresAt: number };
 export const deviceTtl = 30 * 24 * 60 * 60 * 1000;
 
 async function transaction<T>(work: (store: IDBObjectStore, setResult: (value: T) => void) => void): Promise<T> {

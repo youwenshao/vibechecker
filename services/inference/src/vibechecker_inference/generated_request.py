@@ -3,9 +3,14 @@
 
 from __future__ import annotations
 
-from typing import Literal
+from enum import StrEnum
 
 from pydantic import BaseModel, ConfigDict, Field
+
+
+class Mode(StrEnum):
+    quick = 'quick'
+    deep = 'deep'
 
 
 class AnalyzeRequest(BaseModel):
@@ -13,4 +18,4 @@ class AnalyzeRequest(BaseModel):
         extra='forbid',
     )
     text: str = Field(..., max_length=200000, min_length=1)
-    mode: Literal['quick']
+    mode: Mode

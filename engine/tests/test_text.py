@@ -62,3 +62,12 @@ def test_length_boundaries():
     with pytest.raises(Refusal, match="too_short"):
         validate(prepare(ENGLISH * 29), mode="deep")
     validate(prepare(ENGLISH * 30), mode="deep")
+
+
+def test_utf16_spans_after_nfc_astral_prefix():
+    text = "🙋🏽‍♀️ I wrote this. 東京と港.\nShe also read “café”."
+    doc = prepare(text)
+    assert doc.normalized == text
+    for sentence in doc.sentences:
+        assert sentence.norm_start == sentence.start and sentence.norm_end == sentence.end
+        assert utf16_slice(text, sentence.start_utf16, sentence.end_utf16) == sentence.normalized

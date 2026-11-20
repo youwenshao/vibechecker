@@ -1,0 +1,73 @@
+{
+  "fixture_sha256": "08015ae45f7c94e230e06a5e593b0c9dfc8ee98d2dc94592e8dc571364b353bc",
+  "words": 1000,
+  "local_services": [
+    "Turnstile",
+    "quota",
+    "cache",
+    "receipt"
+  ],
+  "backend": "mlx-metal",
+  "engine_version": "qwen-4bit-v1",
+  "chunks": 6,
+  "streamed_batches": [
+    7,
+    11,
+    4,
+    8,
+    7,
+    4
+  ],
+  "timeline": [
+    {
+      "ms": 11,
+      "markers": 0,
+      "verdict": false
+    },
+    {
+      "ms": 1261,
+      "markers": 7,
+      "verdict": false
+    },
+    {
+      "ms": 2263,
+      "markers": 18,
+      "verdict": false
+    },
+    {
+      "ms": 3073,
+      "markers": 22,
+      "verdict": false
+    },
+    {
+      "ms": 4085,
+      "markers": 30,
+      "verdict": false
+    },
+    {
+      "ms": 4984,
+      "markers": 37,
+      "verdict": false
+    },
+    {
+      "ms": 5774,
+      "markers": 41,
+      "verdict": false
+    },
+    {
+      "ms": 6259,
+      "markers": 41,
+      "verdict": true
+    }
+  ],
+  "rendered_before_verdict": true,
+  "offsets_match": true,
+  "sentence_count": 41,
+  "signal_count": 8,
+  "score": 48,
+  "interval": {
+    "low": 7,
+    "high": 73
+  },
+  "keyboard_and_list": true
+}

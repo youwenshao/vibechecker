@@ -10,7 +10,15 @@
 **/.vercel
 # Anchor the Python package so apps/web/app/api/engine/heartbeat is uploaded.
 /engine
-eval
+# The methodology page imports only the two aggregate scorecards.
+/eval/*
+!/eval/reports/
+/eval/reports/*
+!/eval/reports/phase-1/
+!/eval/reports/quick-m6-fp32-v0/
+/eval/reports/*/*
+!/eval/reports/phase-1/report.json
+!/eval/reports/quick-m6-fp32-v0/report.json
 artifacts
 weights
 services

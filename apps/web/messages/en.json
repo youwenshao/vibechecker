@@ -6,7 +6,8 @@
     "how": "How it works",
     "locale": "繁體中文",
     "close": "Close",
-    "foot": "A detector score is a reason to look closer, never proof."
+    "foot": "A detector score is a reason to look closer, never proof.",
+    "methodology": "Methodology"
   },
   "home": {
     "pageTitle": "VibeChecker · AI writing checker",
@@ -15,7 +16,7 @@
     "label": "Your essay",
     "placeholder": "Paste your English essay here…",
     "quick": "Quick check",
-    "limits": "150–5,000 words · English",
+    "limits": "{n}–5,000 words · English",
     "upload": "Upload file",
     "fileHelp": "Word document, plain text or Markdown",
     "count": "{n, plural, one {# word} other {# words}}",
@@ -23,7 +24,7 @@
     "check": "Check my essay",
     "checking": "Checking…",
     "privacy": "Your essay is processed in memory. Only this browser keeps a copy of the text, for 30 days.",
-    "howBody": "A Quick check reads your English essay in several ways. It compares word predictability, word choices and vocabulary with patterns from human and machine-written examples. The result includes a range and an explanation of each signal.",
+    "howBody": "Quick compares word choices and vocabulary with patterns in human and AI writing. Deep also compares two language models and shows how the signals vary sentence by sentence. Both checks return an index, an uncertainty range and the signals behind the result.",
     "verification": "Completing verification…",
     "unavailable": "Verification is unavailable. Try reloading this page.",
     "ready": "Ready for a Quick check.",
@@ -33,11 +34,18 @@
     "scoring": "Comparing writing signals…",
     "fallback": "Our cloud engine is covering this check.",
     "storageError": "Your browser couldn’t save this result on this device.",
-    "forgetError": "Your browser couldn’t erase the local copy. Check site storage permissions and try again."
+    "forgetError": "Your browser couldn’t erase the local copy. Check site storage permissions and try again.",
+    "mode": "Check mode",
+    "deep": "Deep check",
+    "moreDeep": "{n, plural, one {# more word} other {# more words}} for a Deep check.",
+    "readyDeep": "Ready for a sentence-by-sentence Deep check.",
+    "scoringNext": "Measuring how predictable each sentence is…",
+    "scoringPatterns": "Looking for patterns across the essay…",
+    "deepLimits": "{n}–2,500 words · English · Sentence heatmap"
   },
   "errors": {
-    "too_short": "A Quick check needs at least 150 words.",
-    "too_long": "A Quick check can read up to 5,000 words. Try one section at a time.",
+    "too_short": "This check needs at least {n} words.",
+    "too_long": "Try one section at a time. This check can read up to {n, number} words.",
     "not_english": "We only read English essays for now. You can edit your draft and try again.",
     "quota": "You’ve used today’s free checks. Come back tomorrow.",
     "turnstile": "Verification expired. Complete the new verification and try again.",
@@ -60,7 +68,7 @@
       "high": "Several patterns resemble machine-generated text. A human writer can produce these patterns too."
     },
     "why": "Why this score?",
-    "whyBody": "The index combines four signals and calibrates them against a balanced sample of human and AI writing. Each card compares your essay with the median human training essay. Any single signal has many possible explanations.",
+    "whyBody": "The index combines the signals below and calibrates them against human and AI writing with a 50% prior. Each card compares your essay with the median human training essay. A single signal has many possible explanations.",
     "wrong": "Why can detectors be wrong?",
     "wrongBody": "Short, polished or formulaic passages can look predictable. People writing in a second language may be flagged more often. The range shows uncertainty in calibration. It cannot establish who wrote an essay. Keep drafts, notes and revision history as evidence of your process.",
     "signals": "What the detector noticed",
@@ -86,6 +94,82 @@
     "stylometry": {
       "title": "Vocabulary variety",
       "detail": "The share of distinct words in the essay. Topic, word count and a writer’s vocabulary can all change this ratio."
+    },
+    "esl": "Some patterns here also occur in second-language English writing. Detectors can over-flag this writing, so read the index with extra caution and keep your drafts.",
+    "laundering": "Some patterns resemble text that has been reformatted or rewritten. Editing and translation can produce similar patterns.",
+    "e3": {
+      "title": "Word likelihood gap",
+      "detail": "Two language models estimate how likely a typical next word would be. Fast-DetectGPT compares the words actually used with that expectation."
+    },
+    "e4": {
+      "title": "Model agreement",
+      "detail": "Binoculars compares how surprising the essay is to one model with how much two related models disagree about possible next words."
+    },
+    "e5": {
+      "title": "Sentence patterns",
+      "detail": "A sentence model looks at how word predictability changes within each sentence. The map shows where it found stronger and weaker patterns."
+    },
+    "e7": {
+      "title": "Patterns across models",
+      "detail": "A classifier compares patterns in the word-level signals across the essay with those in its training examples."
     }
+  },
+  "heat": {
+    "reading": "Reading your essay",
+    "title": "Sentence heatmap",
+    "count": "{n, plural, one {# sentence} other {# sentences}}",
+    "analyzed": "{n, plural, one {# sentence read} other {# sentences read}} so far",
+    "view": "Heatmap view",
+    "passage": "Passage",
+    "list": "List",
+    "filter": "Highlight by signal",
+    "all": "All signals",
+    "matches": "{n, plural, one {# match} other {# matches}}",
+    "strength": "Sentence signal strength",
+    "faint": "Faint signal",
+    "moderate": "Moderate signal",
+    "strong": "Strong signal",
+    "detail": "Sentence {n, number}",
+    "none": "No signals flagged",
+    "sentenceLabel": "Sentence {n}. {sentence} {band}.",
+    "separator": ", ",
+    "help": "Focus or tap a highlighted sentence to see its signals. Use the arrow keys to move between highlights."
+  },
+  "method": {
+    "pageTitle": "Methodology · VibeChecker",
+    "skip": "Skip to methodology",
+    "check": "Check an essay",
+    "intro": "How we measure the detector’s mistakes, interpret its index and check whether its results hold up across different groups of writers.",
+    "deep": "Deep evaluation",
+    "quick": "Quick baseline",
+    "passed": "Release gates passed",
+    "pending": "Release gates outstanding",
+    "reliability": "Calibration",
+    "reliabilityBody": "Each point groups essays with similar scores. Its horizontal position is the mean predicted score and its height is the observed share of AI essays. Points on the diagonal agree with the observations.",
+    "noBins": "The Deep report has no held-out calibration measurements yet.",
+    "plotData": "Read chart values",
+    "mean": "Mean score",
+    "observed": "Observed AI share",
+    "documents": "Essays",
+    "fpr": "False positives by group",
+    "fprBody": "Among human essays in each group, this is the share that received a high index. The 95% Wilson interval reflects uncertainty from the sample size.",
+    "all": "All documents",
+    "essay": "Essay domain",
+    "esl": "Second-language essays",
+    "toefl": "TOEFL essays",
+    "native": "US comparison group",
+    "cohort": "Group",
+    "humanCount": "Human essays",
+    "rate": "Flagged high",
+    "wilson": "95% interval",
+    "unmeasured": "Unmeasured",
+    "otherGroups": "All remaining groups",
+    "cohortNote": "The US comparison group comes from the Hewlett dataset. Individual native-language status is unverified. TOEFL estimates require essays that pass the mode’s English and length checks.",
+    "priorTitle": "Why the base rate matters",
+    "priorBody": "The index is calibrated to a population where {prior}% of essays are AI-written. The mix in a classroom can be very different. A high index alone cannot establish authorship.",
+    "example": "For example, suppose a detector flags 80% of AI essays and 2% of human essays in a group of 1,000. These rates illustrate the calculation.",
+    "aiShare": "Share of AI essays in the group",
+    "exampleResult": "It would flag {aiFlags, number} AI essays and {humanFlags, number} human essays. Of all the essays flagged, {share} would be AI-written.",
+    "toeflSkipped": "The length check excluded {n, plural, one {# TOEFL essay} other {# TOEFL essays}} from this evaluation."
   }
 }

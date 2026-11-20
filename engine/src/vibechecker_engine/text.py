@@ -3,6 +3,7 @@
 import unicodedata
 from dataclasses import dataclass
 from functools import lru_cache
+from itertools import accumulate
 from typing import Literal
 
 import regex
@@ -12,6 +13,7 @@ from spacy.lang.en import English
 WORD = regex.compile(r"[\p{L}\p{N}][\p{L}\p{N}\p{M}]*(?:['’\-][\p{L}\p{N}][\p{L}\p{N}\p{M}]*)*")
 GRAPHEME = regex.compile(r"\X")
 LATIN = regex.compile(r"\p{Script=Latin}")
+NON_LATIN_LETTER = regex.compile(r"(?!\p{Script=Latin})\p{L}")
 CONFUSABLE_SCRIPT = regex.compile(r"[\p{Script=Cyrillic}\p{Script=Greek}]")
 INVISIBLE = regex.compile(r"[\p{Cf}\u034f]")
 CHUNK_WORDS = 200
@@ -61,10 +63,18 @@ def _language_id():
 
 
 def count_words(text: str) -> int:
-    return sum(1 for _ in WORD.finditer(text))
+    return len(WORD.findall(text, concurrent=False))
 
 
 def _normalize(text: str):
+    # Existing NFC/LF text has identical model and original coordinates.
+    # Only astral characters need an extra unit in the browser offset map.
+    if "\r" not in text and unicodedata.is_normalized("NFC", text):
+        original = range(len(text) + 1)
+        if text.isascii() or max(text, default="") < "\U00010000":
+            return text, original, original
+        utf16 = list(accumulate((1 + int(ord(c) > 0xFFFF) for c in text), initial=0))
+        return text, original, utf16
     pieces = []
     # NFC can combine several input code points. Keep the original end boundary
     # for each output grapheme so an emoji or decomposed accent never shifts later spans.
@@ -89,7 +99,7 @@ def _normalize(text: str):
 
 def prepare(text: str) -> Prepared:
     normalized, original, utf16 = _normalize(text)
-    words = tuple(WORD.findall(normalized))
+    words = tuple(WORD.findall(normalized, concurrent=False))
     sentences = []
     chunks = []
     chunk: list[Sentence] = []
@@ -124,7 +134,9 @@ def prepare(text: str) -> Prepared:
     flags = []
     if INVISIBLE.search(text):
         flags.append("invisible")
-    if any(LATIN.search(word) and CONFUSABLE_SCRIPT.search(word) for word in words):
+    if CONFUSABLE_SCRIPT.search(normalized) and any(
+        LATIN.search(word) and CONFUSABLE_SCRIPT.search(word) for word in words
+    ):
         flags.append("homoglyph")
     return Prepared(normalized, tuple(sentences), tuple(chunks), words, tuple(flags))
 
@@ -134,9 +146,13 @@ def validate(doc: Prepared, mode: Literal["quick", "deep"] = "quick") -> None:
     if doc.word_count > maximum:
         raise Refusal("too_long")
     # An unsegmented script may count as only a few words despite a full essay.
-    letters = regex.findall(r"\p{L}", doc.normalized)
-    if len(letters) >= 40 and len(LATIN.findall(doc.normalized)) < len(letters) / 2:
-        raise Refusal("not_english")
+    if NON_LATIN_LETTER.search(doc.normalized, concurrent=False):
+        letters = regex.findall(r"\p{L}", doc.normalized, concurrent=False)
+        if (
+            len(letters) >= 40
+            and len(LATIN.findall(doc.normalized, concurrent=False)) < len(letters) / 2
+        ):
+            raise Refusal("not_english")
     if doc.word_count < minimum:
         raise Refusal("too_short")
     if _language_id().detect_language_of(doc.normalized) != Language.ENGLISH:

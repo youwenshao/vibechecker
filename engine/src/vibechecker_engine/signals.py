@@ -2,6 +2,7 @@ import os
 from bisect import bisect_right
 from collections import Counter
 from dataclasses import dataclass
+from itertools import batched, groupby
 from pathlib import Path
 
 import numpy as np
@@ -80,6 +81,7 @@ class Encoder:
         self.model = model
         self.tokenizer = tokenizer
         self.device = device
+        self.batch_windows = 1
 
     @classmethod
     def load(cls, path, backend):
@@ -110,15 +112,23 @@ class Encoder:
             return_special_tokens_mask=True,
             verbose=False,
         )
-        scores, sizes = [], []
+        scores = []
+        windows_ids = windows["input_ids"]
+        sizes = [
+            len(ids) - sum(mask)
+            for ids, mask in zip(windows_ids, windows["special_tokens_mask"], strict=True)
+        ]
         with torch.inference_mode():
-            for ids, mask in zip(windows["input_ids"], windows["special_tokens_mask"], strict=True):
-                # The published RAID/MAGE checkpoint uses binary softmax with
-                # class 1 = machine, despite its generic label names in config.
-                tensor = torch.tensor([ids], device=self.device)
-                logits = self.model(input_ids=tensor, attention_mask=torch.ones_like(tensor)).logits
-                scores.append(float(torch.softmax(logits.float(), dim=-1)[0, 1].item()))
-                sizes.append(len(ids) - sum(mask))
+            # Batch complete windows without padding. A shorter final window
+            # retains precisely its original positions and attention mask.
+            for _, equal_length in groupby(windows_ids, key=len):
+                for batch in batched(equal_length, self.batch_windows):
+                    tensor = torch.tensor(batch, device=self.device)
+                    logits = self.model(
+                        input_ids=tensor, attention_mask=torch.ones_like(tensor)
+                    ).logits
+                    scores.append(torch.softmax(logits.float(), dim=-1)[:, 1])
+        scores = torch.cat(scores).cpu().tolist()
         return float(np.average(scores, weights=sizes)), _samples(scores)
 
 
@@ -139,11 +149,21 @@ class FeatureExtractor:
             raise ValueError("Local LM and encoder directories are required")
         lm = MLXBackend.from_path(lm_dir, os.getenv("VIBECHECKER_BACKEND"))
         tokenizer = AutoTokenizer.from_pretrained(lm_dir, local_files_only=True, use_fast=True)
-        return cls(lm, tokenizer, Encoder.load(encoder_dir, lm.name))
+        extractor = cls(lm, tokenizer, Encoder.load(encoder_dir, lm.name))
+        if prefill := os.getenv("VIBECHECKER_QUICK_PREFILL"):
+            extractor.set_prefill(int(prefill))
+        return extractor
+
+    def set_prefill(self, tokens):
+        self.lm.set_prefill(tokens)
+        self.encoder.batch_windows = 1 if tokens == 64 else 2
 
     def extract(self, text: str) -> FeatureRow:
         doc = prepare(text)
         validate(doc)
+        return self.extract_prepared(doc)
+
+    def extract_prepared(self, doc: Prepared) -> FeatureRow:
         encoded = self.tokenizer(
             doc.normalized, return_offsets_mapping=True, add_special_tokens=False, verbose=False
         )
@@ -158,7 +178,9 @@ class FeatureExtractor:
         encoder, samples["e6"] = self.encoder.score(doc.normalized)
         chunk_ratios = []
         for chunk in doc.chunks:
-            words = [w.casefold() for s in chunk for w in WORD.findall(s.normalized)]
+            words = [
+                w.casefold() for s in chunk for w in WORD.findall(s.normalized, concurrent=False)
+            ]
             if words:
                 chunk_ratios.append(len(set(words)) / len(words))
         samples["stylometry"] = _samples(chunk_ratios)

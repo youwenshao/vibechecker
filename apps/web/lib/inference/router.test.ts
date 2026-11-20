@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import { events, routeInference } from "./router";
+import { events, routeInference, validSentences } from "./router";
 import {
   digest,
   deviceIdentity,
@@ -119,4 +119,15 @@ it("accepts the shared Python/Node signature vector and rejects a modified heart
   });
   expect(verifyHeartbeat(req, body)).toBeTruthy();
   expect(verifyHeartbeat(req, body + " ")).toBeNull();
+});
+
+it("rejects overlaps, empty ranges, out-of-bounds or half-surrogate offsets before caching", () => {
+  const text = "😀A.\r\nB.";
+  const item = (start: number, end: number) => ({ start, end, score: .5, signals: [] });
+  expect(validSentences(text, [item(0, 4), item(6, 8)])).toBe(true);
+  for (const range of [item(1, 4), item(0, 1), item(3, 3), item(6, 9)]) {
+    expect(validSentences(text, [range])).toBe(false);
+  }
+  expect(validSentences(text, [item(0, 4), item(3, 8)])).toBe(false);
+  expect(validSentences(text, [item(3, 8)], 4)).toBe(false);
 });

@@ -9,7 +9,10 @@
     },
     "mode": {
       "type": "string",
-      "const": "quick"
+      "enum": [
+        "quick",
+        "deep"
+      ]
     }
   },
   "required": [

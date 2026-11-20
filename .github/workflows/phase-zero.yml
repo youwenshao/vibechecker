@@ -1,4 +1,4 @@
-name: Phase 0 checks
+name: Engine and web checks
 on: [push, pull_request]
 jobs:
   verify:
@@ -24,6 +24,16 @@ jobs:
           uv pip install torch==2.15.0 --index-url https://download.pytorch.org/whl/cpu
           uv pip install 'mlx[cpu]==0.32.4' 'mlx-lm==0.32.2' 'transformers==5.23.0'
           .venv/bin/python -c 'import mlx.core, mlx_lm, torch'
-          .venv/bin/python -m pytest engine/tests/test_backends.py
+          .venv/bin/python -m pytest engine/tests
+      - name: Cache pinned CPU fixture checkpoints
+        id: smol-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/vibechecker/smol-pair
+          key: smollm2-135m-pair-${{ hashFiles('engine/tools/smoke_smol.py', 'engine/tools/fetch_weights.py') }}
+      - name: Score with the pinned SmolLM2 base and instruct pair
+        env:
+          HF_HUB_OFFLINE: ${{ steps.smol-cache.outputs.cache-hit == 'true' && '1' || '0' }}
+        run: .venv/bin/python engine/tools/smoke_smol.py
       - run: pnpm --filter @vibechecker/web exec playwright install --with-deps chromium
       - run: pnpm --filter @vibechecker/web e2e

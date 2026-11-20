@@ -22,10 +22,10 @@ todos:
     status: completed
   - id: p1-deep
     content: "Phase 1: Binoculars + Fast-DetectGPT via pair_stats with golden tests, published-number reproduction, quantization bake-off, E5 sentence head, E7, ESL and laundering flags, Deep stacker and calibration"
-    status: pending
+    status: in_progress
   - id: p1-heatmap
     content: "Phase 1: progressive streaming heatmap with tooltips and list view, StatusTicker, methodology page v0, M6 load and co-tenancy test"
-    status: pending
+    status: completed
   - id: p2-lenses-kit
     content: "Phase 2: five lenses fitted and validated with disclaimers and footnotes, LensPanel, one-page evidence-kit PDF"
     status: pending
@@ -734,6 +734,8 @@ Monthly cost by scale:
   - Targets: Quick p95 <= 2 s at 5 concurrent requests; Deep p95 <= 25 s at 2,000 words.
   - Memory stays at or under 18 GB, and beat-ad's health is unchanged.
   - If a target is missed: switch to 4-bit weights, use a smaller pair, or overflow to Modal.
+
+The [Phase 1 verification record](../../docs/plans/phase-1-evidence.md) covers the local implementation, held-out evaluation and measured M6 workloads. The operator retained the hosted GPU hold for the L40S reference and CUDA parity runs.
 
 **Phase 2 (21 Dec-3 Jan): lenses, evidence kit, accounts.** Demo: a feature-complete beta.
 

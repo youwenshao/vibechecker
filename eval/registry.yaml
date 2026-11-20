@@ -1,5 +1,18 @@
 # Each sha256 names the exact publisher bytes consumed by its loader.
 datasets:
+  - id: binoculars-cnn
+    source: https://github.com/ahans30/Binoculars
+    version: c8ae2f90d50ee696418bc71d8d9e5020e5f9d7b8
+    license: BSD-3-Clause repository, CNN articles retain source rights
+    commercial_ok: false
+    share_alike: false
+    use: eval
+    strata: [news, generator]
+    artifacts:
+      - name: cnn-llama2_13.jsonl
+        url: https://raw.githubusercontent.com/ahans30/Binoculars/c8ae2f90d50ee696418bc71d8d9e5020e5f9d7b8/datasets/core/cnn/cnn-llama2_13.jsonl
+        sha256: 73a7c9529114b05efdf9c938f5c359357f4cc2a1177737e7630efba7a5539594
+        split: test
   - id: raid
     source: https://github.com/liamdugan/raid
     version: train-none-2024-06-04

@@ -4,12 +4,14 @@ import os
 import re
 from collections.abc import Callable
 from contextlib import asynccontextmanager, suppress
+from threading import Event
 
 import httpx
 from fastapi import FastAPI, Request
 from pydantic import ValidationError
 from starlette.responses import JSONResponse, Response, StreamingResponse
 from vibechecker_engine import QuickEngine, Refusal
+from vibechecker_engine.text import prepare
 
 from .auth import Authenticator, signed_headers
 from .generated_event import InferenceEvent
@@ -42,9 +44,25 @@ def encode_event(**event):
     return (validated.model_dump_json(exclude_none=True) + "\n").encode()
 
 
+def deep_from_env(quick):
+    if not any(
+        os.getenv(key)
+        for key in (
+            "VIBECHECKER_DEEP_MODEL",
+            "VIBECHECKER_PAIR_OBSERVER",
+            "VIBECHECKER_PAIR_PERFORMER",
+        )
+    ):
+        return None
+    from vibechecker_engine.deep import DeepEngine
+
+    return DeepEngine.from_env(quick_extractor=quick.extractor)
+
+
 def create_app(
     *,
     engine_factory: Callable = QuickEngine.from_env,
+    deep_factory: Callable = deep_from_env,
     secret: bytes | None = None,
     version: str | None = None,
     scheduler: Scheduler | None = None,
@@ -58,6 +76,9 @@ def create_app(
         if not re.fullmatch(r"[a-zA-Z0-9._-]{1,64}", app.state.version):
             raise ValueError("Invalid ENGINE_VERSION")
         app.state.engine = await asyncio.to_thread(engine_factory)
+        app.state.deep = await asyncio.to_thread(deep_factory, app.state.engine)
+        if app.state.deep is not None and app.state.deep.backend != app.state.engine.backend:
+            raise ValueError("Quick and Deep must use the same backend")
         app.state.scheduler = scheduler or Scheduler()
         app.state.jobs = set()
         url = os.getenv("HEARTBEAT_URL") if heartbeat_url is None else heartbeat_url
@@ -99,37 +120,60 @@ def create_app(
             data = AnalyzeRequest.model_validate_json(request.state.verified_body)
         except ValidationError:
             return JSONResponse({"code": "invalid_request"}, status_code=400)
+        deep = data.mode == "deep"
+        if deep and app.state.deep is None:
+            return JSONResponse({"code": "busy"}, status_code=503)
         try:
             slot = await app.state.scheduler.reserve(data.mode)
         except Busy:
             return JSONResponse({"code": "busy"}, status_code=503, headers={"retry-after": "3"})
 
-        async def score():
+        stopped = Event()
+        queue = asyncio.Queue()
+        loop = asyncio.get_running_loop()
+
+        def emit(**event):
+            line = encode_event(**event)
+            loop.call_soon_threadsafe(queue.put_nowait, line)
+
+        def score():
             try:
-                result = await asyncio.to_thread(app.state.engine.analyze, data.text)
-                return encode_event(type="result", result=result)
+                doc = prepare(data.text) if deep else None
+                chunks = max(1, len(doc.chunks)) if deep else 1
+                emit(
+                    type="accepted",
+                    backend=app.state.engine.backend,
+                    engineVersion=app.state.version,
+                    chunks=chunks,
+                )
+                emit(type="progress", stage="deep" if deep else "scoring", done=0, total=chunks)
+                if deep:
+                    for event in app.state.deep.stream(doc):
+                        if stopped.is_set():
+                            break
+                        emit(**event)
+                else:
+                    emit(type="result", result=app.state.engine.analyze(data.text))
             except Refusal as exc:
-                return encode_event(type="error", code=exc.code, retryable=False)
+                emit(type="error", code=exc.code, retryable=False)
             except Exception:  # noqa: BLE001 -- translate private backend failures at the HTTP boundary.
                 # Framework validation and backend exceptions can contain snippets of input.
-                return encode_event(type="error", code="internal", retryable=True)
+                emit(type="error", code="internal", retryable=True)
             finally:
-                slot.release()
+                loop.call_soon_threadsafe(queue.put_nowait, None)
 
-        job = asyncio.create_task(score())
+        job = asyncio.create_task(asyncio.to_thread(score))
         app.state.jobs.add(job)
         job.add_done_callback(app.state.jobs.discard)
+        # A disconnected client must not release the GPU slot during a running forward pass.
+        job.add_done_callback(lambda _: slot.release())
 
         async def stream():
-            yield encode_event(
-                type="accepted",
-                backend=app.state.engine.backend,
-                engineVersion=app.state.version,
-                chunks=1,
-            )
-            yield encode_event(type="progress", stage="scoring", done=0, total=1)
-            # GPU work can outlive a disconnected browser. Keep its slot until it really finishes.
-            yield await asyncio.shield(job)
+            try:
+                while (line := await queue.get()) is not None:
+                    yield line
+            finally:
+                stopped.set()
 
         return StreamingResponse(
             stream(), media_type="application/x-ndjson", headers={"cache-control": "no-store"}

@@ -1,7 +1,8 @@
-import { InferenceEvent } from "@vibechecker/contracts";
+import { InferenceEvent, type Mode, type SentenceScore } from "@vibechecker/contracts";
 import { env, signedHeaders } from "../server/security";
 
 interface Routing {
+  mode?: Mode;
   lastSeen?: string;
   forceFallback: boolean;
   signal: AbortSignal;
@@ -11,7 +12,7 @@ interface Routing {
 export class UpstreamUnavailable extends Error {}
 
 export async function routeInference(text: string, options: Routing) {
-  const body = JSON.stringify({ text, mode: "quick" });
+  const body = JSON.stringify({ text, mode: options.mode ?? "quick" });
   const send = async (primary: boolean) => {
     const base = env(primary ? "PRIMARY_INFERENCE_URL" : "FALLBACK_INFERENCE_URL");
     const headers: Record<string, string> = {
@@ -69,12 +70,31 @@ export async function routeInference(text: string, options: Routing) {
   return await send(false);
 }
 
-export function validScore(score: Extract<InferenceEvent, { type: "result" }>["result"]) {
-  return (
-    score.interval.low <= score.index &&
-    score.index <= score.interval.high &&
-    new Set(score.signals.map((signal) => signal.id)).size === 4
-  );
+const quickSignals = ["e1", "e2", "e6", "stylometry"] as const;
+const deepSignals = [...quickSignals, "e3", "e4", "e5", "e7"] as const;
+
+// UTF-16 indices are end-exclusive and must not split a surrogate pair.
+export function validSentences(text: string, items: SentenceScore[], previousEnd = 0) {
+  function boundary(offset: number) {
+    const before = text.charCodeAt(offset - 1);
+    const after = text.charCodeAt(offset);
+    return !(before >= 0xd800 && before <= 0xdbff && after >= 0xdc00 && after <= 0xdfff);
+  }
+  for (const item of items) {
+    if (item.start < previousEnd || item.start >= item.end || item.end > text.length ||
+        !boundary(item.start) || !boundary(item.end)) return false;
+    previousEnd = item.end;
+  }
+  return true;
+}
+
+export function validScore(score: Extract<InferenceEvent, { type: "result" }>["result"], mode: Mode, text: string) {
+  const expected = mode === "deep" ? deepSignals : quickSignals;
+  const ids = new Set(score.signals.map((signal) => signal.id));
+  return score.interval.low <= score.index && score.index <= score.interval.high &&
+    score.signals.length === expected.length && expected.every((id) => ids.has(id)) &&
+    (mode === "deep" ? score.wordCount >= 300 && score.wordCount <= 2500 && Boolean(score.sentences?.length) &&
+      validSentences(text, score.sentences!) : !score.sentences?.length);
 }
 
 export async function* events(stream: ReadableStream<Uint8Array>) {
@@ -82,9 +102,8 @@ export async function* events(stream: ReadableStream<Uint8Array>) {
   const decoder = new TextDecoder("utf-8", { fatal: true });
   let tail = "";
   const parse = (line: string) => {
-    if (line.length > 32768) throw Error("Oversized event");
+    if (line.length > 1024 * 1024) throw Error("Oversized event");
     const event = InferenceEvent.parse(JSON.parse(line));
-    if (event.type === "result" && !validScore(event.result)) throw Error("Invalid score");
     return event;
   };
   try {
@@ -97,7 +116,7 @@ export async function* events(stream: ReadableStream<Uint8Array>) {
         if (end) yield parse(tail.slice(0, end));
         tail = tail.slice(end + 1);
       }
-      if (tail.length > 32768) throw Error("Oversized event");
+      if (tail.length > 1024 * 1024) throw Error("Oversized event");
     }
     tail += decoder.decode();
     if (tail.trim()) yield parse(tail);

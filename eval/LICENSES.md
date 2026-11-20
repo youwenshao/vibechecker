@@ -13,3 +13,5 @@ Reviewed 20 November 2026. Each enabled input is pinned by publisher revision or
 | DAIGT | The Kaggle competition publishes separate terms. A general downstream grant for a hosted detector was not verified. [Competition rules](https://www.kaggle.com/competitions/llm-detect-ai-generated-text/rules) | Excluded from fetching, training and evaluation. |
 
 Reports contain aggregate measurements. Raw source texts stay in the dataset cache and are omitted from Git. The consent and content of submitted user checks play no role in these datasets.
+
+The Phase 1 Falcon reproduction uses the Binoculars authors' pinned CNN/LLaMA-2-13B dataset for evaluation only. Their repository carries a BSD 3-Clause license. Underlying news articles retain their source rights. The registry excludes this cohort from both training and commercial use. [Corpus revision](https://github.com/ahans30/Binoculars/tree/c8ae2f90d50ee696418bc71d8d9e5020e5f9d7b8/datasets/core/cnn) · [Project license](https://github.com/ahans30/Binoculars/blob/c8ae2f90d50ee696418bc71d8d9e5020e5f9d7b8/LICENSE.md)

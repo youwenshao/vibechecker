@@ -3,6 +3,7 @@ import { createServer } from "node:http";
 const engineVersion = "e2e-quick";
 const stored = new Map();
 const cache = new Map();
+const heldHeatmaps = new Map();
 const result = {
   index: 62, interval: { low: 48, high: 75 }, band: "mixed", wordCount: 180,
   signals: [
@@ -19,12 +20,39 @@ createServer(async (req, res) => {
   for await (const chunk of req) chunks.push(chunk);
   const raw = Buffer.concat(chunks).toString();
   if (pathname.endsWith("/v1/analyze")) {
-    const { text } = JSON.parse(raw);
+    const { text, mode } = JSON.parse(raw);
     const event = (value) => res.write(JSON.stringify(value) + "\n");
     res.writeHead(200, { "Content-Type": "application/x-ndjson" });
     const primary = Boolean(req.headers["cf-access-client-id"]);
-    event({ type: "accepted", engineVersion, chunks: 1, backend: primary ? "mlx-metal" : "mlx-cuda" });
+    const promised = text.startsWith("Missing chunk") ? 3 : 2;
+    event({ type: "accepted", engineVersion, chunks: mode === "deep" ? promised : 1, backend: primary ? "mlx-metal" : "mlx-cuda" });
     if (text.startsWith("Failover") && primary) return res.end();
+    if (mode === "deep") {
+      const words = text.trim().split(/\s+/).length;
+      if (words < 300) {
+        event({ type: "error", code: "too_short", retryable: false });
+        return res.end();
+      }
+      const sentences = [...text.matchAll(/[^.!?]+[.!?]/g)].map((match, i) => ({
+        start: match.index + match[0].length - match[0].trimStart().length,
+        end: match.index + match[0].length, score: i % 2 ? .82 : .28, signals: i % 2 ? ["e4", "e5"] : ["e3"],
+      }));
+      event({ type: "progress", stage: "deep", done: 0, total: 2 });
+      event({ type: "sentences", items: sentences.slice(0, 1) });
+      if (text.startsWith("Interrupted") && primary) return res.end();
+      if (text.startsWith("Stream demo") || text.startsWith("Interrupted browser")) {
+        await new Promise((resolve) => {
+          const timeout = setTimeout(resolve, 20000);
+          heldHeatmaps.set(text.startsWith("Interrupted") ? "interrupted" : "stream", () => { clearTimeout(timeout); resolve(); });
+        });
+      }
+      event({ type: "sentences", items: sentences.slice(1) });
+      event({ type: "progress", stage: "deep", done: 2, total: 2 });
+      event({ type: "result", result: { ...result, wordCount: words, flags: ["esl"], sentences,
+        signals: [...result.signals, ...["e3", "e4", "e5", "e7"].map((id) => ({id, value: .42, humanReference: .5}))],
+      } });
+      return res.end();
+    }
     event({ type: "progress", stage: "scoring", done: 1, total: 1 });
     if (text.startsWith("Bonjour")) event({ type: "error", code: "not_english", retryable: false });
     else event({ type: "result", result: { ...result, wordCount: text.trim().split(/\s+/).length } });
@@ -36,12 +64,13 @@ createServer(async (req, res) => {
     res.end(JSON.stringify(value));
   };
   switch (pathname) {
+    case "/continue-heatmap": heldHeatmaps.get(searchParams.get("fixture") ?? "stream")?.(); return json(true);
     case "/health": return json({ ok: true });
     case "/stored": return json(stored.get(searchParams.get("id")) ?? null);
     case "/siteverify": {
       const params = new URLSearchParams(raw);
       const token = req.headers["content-type"]?.includes("application/json") ? JSON.parse(raw).response : params.get("response");
-      return json({ success: token === "browser-test-token", hostname: "127.0.0.1", action: "quick_check" });
+      return json({ success: ["browser-test-token", "browser-deep-token"].includes(token), hostname: "127.0.0.1", action: token === "browser-deep-token" ? "deep_check" : "quick_check" });
     }
     case "/rest/v1/rpc/consume_quota":
     case "/rest/v1/rpc/use_retry": return json(true);

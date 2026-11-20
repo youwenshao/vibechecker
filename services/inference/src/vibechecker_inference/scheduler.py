@@ -1,16 +1,21 @@
 import asyncio
+import os
+import sys
 from collections.abc import Callable
 
 import psutil
+from vibechecker_engine.backends.memory import macos_footprint
 
 GIB = 1024**3
 
 
 def memory_available() -> bool:
-    return (
-        psutil.Process().memory_info().rss < 18 * GIB
-        and psutil.virtual_memory().available >= 2 * GIB
+    used = (
+        macos_footprint(os.getpid())[0]
+        if sys.platform == "darwin"
+        else psutil.Process().memory_info().rss
     )
+    return used < 18 * GIB and psutil.virtual_memory().available >= 2 * GIB
 
 
 class Busy(Exception):

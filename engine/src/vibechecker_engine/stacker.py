@@ -4,6 +4,7 @@ import os
 import tempfile
 from dataclasses import dataclass
 from pathlib import Path
+from typing import ClassVar
 
 import joblib
 import numpy as np
@@ -56,10 +57,10 @@ class Calibration:
         return cls(Curve.fit(scores, labels), curves)
 
 
-def _arrays(x, y):
+def _arrays(x, y, feature_names):
     matrix = np.asarray(x, dtype=float)
     labels = np.asarray(y)
-    if matrix.shape != (len(labels), len(FEATURE_NAMES)) or not np.isfinite(matrix).all():
+    if matrix.shape != (len(labels), len(feature_names)) or not np.isfinite(matrix).all():
         raise ValueError("Expected one complete finite feature vector per label")
     if labels.ndim != 1 or set(labels.tolist()) != {0, 1}:
         raise ValueError("Training and calibration each require human and machine examples")
@@ -81,13 +82,17 @@ class QuickStacker:
     high_threshold: int
     feature_names: tuple[str, ...] = FEATURE_NAMES
 
+    FEATURES: ClassVar = FEATURE_NAMES
+    DISPLAY: ClassVar = DISPLAY_FEATURES
+    MONOTONIC: ClassVar = {"encoder_probability": 1}
+
     @classmethod
     def fit(cls, train_x, train_y, cal_x, cal_y, cal_word_counts, *, seed=42):
-        train, labels = _arrays(train_x, train_y)
-        calibration, truth = _arrays(cal_x, cal_y)
+        train, labels = _arrays(train_x, train_y, cls.FEATURES)
+        calibration, truth = _arrays(cal_x, cal_y, cls.FEATURES)
         if len(cal_word_counts) != len(truth):
             raise ValueError("Calibration word counts must match the calibration rows")
-        constraints = [int(name == "encoder_probability") for name in FEATURE_NAMES]
+        constraints = [cls.MONOTONIC.get(name, 0) for name in cls.FEATURES]
         model = HistGradientBoostingClassifier(
             monotonic_cst=constraints,
             random_state=seed,
@@ -116,12 +121,13 @@ class QuickStacker:
             np.median(train[labels == 0], axis=0),
             _band_threshold(human, 0.20),
             _band_threshold(human, 0.02),
+            cls.FEATURES,
         )
 
     def predict(self, values, word_count):
         vector = np.asarray(values, dtype=float)
         if vector.shape != (len(self.feature_names),) or not np.isfinite(vector).all():
-            raise ValueError("Expected a complete finite Quick feature vector")
+            raise ValueError("Expected a complete finite feature vector")
         with threadpool_limits(limits=1, user_api="openmp"):
             raw = self.classifier.predict_proba(vector.reshape(1, -1))[0, 1]
         stratum = length_bin(word_count)
@@ -147,25 +153,29 @@ class QuickStacker:
                     "value": float(vector[col]),
                     "humanReference": float(self.human_reference[col]),
                 }
-                for key, col in DISPLAY_FEATURES.items()
+                for key, col in self.DISPLAY.items()
             ],
         }
 
     def save(self, path):
-        path = Path(path)
-        path.parent.mkdir(parents=True, exist_ok=True)
-        with tempfile.NamedTemporaryFile(dir=path.parent, delete=False) as tmp:
-            tmp_path = Path(tmp.name)
-        try:
-            joblib.dump(self, tmp_path, compress=3)
-            os.replace(tmp_path, path)
-        finally:
-            tmp_path.unlink(missing_ok=True)
+        save_artifact(self, path)
 
     @classmethod
     def load(cls, path):
         # Only deployment-controlled artifacts should be passed to joblib.
         instance = joblib.load(path)
-        if not isinstance(instance, cls) or instance.feature_names != FEATURE_NAMES:
+        if not isinstance(instance, cls) or instance.feature_names != cls.FEATURES:
             raise ValueError("Incompatible Quick stacker")
         return instance
+
+
+def save_artifact(artifact, path):
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.NamedTemporaryFile(dir=path.parent, delete=False) as tmp:
+        tmp_path = Path(tmp.name)
+    try:
+        joblib.dump(artifact, tmp_path, compress=3)
+        os.replace(tmp_path, path)
+    finally:
+        tmp_path.unlink(missing_ok=True)

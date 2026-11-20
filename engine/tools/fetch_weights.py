@@ -21,12 +21,9 @@ WEIGHTS = (
 )
 
 
-def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("directory", type=Path)
-    args = parser.parse_args()
-    for repo, revision, checksum in WEIGHTS:
-        dest = args.directory / repo.split("/")[-1]
+def fetch_checkpoints(directory, checkpoints):
+    for repo, revision, checksum in checkpoints:
+        dest = directory / repo.split("/")[-1]
         snapshot_download(
             repo,
             revision=revision,
@@ -38,6 +35,13 @@ def main():
             if hashlib.file_digest(weights, "sha256").hexdigest() != checksum:
                 raise RuntimeError(f"Weight checksum mismatch for {repo}")
         print(f"Verified {repo}@{revision} in {os.fspath(dest)}")
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("directory", type=Path)
+    args = parser.parse_args()
+    fetch_checkpoints(args.directory, WEIGHTS)
 
 
 if __name__ == "__main__":

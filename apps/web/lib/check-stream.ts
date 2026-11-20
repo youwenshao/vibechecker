@@ -1,9 +1,14 @@
-import { CheckResult, InferenceEvent } from "@vibechecker/contracts";
+import { CheckResult, InferenceEvent, type Mode, type SentenceScore } from "@vibechecker/contracts";
 import { z } from "zod";
 
 export type Verdict = z.infer<typeof CheckResult>;
 export type Receipt = { result: Verdict; checkId: string; claimToken: string };
-type Stage = "loading" | "scoring" | "fallback";
+export type Stage = "loading" | "scoring" | "fallback";
+interface StreamObserver {
+  stage: (stage: Stage) => void;
+  sentences: (items: SentenceScore[]) => void;
+  reset: () => void;
+}
 const completed = z.object({ result: CheckResult, checkId: z.uuid(), claimToken: z.string().min(1) });
 
 export class CheckError extends Error {
@@ -13,12 +18,12 @@ export class CheckError extends Error {
 }
 
 async function readAttempt(
-  text: string, turnstileToken: string, onStage: (stage: Stage) => void, retryToken?: string,
+  text: string, mode: Mode, turnstileToken: string, observer: StreamObserver, retryToken?: string,
 ): Promise<Receipt> {
   const response = await fetch("/api/checks", {
     method: "POST",
     headers: { "Content-Type": "application/json", Accept: "application/x-ndjson" },
-    body: JSON.stringify({ text, mode: "quick", turnstileToken, retryToken }),
+    body: JSON.stringify({ text, mode, turnstileToken, retryToken }),
   });
   if (!response.ok || !response.body) {
     const error = await response.json().catch(() => null);
@@ -33,8 +38,9 @@ async function readAttempt(
     const event = InferenceEvent.parse(wire);
     if (event.type === "error") throw new CheckError(event.code,
       event.retryable && typeof permit === "string" ? permit : undefined);
-    if (event.type === "accepted") onStage(event.backend === "mlx-cuda" ? "fallback" : "loading");
-    if (event.type === "progress") onStage("scoring");
+    if (event.type === "accepted") observer.stage(event.backend === "mlx-cuda" ? "fallback" : "loading");
+    if (event.type === "progress") observer.stage("scoring");
+    if (event.type === "sentences") observer.sentences(event.items);
   };
   try {
     for (;;) {
@@ -49,7 +55,7 @@ async function readAttempt(
           if (receipt) return receipt;
         }
       }
-      if (done || buffer.length > 256 * 1024) throw new CheckError("internal");
+      if (done || buffer.length > 1024 * 1024) throw new CheckError("internal");
     }
   } finally {
     await reader.cancel().catch(() => {});
@@ -57,12 +63,13 @@ async function readAttempt(
   }
 }
 
-export async function checkEssay(text: string, token: string, onStage: (stage: Stage) => void) {
+export async function checkEssay(text: string, mode: Mode, token: string, observer: StreamObserver) {
   try {
-    return await readAttempt(text, token, onStage);
+    return await readAttempt(text, mode, token, observer);
   } catch (error) {
     if (!(error instanceof CheckError) || !error.retryToken) throw error;
-    onStage("fallback");
-    return readAttempt(text, token, onStage, error.retryToken);
+    observer.reset();
+    observer.stage("fallback");
+    return readAttempt(text, mode, token, observer, error.retryToken);
   }
 }

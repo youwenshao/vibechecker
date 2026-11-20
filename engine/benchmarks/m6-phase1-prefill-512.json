@@ -1,0 +1,44 @@
+{
+  "baseline": {
+    "backend": "mlx-metal",
+    "words": 1000,
+    "runs": 5,
+    "p50_ms": 625.2950000343844,
+    "p95_ms": 625.7703664014116
+  },
+  "candidate": {
+    "backend": "mlx-metal",
+    "words": 1000,
+    "runs": 5,
+    "p50_ms": 370.7349579781294,
+    "p95_ms": 371.10135776456445
+  },
+  "prefill": 512,
+  "absolute_feature_deltas": {
+    "perplexity": 0.0015117056682072416,
+    "sentence_nll_std": 0.00020891375981291205,
+    "log_rank": 0.0006599449692168413,
+    "entropy": 3.24249267578125e-05,
+    "encoder_probability": 0.0,
+    "type_token_ratio": 0.0,
+    "mean_word_length": 0.0,
+    "sentence_length_std": 0.0,
+    "word_repetition": 0.0
+  },
+  "original_verdict": {
+    "index": 0,
+    "band": "low",
+    "interval": {
+      "low": 0,
+      "high": 10
+    }
+  },
+  "candidate_verdict": {
+    "index": 0,
+    "band": "low",
+    "interval": {
+      "low": 0,
+      "high": 10
+    }
+  }
+}

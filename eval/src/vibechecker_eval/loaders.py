@@ -23,6 +23,8 @@ class Example:
     generator: str = "unknown"
     attack: str = "none"
     archived_score: float | None = None
+    source_group: str | None = None
+    ell_label: int | None = None
 
 
 def fingerprint(text):
@@ -45,6 +47,7 @@ def raid_examples(rows, dataset_id="raid"):
             "other",
             generator=r["model"],
             attack=r["attack"],
+            source_group="raid:" + r["source_id"],
         )
 
 
@@ -62,11 +65,30 @@ def human_essays(rows, name):
             if name == "ellipse" or status in {"yes", "ell", "english language learner", "1"}
             else "unknown"
         )
-        yield Example(text, 0, name, partition(group), "essay", writer, "human")
+        ell_label = 1 if writer == "ESL" else 0 if status in {"no", "0"} else None
+        yield Example(
+            text, 0, name, partition(group), "essay", writer, "human", ell_label=ell_label
+        )
 
 
 def read_artifact(dataset, artifact, path):
-    if dataset.id == "liang":
+    if dataset.id == "binoculars-cnn":
+        with path.open(encoding="utf8") as stream:
+            for line in stream:
+                record = json.loads(line)
+                for label, field in enumerate(
+                    ("article", "meta-llama-Llama-2-13b-hf_generated_text_wo_prompt")
+                ):
+                    yield Example(
+                        record[field],
+                        label,
+                        dataset.id,
+                        "test",
+                        "news",
+                        generator="llama2_13b" if label else "human",
+                        source_group=record["id"],
+                    )
+    elif dataset.id == "liang":
         label = int(artifact.name == "college-ai")
         writer = {"toefl": "ESL", "hewlett": "native_proxy"}.get(artifact.name, "unknown")
         for r in json.loads(path.read_bytes()):

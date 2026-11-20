@@ -96,7 +96,7 @@ def summarize(rows, mixed, high):
     }
 
 
-def gates(groups, *, quick, previous=None):
+def gates(groups, *, quick, previous=None, deep=False):
     gates = {}
 
     def test(name, value, target, at_least=False):
@@ -108,7 +108,7 @@ def gates(groups, *, quick, previous=None):
         }
 
     essay = groups.get("genre/essay", {})
-    test("essay_auroc", essay.get("auroc"), 0.85, at_least=True)
+    test("essay_auroc", essay.get("auroc"), 0.90 if deep else 0.85, at_least=True)
     test("pooled_ece", groups["pooled"]["ece"], 0.05)
     test(
         "worst_stratum_ece",
@@ -151,7 +151,7 @@ def gates(groups, *, quick, previous=None):
         worst = max(deltas) if deltas and None not in deltas else None
         test("max_metric_regression", worst, 0.01)
     return {
-        "eligible": quick and all(g["status"] == "pass" for g in gates.values()),
+        "eligible": (quick or deep) and all(g["status"] == "pass" for g in gates.values()),
         "checks": gates,
     }
 
