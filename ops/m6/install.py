@@ -6,6 +6,7 @@ import os
 import plistlib
 import secrets
 import subprocess
+import sys
 import time
 from pathlib import Path
 
@@ -30,7 +31,7 @@ plist = directory / (label + ".plist")
 spec = {
     "Label": label,
     "ProgramArguments": [
-        str(home / "venv/bin/python"),
+        sys.executable,
         str(Path(__file__).with_name("start.py").resolve()),
     ],
     "WorkingDirectory": str(home),

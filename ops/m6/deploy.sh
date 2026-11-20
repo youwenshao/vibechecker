@@ -10,4 +10,4 @@ dest="vibechecker/releases/$revision"
 ssh -o BatchMode=yes "$remote" "umask 077 && mkdir -p '$dest'"
 git archive "$revision" engine services/inference ops/m6 pyproject.toml uv.lock modal/pyproject.toml eval |
   ssh -o BatchMode=yes "$remote" "tar -x -C '$dest'"
-ssh -o BatchMode=yes "$remote" "cd '$dest' && UV_PROJECT_ENVIRONMENT=\$HOME/vibechecker/venv /opt/homebrew/bin/uv sync --locked --all-packages --extra metal --no-dev && \$HOME/vibechecker/venv/bin/python ops/m6/install.py --version '$version'"
+ssh -o BatchMode=yes "$remote" "cd '$dest' && /opt/homebrew/bin/uv sync --locked --all-packages --extra metal --no-dev && .venv/bin/python ops/m6/install.py --version '$version' && .venv/bin/python ops/m6/probe.py --wait"
