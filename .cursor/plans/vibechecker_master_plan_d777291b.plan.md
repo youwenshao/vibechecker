@@ -509,6 +509,7 @@ Items marked [You] need your login, payment, sudo or a click. Everything else I 
 
 - [You] Sign up, add a payment method and run `modal token new`.
 - I set the $30 budget cap, secrets and the weights Volume, then deploy the fallback app.
+- Operator decision, 20 Nov 2026. The workspace currently has a $1 monthly cap. Keep hosted Modal GPU inference, evaluation and the live failover drill on hold until the operator lifts the hold after adding a payment method. Use the M6 for staging checks and evaluation during this period.
 
 **Sentry** (can wait until Phase 2): [You] Sign up. I create the project and DSN and set the scrubbing rules.
 

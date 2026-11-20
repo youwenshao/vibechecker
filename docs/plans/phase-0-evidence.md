@@ -18,7 +18,11 @@ Four simultaneous signed requests for the same fixture all returned four signals
 
 Both migrations were applied to the Singapore Supabase Free staging project. Hosted SQL checks verified role privileges, the device and address caps, single-use retry tokens, monotonic heartbeats, 30-day record expiry and rollback isolation. The browser suite exercised the production Next.js build, including cached re-checks with separate claim tokens, text-free persistence, interrupted-stream retry, file import, local deletion, axe and reduced motion. All eight browser tests passed with local upstream fixtures.
 
-Vercel CLI 66.5.0 built commit `46974b8` locally on Linux using the linked project's Preview settings. Its Build Output API v3 package contains Node.js 24 functions for the localized page, `/api/checks` and `/api/engine/heartbeat`. Live staging and the Modal failover drill are pending.
+The Production slot serves the approved static placeholder. On 20 November 2026 the Preview built from `5e4a9f5` was assigned to [staging.vibechecker.io](https://staging.vibechecker.io). Its hosted build includes `/api/checks` and `/api/engine/heartbeat`. Vercel had previously omitted the heartbeat route because an unanchored ignore rule also matched the web app's `api/engine` directory.
+
+At 23:12 Hong Kong time, a 163-word English fixture passed the live Turnstile check and returned index 0, interval 0–20 and four signals in the browser. The staging cache entry and matching Supabase receipt identified `mlx-metal`, engine `quick-m6-fp32-v0` and a 30-day expiry. The M6 LaunchAgent recorded successive heartbeats at 23:12:43 and 23:13:44. An unsigned heartbeat received HTTP 403.
+
+The operator placed hosted Modal GPU use on hold while the workspace has a $1 monthly cap. Staging uses the M6 and reports unavailability if the M6 cannot serve a request. The live fallback drill and CUDA comparison remain pending.
 
 ## Evaluation
 
