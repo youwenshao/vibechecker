@@ -27,6 +27,7 @@ The mode, tokenizer, weights, calibration artifact and engine version must agree
 ops/m6/deploy.sh <git-ref> <engine-version>
 uv run --package vibechecker-modal modal deploy modal/fallback.py
 node --env-file=apps/web/.env.local ops/probe-inference.mjs
+node --env-file=apps/web/.env.local ops/probe-inference.mjs --target fallback
 ```
 
 Use the Modal volume `vibechecker-weights` for both pinned checkpoints and `quick.joblib`. The Modal secret is `vibechecker-inference`. The release workflow re-scores the held-out corpus on CUDA and compares it with the same model's Metal trace in `/weights/traces/<engine-version>.metal.json`. Its exit status includes the quality and parity gates. The benchmark record identifies the exact fixture, model revisions and fitted artifact.
