@@ -12,6 +12,8 @@ node --env-file=apps/web/.env.local ops/probe-inference.mjs artifacts/thoreau-10
 
 After a fresh install from commit `275d4a5`, the first signed analysis took **4,495 ms**. A subsequent 20-request run measured p50 **964 ms** and p95 **1,498 ms** through Cloudflare. The M6's local warm benchmark recorded p95 **625 ms** over 20 checks. The fixture recipe and SHA-256 digests identify the data and weights used. [Engine benchmark](../../engine/benchmarks/m6-phase0.json)
 
+Four simultaneous signed requests for the same fixture all returned four signals, index 0 and interval 0–10. Their elapsed times through Cloudflare were 2,918, 3,182, 3,183 and 3,215 ms.
+
 ## Staging database and browser
 
 Both migrations were applied to the Singapore Supabase Free staging project. Hosted SQL checks verified role privileges, the device and address caps, single-use retry tokens, monotonic heartbeats, 30-day record expiry and rollback isolation. The browser suite exercised the production Next.js build, including cached re-checks with separate claim tokens, text-free persistence, interrupted-stream retry, file import, local deletion, axe and reduced motion. All eight browser tests passed with local upstream fixtures.
