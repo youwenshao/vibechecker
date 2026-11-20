@@ -16,6 +16,8 @@ After a fresh install from commit `275d4a5`, the first signed analysis took **4,
 
 Both migrations were applied to the Singapore Supabase Free staging project. Hosted SQL checks verified role privileges, the device and address caps, single-use retry tokens, monotonic heartbeats, 30-day record expiry and rollback isolation. The browser suite exercised the production Next.js build, including cached re-checks with separate claim tokens, text-free persistence, interrupted-stream retry, file import, local deletion, axe and reduced motion. All eight browser tests passed with local upstream fixtures.
 
+Vercel CLI 66.5.0 built commit `46974b8` locally on Linux using the linked project's Preview settings. Its Build Output API v3 package contains Node.js 24 functions for the localized page, `/api/checks` and `/api/engine/heartbeat`. Live staging and the Modal failover drill are pending.
+
 ## Evaluation
 
 The committed scorecards cover archived HFOpenAI predictions, a measured RoBERTa comparator and Quick on 436 held-out documents. The largest stratum calibration error exceeds the release gate and the TOEFL corpus cannot establish a Quick false-positive rate at the 150-word minimum. [Quick report](../../eval/reports/quick-m6-fp32-v0/report.md) · [RoBERTa report](../../eval/reports/roberta-large-liang-v1/report.md) · [Dataset review](../../eval/LICENSES.md)
