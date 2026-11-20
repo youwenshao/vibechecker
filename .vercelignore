@@ -8,7 +8,8 @@
 **/.env*
 .env*
 **/.vercel
-engine
+# Anchor the Python package so apps/web/app/api/engine/heartbeat is uploaded.
+/engine
 eval
 artifacts
 weights
