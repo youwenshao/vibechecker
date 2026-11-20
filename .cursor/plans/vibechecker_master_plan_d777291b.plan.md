@@ -10,16 +10,16 @@ todos:
     status: pending
   - id: p0-harness
     content: "Phase 0: license-tagged dataset registry, text prep with UTF-16 offsets, MLX token_stats backend with parity tests, harness metrics and first baseline report"
-    status: pending
+    status: completed
   - id: p0-quick
     content: "Phase 0: Quick signals (E1, E2, E6, stylometry), Quick stacker with isotonic calibration and bootstrap interval, length and language refusals"
-    status: pending
+    status: completed
   - id: p0-service
     content: "Phase 0: FastAPI inference service (NDJSON, HMAC, scheduler, memory guard, heartbeat) on the M6, Modal fallback app, web router with failover tests"
-    status: pending
+    status: in_progress
   - id: p0-web
     content: "Phase 0: Next.js app with tokens, fonts, i18n skeleton, PasteBox, results v0, /api/checks (Turnstile, quota, cache, stream, persist), Playwright + axe + reduced-motion smoke tests"
-    status: pending
+    status: completed
   - id: p1-deep
     content: "Phase 1: Binoculars + Fast-DetectGPT via pair_stats with golden tests, published-number reproduction, quantization bake-off, E5 sentence head, E7, ESL and laundering flags, Deep stacker and calibration"
     status: pending
