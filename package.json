@@ -1,0 +1,17 @@
+{
+  "name": "vibechecker",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.30.2",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "verify": "pnpm contracts:check && pnpm --filter @vibechecker/web typecheck && pnpm --filter @vibechecker/web test",
+    "contracts:generate": "pnpm --filter @vibechecker/contracts generate && uv run python ops/generate_contracts.py",
+    "contracts:check": "pnpm --filter @vibechecker/contracts generate --check && uv run python ops/generate_contracts.py --check"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.6.8"
+  }
+}

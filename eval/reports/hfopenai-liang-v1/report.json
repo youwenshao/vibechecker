@@ -1,0 +1,556 @@
+{
+  "version": "hfopenai-liang-v1",
+  "mode": "baseline",
+  "description": "Replay of Liang et al.\u2019s archived HFOpenAI scores. All available essay lengths are included for the baseline. Mixed and high thresholds are 0.50 and 0.90. Short essays in this offline comparison receive a length refusal in the Quick service. Hewlett is the US comparison cohort. Individual native-language status is unverified.",
+  "backend": "archived-hfopenai",
+  "model_sha256": null,
+  "scope": {
+    "seed": 42,
+    "limit_per_class_per_dataset_split": 0,
+    "commercial_only": false,
+    "manifest": {
+      "liang": {
+        "version": "1d05ed8242d4694a0ed7b73a79c52be8864470f9",
+        "sha256": [
+          "ca1993970a87c5e95cd1e5a90da0cec1fc85c3c3719de7d809af90bb44de1391",
+          "711b5b1adf0ca5beedb68dcf028b59298b25aaab312e4dc395e6862ae02b19de",
+          "c1e3ad86e5165c6ed650abf0e29729f8b06847737c6dd154e24e1c27d51e2cbd",
+          "86dea70272f44201446d8fa200b65cee61bb49e14b9a342a12d131709cdf7f29"
+        ]
+      }
+    },
+    "scored_ids_sha256": "2c9283808fa7965264c37db91e460723bb5921c2877305b74805b981edf141eb"
+  },
+  "fit_counts": {},
+  "skipped": {
+    "liang/toefl/duplicate": 1
+  },
+  "thresholds": {
+    "mixed": 0.5,
+    "high": 0.9
+  },
+  "metrics": {
+    "pooled": {
+      "count": 279,
+      "ai_count": 31,
+      "auroc": 0.7859001040582727,
+      "tpr_at_1pct_fpr": 0.1935483870967742,
+      "ece": 0.24689450035404537,
+      "brier": 0.21676825477025655,
+      "fpr_mixed_or_above": {
+        "count": 61,
+        "denominator": 248,
+        "rate": 0.24596774193548387,
+        "wilson95": [
+          0.1965130643961201,
+          0.3031721717440124
+        ]
+      },
+      "fpr_high": {
+        "count": 32,
+        "denominator": 248,
+        "rate": 0.12903225806451613,
+        "wilson95": [
+          0.09290264996790751,
+          0.17647896471292104
+        ]
+      },
+      "latency_ms": null
+    },
+    "attack/none": {
+      "count": 279,
+      "ai_count": 31,
+      "auroc": 0.7859001040582727,
+      "tpr_at_1pct_fpr": 0.1935483870967742,
+      "ece": 0.24689450035404537,
+      "brier": 0.21676825477025655,
+      "fpr_mixed_or_above": {
+        "count": 61,
+        "denominator": 248,
+        "rate": 0.24596774193548387,
+        "wilson95": [
+          0.1965130643961201,
+          0.3031721717440124
+        ]
+      },
+      "fpr_high": {
+        "count": 32,
+        "denominator": 248,
+        "rate": 0.12903225806451613,
+        "wilson95": [
+          0.09290264996790751,
+          0.17647896471292104
+        ]
+      },
+      "latency_ms": null
+    },
+    "dataset/liang/college-ai": {
+      "count": 31,
+      "ai_count": 31,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.4092529677187896,
+      "brier": 0.3853170993637732,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "latency_ms": null
+    },
+    "dataset/liang/college-human": {
+      "count": 70,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.009163291701198822,
+      "brier": 0.001382612197144816,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 70,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.0520230624102642
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 70,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.0520230624102642
+        ]
+      },
+      "latency_ms": null
+    },
+    "dataset/liang/hewlett": {
+      "count": 88,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.09869214229316144,
+      "brier": 0.07441326995261971,
+      "fpr_mixed_or_above": {
+        "count": 8,
+        "denominator": 88,
+        "rate": 0.09090909090909091,
+        "wilson95": [
+          0.04678642147616794,
+          0.16925390579510569
+        ]
+      },
+      "fpr_high": {
+        "count": 3,
+        "denominator": 88,
+        "rate": 0.03409090909090909,
+        "wilson95": [
+          0.01166099719958577,
+          0.09549604219269808
+        ]
+      },
+      "latency_ms": null
+    },
+    "dataset/liang/toefl": {
+      "count": 90,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.5628575970918367,
+      "brier": 0.4654262487888215,
+      "fpr_mixed_or_above": {
+        "count": 53,
+        "denominator": 90,
+        "rate": 0.5888888888888889,
+        "wilson95": [
+          0.48563237347145843,
+          0.6848679597615507
+        ]
+      },
+      "fpr_high": {
+        "count": 29,
+        "denominator": 90,
+        "rate": 0.32222222222222224,
+        "wilson95": [
+          0.23466771186194163,
+          0.42433162167204047
+        ]
+      },
+      "latency_ms": null
+    },
+    "fairness/ESL-essay": {
+      "count": 90,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.5628575970918367,
+      "brier": 0.4654262487888215,
+      "fpr_mixed_or_above": {
+        "count": 53,
+        "denominator": 90,
+        "rate": 0.5888888888888889,
+        "wilson95": [
+          0.48563237347145843,
+          0.6848679597615507
+        ]
+      },
+      "fpr_high": {
+        "count": 29,
+        "denominator": 90,
+        "rate": 0.32222222222222224,
+        "wilson95": [
+          0.23466771186194163,
+          0.42433162167204047
+        ]
+      },
+      "latency_ms": null
+    },
+    "generator/gpt-3": {
+      "count": 31,
+      "ai_count": 31,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.4092529677187896,
+      "brier": 0.3853170993637732,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "latency_ms": null
+    },
+    "generator/human": {
+      "count": 248,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.24186904306107834,
+      "brier": 0.19569964919606697,
+      "fpr_mixed_or_above": {
+        "count": 61,
+        "denominator": 248,
+        "rate": 0.24596774193548387,
+        "wilson95": [
+          0.1965130643961201,
+          0.3031721717440124
+        ]
+      },
+      "fpr_high": {
+        "count": 32,
+        "denominator": 248,
+        "rate": 0.12903225806451613,
+        "wilson95": [
+          0.09290264996790751,
+          0.17647896471292104
+        ]
+      },
+      "latency_ms": null
+    },
+    "genre/essay": {
+      "count": 279,
+      "ai_count": 31,
+      "auroc": 0.7859001040582727,
+      "tpr_at_1pct_fpr": 0.1935483870967742,
+      "ece": 0.24689450035404537,
+      "brier": 0.21676825477025655,
+      "fpr_mixed_or_above": {
+        "count": 61,
+        "denominator": 248,
+        "rate": 0.24596774193548387,
+        "wilson95": [
+          0.1965130643961201,
+          0.3031721717440124
+        ]
+      },
+      "fpr_high": {
+        "count": 32,
+        "denominator": 248,
+        "rate": 0.12903225806451613,
+        "wilson95": [
+          0.09290264996790751,
+          0.17647896471292104
+        ]
+      },
+      "latency_ms": null
+    },
+    "length/150-299": {
+      "count": 42,
+      "ai_count": 20,
+      "auroc": 0.884090909090909,
+      "tpr_at_1pct_fpr": 0.45,
+      "ece": 0.21490678071062402,
+      "brier": 0.2178445214064304,
+      "fpr_mixed_or_above": {
+        "count": 2,
+        "denominator": 22,
+        "rate": 0.09090909090909091,
+        "wilson95": [
+          0.02529542899099607,
+          0.2781494684160517
+        ]
+      },
+      "fpr_high": {
+        "count": 1,
+        "denominator": 22,
+        "rate": 0.045454545454545456,
+        "wilson95": [
+          0.008069427621264141,
+          0.21798045838656666
+        ]
+      },
+      "latency_ms": null
+    },
+    "length/300-599": {
+      "count": 96,
+      "ai_count": 10,
+      "auroc": 0.8883720930232558,
+      "tpr_at_1pct_fpr": 0.2,
+      "ece": 0.10904726104217842,
+      "brier": 0.09616836874193542,
+      "fpr_mixed_or_above": {
+        "count": 6,
+        "denominator": 86,
+        "rate": 0.06976744186046512,
+        "wilson95": [
+          0.032365414509922,
+          0.14396140641036587
+        ]
+      },
+      "fpr_high": {
+        "count": 2,
+        "denominator": 86,
+        "rate": 0.023255813953488372,
+        "wilson95": [
+          0.00640092620427106,
+          0.08088014562631822
+        ]
+      },
+      "latency_ms": null
+    },
+    "length/600-1199": {
+      "count": 49,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.016131671678039663,
+      "brier": 0.0042519760662616275,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 49,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.07269781922049266
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 49,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.07269781922049266
+        ]
+      },
+      "latency_ms": null
+    },
+    "length/<150": {
+      "count": 92,
+      "ai_count": 1,
+      "auroc": 0.9340659340659341,
+      "tpr_at_1pct_fpr": 0.0,
+      "ece": 0.5506157800517267,
+      "brier": 0.4553082929930312,
+      "fpr_mixed_or_above": {
+        "count": 53,
+        "denominator": 91,
+        "rate": 0.5824175824175825,
+        "wilson95": [
+          0.4797716618786743,
+          0.6783870187923899
+        ]
+      },
+      "fpr_high": {
+        "count": 29,
+        "denominator": 91,
+        "rate": 0.31868131868131866,
+        "wilson95": [
+          0.23196000154381752,
+          0.42009090097984153
+        ]
+      },
+      "latency_ms": null
+    },
+    "split/test": {
+      "count": 279,
+      "ai_count": 31,
+      "auroc": 0.7859001040582727,
+      "tpr_at_1pct_fpr": 0.1935483870967742,
+      "ece": 0.24689450035404537,
+      "brier": 0.21676825477025655,
+      "fpr_mixed_or_above": {
+        "count": 61,
+        "denominator": 248,
+        "rate": 0.24596774193548387,
+        "wilson95": [
+          0.1965130643961201,
+          0.3031721717440124
+        ]
+      },
+      "fpr_high": {
+        "count": 32,
+        "denominator": 248,
+        "rate": 0.12903225806451613,
+        "wilson95": [
+          0.09290264996790751,
+          0.17647896471292104
+        ]
+      },
+      "latency_ms": null
+    },
+    "writer/ESL": {
+      "count": 90,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.5628575970918367,
+      "brier": 0.4654262487888215,
+      "fpr_mixed_or_above": {
+        "count": 53,
+        "denominator": 90,
+        "rate": 0.5888888888888889,
+        "wilson95": [
+          0.48563237347145843,
+          0.6848679597615507
+        ]
+      },
+      "fpr_high": {
+        "count": 29,
+        "denominator": 90,
+        "rate": 0.32222222222222224,
+        "wilson95": [
+          0.23466771186194163,
+          0.42433162167204047
+        ]
+      },
+      "latency_ms": null
+    },
+    "writer/native_proxy": {
+      "count": 88,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.09869214229316144,
+      "brier": 0.07441326995261971,
+      "fpr_mixed_or_above": {
+        "count": 8,
+        "denominator": 88,
+        "rate": 0.09090909090909091,
+        "wilson95": [
+          0.04678642147616794,
+          0.16925390579510569
+        ]
+      },
+      "fpr_high": {
+        "count": 3,
+        "denominator": 88,
+        "rate": 0.03409090909090909,
+        "wilson95": [
+          0.01166099719958577,
+          0.09549604219269808
+        ]
+      },
+      "latency_ms": null
+    },
+    "writer/unknown": {
+      "count": 101,
+      "ai_count": 31,
+      "auroc": 0.9465437788018433,
+      "tpr_at_1pct_fpr": 0.6129032258064516,
+      "ece": 0.12964371312366418,
+      "brier": 0.119223890436407,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 70,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.0520230624102642
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 70,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.0520230624102642
+        ]
+      },
+      "latency_ms": null
+    }
+  },
+  "sentence_f1": null,
+  "parity": null,
+  "gates": {
+    "eligible": false,
+    "checks": {
+      "essay_auroc": {
+        "value": 0.7859001040582727,
+        "target": 0.85,
+        "status": "fail"
+      },
+      "pooled_ece": {
+        "value": 0.24689450035404537,
+        "target": 0.05,
+        "status": "fail"
+      },
+      "worst_stratum_ece": {
+        "value": 0.5628575970918367,
+        "target": 0.08,
+        "status": "fail"
+      },
+      "human_essay_high_fpr": {
+        "value": 0.12903225806451613,
+        "target": 0.02,
+        "status": "fail"
+      },
+      "esl_high_fpr": {
+        "value": 0.32222222222222224,
+        "target": 0.05,
+        "status": "fail"
+      },
+      "toefl_high_fpr": {
+        "value": 0.32222222222222224,
+        "target": 0.05,
+        "status": "fail"
+      },
+      "esl_native_gap": {
+        "value": 0.2881313131313131,
+        "target": 0.03,
+        "status": "fail"
+      },
+      "toefl_native_gap": {
+        "value": 0.2881313131313131,
+        "target": 0.03,
+        "status": "fail"
+      }
+    }
+  },
+  "release_ready": false
+}

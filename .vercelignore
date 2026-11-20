@@ -1,0 +1,25 @@
+# The staging build needs the web workspace and its TypeScript contract.
+.git
+.cursor
+.github
+.venv
+**/node_modules
+**/.next*
+**/.env*
+.env*
+**/.vercel
+engine
+eval
+artifacts
+weights
+services
+modal
+supabase
+ops
+docs
+**/playwright-report
+**/test-results
+**/e2e
+**/*.test.ts
+uv.lock
+pyproject.toml

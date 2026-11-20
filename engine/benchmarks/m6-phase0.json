@@ -1,0 +1,44 @@
+{
+  "measured_at": "2026-11-20",
+  "hardware": {"chip": "Apple M6", "memory_gib": 32, "cores": 12, "macos": "27.0.1"},
+  "runtime": {"python": "3.12.16", "mlx": "0.32.4", "mlx_lm": "0.32.2", "torch": "2.15.0", "sklearn": "1.9.1"},
+  "models": {
+    "lm": "Qwen/Qwen2.5-0.5B@060db6499f32faf8b98477b0a26969ef7d8b9987",
+    "encoder": "GeorgeDrayson/modernbert-ai-detection-raid-mage@e047d9c56f51a7e5c5ef5b0dd556f519bb9dd624",
+    "compute_dtype": "float32",
+    "stacker_version": "quick-m6-fp32-v0",
+    "stacker_sha256": "0dba864f984689ed4556212c4aa3cce6025e255ff96089c02020475ff82235cd"
+  },
+  "fixture": {
+    "source": "https://raw.githubusercontent.com/GITenberg/On-the-Duty-of-Civil-Disobedience_71/84107f464dbbec471d5d7ba3b3b37d22687bb048/71.txt",
+    "selection": "Decode as UTF-8, translate line endings to LF, start at the first occurrence of 'I heartily accept', and end immediately after the 1000th match of vibechecker_engine.text.WORD.",
+    "utf8_sha256": "08015ae45f7c94e230e06a5e593b0c9dfc8ee98d2dc94592e8dc571364b353bc",
+    "words": 1000,
+    "lm_tokens": 1341
+  },
+  "latency": {
+    "method": "QuickEngine.analyze, after one untimed warmup, one request at a time",
+    "backend": "mlx-metal",
+    "runs": 20,
+    "p50_ms": 621.8300830223598,
+    "p95_ms": 625.4689732741099
+  },
+  "fixture_index_parity": {
+    "mlx_cpu": {"index": 0, "interval": [0, 10]},
+    "mlx_metal": {"index": 0, "interval": [0, 10]}
+  },
+  "token_parity": {
+    "method": "engine/tools/check_parity.py on the first 128 tokens of the same fixture",
+    "tokens_scored": 127,
+    "metal_vs_mlx_cpu": {
+      "logp": {"mean_abs_delta": 0.003365111071616411, "max_abs_delta": 0.03424835205078125},
+      "rank": {"mean_abs_delta": 0.2047244094488189, "max_abs_delta": 13},
+      "entropy": {"mean_abs_delta": 0.0031470367684960365, "max_abs_delta": 0.02173614501953125}
+    },
+    "metal_vs_torch_cpu_fp32": {
+      "logp": {"mean_abs_delta": 0.0033685024827718735, "max_abs_delta": 0.03421306610107422},
+      "rank": {"mean_abs_delta": 0.2047244094488189, "max_abs_delta": 13},
+      "entropy": {"mean_abs_delta": 0.003006433369591832, "max_abs_delta": 0.02157902717590332}
+    }
+  }
+}

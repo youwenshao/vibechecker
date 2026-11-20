@@ -1,0 +1,127 @@
+# Each sha256 names the exact publisher bytes consumed by its loader.
+datasets:
+  - id: raid
+    source: https://github.com/liamdugan/raid
+    version: train-none-2024-06-04
+    license: MIT (dataset card), underlying sources vary
+    commercial_ok: false
+    share_alike: false
+    use: train_eval
+    strata: [genre, generator, length]
+    artifacts:
+      - name: train_none.csv
+        url: https://dataset.raid-bench.xyz/train_none.csv
+        sha256: c5467bca6fc7f5c728c676450c7f84ce401df6c6ccc6d82c47e3b5f3c6d6fce4
+        split: grouped
+  - id: raid-attacks
+    source: https://huggingface.co/datasets/liamdugan/raid
+    version: 5008b2d167f74bfd4ceff6b3b0512b7097d7cbb1
+    license: MIT (dataset card), underlying sources vary
+    commercial_ok: false
+    share_alike: false
+    use: train_eval
+    strata: [genre, generator, attack, length]
+    artifacts:
+      - name: partial-train-0000.parquet
+        url: https://huggingface.co/datasets/liamdugan/raid/resolve/5008b2d167f74bfd4ceff6b3b0512b7097d7cbb1/raid/partial-train/0000.parquet?download=true
+        sha256: ec962e229a2bf0d1726e7ed1852be01e1b808dfb395294cbcb62307eea63c514
+        split: grouped
+  - id: mage
+    source: https://huggingface.co/datasets/yaful/MAGE
+    version: 342663f0a2b775455c023f5d36a1341ff0ec5402
+    license: Apache-2.0 (HF), CC-BY-4.0 (repository badge)
+    commercial_ok: false
+    share_alike: false
+    use: eval
+    strata: [genre, generator, length]
+    artifacts:
+      - name: test.csv
+        url: https://huggingface.co/datasets/yaful/MAGE/resolve/342663f0a2b775455c023f5d36a1341ff0ec5402/test.csv
+        sha256: dcb8a8a8de1459d382ac2da5e0f1c39452e8bc47d186d7393f3ed4308f762ac7
+        split: test
+  - id: liang
+    source: https://github.com/Weixin-Liang/ChatGPT-Detector-Bias
+    version: 1d05ed8242d4694a0ed7b73a79c52be8864470f9
+    license: MIT (project), source essays have separate origins
+    commercial_ok: false
+    share_alike: false
+    use: eval
+    strata: [essay, writer, generator, length]
+    artifacts:
+      - name: toefl
+        url: https://raw.githubusercontent.com/Weixin-Liang/ChatGPT-Detector-Bias/1d05ed8242d4694a0ed7b73a79c52be8864470f9/Data_and_Results/Human_Data/TOEFL_real_91/HFOpenAI.json
+        sha256: ca1993970a87c5e95cd1e5a90da0cec1fc85c3c3719de7d809af90bb44de1391
+        split: test
+      - name: hewlett
+        url: https://raw.githubusercontent.com/Weixin-Liang/ChatGPT-Detector-Bias/1d05ed8242d4694a0ed7b73a79c52be8864470f9/Data_and_Results/Human_Data/HewlettStudentEssay_real_88/HFOpenAI.json
+        sha256: 711b5b1adf0ca5beedb68dcf028b59298b25aaab312e4dc395e6862ae02b19de
+        split: test
+      - name: college-ai
+        url: https://raw.githubusercontent.com/Weixin-Liang/ChatGPT-Detector-Bias/1d05ed8242d4694a0ed7b73a79c52be8864470f9/Data_and_Results/GPT_Data/CollegeEssay_gpt3_31/HFOpenAI.json
+        sha256: c1e3ad86e5165c6ed650abf0e29729f8b06847737c6dd154e24e1c27d51e2cbd
+        split: test
+      - name: college-human
+        url: https://raw.githubusercontent.com/Weixin-Liang/ChatGPT-Detector-Bias/1d05ed8242d4694a0ed7b73a79c52be8864470f9/Data_and_Results/Human_Data/CollegeEssay_real_70/HFOpenAI.json
+        sha256: 86dea70272f44201446d8fa200b65cee61bb49e14b9a342a12d131709cdf7f29
+        split: test
+  - id: padben
+    source: https://huggingface.co/datasets/JonathanZha/PADBen-Task1
+    version: 47abe58aa55fb458d3eaae1670da988c77ec7032
+    license: MIT (dataset card), source corpora retain terms
+    commercial_ok: false
+    share_alike: false
+    use: eval
+    strata: [paraphrase, length]
+    artifacts:
+      - name: train.json
+        url: https://huggingface.co/datasets/JonathanZha/PADBen-Task1/resolve/47abe58aa55fb458d3eaae1670da988c77ec7032/train.json
+        sha256: 58abf9ef067d86e617f4d706d705e73b5b6e0d5c128047fd6d1b3f6cacc0c37e
+        split: test
+  - id: asap
+    source: https://github.com/scrosseye/ASAP_2.0
+    version: 060ab225ca0984c0bf43ff222bf6bb2bc6195b6f
+    license: CC-BY-4.0
+    commercial_ok: true
+    share_alike: false
+    use: train_eval
+    strata: [essay, writer, length]
+    artifacts:
+      - name: train.zip
+        url: https://raw.githubusercontent.com/scrosseye/ASAP_2.0/060ab225ca0984c0bf43ff222bf6bb2bc6195b6f/ASAP_2_Final_github_train.zip
+        sha256: aec01e98eb16cc3bc3828010ca053a09daecc2821dd2105f8a7333089271beb4
+        split: grouped
+  - id: daigt
+    source: https://www.kaggle.com/competitions/llm-detect-ai-generated-text/rules
+    version: competition-2023
+    license: competition rules require separate review
+    commercial_ok: false
+    share_alike: false
+    use: excluded
+    strata: [essay, generator, length]
+    artifacts: []
+  - id: ellipse
+    source: https://github.com/scrosseye/ELLIPSE-Corpus
+    version: 710963bbf1acf23a28e40643d9f937d06f047dd4
+    license: CC-BY-4.0 (publisher), research-only project scope
+    commercial_ok: false
+    share_alike: true
+    use: train_eval
+    strata: [essay, writer, length]
+    artifacts:
+      - name: train.csv
+        url: https://raw.githubusercontent.com/scrosseye/ELLIPSE-Corpus/710963bbf1acf23a28e40643d9f937d06f047dd4/ELLIPSE_Final_github_train.csv
+        sha256: 782344e99668a3ff508d7410c0eb6e36da70f3b28f81c96e367f1ca04924b06c
+        split: grouped
+  - id: persuade
+    source: https://github.com/scrosseye/persuade_corpus_2.0
+    version: 5bdbad1175d1d5adec082b3f1c4e3ce37b7bd1bf
+    license: CC-BY-4.0 (publisher), research-only project scope
+    commercial_ok: false
+    share_alike: true
+    use: train_eval
+    strata: [essay, writer, length]
+    artifacts:
+      - name: train.csv
+        url: https://drive.usercontent.google.com/download?id=13phHyDzIsb0MHyJr6q-B-qIa9P2tM135&export=download&confirm=t
+        sha256: f61319edd8bf16a982711ea0399fad59c05afaec05cdf0767f16a2c05c467e23
+        split: grouped

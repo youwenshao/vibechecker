@@ -1,0 +1,91 @@
+{
+  "chrome": {
+    "brand": "vibechecker",
+    "home": "VibeChecker home",
+    "jump": "Skip to essay checker",
+    "how": "How it works",
+    "locale": "繁體中文",
+    "close": "Close",
+    "foot": "A detector score is a reason to look closer, never proof."
+  },
+  "home": {
+    "pageTitle": "VibeChecker · AI writing checker",
+    "title": "Does your essay <br></br>smell like a r<dial>o</dial>bot?",
+    "subline": "Paste it in. We’ll show you what detectors notice, and why they’re often wrong.",
+    "label": "Your essay",
+    "placeholder": "Paste your English essay here…",
+    "quick": "Quick check",
+    "limits": "150–5,000 words · English",
+    "upload": "Upload file",
+    "fileHelp": "Word document, plain text or Markdown",
+    "count": "{n, plural, one {# word} other {# words}}",
+    "more": "{n, plural, one {# more word} other {# more words}} for a Quick check.",
+    "check": "Check my essay",
+    "checking": "Checking…",
+    "privacy": "Your essay is processed in memory. Only this browser keeps a copy of the text, for 30 days.",
+    "howBody": "A Quick check reads your English essay in several ways. It compares word predictability, word choices and vocabulary with patterns from human and machine-written examples. The result includes a range and an explanation of each signal.",
+    "verification": "Completing verification…",
+    "unavailable": "Verification is unavailable. Try reloading this page.",
+    "ready": "Ready for a Quick check.",
+    "forget": "Forget on this device",
+    "again": "Edit essay",
+    "loading": "Reading your essay…",
+    "scoring": "Comparing writing signals…",
+    "fallback": "Our cloud engine is covering this check.",
+    "storageError": "Your browser couldn’t save this result on this device.",
+    "forgetError": "Your browser couldn’t erase the local copy. Check site storage permissions and try again."
+  },
+  "errors": {
+    "too_short": "A Quick check needs at least 150 words.",
+    "too_long": "A Quick check can read up to 5,000 words. Try one section at a time.",
+    "not_english": "We only read English essays for now. You can edit your draft and try again.",
+    "quota": "You’ve used today’s free checks. Come back tomorrow.",
+    "turnstile": "Verification expired. Complete the new verification and try again.",
+    "busy": "Both engines are busy. Your draft is here when you try again.",
+    "internal": "Your check couldn’t finish. Your draft is here. Please try again.",
+    "file": "Choose a readable .docx, .txt or .md file, up to 5 MB."
+  },
+  "result": {
+    "title": "Robot-smell index",
+    "range": "Likely range {low}–{high}",
+    "scoreLabel": "{index} out of 100",
+    "bands": {
+      "low": "Low signal",
+      "mixed": "Mixed signals",
+      "high": "High signal"
+    },
+    "interpretation": {
+      "low": "Your writing shares fewer of the patterns our detector associates with AI-generated text.",
+      "mixed": "Some patterns resemble human writing and others resemble machine-generated text.",
+      "high": "Several patterns resemble machine-generated text. A human writer can produce these patterns too."
+    },
+    "why": "Why this score?",
+    "whyBody": "The index combines four signals and calibrates them against a balanced sample of human and AI writing. Each card compares your essay with the median human training essay. Any single signal has many possible explanations.",
+    "wrong": "Why can detectors be wrong?",
+    "wrongBody": "Short, polished or formulaic passages can look predictable. People writing in a second language may be flagged more often. The range shows uncertainty in calibration. It cannot establish who wrote an essay. Keep drafts, notes and revision history as evidence of your process.",
+    "signals": "What the detector noticed",
+    "you": "Your essay",
+    "ref": "Human reference",
+    "flags": "Text notes",
+    "invisible": "The text contains invisible formatting characters, which can affect how words are read.",
+    "homoglyph": "Some characters look like letters from another script. Check whether they were intentional.",
+    "saved": "This browser keeps your essay and claim token for 30 days.",
+    "series": "Signal across the essay",
+    "e1": {
+      "title": "Predictability",
+      "detail": "Like guessing the next word in a sentence. Lower perplexity means the language model found the wording easier to anticipate."
+    },
+    "e2": {
+      "title": "Word choices",
+      "detail": "Like checking how far down a list of suggestions each word appears. Lower log-rank means more top-ranked words."
+    },
+    "e6": {
+      "title": "Learned patterns",
+      "detail": "A classifier compares short passages with patterns it learned from labelled examples. A higher value means a closer match to its AI-labelled examples."
+    },
+    "stylometry": {
+      "title": "Vocabulary variety",
+      "detail": "The share of distinct words in the essay. Topic, word count and a writer’s vocabulary can all change this ratio."
+    }
+  }
+}

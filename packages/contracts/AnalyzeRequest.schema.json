@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200000
+    },
+    "mode": {
+      "type": "string",
+      "const": "quick"
+    }
+  },
+  "required": [
+    "text",
+    "mode"
+  ],
+  "additionalProperties": false,
+  "title": "AnalyzeRequest"
+}

@@ -1,0 +1,13 @@
+{
+  "name": "@vibechecker/contracts",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": "./src/inference.ts",
+  "scripts": {
+    "generate": "node --experimental-strip-types export.ts"
+  },
+  "dependencies": {
+    "zod": "^4.0.0"
+  }
+}

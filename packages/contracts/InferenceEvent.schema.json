@@ -1,0 +1,259 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "accepted"
+        },
+        "backend": {
+          "type": "string",
+          "enum": [
+            "mlx-metal",
+            "mlx-cuda",
+            "mlx-cpu"
+          ]
+        },
+        "engineVersion": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9._-]{1,64}$"
+        },
+        "chunks": {
+          "type": "integer",
+          "exclusiveMinimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "type",
+        "backend",
+        "engineVersion",
+        "chunks"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "progress"
+        },
+        "stage": {
+          "type": "string",
+          "enum": [
+            "quick",
+            "scoring"
+          ]
+        },
+        "done": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "total": {
+          "type": "integer",
+          "exclusiveMinimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "type",
+        "stage",
+        "done",
+        "total"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "sentences"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "start": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "end": {
+                "type": "integer",
+                "exclusiveMinimum": 0,
+                "maximum": 9007199254740991
+              },
+              "score": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "required": [
+              "start",
+              "end",
+              "score"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "type",
+        "items"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "result"
+        },
+        "result": {
+          "type": "object",
+          "properties": {
+            "index": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "interval": {
+              "type": "object",
+              "properties": {
+                "low": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "high": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 100
+                }
+              },
+              "required": [
+                "low",
+                "high"
+              ],
+              "additionalProperties": false
+            },
+            "band": {
+              "type": "string",
+              "enum": [
+                "low",
+                "mixed",
+                "high"
+              ]
+            },
+            "wordCount": {
+              "type": "integer",
+              "minimum": 150,
+              "maximum": 5000
+            },
+            "signals": {
+              "minItems": 4,
+              "maxItems": 4,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "enum": [
+                      "e1",
+                      "e2",
+                      "e6",
+                      "stylometry"
+                    ]
+                  },
+                  "value": {
+                    "type": "number"
+                  },
+                  "humanReference": {
+                    "type": "number"
+                  },
+                  "samples": {
+                    "minItems": 2,
+                    "maxItems": 16,
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    }
+                  }
+                },
+                "required": [
+                  "id",
+                  "value",
+                  "humanReference"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "flags": {
+              "maxItems": 2,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "invisible",
+                  "homoglyph"
+                ]
+              }
+            }
+          },
+          "required": [
+            "index",
+            "interval",
+            "band",
+            "wordCount",
+            "signals",
+            "flags"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "type",
+        "result"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "error"
+        },
+        "code": {
+          "type": "string",
+          "enum": [
+            "too_short",
+            "too_long",
+            "not_english",
+            "busy",
+            "internal"
+          ]
+        },
+        "retryable": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "type",
+        "code",
+        "retryable"
+      ],
+      "additionalProperties": false
+    }
+  ],
+  "title": "InferenceEvent"
+}

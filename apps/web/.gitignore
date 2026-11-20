@@ -1,0 +1,7 @@
+public/fonts/clash-display-semibold.woff2
+.next/
+.next-e2e/
+next-env.d.ts
+*.tsbuildinfo
+playwright-report/
+test-results/

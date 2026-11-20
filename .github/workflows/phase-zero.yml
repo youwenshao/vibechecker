@@ -1,0 +1,29 @@
+name: Phase 0 checks
+on: [push, pull_request]
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.30.2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.12"
+      - run: pnpm install --frozen-lockfile
+      - run: uv sync --locked --all-packages
+      - run: pnpm verify
+      - run: uv run pytest
+      - name: CPU model golden tests
+        run: |
+          uv pip install torch==2.15.0 --index-url https://download.pytorch.org/whl/cpu
+          uv pip install 'mlx[cpu]==0.32.4' 'mlx-lm==0.32.2' 'transformers==5.23.0'
+          .venv/bin/python -c 'import mlx.core, mlx_lm, torch'
+          .venv/bin/python -m pytest engine/tests/test_backends.py
+      - run: pnpm --filter @vibechecker/web exec playwright install --with-deps chromium
+      - run: pnpm --filter @vibechecker/web e2e

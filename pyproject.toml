@@ -1,0 +1,22 @@
+[project]
+name = "vibechecker"
+version = "0.1.0"
+requires-python = ">=3.12,<3.13"
+dependencies = []
+
+[tool.uv.workspace]
+members = ["engine", "services/inference", "eval", "modal"]
+
+[dependency-groups]
+dev = ["pytest>=8", "hypothesis", "ruff", "datamodel-code-generator>=0.35,<1", "vibechecker-inference", "vibechecker-eval"]
+
+[tool.uv.sources]
+vibechecker-engine = { workspace = true }
+vibechecker-inference = { workspace = true }
+vibechecker-eval = { workspace = true }
+
+[tool.pytest.ini_options]
+testpaths = ["engine/tests", "services/inference/tests", "eval/tests"]
+
+[tool.ruff]
+line-length = 100

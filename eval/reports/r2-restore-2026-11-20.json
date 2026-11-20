@@ -1,0 +1,53 @@
+{
+  "date": "2026-11-20",
+  "bucket": "vibechecker-artifacts",
+  "transport": "R2 REST API",
+  "verification": "Each object was downloaded into a separate local restore directory and compared by SHA-256 with its source file.",
+  "dataset_projection": {
+    "source": "padben",
+    "source_sha256": "58abf9ef067d86e617f4d706d705e73b5b6e0d5c128047fd6d1b3f6cacc0c37e",
+    "records": "First 64 in publisher order; integer idx and label fields only."
+  },
+  "objects": [
+    {
+      "key": "reports/hfopenai-liang-v1/report.json",
+      "bytes": 13565,
+      "sha256": "188602ccf3f46434caa5884b5bd2d4804b4440d7cc53be2a5d850d48f3dbe583"
+    },
+    {
+      "key": "reports/hfopenai-liang-v1/report.md",
+      "bytes": 2557,
+      "sha256": "7f8c28f3d646d9d679e2c921694e27d80552c04c3b19bc84dd7c6d9ad75778ef"
+    },
+    {
+      "key": "reports/quick-m6-fp32-v0/report.json",
+      "bytes": 22309,
+      "sha256": "c9203d345573f25ade704b1ee824f6298e9e13f61eaecf4a31c7604c3531359b"
+    },
+    {
+      "key": "reports/quick-m6-fp32-v0/report.md",
+      "bytes": 3250,
+      "sha256": "884e93a199411224b9ba10cc8f4bbafc7aae9902efc066d40f37cf4a372b3c2d"
+    },
+    {
+      "key": "reports/roberta-large-liang-v1/report.json",
+      "bytes": 14789,
+      "sha256": "ff10f66355c05b698d2a26a9ea7c66a030fb265af88d6805d2cd572c97fa847f"
+    },
+    {
+      "key": "reports/roberta-large-liang-v1/report.md",
+      "bytes": 2586,
+      "sha256": "ecaceb296ce998ed7bc89d34ca22da77ed13a1f8a9267ba3961856b0a407d847"
+    },
+    {
+      "key": "weights/quick-m6-fp32-v0/quick.joblib",
+      "bytes": 60301,
+      "sha256": "0dba864f984689ed4556212c4aa3cce6025e255ff96089c02020475ff82235cd"
+    },
+    {
+      "key": "datasets/projections/padben-task1/01c756a438df8e2394ee982eec43ca51a0171b1af5765f0c8ac067b72e429a6e.json",
+      "bytes": 1485,
+      "sha256": "01c756a438df8e2394ee982eec43ca51a0171b1af5765f0c8ac067b72e429a6e"
+    }
+  ]
+}

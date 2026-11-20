@@ -1,0 +1,21 @@
+name: Release evaluation
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+jobs:
+  quick-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      MODAL_TOKEN_ID: ${{ secrets.MODAL_TOKEN_ID }}
+      MODAL_TOKEN_SECRET: ${{ secrets.MODAL_TOKEN_SECRET }}
+      ENGINE_VERSION: ${{ vars.VIBECHECKER_ENGINE_VERSION }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.12"
+      - run: uv sync --locked --package vibechecker-modal --no-dev
+      - name: Score held-out data on CUDA and apply quality and parity gates
+        run: .venv/bin/python modal/release_eval.py
