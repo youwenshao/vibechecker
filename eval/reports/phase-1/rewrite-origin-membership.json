@@ -1,0 +1,78 @@
+{
+  "scheme": "independent-rewrite-origin-membership-v1",
+  "model_sha256": "f091eed2f254fdd5285ec8cf6ee595b93539d7207eac8b34da2972be173099b9",
+  "study_report_sha256": "666654a410a4f7030f2e3d2c69662de553d8b847ffa2b793367f38064f11eb44",
+  "general_report_sha256": "9cfdcf4f1b65690dd199cccf56848d63c9a23456fc379f4ca3ed379ff29c634c",
+  "general_index_sha256": "0ca7315690e4e9c405403814697d59171039965d701aa3fd3bd85aa409b61c61",
+  "authenticated_cohort_db_sha256": "5ab5814717ef46f5fc9f849704503fe49f5434a479e0970911a81339e94a00df",
+  "authenticated_cohort_selection_sha256": "1558a0004e629dd4e670c05a4584d726e71e95ac41af2c2d6245b0a3c7aafeac",
+  "split_seed": 42,
+  "source_aliases": {
+    "scheme": "normalized-human-source-aliases-v1",
+    "group_count": 200,
+    "passage_count": 98,
+    "sha256": "df5312e7d74b4973030b5c7914c25d9f93db4acc3d9de753c45a684dbea4ea8f"
+  },
+  "original_general": {
+    "documents": 12989,
+    "groups": 6075,
+    "document_ids_sha256": "21e4dc66e867c604a9cac7e2ef795a7eb06b57aa1a5ecd49e26938881132286c",
+    "group_ids_sha256": "f3a2f4d318d898c9c9874ef7cd41bb47c63b3b028767206977d15dbe3b66c7fa"
+  },
+  "general_excluded_by_supplement": {
+    "documents": 0,
+    "groups": 0,
+    "document_ids_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "group_ids_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "new_source_conflict_groups": 0,
+  "general_and_supplement_duplicate_document_ids": 262,
+  "paired_roles": {
+    "fit": {
+      "documents": 584,
+      "groups": 146,
+      "document_ids_sha256": "9971f86845ebe80f20497215d6b3273c2dccd5d6d80f1056f9a06a876bd5b0a1",
+      "group_ids_sha256": "c155af285f94769158aaf54a9f19aa762f9fd40f1774f6bbfdf4b0416ca6e3b9"
+    },
+    "calibration": {
+      "documents": 164,
+      "groups": 41,
+      "document_ids_sha256": "5f1acde88d68a31ec9b4a2d681472b6f909be460b3cf4870dbd1bb4df4649f68",
+      "group_ids_sha256": "f7a06421249a227a6a5f0a1fda8d06920c7379f2f2d0cca6d9c91c3365839ac5"
+    },
+    "development": {
+      "documents": 212,
+      "groups": 53,
+      "document_ids_sha256": "5dcd772c56d8c975bd4768b27944dc12b8a481323408b0863f238d4cc36d2760",
+      "group_ids_sha256": "151d9a3a7ea9928db746f7a2a66b015d44b7c66c7b1b2be1245a1d7daea8445f"
+    }
+  },
+  "supervised_roles": {
+    "fit": {
+      "documents": 8067,
+      "groups": 3667,
+      "document_ids_sha256": "cafe5630e528301ff3b55dc16a78ba53138dbdb0fd76ce69bae744732b55ecda",
+      "group_ids_sha256": "51e4a13c9e2e638b910143512b9687e512e3afdcfac015a1f5aa82fca9960271"
+    },
+    "calibration": {
+      "documents": 2692,
+      "groups": 1184,
+      "document_ids_sha256": "c5911a05e0dc4394406d0a36416495785550d22a4cbe2abec48330f198b4aa55",
+      "group_ids_sha256": "2db07da47fc97624739c7e4c9ef1c7d320a1cb608debdeff2eda36c5b8303abf"
+    },
+    "development": {
+      "documents": 2928,
+      "groups": 1224,
+      "document_ids_sha256": "32c4997bdd56caf74d50d3aa67b84c66fe6dec7496e862808dcebec8655c1ebc",
+      "group_ids_sha256": "ad27eeec62471d33d99c16c4738d92c30f36423d4e4ebea76d315649f416dcc6"
+    }
+  },
+  "model_fit": {
+    "documents": 10759,
+    "groups": 4851,
+    "document_ids_sha256": "0d9852c2426273395162710ab47b4deef3c27bec3bd3ac242efb98b2409df1a6",
+    "group_ids_sha256": "8d0dd464e79d577c532a84a52cd1d059a4f6331dd5034183c9dbcf7eeb0bad60"
+  },
+  "pairwise_role_group_overlap": 0,
+  "general_counts_and_model_fit_counts_verified": true
+}
