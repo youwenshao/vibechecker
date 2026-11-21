@@ -6,7 +6,7 @@
 
 Of the 70 pinned human admissions essays, 30 belonged to development, 36 were historical scored documents and four triggered the historical language refusal. Adding the 36 historical controls to the audit gave 5/267 guarded false positives (1.87%, 95% Wilson 0.80–4.31%), including 4/36 on admissions essays (11.11%). The independent reservation has no fresh eligible admissions source. The prospective human-FP gate now records incomplete coverage. All 91 TOEFL records were measured offline at their original lengths of 62–148 words. The frozen and guarded rules flagged 24/91 (26.37%). Deep refused all 91 through normal admission. [Membership, estimates and intervals](../../eval/reports/phase-1/phase-1.1/metrics.json)
 
-The RTX 5090 reproduced all 221 M6 Metal indexes and all 5,236 sentence spans. One sentence exceeded the 0.02 difference limit at 0.02494. The backup container resumed after each GPU run. The Modal hold, Falcon L40S reference and hosted training remain outstanding. [Workstation measurements, backup windows and test results](../../eval/reports/phase-1/phase-1.1/report.md)
+The RTX 5090 matched all 221 document indexes and 5,236 spans on both M6 Metal and the workstation's expanded-Q4 CPU reference. Sentence parity failed against both. Two CPU comparisons exceeded 0.02, with a maximum difference of **0.04385**. One Metal comparison exceeded 0.02, at **0.02494**. The CPU replay took 6 h 37 min 52 s and the CUDA replay took 137.22 s. The BEAT-AD backup resumed after each GPU run and was running after the CPU replay. The Falcon L40S reference, hosted training and Modal-hosted parity remain pending under the Modal hold. [Workstation measurements and trace hashes](../../eval/reports/phase-1/phase-1.1/hardware.json) · [Backup windows and test results](../../eval/reports/phase-1/phase-1.1/report.md)
 
 ## Pair selection
 
@@ -44,7 +44,7 @@ Across 1,132 sentences in held-out mixed documents, precision was 0.840, recall 
 
 The SmolLM2 comparison used 221 held-out documents. Its pooled calibration error was 0.0296 and its worst-stratum error was 0.5200, above the 0.08 limit. Sentence F1 was 0.6241 across 1,132 held-out mixed-document sentences. Only five generated essays qualified in its 120-essay discrimination cohort. The 91 pinned TOEFL essays all fell below the Deep length minimum. The false-positive estimate for that cohort is unavailable. [SmolLM2 scorecard](../../eval/reports/smol-calibrated-v1/report.md)
 
-The operator retained the hosted Modal hold. The Falcon L40S bf16 reproduction, hosted training and Metal/CUDA parity therefore have no live results. Local CPU and Metal tests cover the official-function numerical goldens, cached chunk boundaries, the native Falcon implementation and quantized checkpoint reloads.
+The operator retained the hosted Modal hold. The Falcon L40S bf16 reproduction, hosted training and Modal-hosted Metal/CUDA parity still lack measurements. Phase 1.1 measured the local RTX comparison separately. Local CPU and Metal tests cover the official-function numerical goldens, cached chunk boundaries, the native Falcon implementation and quantized checkpoint reloads.
 
 ## Calibration refit
 

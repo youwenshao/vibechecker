@@ -1,0 +1,153 @@
+{
+  "model_sha256": "aeafbb70201caec3029b24799faedd8fee89aacf5ef1bdf09e1eee2673b82d9b",
+  "fixture_ids_sha256": "01596ba9924def69ede8c8d8d22691f4384862b0d625c8d66a354f515854ba2d",
+  "fixture_cache_sha256": "b054f19caf48e47894c2933d6fcb9d3756cf3a79fc3036592502f54c58b753af",
+  "fixture_uncompressed_sha256": "8ae9bcf74e963fc86266a1ad384b4837f351bc280c11478b92077aac9ba3b324",
+  "backend": "mlx-cuda",
+  "gpu_trace_sha256": "c5450192a310cead127fd83107df241df28774cc44319985ec2968328b8338a1",
+  "gpu_elapsed_seconds": 137.21662175096571,
+  "quick_prefill": 512,
+  "host": "SYW-WORKSTATION",
+  "os": "Ubuntu 24.04.4 LTS",
+  "kernel": "7.0.0-43-generic",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "vram_mib": 32607,
+  "driver": "595.99.02",
+  "cpu": "AMD Ryzen 9 9950X3D 16-Core Processor",
+  "mlx": "0.32.4",
+  "mlx_lm": "0.32.2",
+  "python": "3.12.14",
+  "torch": "2.15.0",
+  "transformers": "5.23.0",
+  "scikit_learn": "1.9.1",
+  "cpu_vs_rtx": {
+    "documents": 221,
+    "max_index_delta": 0,
+    "mean_index_delta": 0.0,
+    "pass": false,
+    "max_sentence_delta": 0.0438538000779585,
+    "sentences": 5236,
+    "quick_prefill": 512,
+    "index_disagreements": 0,
+    "documents_over_index_limit": 0,
+    "sentences_over_limit": 2,
+    "documents_over_sentence_limit": 2,
+    "largest_sentence_failure": {
+      "document": "d271c64727449ee65f302f06fb464f2ebe24d0ba9e24b314be6f850fb3d4a6bb",
+      "start_utf16": 360,
+      "end_utf16": 3044,
+      "cuda": 0.22844209720456196,
+      "reference": 0.27229589728252046
+    },
+    "reference_backend": "mlx-cpu-dense-q4",
+    "reference_trace_sha256": "d4c6170f0050cdd8264cbfcb8ad440571b11adc6a721efde63896d080b3aea4e",
+    "reference_elapsed_seconds": 23872.35662319098,
+    "sentence_failures": [
+      {
+        "document": "d271c64727449ee65f302f06fb464f2ebe24d0ba9e24b314be6f850fb3d4a6bb",
+        "start_utf16": 360,
+        "end_utf16": 3044,
+        "cuda": 0.22844209720456196,
+        "reference": 0.27229589728252046,
+        "absolute_delta": 0.0438538000779585
+      },
+      {
+        "document": "abf728366fedb24f47c6b58954fc2bacbac25144b3abcba9cc1ea227a604db9f",
+        "start_utf16": 0,
+        "end_utf16": 17,
+        "cuda": 0.447978888995481,
+        "reference": 0.4226272367407521,
+        "absolute_delta": 0.025351652254728907
+      }
+    ]
+  },
+  "metal_vs_rtx": {
+    "documents": 221,
+    "max_index_delta": 0,
+    "mean_index_delta": 0.0,
+    "pass": false,
+    "max_sentence_delta": 0.02493960565901429,
+    "sentences": 5236,
+    "quick_prefill": 512,
+    "index_disagreements": 0,
+    "documents_over_index_limit": 0,
+    "sentences_over_limit": 1,
+    "documents_over_sentence_limit": 1,
+    "largest_sentence_failure": {
+      "document": "d271c64727449ee65f302f06fb464f2ebe24d0ba9e24b314be6f850fb3d4a6bb",
+      "start_utf16": 360,
+      "end_utf16": 3044,
+      "cuda": 0.22844209720456196,
+      "reference": 0.25338170286357625
+    },
+    "reference_backend": "mlx-metal",
+    "reference_trace_sha256": "d461161cd5470c3c20b351c0ee3fe22887f79c1b4fb4a108e31fd269d5c9539e",
+    "reference_elapsed_seconds": null,
+    "sentence_failures": [
+      {
+        "document": "d271c64727449ee65f302f06fb464f2ebe24d0ba9e24b314be6f850fb3d4a6bb",
+        "start_utf16": 360,
+        "end_utf16": 3044,
+        "cuda": 0.22844209720456196,
+        "reference": 0.25338170286357625,
+        "absolute_delta": 0.02493960565901429
+      }
+    ]
+  },
+  "quick_lm_token_check": {
+    "backend": "mlx-cuda",
+    "tokens_scored": 127,
+    "comparisons": {
+      "mlx_cpu": {
+        "logp": {
+          "mean_abs_delta": 0.002361995866522193,
+          "max_abs_delta": 0.025279998779296875
+        },
+        "rank": {
+          "mean_abs_delta": 0.18110236220472442,
+          "max_abs_delta": 12.0
+        },
+        "entropy": {
+          "mean_abs_delta": 0.002354819094762206,
+          "max_abs_delta": 0.021814584732055664
+        }
+      },
+      "torch_cpu_fp32": {
+        "logp": {
+          "mean_abs_delta": 0.002318082144483924,
+          "max_abs_delta": 0.025121688842773438
+        },
+        "rank": {
+          "mean_abs_delta": 0.1889763779527559,
+          "max_abs_delta": 13.0
+        },
+        "entropy": {
+          "mean_abs_delta": 0.002120874123647809,
+          "max_abs_delta": 0.021210908889770508
+        }
+      }
+    }
+  },
+  "backup_container": "beat-ad-beta-backup-1",
+  "backup_events": [
+    "2026-11-21T15:34:41+08:00 before true false",
+    "2026-11-21T15:34:41+08:00 paused true true",
+    "2026-11-21T15:35:53+08:00 restored true false",
+    "2026-11-21T15:36:19+08:00 before true false",
+    "2026-11-21T15:36:19+08:00 paused true true",
+    "2026-11-21T15:38:40+08:00 restored true false",
+    "2026-11-21T15:39:13+08:00 before true false",
+    "2026-11-21T15:39:13+08:00 paused true true",
+    "2026-11-21T15:39:21+08:00 restored true false"
+  ],
+  "hosted_training": null,
+  "modal_parity": null,
+  "falcon_l40s_reference": null,
+  "backup_after_cpu": {
+    "observed_at": "2026-11-21T22:14:07+08:00",
+    "running": true,
+    "paused": false
+  },
+  "cpu_method": "CPU-only expanded affine Q4 pair projections, MLX dequantization and dense Torch CPU linear in checkpoint dtype",
+  "full_native_packed_cpu_trace": null
+}

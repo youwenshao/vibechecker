@@ -66,6 +66,8 @@ All 70 pinned human admissions essays were accounted for. Thirty were assigned t
 
 The coverage sensitivity analysis adds the 36 historical humans to the 435 prospective documents exactly once. The join verified normalized document IDs and source IDs. The original prospective reservation had already excluded historical source components, including linked duplicates. A fresh independent human-FP gate remains unresolved for this cohort. [Reservation and isolation checks](../prospective-audit-reservation.json)
 
+The prospective and combined samples contain zero generated essay-domain documents, leaving essay AUROC unmeasured in both. They also lack the native-proxy comparator for the ESL gap. The original test has five generated essays and a measured essay AUROC of 1.0000. Both final samples lack a release-length TOEFL/native comparison.
+
 ## Short TOEFL essays
 
 The pinned release has **91 records, 90 distinct normalized texts**, ranging from 62 to 148 words. Product Deep refused all 91 as too short. The M6 research run processed the original text of every record through the v4 pair, encoder probe, stacker and length fallback. At cutoff 24 the false-positive rate was **24/91 (26.37%, 95% Wilson 18.41–36.25%)**. The duplicate was below cutoff. The distinct-text estimate was **24/90 (26.67%)**. The guarded policy also flagged 24/91. The empirical and score-adjusted policies used the pooled fallback of 21 and flagged **32/91 (35.16%)**. The release-length TOEFL gate still has zero eligible observations.
@@ -74,7 +76,11 @@ The pinned release has **91 records, 90 distinct normalized texts**, ranging fro
 
 The tailnet workstation ran Ubuntu 24.04.4 LTS on a Ryzen 9 9950X3D with one GeForce RTX 5090 (32,607 MiB, driver 595.99.02). The locked environment used MLX 0.32.4, mlx-lm 0.32.2, Torch 2.15.0 and Transformers 5.23.0. Both local runs used the same v4 digest, checkpoint and tokenizer hashes, prefill, held-out IDs and UTF-16 offsets as the M6 report.
 
-The full CUDA replay took **137.22 s**. All **221 indexes** and **5,236 sentence spans** matched the archived M6 Metal trace. One sentence exceeded the 0.02 limit. Its score was 0.253382 on Metal and 0.228442 on CUDA, a difference of **0.024940**. The workstation comparison fails the sentence gate. The first CUDA attempt exhausted memory in the Quick LM. Limiting the MLX scratch cache to 512 MiB and total MLX memory to 23 GiB left room for the Torch encoder during the successful replay.
+The full CUDA replay took **137.22 s**. All **221 indexes** and **5,236 sentence spans** matched the archived M6 Metal trace. One sentence exceeded the 0.02 limit. Its score was 0.253382 on Metal and 0.228442 on CUDA, a difference of **0.024940**. The affected span covered UTF-16 offsets 360–3,044 in a 374-word RAID-attacks MPT Chat passage in the perplexity-misspelling stratum. The workstation comparison fails the sentence gate. The first CUDA attempt exhausted memory in the Quick LM. Limiting the MLX scratch cache to 512 MiB and total MLX memory to 23 GiB left room for the Torch encoder during the successful replay.
+
+The workstation CPU replay took **23,872.36 s (6 h 37 min 52 s)**. Its 221 document indexes and 5,236 sentence spans matched CUDA exactly. Two sentence scores in two documents exceeded 0.02. The largest difference was **0.043854** on the same RAID-attacks passage, with a CPU score of 0.272296. The other span, at UTF-16 offsets 0–17, scored 0.422627 on CPU and 0.447979 on CUDA, a difference of **0.025352**. Both local comparisons fail sentence parity. [Hardware, trace hashes and backup events](hardware.json)
+
+Native packed MLX CPU did not finish a four-token base-model preflight in 10 min 31 s. For the full CPU reference, MLX expanded the pinned pair's affine Q4 projection weights in their checkpoint dtype, and Torch performed the dense CPU matrix multiplies. The research runner identifies this path as `mlx-cpu-dense-q4`. Both replays used the same tokenizer, frozen readouts and stacker. Native packed CPU coverage for the full Deep cohort remains unmeasured.
 
 The repository's Quick LM parity command also compared 127 next-token predictions on the public Thoreau fixture. CUDA versus native MLX CPU maximum absolute differences were 0.025280 in log probability, 12 rank positions and 0.021815 in entropy. Against Torch CPU fp32 they were 0.025122, 13 and 0.021211 respectively.
 
@@ -86,11 +92,11 @@ Only the workstation container `beat-ad-beta-backup-1` was paused. The following
 | Complete 221-document CUDA replay | 15:36:19 | 15:38:40 | 141 s |
 | Quick token comparison | 15:39:13 | 15:39:21 | 8 s |
 
-The CPU-only reference ran with CUDA hidden. The backup ran throughout the remaining CPU work. The original plan still requires the Falcon L40S bf16 reference and hosted measurements. Modal remains on hold.
+The CPU-only reference ran with CUDA hidden. The backup was running and unpaused at 22:14 Shanghai time after the CPU trace completed. Both temporary research copies of the raw fixture cache were removed after digest verification. A subsequent duplicate CPU invocation encountered the retired cache before scoring and left the verified trace intact. The original plan still requires the Falcon L40S bf16 reference and hosted measurements. Modal remains on hold.
 
 ## Reproduction
 
-Software verification passed all 103 baseline M6 Python tests in 5.39 s and all 108 tests with the five added cases in 4.78 s. On Windows with Node 24.19.0 and pnpm 10.30.2, `pnpm verify` passed contract generation checks, TypeScript and all 13 unit tests in 5.80 s. The final production-build Playwright run passed all 13 tests in 11.9 s with `pnpm --filter @vibechecker/web e2e`. On the M6 the command was `PYTHONPATH=engine/src:eval/src:services/inference/src ~/vibechecker/venv/bin/python -m pytest -q`.
+The M6 passed all 103 baseline Python tests in 5.39 s. With the five added cases, the final run passed all 108 in 5.18 s using `PYTHONPATH=engine/src:eval/src:services/inference/src ~/vibechecker/venv/bin/python -m pytest -q`. On Windows with Node 24.19.0 and pnpm 10.30.2, `pnpm verify` passed the contract checks, TypeScript and all 13 unit tests in 9.88 s wall time. The production-build Playwright run passed all 13 tests in 17.0 s with `pnpm --filter @vibechecker/web e2e`.
 
 Run from the repository root with the pinned Python environment. On the M6, `$research` is the existing `~/vibechecker/phase1-check` directory, `$cache` is `~/vibechecker/eval/.cache`, and `$output` is a separate research output directory. Set the four checkpoint paths, the v4 joblib, Metal backend and Quick prefill 512 as in the Phase 1 evidence. The v4 artifact SHA-256 is `aeafbb70201caec3029b24799faedd8fee89aacf5ef1bdf09e1eee2673b82d9b`. Fitting took 2.06 s wall time, the TOEFL measurement took 60.48 s including model load, and the final cohort replay took 11.56 s.
 
@@ -110,3 +116,28 @@ python -m vibechecker_eval.phase11 evaluate --policy "$output/policy.json" \
   --audit "$research/calibration-v4-academic/$version.prospective.metal.json" \
   --cache "$cache" --short "$output/toefl.json" --out "$output/metrics.json"
 ```
+
+On the M6, export only the committed historical documents to a private research corpus cache. Transfer that cache, the reference trace, the frozen joblib and the four checkpoint directories over the tailnet. Set the same checkpoint paths and prefill on the workstation. The evaluator verifies weight bytes, the artifact digest, cohort membership and prefill before comparison.
+
+```sh
+umask 077
+python -m vibechecker_eval.workstation_parity --reference "$research/$version.test.metal.json" \
+  --export-from-cache "$cache" --fixtures "$output/historical.jsonl.gz"
+
+# Workstation, from its research checkout. Both environments use uv.lock.
+UV_PROJECT_ENVIRONMENT=../env uv sync --frozen --package vibechecker-engine --extra cuda --package vibechecker-eval
+UV_PROJECT_ENVIRONMENT=../env-cpu uv sync --frozen --package vibechecker-engine --extra cpu --package vibechecker-eval
+export PYTHONPATH=engine/src:eval/src VIBECHECKER_QUICK_PREFILL=512 HF_HUB_OFFLINE=1
+export OMP_NUM_THREADS=12 MKL_NUM_THREADS=12 OPENBLAS_NUM_THREADS=1
+VIBECHECKER_BACKEND=mlx-cuda ../env/bin/python -m vibechecker_eval.workstation_parity \
+  --reference ../reference.json --fixtures ../corpus-cache/historical.jsonl.gz --trace-out ../rtx.json
+CUDA_VISIBLE_DEVICES="" VIBECHECKER_BACKEND=mlx-cpu \
+  LD_PRELOAD="$PWD/../env-cpu/lib/python3.12/site-packages/torch/lib/libtorch_cpu.so" \
+  ../env-cpu/bin/python -m vibechecker_eval.workstation_parity --dense-cpu \
+  --reference ../reference.json --fixtures ../corpus-cache/historical.jsonl.gz --trace-out ../cpu.json
+LD_PRELOAD="$PWD/../env/lib/python3.12/site-packages/torch/lib/libtorch_cpu.so" \
+  ../env/bin/python engine/tools/check_parity.py "$VIBECHECKER_LM" ../thoreau-1000.txt \
+  --tokens 128 --backend mlx-cuda
+```
+
+Each GPU command ran inside a shell that verified the container was running and unpaused, captured its Docker ID, registered an exit trap, then ran `docker pause "$unit"`. The trap ran `docker unpause "$unit"` and inspected the restored state. The CPU-only command ran outside this wrapper. For the Deep trace comparison, call `vibechecker_eval.deep_cohort.parity(cuda, cpu, local_cpu_cuda=True)` on the two decoded JSON files. The default comparator accepts Metal and CUDA traces for the hardware gate.
