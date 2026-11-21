@@ -1,0 +1,5155 @@
+{
+  "features_sha256": "0ca7315690e4e9c405403814697d59171039965d701aa3fd3bd85aa409b61c61",
+  "provenance_sha256": "c2699ab5a72432d5c142e72eeb1b47f4827acaee24415871d959593e823ffb94",
+  "seed": 42,
+  "fits": {
+    "original": {
+      "n": 6027,
+      "groups": 3585,
+      "document_sha": "16a0d7790d12ea43accabfc3fcf78cf08b07796ff4e96c0f2aeb1d9035be4dd5",
+      "group_sha": "9744631876cd21f192886db20d912695a53cc4adeba78e2891f3ba31880b5269"
+    },
+    "expanded": {
+      "n": 10217,
+      "groups": 4851,
+      "document_sha": "73f583d8ce2f5f7198d8bd771327953afeaa6ef35adbe5511ecaa7e93d114cbf",
+      "group_sha": "8d0dd464e79d577c532a84a52cd1d059a4f6331dd5034183c9dbcf7eeb0bad60"
+    }
+  },
+  "slices": {
+    "original_fixed": {
+      "n": 1614,
+      "source_groups": 904,
+      "document_sha": "76339d2ca8ab592fd3191eb374a5703a5c2b179bfc49a9ddbd10d7e90449893b",
+      "group_sha": "6d6b8e56ec0734a7dd055dc0761142fc736a793fdffb60db378c14cd0ee1d94b",
+      "logistic": {
+        "original": {
+          "subgroups": {
+            "pooled": {
+              "n": 1614,
+              "errors": 13,
+              "mean_p": 0.6646166616345246,
+              "loss": 0.02630131338155984,
+              "ece": 0.005306548450430804
+            },
+            "paraphrase": {
+              "n": 49,
+              "errors": 0,
+              "mean_p": 0.9884550632262716,
+              "loss": 0.011993313046669313,
+              "ece": 0.011544936773728351
+            },
+            "synonym": {
+              "n": 75,
+              "errors": 0,
+              "mean_p": 0.9980314167340597,
+              "loss": 0.002039722759018879,
+              "ece": 0.001968583265940348
+            },
+            "rewrite": {
+              "n": 124,
+              "errors": 0,
+              "mean_p": 0.994247212525337,
+              "loss": 0.0059729963404291314,
+              "ece": 0.005752787474663027
+            },
+            "all_attacks": {
+              "n": 415,
+              "errors": 0,
+              "mean_p": 0.9978610940726407,
+              "loss": 0.0022080809990908837,
+              "ece": 0.00213890592735934
+            },
+            "clean_machine": {
+              "n": 665,
+              "errors": 10,
+              "mean_p": 0.9794121120412155,
+              "loss": 0.04868626141336511,
+              "ece": 0.020587887958784523
+            },
+            "human": {
+              "n": 534,
+              "errors": 3,
+              "mean_p": 0.013614013727656249,
+              "loss": 0.01714906805866492,
+              "ece": 0.013614013727656249
+            }
+          },
+          "auroc": 0.99935670689416,
+          "macro_loss_n5": 0.013884856825546304,
+          "worst_ece_n5": 0.059208340820718984,
+          "small_cells": 10,
+          "small_rows": 23,
+          "small_errors": 0,
+          "cells": {
+            "asap/human/none": {
+              "n": 185,
+              "errors": 1,
+              "mean_p": 0.015346413288568091,
+              "loss": 0.018286403044307478,
+              "ece": 0.015346413288568091
+            },
+            "ellipse/human/none": {
+              "n": 167,
+              "errors": 0,
+              "mean_p": 0.002934618725242008,
+              "loss": 0.002989832878578201,
+              "ece": 0.002934618725242008
+            },
+            "raid-attacks/gpt2/alternative_spelling": {
+              "n": 17,
+              "errors": 0,
+              "mean_p": 0.9991890717955196,
+              "loss": 0.000811994496799028,
+              "ece": 0.0008109282044803395
+            },
+            "raid-attacks/gpt2/article_deletion": {
+              "n": 20,
+              "errors": 0,
+              "mean_p": 0.9992961317300797,
+              "loss": 0.0007043606177667837,
+              "ece": 0.0007038682699203492
+            },
+            "raid-attacks/gpt2/homoglyph": {
+              "n": 3,
+              "errors": 0,
+              "mean_p": 0.9951014518737793,
+              "loss": 0.0049205775872539345,
+              "ece": 0.004898548126220703
+            },
+            "raid-attacks/gpt2/insert_paragraphs": {
+              "n": 2,
+              "errors": 0,
+              "mean_p": 0.9996678531169891,
+              "loss": 0.000332251058715067,
+              "ece": 0.00033214688301086426
+            },
+            "raid-attacks/gpt2/number": {
+              "n": 13,
+              "errors": 0,
+              "mean_p": 0.9991324819051303,
+              "loss": 0.0008681576143782689,
+              "ece": 0.0008675180948697603
+            },
+            "raid-attacks/gpt2/paraphrase": {
+              "n": 15,
+              "errors": 0,
+              "mean_p": 0.9761162082354228,
+              "loss": 0.025027173970882253,
+              "ece": 0.02388379176457723
+            },
+            "raid-attacks/gpt2/perplexity_misspelling": {
+              "n": 9,
+              "errors": 0,
+              "mean_p": 0.9935288031895956,
+              "loss": 0.006597110538713641,
+              "ece": 0.00647119681040446
+            },
+            "raid-attacks/gpt2/synonym": {
+              "n": 16,
+              "errors": 0,
+              "mean_p": 0.9998602420091629,
+              "loss": 0.00013980355905967283,
+              "ece": 0.00013975799083709717
+            },
+            "raid-attacks/llama-chat/alternative_spelling": {
+              "n": 14,
+              "errors": 0,
+              "mean_p": 0.9992502118859973,
+              "loss": 0.0007527104611686631,
+              "ece": 0.0007497881140027728
+            },
+            "raid-attacks/llama-chat/article_deletion": {
+              "n": 8,
+              "errors": 0,
+              "mean_p": 0.99812101572752,
+              "loss": 0.0018902407459919694,
+              "ece": 0.001878984272480011
+            },
+            "raid-attacks/llama-chat/homoglyph": {
+              "n": 1,
+              "errors": 0,
+              "mean_p": 0.9999470710754395,
+              "loss": 5.293032534550269e-05,
+              "ece": 5.2928924560546875e-05
+            },
+            "raid-attacks/llama-chat/number": {
+              "n": 10,
+              "errors": 0,
+              "mean_p": 0.9999616742134094,
+              "loss": 3.832683627828258e-05,
+              "ece": 3.832578659057617e-05
+            },
+            "raid-attacks/llama-chat/paraphrase": {
+              "n": 11,
+              "errors": 0,
+              "mean_p": 0.9985601576891813,
+              "loss": 0.0014439754847013287,
+              "ece": 0.001439842310818759
+            },
+            "raid-attacks/llama-chat/perplexity_misspelling": {
+              "n": 11,
+              "errors": 0,
+              "mean_p": 0.999730570749803,
+              "loss": 0.00026959009891223956,
+              "ece": 0.0002694292501969771
+            },
+            "raid-attacks/llama-chat/synonym": {
+              "n": 15,
+              "errors": 0,
+              "mean_p": 0.9913122018178304,
+              "loss": 0.009042298119325526,
+              "ece": 0.008687798182169597
+            },
+            "raid-attacks/mistral-chat/alternative_spelling": {
+              "n": 5,
+              "errors": 0,
+              "mean_p": 0.9999676942825317,
+              "loss": 3.230638395902646e-05,
+              "ece": 3.230571746826172e-05
+            },
+            "raid-attacks/mistral-chat/article_deletion": {
+              "n": 3,
+              "errors": 0,
+              "mean_p": 0.9984062314033508,
+              "loss": 0.0015974316201380855,
+              "ece": 0.00159376859664917
+            },
+            "raid-attacks/mistral-chat/homoglyph": {
+              "n": 1,
+              "errors": 0,
+              "mean_p": 0.9999551773071289,
+              "loss": 4.482369743801023e-05,
+              "ece": 4.482269287109375e-05
+            },
+            "raid-attacks/mistral-chat/number": {
+              "n": 3,
+              "errors": 0,
+              "mean_p": 0.9999762376149496,
+              "loss": 2.3762769879871246e-05,
+              "ece": 2.376238505045573e-05
+            },
+            "raid-attacks/mistral-chat/paraphrase": {
+              "n": 3,
+              "errors": 0,
+              "mean_p": 0.9992407361666361,
+              "loss": 0.0007596913412914794,
+              "ece": 0.000759263833363851
+            },
+            "raid-attacks/mistral-chat/perplexity_misspelling": {
+              "n": 5,
+              "errors": 0,
+              "mean_p": 0.9999441862106323,
+              "loss": 5.5815892505497405e-05,
+              "ece": 5.581378936767578e-05
+            },
+            "raid-attacks/mistral-chat/synonym": {
+              "n": 6,
+              "errors": 0,
+              "mean_p": 0.999808132648468,
+              "loss": 0.00019189281349010995,
+              "ece": 0.00019186735153198242
+            },
+            "raid-attacks/mistral/alternative_spelling": {
+              "n": 15,
+              "errors": 0,
+              "mean_p": 0.9998716115951538,
+              "loss": 0.00012844554747046743,
+              "ece": 0.0001283884048461914
+            },
+            "raid-attacks/mistral/article_deletion": {
+              "n": 13,
+              "errors": 0,
+              "mean_p": 0.9998452709271357,
+              "loss": 0.00015476191382654696,
+              "ece": 0.00015472907286423904
+            },
+            "raid-attacks/mistral/homoglyph": {
+              "n": 3,
+              "errors": 0,
+              "mean_p": 0.9994666973749796,
+              "loss": 0.0005336821396577239,
+              "ece": 0.0005333026250203451
+            },
+            "raid-attacks/mistral/insert_paragraphs": {
+              "n": 2,
+              "errors": 0,
+              "mean_p": 0.9997537136077881,
+              "loss": 0.00024634014409682855,
+              "ece": 0.00024628639221191406
+            },
+            "raid-attacks/mistral/number": {
+              "n": 20,
+              "errors": 0,
+              "mean_p": 0.9998031854629517,
+              "loss": 0.0001968994567110636,
+              "ece": 0.00019681453704833984
+            },
+            "raid-attacks/mistral/paraphrase": {
+              "n": 9,
+              "errors": 0,
+              "mean_p": 0.9951944483651055,
+              "loss": 0.004845611525549198,
+              "ece": 0.004805551634894477
+            },
+            "raid-attacks/mistral/perplexity_misspelling": {
+              "n": 10,
+              "errors": 0,
+              "mean_p": 0.9995814442634583,
+              "loss": 0.00041883657886385107,
+              "ece": 0.00041855573654174804
+            },
+            "raid-attacks/mistral/synonym": {
+              "n": 20,
+              "errors": 0,
+              "mean_p": 0.999573266506195,
+              "loss": 0.00042700775276321046,
+              "ece": 0.0004267334938049316
+            },
+            "raid-attacks/mpt-chat/alternative_spelling": {
+              "n": 11,
+              "errors": 0,
+              "mean_p": 0.9999991438605569,
+              "loss": 8.561400432237992e-07,
+              "ece": 8.56139443137429e-07
+            },
+            "raid-attacks/mpt-chat/article_deletion": {
+              "n": 5,
+              "errors": 0,
+              "mean_p": 0.9999991893768311,
+              "loss": 8.106236037978175e-07,
+              "ece": 8.106231689453125e-07
+            },
+            "raid-attacks/mpt-chat/homoglyph": {
+              "n": 10,
+              "errors": 0,
+              "mean_p": 0.9998316109180451,
+              "loss": 0.00016841047965604857,
+              "ece": 0.00016838908195495605
+            },
+            "raid-attacks/mpt-chat/number": {
+              "n": 2,
+              "errors": 0,
+              "mean_p": 0.9999991655349731,
+              "loss": 8.344654034433599e-07,
+              "ece": 8.344650268554688e-07
+            },
+            "raid-attacks/mpt-chat/perplexity_misspelling": {
+              "n": 10,
+              "errors": 0,
+              "mean_p": 0.9999971747398376,
+              "loss": 2.8252808074411862e-06,
+              "ece": 2.8252601623535155e-06
+            },
+            "raid-attacks/mpt-chat/synonym": {
+              "n": 9,
+              "errors": 0,
+              "mean_p": 0.9999985297520956,
+              "loss": 1.4702498647724972e-06,
+              "ece": 1.4702479044596355e-06
+            },
+            "raid-attacks/mpt/alternative_spelling": {
+              "n": 10,
+              "errors": 0,
+              "mean_p": 0.9999829292297363,
+              "loss": 1.7071064131556385e-05,
+              "ece": 1.7070770263671874e-05
+            },
+            "raid-attacks/mpt/article_deletion": {
+              "n": 12,
+              "errors": 0,
+              "mean_p": 0.999669536948204,
+              "loss": 0.00033068305685000145,
+              "ece": 0.00033046305179595947
+            },
+            "raid-attacks/mpt/homoglyph": {
+              "n": 5,
+              "errors": 0,
+              "mean_p": 0.9988229632377624,
+              "loss": 0.0011794015264196124,
+              "ece": 0.001177036762237549
+            },
+            "raid-attacks/mpt/insert_paragraphs": {
+              "n": 14,
+              "errors": 0,
+              "mean_p": 0.9999986716679165,
+              "loss": 1.3283379354397913e-06,
+              "ece": 1.3283320835658482e-06
+            },
+            "raid-attacks/mpt/number": {
+              "n": 10,
+              "errors": 0,
+              "mean_p": 0.9999685168266297,
+              "loss": 3.1484354858585e-05,
+              "ece": 3.148317337036133e-05
+            },
+            "raid-attacks/mpt/paraphrase": {
+              "n": 11,
+              "errors": 0,
+              "mean_p": 0.9867200905626471,
+              "loss": 0.013681038330730068,
+              "ece": 0.01327990943735296
+            },
+            "raid-attacks/mpt/perplexity_misspelling": {
+              "n": 14,
+              "errors": 0,
+              "mean_p": 0.9999244213104248,
+              "loss": 7.56120209084354e-05,
+              "ece": 7.557868957519531e-05
+            },
+            "raid-attacks/mpt/synonym": {
+              "n": 9,
+              "errors": 0,
+              "mean_p": 0.9994009402063158,
+              "loss": 0.0006003482229544914,
+              "ece": 0.0005990597936842176
+            },
+            "raid/chatgpt/none": {
+              "n": 67,
+              "errors": 0,
+              "mean_p": 0.9986968022673878,
+              "loss": 0.0013319456548376502,
+              "ece": 0.0013031977326122682
+            },
+            "raid/cohere-chat/none": {
+              "n": 61,
+              "errors": 4,
+              "mean_p": 0.940791659179281,
+              "loss": 0.14682205709160737,
+              "ece": 0.059208340820718984
+            },
+            "raid/cohere/none": {
+              "n": 53,
+              "errors": 1,
+              "mean_p": 0.9499645519931361,
+              "loss": 0.06063759752957204,
+              "ece": 0.05003544800686387
+            },
+            "raid/gpt2/none": {
+              "n": 53,
+              "errors": 1,
+              "mean_p": 0.9519581333646234,
+              "loss": 0.08962234170285402,
+              "ece": 0.04804186663537655
+            },
+            "raid/gpt3/none": {
+              "n": 64,
+              "errors": 1,
+              "mean_p": 0.9798240616364637,
+              "loss": 0.10780062193894649,
+              "ece": 0.02017593836353626
+            },
+            "raid/gpt4/none": {
+              "n": 64,
+              "errors": 0,
+              "mean_p": 0.9989285562187433,
+              "loss": 0.001074724099367582,
+              "ece": 0.0010714437812566757
+            },
+            "raid/human/none": {
+              "n": 182,
+              "errors": 2,
+              "mean_p": 0.021652283214658924,
+              "loss": 0.028985251040701234,
+              "ece": 0.021652283214658924
+            },
+            "raid/llama-chat/none": {
+              "n": 58,
+              "errors": 0,
+              "mean_p": 0.9996753828278904,
+              "loss": 0.00032486951264002747,
+              "ece": 0.00032461717210966964
+            },
+            "raid/mistral-chat/none": {
+              "n": 59,
+              "errors": 0,
+              "mean_p": 0.9997317002991498,
+              "loss": 0.00026843597845586643,
+              "ece": 0.0002682997008501473
+            },
+            "raid/mistral/none": {
+              "n": 57,
+              "errors": 1,
+              "mean_p": 0.9767650690893724,
+              "loss": 0.09744661844709063,
+              "ece": 0.02323493091062757
+            },
+            "raid/mpt-chat/none": {
+              "n": 60,
+              "errors": 0,
+              "mean_p": 0.9997818291187286,
+              "loss": 0.00021870748208165889,
+              "ece": 0.00021817088127136232
+            },
+            "raid/mpt/none": {
+              "n": 69,
+              "errors": 2,
+              "mean_p": 0.9701180648112643,
+              "loss": 0.040535061127302256,
+              "ece": 0.02988193518873574
+            }
+          },
+          "rewrite_by_family": {
+            "gpt2": {
+              "n": 31,
+              "errors": 0,
+              "mean_p": 0.9883711934089661,
+              "loss": 0.012182079564780275,
+              "ece": 0.011628806591033936
+            },
+            "llama-chat": {
+              "n": 26,
+              "errors": 0,
+              "mean_p": 0.9943786446864789,
+              "loss": 0.005827623158522981,
+              "ece": 0.005621355313521165
+            },
+            "mistral": {
+              "n": 29,
+              "errors": 0,
+              "mean_p": 0.9982143229451673,
+              "loss": 0.0017982985788002406,
+              "ece": 0.0017856770548327215
+            },
+            "mistral-chat": {
+              "n": 9,
+              "errors": 0,
+              "mean_p": 0.9996190004878573,
+              "loss": 0.00038115898942389984,
+              "ece": 0.00038099951214260526
+            },
+            "mpt": {
+              "n": 20,
+              "errors": 0,
+              "mean_p": 0.992426472902298,
+              "loss": 0.007794727782231057,
+              "ece": 0.007573527097702026
+            },
+            "mpt-chat": {
+              "n": 9,
+              "errors": 0,
+              "mean_p": 0.9999985297520956,
+              "loss": 1.4702498647724972e-06,
+              "ece": 1.4702479044596355e-06
+            }
+          }
+        },
+        "expanded": {
+          "subgroups": {
+            "pooled": {
+              "n": 1614,
+              "errors": 10,
+              "mean_p": 0.6666625643018582,
+              "loss": 0.023449310008819165,
+              "ece": 0.005740018529979434
+            },
+            "paraphrase": {
+              "n": 49,
+              "errors": 0,
+              "mean_p": 0.9962663370735791,
+              "loss": 0.0037719775586780376,
+              "ece": 0.0037336629264208736
+            },
+            "synonym": {
+              "n": 75,
+              "errors": 0,
+              "mean_p": 0.9983195503552754,
+              "loss": 0.0017155325615219564,
+              "ece": 0.001680449644724528
+            },
+            "rewrite": {
+              "n": 124,
+              "errors": 0,
+              "mean_p": 0.9975081999455729,
+              "loss": 0.0025281600200755695,
+              "ece": 0.002491800054427116
+            },
+            "all_attacks": {
+              "n": 415,
+              "errors": 0,
+              "mean_p": 0.9989182930394828,
+              "loss": 0.0010953597453346982,
+              "ece": 0.00108170696051724
+            },
+            "clean_machine": {
+              "n": 665,
+              "errors": 7,
+              "mean_p": 0.984153792619201,
+              "loss": 0.04025785907845344,
+              "ece": 0.015846207380798973
+            },
+            "human": {
+              "n": 534,
+              "errors": 3,
+              "mean_p": 0.01307118928847426,
+              "loss": 0.01988976736469793,
+              "ece": 0.01307118928847426
+            }
+          },
+          "auroc": 0.9995613122485781,
+          "macro_loss_n5": 0.01153297824505719,
+          "worst_ece_n5": 0.044256843519626096,
+          "small_cells": 10,
+          "small_rows": 23,
+          "small_errors": 0,
+          "cells": {
+            "asap/human/none": {
+              "n": 185,
+              "errors": 0,
+              "mean_p": 0.009890105744073537,
+              "loss": 0.011442221468016682,
+              "ece": 0.009890105744073537
+            },
+            "ellipse/human/none": {
+              "n": 167,
+              "errors": 0,
+              "mean_p": 0.003123882316834946,
+              "loss": 0.0031748531834410497,
+              "ece": 0.003123882316834946
+            },
+            "raid-attacks/gpt2/alternative_spelling": {
+              "n": 17,
+              "errors": 0,
+              "mean_p": 0.9992597558919121,
+              "loss": 0.0007411772694400578,
+              "ece": 0.0007402441080878763
+            },
+            "raid-attacks/gpt2/article_deletion": {
+              "n": 20,
+              "errors": 0,
+              "mean_p": 0.9993042379617691,
+              "loss": 0.0006964714382072059,
+              "ece": 0.000695762038230896
+            },
+            "raid-attacks/gpt2/homoglyph": {
+              "n": 3,
+              "errors": 0,
+              "mean_p": 0.9980973402659098,
+              "loss": 0.001905363265599797,
+              "ece": 0.0019026597340901692
+            },
+            "raid-attacks/gpt2/insert_paragraphs": {
+              "n": 2,
+              "errors": 0,
+              "mean_p": 0.9995661079883575,
+              "loss": 0.00043406266777090246,
+              "ece": 0.00043389201164245605
+            },
+            "raid-attacks/gpt2/number": {
+              "n": 13,
+              "errors": 0,
+              "mean_p": 0.9989542456773611,
+              "loss": 0.0010468775219303378,
+              "ece": 0.0010457543226388784
+            },
+            "raid-attacks/gpt2/paraphrase": {
+              "n": 15,
+              "errors": 0,
+              "mean_p": 0.9927823583285014,
+              "loss": 0.00730396287025048,
+              "ece": 0.007217641671498617
+            },
+            "raid-attacks/gpt2/perplexity_misspelling": {
+              "n": 9,
+              "errors": 0,
+              "mean_p": 0.9943996336725023,
+              "loss": 0.005714106357926418,
+              "ece": 0.005600366327497695
+            },
+            "raid-attacks/gpt2/synonym": {
+              "n": 16,
+              "errors": 0,
+              "mean_p": 0.9999167546629906,
+              "loss": 8.327095137057873e-05,
+              "ece": 8.324533700942993e-05
+            },
+            "raid-attacks/llama-chat/alternative_spelling": {
+              "n": 14,
+              "errors": 0,
+              "mean_p": 0.9994654698031289,
+              "loss": 0.0005360163391857901,
+              "ece": 0.0005345301968710763
+            },
+            "raid-attacks/llama-chat/article_deletion": {
+              "n": 8,
+              "errors": 0,
+              "mean_p": 0.9987462535500526,
+              "loss": 0.0012587262151537756,
+              "ece": 0.0012537464499473572
+            },
+            "raid-attacks/llama-chat/homoglyph": {
+              "n": 1,
+              "errors": 0,
+              "mean_p": 0.9999964237213135,
+              "loss": 3.576285081423306e-06,
+              "ece": 3.5762786865234375e-06
+            },
+            "raid-attacks/llama-chat/number": {
+              "n": 10,
+              "errors": 0,
+              "mean_p": 0.9999744534492493,
+              "loss": 2.5546986599561483e-05,
+              "ece": 2.5546550750732423e-05
+            },
+            "raid-attacks/llama-chat/paraphrase": {
+              "n": 11,
+              "errors": 0,
+              "mean_p": 0.9995950243689797,
+              "loss": 0.00040525980661513264,
+              "ece": 0.00040497563102028585
+            },
+            "raid-attacks/llama-chat/perplexity_misspelling": {
+              "n": 11,
+              "errors": 0,
+              "mean_p": 0.999584284695712,
+              "loss": 0.0004163410551922301,
+              "ece": 0.0004157153042879972
+            },
+            "raid-attacks/llama-chat/synonym": {
+              "n": 15,
+              "errors": 0,
+              "mean_p": 0.9928873340288799,
+              "loss": 0.007284717159977771,
+              "ece": 0.007112665971120199
+            },
+            "raid-attacks/mistral-chat/alternative_spelling": {
+              "n": 5,
+              "errors": 0,
+              "mean_p": 0.9999626636505127,
+              "loss": 3.733740788587342e-05,
+              "ece": 3.7336349487304686e-05
+            },
+            "raid-attacks/mistral-chat/article_deletion": {
+              "n": 3,
+              "errors": 0,
+              "mean_p": 0.9992882212003072,
+              "loss": 0.0007124621413911418,
+              "ece": 0.0007117787996927897
+            },
+            "raid-attacks/mistral-chat/homoglyph": {
+              "n": 1,
+              "errors": 0,
+              "mean_p": 0.9999920129776001,
+              "loss": 7.98705429633559e-06,
+              "ece": 7.987022399902344e-06
+            },
+            "raid-attacks/mistral-chat/number": {
+              "n": 3,
+              "errors": 0,
+              "mean_p": 0.9999752442042033,
+              "loss": 2.475626945969093e-05,
+              "ece": 2.475579579671224e-05
+            },
+            "raid-attacks/mistral-chat/paraphrase": {
+              "n": 3,
+              "errors": 0,
+              "mean_p": 0.9998871684074402,
+              "loss": 0.00011284082938154819,
+              "ece": 0.00011283159255981445
+            },
+            "raid-attacks/mistral-chat/perplexity_misspelling": {
+              "n": 5,
+              "errors": 0,
+              "mean_p": 0.9999385833740234,
+              "loss": 6.141938037823496e-05,
+              "ece": 6.14166259765625e-05
+            },
+            "raid-attacks/mistral-chat/synonym": {
+              "n": 6,
+              "errors": 0,
+              "mean_p": 0.9997983276844025,
+              "loss": 0.0002016998165186102,
+              "ece": 0.00020167231559753418
+            },
+            "raid-attacks/mistral/alternative_spelling": {
+              "n": 15,
+              "errors": 0,
+              "mean_p": 0.9999256372451782,
+              "loss": 7.437841697294365e-05,
+              "ece": 7.436275482177734e-05
+            },
+            "raid-attacks/mistral/article_deletion": {
+              "n": 13,
+              "errors": 0,
+              "mean_p": 0.999912115243765,
+              "loss": 8.78942661909257e-05,
+              "ece": 8.788475623497597e-05
+            },
+            "raid-attacks/mistral/homoglyph": {
+              "n": 3,
+              "errors": 0,
+              "mean_p": 0.9999069571495056,
+              "loss": 9.30544057885169e-05,
+              "ece": 9.304285049438477e-05
+            },
+            "raid-attacks/mistral/insert_paragraphs": {
+              "n": 2,
+              "errors": 0,
+              "mean_p": 0.9997089803218842,
+              "loss": 0.0002910972689084395,
+              "ece": 0.0002910196781158447
+            },
+            "raid-attacks/mistral/number": {
+              "n": 20,
+              "errors": 0,
+              "mean_p": 0.9998298645019531,
+              "loss": 0.00017019437087058433,
+              "ece": 0.000170135498046875
+            },
+            "raid-attacks/mistral/paraphrase": {
+              "n": 9,
+              "errors": 0,
+              "mean_p": 0.9979601502418518,
+              "loss": 0.002049871341862932,
+              "ece": 0.0020398497581481934
+            },
+            "raid-attacks/mistral/perplexity_misspelling": {
+              "n": 10,
+              "errors": 0,
+              "mean_p": 0.9996876180171966,
+              "loss": 0.00031255329587589456,
+              "ece": 0.0003123819828033447
+            },
+            "raid-attacks/mistral/synonym": {
+              "n": 20,
+              "errors": 0,
+              "mean_p": 0.9996512055397033,
+              "loss": 0.0003490494282824319,
+              "ece": 0.00034879446029663087
+            },
+            "raid-attacks/mpt-chat/alternative_spelling": {
+              "n": 11,
+              "errors": 0,
+              "mean_p": 0.9999977350234985,
+              "loss": 2.2649814423402804e-06,
+              "ece": 2.2649765014648438e-06
+            },
+            "raid-attacks/mpt-chat/article_deletion": {
+              "n": 5,
+              "errors": 0,
+              "mean_p": 0.999997591972351,
+              "loss": 2.4080313281240033e-06,
+              "ece": 2.408027648925781e-06
+            },
+            "raid-attacks/mpt-chat/homoglyph": {
+              "n": 10,
+              "errors": 0,
+              "mean_p": 0.9999026834964753,
+              "loss": 9.732586691249659e-05,
+              "ece": 9.731650352478028e-05
+            },
+            "raid-attacks/mpt-chat/number": {
+              "n": 2,
+              "errors": 0,
+              "mean_p": 0.9999972581863403,
+              "loss": 2.7418174184459116e-06,
+              "ece": 2.7418136596679688e-06
+            },
+            "raid-attacks/mpt-chat/perplexity_misspelling": {
+              "n": 10,
+              "errors": 0,
+              "mean_p": 0.9999923229217529,
+              "loss": 7.677226758420888e-06,
+              "ece": 7.677078247070313e-06
+            },
+            "raid-attacks/mpt-chat/synonym": {
+              "n": 9,
+              "errors": 0,
+              "mean_p": 0.9999969138039483,
+              "loss": 3.086205864359428e-06,
+              "ece": 3.086196051703559e-06
+            },
+            "raid-attacks/mpt/alternative_spelling": {
+              "n": 10,
+              "errors": 0,
+              "mean_p": 0.9999896168708802,
+              "loss": 1.0383236671503684e-05,
+              "ece": 1.0383129119873046e-05
+            },
+            "raid-attacks/mpt/article_deletion": {
+              "n": 12,
+              "errors": 0,
+              "mean_p": 0.9998043129841486,
+              "loss": 0.00019574487605550893,
+              "ece": 0.0001956870158513387
+            },
+            "raid-attacks/mpt/homoglyph": {
+              "n": 5,
+              "errors": 0,
+              "mean_p": 0.9992118120193482,
+              "loss": 0.0007895107693088764,
+              "ece": 0.0007881879806518555
+            },
+            "raid-attacks/mpt/insert_paragraphs": {
+              "n": 14,
+              "errors": 0,
+              "mean_p": 0.9999965599605015,
+              "loss": 3.4400871100130163e-06,
+              "ece": 3.440039498465402e-06
+            },
+            "raid-attacks/mpt/number": {
+              "n": 10,
+              "errors": 0,
+              "mean_p": 0.9999820351600647,
+              "loss": 1.7965161659220497e-05,
+              "ece": 1.7964839935302733e-05
+            },
+            "raid-attacks/mpt/paraphrase": {
+              "n": 11,
+              "errors": 0,
+              "mean_p": 0.9953151832927357,
+              "loss": 0.004729294080344468,
+              "ece": 0.004684816707264294
+            },
+            "raid-attacks/mpt/perplexity_misspelling": {
+              "n": 14,
+              "errors": 0,
+              "mean_p": 0.9999688267707825,
+              "loss": 3.1177139457061374e-05,
+              "ece": 3.11732292175293e-05
+            },
+            "raid-attacks/mpt/synonym": {
+              "n": 9,
+              "errors": 0,
+              "mean_p": 0.9989113211631775,
+              "loss": 0.0010936540194457103,
+              "ece": 0.0010886788368225098
+            },
+            "raid/chatgpt/none": {
+              "n": 67,
+              "errors": 0,
+              "mean_p": 0.9979130492281558,
+              "loss": 0.002212704116601789,
+              "ece": 0.002086950771844209
+            },
+            "raid/cohere-chat/none": {
+              "n": 61,
+              "errors": 2,
+              "mean_p": 0.9557431564803739,
+              "loss": 0.13556333808420828,
+              "ece": 0.044256843519626096
+            },
+            "raid/cohere/none": {
+              "n": 53,
+              "errors": 1,
+              "mean_p": 0.9621610764484361,
+              "loss": 0.08070101723854105,
+              "ece": 0.037838923551563944
+            },
+            "raid/gpt2/none": {
+              "n": 53,
+              "errors": 2,
+              "mean_p": 0.9611158503816938,
+              "loss": 0.08106570993438657,
+              "ece": 0.03888414961830625
+            },
+            "raid/gpt3/none": {
+              "n": 64,
+              "errors": 1,
+              "mean_p": 0.9803670060355216,
+              "loss": 0.06360196774115119,
+              "ece": 0.019632993964478374
+            },
+            "raid/gpt4/none": {
+              "n": 64,
+              "errors": 0,
+              "mean_p": 0.9989124611020088,
+              "loss": 0.0010932375651361485,
+              "ece": 0.0010875388979911804
+            },
+            "raid/human/none": {
+              "n": 182,
+              "errors": 3,
+              "mean_p": 0.025432182255385793,
+              "loss": 0.04381386988753272,
+              "ece": 0.025432182255385793
+            },
+            "raid/llama-chat/none": {
+              "n": 58,
+              "errors": 0,
+              "mean_p": 0.9998099135941473,
+              "loss": 0.0001901577958794158,
+              "ece": 0.00019008640585274533
+            },
+            "raid/mistral-chat/none": {
+              "n": 59,
+              "errors": 0,
+              "mean_p": 0.9997592487577664,
+              "loss": 0.00024096401375140752,
+              "ece": 0.000240751242233535
+            },
+            "raid/mistral/none": {
+              "n": 57,
+              "errors": 1,
+              "mean_p": 0.979345666473372,
+              "loss": 0.0761984018920066,
+              "ece": 0.020654333526628058
+            },
+            "raid/mpt-chat/none": {
+              "n": 60,
+              "errors": 0,
+              "mean_p": 0.999840380748113,
+              "loss": 0.00015989792355109377,
+              "ece": 0.00015961925188700358
+            },
+            "raid/mpt/none": {
+              "n": 69,
+              "errors": 0,
+              "mean_p": 0.9841493584107661,
+              "loss": 0.018283811539495334,
+              "ece": 0.01585064158923384
+            }
+          },
+          "rewrite_by_family": {
+            "gpt2": {
+              "n": 31,
+              "errors": 0,
+              "mean_p": 0.9964646274043668,
+              "loss": 0.0035771541379253694,
+              "ece": 0.00353537259563323
+            },
+            "llama-chat": {
+              "n": 26,
+              "errors": 0,
+              "mean_p": 0.9957252030189221,
+              "loss": 0.0043741775104781935,
+              "ece": 0.004274796981077928
+            },
+            "mistral": {
+              "n": 29,
+              "errors": 0,
+              "mean_p": 0.9991263952748529,
+              "loss": 0.0008768907118074148,
+              "ece": 0.0008736047251471158
+            },
+            "mistral-chat": {
+              "n": 9,
+              "errors": 0,
+              "mean_p": 0.9998279412587484,
+              "loss": 0.00017208015413958954,
+              "ece": 0.0001720587412516276
+            },
+            "mpt": {
+              "n": 20,
+              "errors": 0,
+              "mean_p": 0.9969334453344345,
+              "loss": 0.0030932560529400273,
+              "ece": 0.0030665546655654907
+            },
+            "mpt-chat": {
+              "n": 9,
+              "errors": 0,
+              "mean_p": 0.9999969138039483,
+              "loss": 3.086205864359428e-06,
+              "ece": 3.086196051703559e-06
+            }
+          }
+        },
+        "paired_95_delta": {
+          "auc": [
+            -8.592439828295772e-05,
+            0.0006843555432646392
+          ],
+          "ece": [
+            -0.0027717679377831424,
+            0.0023018380953981907
+          ],
+          "macro_loss_n5": [
+            -0.005354252866826538,
+            0.0005987632180860453
+          ],
+          "worst_ece_n5": [
+            -0.034783664806884954,
+            0.002529055075038427
+          ],
+          "pooled_loss": [
+            -0.008458537297597452,
+            0.002863963562449431
+          ],
+          "paraphrase_loss": [
+            -0.014279645950952664,
+            -0.0033473731759965787
+          ],
+          "paraphrase_err_rate": [
+            0.0,
+            0.0
+          ],
+          "rewrite_loss": [
+            -0.006016188953063334,
+            -0.001264797001710573
+          ],
+          "rewrite_err_rate": [
+            0.0,
+            0.0
+          ],
+          "all_attacks_loss": [
+            -0.0019549384364966156,
+            -0.00043867996743170574
+          ],
+          "all_attacks_err_rate": [
+            0.0,
+            0.0
+          ],
+          "clean_machine_loss": [
+            -0.021367628022793524,
+            0.00420608900222969
+          ],
+          "clean_machine_err_rate": [
+            -0.010921315225856697,
+            0.0015097402597402595
+          ],
+          "human_loss": [
+            -0.003976186113398617,
+            0.01201814998499745
+          ],
+          "human_err_rate": [
+            -0.007380073800738007,
+            0.007227071242517022
+          ]
+        }
+      },
+      "svm": {
+        "original": {
+          "subgroups": {
+            "pooled": {
+              "n": 1614,
+              "errors": 9,
+              "mean_p": 0.670980262800859,
+              "loss": 0.018925729180387436,
+              "ece": 0.004150552568808996
+            },
+            "paraphrase": {
+              "n": 49,
+              "errors": 0,
+              "mean_p": 0.9975625145337635,
+              "loss": 0.002487890381504328,
+              "ece": 0.0024374854662364462
+            },
+            "synonym": {
+              "n": 75,
+              "errors": 0,
+              "mean_p": 0.9997554102514763,
+              "loss": 0.0002447557401941035,
+              "ece": 0.00024458974852375505
+            },
+            "rewrite": {
+              "n": 124,
+              "errors": 0,
+              "mean_p": 0.9988888627501221,
+              "loss": 0.0011311557194215308,
+              "ece": 0.0011111372498779637
+            },
+            "all_attacks": {
+              "n": 415,
+              "errors": 0,
+              "mean_p": 0.9993443867527827,
+              "loss": 0.0006632362286268107,
+              "ece": 0.0006556132472172231
+            },
+            "clean_machine": {
+              "n": 665,
+              "errors": 4,
+              "mean_p": 0.9900489534679032,
+              "loss": 0.022620788229693135,
+              "ece": 0.009951046532096705
+            },
+            "human": {
+              "n": 534,
+              "errors": 5,
+              "mean_p": 0.01844881947944887,
+              "loss": 0.02851696571071022,
+              "ece": 0.018448819479448875
+            }
+          },
+          "auroc": 0.9997451102788182,
+          "macro_loss_n5": 0.007644859376744889,
+          "worst_ece_n5": 0.038525977124769135,
+          "small_cells": 10,
+          "small_rows": 23,
+          "small_errors": 0,
+          "cells": {
+            "asap/human/none": {
+              "n": 185,
+              "errors": 3,
+              "mean_p": 0.020668207010224014,
+              "loss": 0.03611805407659084,
+              "ece": 0.02066820701022402
+            },
+            "ellipse/human/none": {
+              "n": 167,
+              "errors": 1,
+              "mean_p": 0.011240562078334047,
+              "loss": 0.014089256191413803,
+              "ece": 0.011240562078334047
+            },
+            "raid-attacks/gpt2/alternative_spelling": {
+              "n": 17,
+              "errors": 0,
+              "mean_p": 0.9986610184358561,
+              "loss": 0.0013485614534583523,
+              "ece": 0.0013389815641440131
+            },
+            "raid-attacks/gpt2/article_deletion": {
+              "n": 20,
+              "errors": 0,
+              "mean_p": 0.9982987651210486,
+              "loss": 0.0017214454583610172,
+              "ece": 0.0017012348789512855
+            },
+            "raid-attacks/gpt2/homoglyph": {
+              "n": 3,
+              "errors": 0,
+              "mean_p": 0.9962458171204784,
+              "loss": 0.0037645640545204574,
+              "ece": 0.0037541828795215984
+            },
+            "raid-attacks/gpt2/insert_paragraphs": {
+              "n": 2,
+              "errors": 0,
+              "mean_p": 0.999977796615561,
+              "loss": 2.2203872295694532e-05,
+              "ece": 2.220338443909009e-05
+            },
+            "raid-attacks/gpt2/number": {
+              "n": 13,
+              "errors": 0,
+              "mean_p": 0.9999705839867097,
+              "loss": 2.9417268932313606e-05,
+              "ece": 2.94160132902066e-05
+            },
+            "raid-attacks/gpt2/paraphrase": {
+              "n": 15,
+              "errors": 0,
+              "mean_p": 0.9981498760341457,
+              "loss": 0.001865997303622644,
+              "ece": 0.001850123965854252
+            },
+            "raid-attacks/gpt2/perplexity_misspelling": {
+              "n": 9,
+              "errors": 0,
+              "mean_p": 0.9989236022780911,
+              "loss": 0.0010789407371813366,
+              "ece": 0.001076397721909027
+            },
+            "raid-attacks/gpt2/synonym": {
+              "n": 16,
+              "errors": 0,
+              "mean_p": 0.9997547586307136,
+              "loss": 0.00024532150142054056,
+              "ece": 0.0002452413692864072
+            },
+            "raid-attacks/llama-chat/alternative_spelling": {
+              "n": 14,
+              "errors": 0,
+              "mean_p": 0.9999692226699536,
+              "loss": 3.0780677476304345e-05,
+              "ece": 3.077733004639268e-05
+            },
+            "raid-attacks/llama-chat/article_deletion": {
+              "n": 8,
+              "errors": 0,
+              "mean_p": 0.9999498735946973,
+              "loss": 5.013073121383405e-05,
+              "ece": 5.0126405302691746e-05
+            },
+            "raid-attacks/llama-chat/homoglyph": {
+              "n": 1,
+              "errors": 0,
+              "mean_p": 0.997769216144364,
+              "loss": 0.002233275760565243,
+              "ece": 0.0022307838556360204
+            },
+            "raid-attacks/llama-chat/number": {
+              "n": 10,
+              "errors": 0,
+              "mean_p": 0.9999988821715758,
+              "loss": 1.1178307236015764e-06,
+              "ece": 1.1178284240354052e-06
+            },
+            "raid-attacks/llama-chat/paraphrase": {
+              "n": 11,
+              "errors": 0,
+              "mean_p": 0.9999635453150915,
+              "loss": 3.645756242660784e-05,
+              "ece": 3.6454684908457125e-05
+            },
+            "raid-attacks/llama-chat/perplexity_misspelling": {
+              "n": 11,
+              "errors": 0,
+              "mean_p": 0.9999937741477575,
+              "loss": 6.225897560562034e-06,
+              "ece": 6.225852242474678e-06
+            },
+            "raid-attacks/llama-chat/synonym": {
+              "n": 15,
+              "errors": 0,
+              "mean_p": 0.9997100311993342,
+              "loss": 0.00029034568196736605,
+              "ece": 0.00028996880066579266
+            },
+            "raid-attacks/mistral-chat/alternative_spelling": {
+              "n": 5,
+              "errors": 0,
+              "mean_p": 0.9999899292100306,
+              "loss": 1.0070862368433436e-05,
+              "ece": 1.0070789969396365e-05
+            },
+            "raid-attacks/mistral-chat/article_deletion": {
+              "n": 3,
+              "errors": 0,
+              "mean_p": 0.9995116091267332,
+              "loss": 0.000488730416829145,
+              "ece": 0.0004883908732668344
+            },
+            "raid-attacks/mistral-chat/homoglyph": {
+              "n": 1,
+              "errors": 0,
+              "mean_p": 0.9982175600244981,
+              "loss": 0.0017840304118208403,
+              "ece": 0.0017824399755018705
+            },
+            "raid-attacks/mistral-chat/number": {
+              "n": 3,
+              "errors": 0,
+              "mean_p": 0.9999944236330469,
+              "loss": 5.5763908515038495e-06,
+              "ece": 5.576366953049157e-06
+            },
+            "raid-attacks/mistral-chat/paraphrase": {
+              "n": 3,
+              "errors": 0,
+              "mean_p": 0.9999803024281254,
+              "loss": 1.9697940065559577e-05,
+              "ece": 1.969757187466244e-05
+            },
+            "raid-attacks/mistral-chat/perplexity_misspelling": {
+              "n": 5,
+              "errors": 0,
+              "mean_p": 0.9999860735696006,
+              "loss": 1.3926586868598953e-05,
+              "ece": 1.3926430399457956e-05
+            },
+            "raid-attacks/mistral-chat/synonym": {
+              "n": 6,
+              "errors": 0,
+              "mean_p": 0.9999672913949889,
+              "loss": 3.2709320503022134e-05,
+              "ece": 3.27086050111447e-05
+            },
+            "raid-attacks/mistral/alternative_spelling": {
+              "n": 15,
+              "errors": 0,
+              "mean_p": 0.9999826884633894,
+              "loss": 1.7311886919442227e-05,
+              "ece": 1.731153661047961e-05
+            },
+            "raid-attacks/mistral/article_deletion": {
+              "n": 13,
+              "errors": 0,
+              "mean_p": 0.9999505224399552,
+              "loss": 4.947996693910963e-05,
+              "ece": 4.9477560044586255e-05
+            },
+            "raid-attacks/mistral/homoglyph": {
+              "n": 3,
+              "errors": 0,
+              "mean_p": 0.9982327455986222,
+              "loss": 0.0017691481298282576,
+              "ece": 0.0017672544013778528
+            },
+            "raid-attacks/mistral/insert_paragraphs": {
+              "n": 2,
+              "errors": 0,
+              "mean_p": 0.9999786676186178,
+              "loss": 2.133280010538681e-05,
+              "ece": 2.1332381382244137e-05
+            },
+            "raid-attacks/mistral/number": {
+              "n": 20,
+              "errors": 0,
+              "mean_p": 0.999885016448828,
+              "loss": 0.00011503591293275832,
+              "ece": 0.00011498355117211533
+            },
+            "raid-attacks/mistral/paraphrase": {
+              "n": 9,
+              "errors": 0,
+              "mean_p": 0.9924323670986435,
+              "loss": 0.007801611137134108,
+              "ece": 0.007567632901356462
+            },
+            "raid-attacks/mistral/perplexity_misspelling": {
+              "n": 10,
+              "errors": 0,
+              "mean_p": 0.9999159036224775,
+              "loss": 8.410656451590743e-05,
+              "ece": 8.409637752260224e-05
+            },
+            "raid-attacks/mistral/synonym": {
+              "n": 20,
+              "errors": 0,
+              "mean_p": 0.9996443761737982,
+              "loss": 0.0003558738513844732,
+              "ece": 0.00035562382620165647
+            },
+            "raid-attacks/mpt-chat/alternative_spelling": {
+              "n": 11,
+              "errors": 0,
+              "mean_p": 0.999892538264854,
+              "loss": 0.00010747163651551257,
+              "ece": 0.00010746173514601539
+            },
+            "raid-attacks/mpt-chat/article_deletion": {
+              "n": 5,
+              "errors": 0,
+              "mean_p": 0.9998841783424103,
+              "loss": 0.00011583141349089362,
+              "ece": 0.00011582165758976526
+            },
+            "raid-attacks/mpt-chat/homoglyph": {
+              "n": 10,
+              "errors": 0,
+              "mean_p": 0.9987026153274474,
+              "loss": 0.0012986102614881213,
+              "ece": 0.0012973846725527038
+            },
+            "raid-attacks/mpt-chat/number": {
+              "n": 2,
+              "errors": 0,
+              "mean_p": 0.9998963017321034,
+              "loss": 0.00010370718424558485,
+              "ece": 0.00010369826789657921
+            },
+            "raid-attacks/mpt-chat/perplexity_misspelling": {
+              "n": 10,
+              "errors": 0,
+              "mean_p": 0.9998491065135724,
+              "loss": 0.00015091199838964946,
+              "ece": 0.00015089348642757238
+            },
+            "raid-attacks/mpt-chat/synonym": {
+              "n": 9,
+              "errors": 0,
+              "mean_p": 0.9998109201967424,
+              "loss": 0.00018912175234598444,
+              "ece": 0.0001890798032575278
+            },
+            "raid-attacks/mpt/alternative_spelling": {
+              "n": 10,
+              "errors": 0,
+              "mean_p": 0.9999728278689795,
+              "loss": 2.7172996906417155e-05,
+              "ece": 2.7172131020536393e-05
+            },
+            "raid-attacks/mpt/article_deletion": {
+              "n": 12,
+              "errors": 0,
+              "mean_p": 0.999631436295699,
+              "loss": 0.00036898119221348975,
+              "ece": 0.00036856370430105034
+            },
+            "raid-attacks/mpt/homoglyph": {
+              "n": 5,
+              "errors": 0,
+              "mean_p": 0.9973842980197561,
+              "loss": 0.0026209514100187714,
+              "ece": 0.0026157019802437675
+            },
+            "raid-attacks/mpt/insert_paragraphs": {
+              "n": 14,
+              "errors": 0,
+              "mean_p": 0.9999299857363887,
+              "loss": 7.002710924413845e-05,
+              "ece": 7.001426361143346e-05
+            },
+            "raid-attacks/mpt/number": {
+              "n": 10,
+              "errors": 0,
+              "mean_p": 0.9999011432913892,
+              "loss": 9.887032648729843e-05,
+              "ece": 9.885670861069507e-05
+            },
+            "raid-attacks/mpt/paraphrase": {
+              "n": 11,
+              "errors": 0,
+              "mean_p": 0.9978985329094594,
+              "loss": 0.0021129128998432795,
+              "ece": 0.002101467090540629
+            },
+            "raid-attacks/mpt/perplexity_misspelling": {
+              "n": 14,
+              "errors": 0,
+              "mean_p": 0.9997123992033836,
+              "loss": 0.00028787789118789005,
+              "ece": 0.00028760079661649396
+            },
+            "raid-attacks/mpt/synonym": {
+              "n": 9,
+              "errors": 0,
+              "mean_p": 0.9998821787958563,
+              "loss": 0.00011783583783301821,
+              "ece": 0.0001178212041438309
+            },
+            "raid/chatgpt/none": {
+              "n": 67,
+              "errors": 0,
+              "mean_p": 0.9998015205802001,
+              "loss": 0.00019947596429840652,
+              "ece": 0.00019847941980001332
+            },
+            "raid/cohere-chat/none": {
+              "n": 61,
+              "errors": 2,
+              "mean_p": 0.9614740228752308,
+              "loss": 0.10511436048042133,
+              "ece": 0.038525977124769135
+            },
+            "raid/cohere/none": {
+              "n": 53,
+              "errors": 0,
+              "mean_p": 0.9806278101922898,
+              "loss": 0.02179056375125897,
+              "ece": 0.019372189807710178
+            },
+            "raid/gpt2/none": {
+              "n": 53,
+              "errors": 1,
+              "mean_p": 0.9716452345331766,
+              "loss": 0.0539896758295555,
+              "ece": 0.028354765466823313
+            },
+            "raid/gpt3/none": {
+              "n": 64,
+              "errors": 0,
+              "mean_p": 0.9969578801725733,
+              "loss": 0.003126588110294446,
+              "ece": 0.0030421198274267845
+            },
+            "raid/gpt4/none": {
+              "n": 64,
+              "errors": 0,
+              "mean_p": 0.999947246292738,
+              "loss": 5.2767136339476206e-05,
+              "ece": 5.275370726197902e-05
+            },
+            "raid/human/none": {
+              "n": 182,
+              "errors": 1,
+              "mean_p": 0.022807018890398177,
+              "loss": 0.03402919726035081,
+              "ece": 0.022807018890398177
+            },
+            "raid/llama-chat/none": {
+              "n": 58,
+              "errors": 0,
+              "mean_p": 0.9999657386809195,
+              "loss": 3.427505757583071e-05,
+              "ece": 3.4261319080494776e-05
+            },
+            "raid/mistral-chat/none": {
+              "n": 59,
+              "errors": 0,
+              "mean_p": 0.9999519507991224,
+              "loss": 4.805756981475692e-05,
+              "ece": 4.804920087764795e-05
+            },
+            "raid/mistral/none": {
+              "n": 57,
+              "errors": 1,
+              "mean_p": 0.9814384793712275,
+              "loss": 0.06826490522369666,
+              "ece": 0.01856152062877258
+            },
+            "raid/mpt-chat/none": {
+              "n": 60,
+              "errors": 0,
+              "mean_p": 0.9994407510748482,
+              "loss": 0.0005611616434712124,
+              "ece": 0.0005592489251518358
+            },
+            "raid/mpt/none": {
+              "n": 69,
+              "errors": 0,
+              "mean_p": 0.9937669708459589,
+              "loss": 0.006783466868797827,
+              "ece": 0.00623302915404114
+            }
+          },
+          "rewrite_by_family": {
+            "gpt2": {
+              "n": 31,
+              "errors": 0,
+              "mean_p": 0.9989782025356002,
+              "loss": 0.00102951947022801,
+              "ece": 0.0010217974643998804
+            },
+            "llama-chat": {
+              "n": 26,
+              "errors": 0,
+              "mean_p": 0.9998172871713854,
+              "loss": 0.00018293147754627604,
+              "ece": 0.00018271282861461222
+            },
+            "mistral": {
+              "n": 29,
+              "errors": 0,
+              "mean_p": 0.9974061664608193,
+              "loss": 0.0026666199055826356,
+              "ece": 0.002593833539180734
+            },
+            "mistral-chat": {
+              "n": 9,
+              "errors": 0,
+              "mean_p": 0.9999716284060344,
+              "loss": 2.837219369053461e-05,
+              "ece": 2.8371593965650613e-05
+            },
+            "mpt": {
+              "n": 20,
+              "errors": 0,
+              "mean_p": 0.9987911735583378,
+              "loss": 0.001215128221938662,
+              "ece": 0.0012088264416620698
+            },
+            "mpt-chat": {
+              "n": 9,
+              "errors": 0,
+              "mean_p": 0.9998109201967424,
+              "loss": 0.00018912175234598444,
+              "ece": 0.0001890798032575278
+            }
+          }
+        },
+        "expanded": {
+          "subgroups": {
+            "pooled": {
+              "n": 1614,
+              "errors": 11,
+              "mean_p": 0.671763940796185,
+              "loss": 0.01789323833052989,
+              "ece": 0.003849613999521589
+            },
+            "paraphrase": {
+              "n": 49,
+              "errors": 0,
+              "mean_p": 0.9995226128940337,
+              "loss": 0.00047849997659360586,
+              "ece": 0.00047738710596639697
+            },
+            "synonym": {
+              "n": 75,
+              "errors": 0,
+              "mean_p": 0.9998305451636647,
+              "loss": 0.00016958608784828504,
+              "ece": 0.00016945483633534764
+            },
+            "rewrite": {
+              "n": 124,
+              "errors": 0,
+              "mean_p": 0.9997088622506651,
+              "loss": 0.00029165689872345216,
+              "ece": 0.0002911377493347139
+            },
+            "all_attacks": {
+              "n": 415,
+              "errors": 0,
+              "mean_p": 0.9996486747441143,
+              "loss": 0.0003523066762672524,
+              "ece": 0.000351325255885805
+            },
+            "clean_machine": {
+              "n": 665,
+              "errors": 4,
+              "mean_p": 0.9918114490121971,
+              "loss": 0.0185256252240999,
+              "ece": 0.008188550987802762
+            },
+            "human": {
+              "n": 534,
+              "errors": 7,
+              "mean_p": 0.01838611766502594,
+              "loss": 0.030737712773029776,
+              "ece": 0.018386117665025944
+            }
+          },
+          "auroc": 0.9997901928145374,
+          "macro_loss_n5": 0.006630038765192185,
+          "worst_ece_n5": 0.03488835497180114,
+          "small_cells": 10,
+          "small_rows": 23,
+          "small_errors": 0,
+          "cells": {
+            "asap/human/none": {
+              "n": 185,
+              "errors": 1,
+              "mean_p": 0.008750536563183002,
+              "loss": 0.012667057859880052,
+              "ece": 0.008750536563183003
+            },
+            "ellipse/human/none": {
+              "n": 167,
+              "errors": 1,
+              "mean_p": 0.011075790203995142,
+              "loss": 0.014226739438008966,
+              "ece": 0.011075790203995144
+            },
+            "raid-attacks/gpt2/alternative_spelling": {
+              "n": 17,
+              "errors": 0,
+              "mean_p": 0.9988491649590133,
+              "loss": 0.0011550394111233652,
+              "ece": 0.0011508350409865837
+            },
+            "raid-attacks/gpt2/article_deletion": {
+              "n": 20,
+              "errors": 0,
+              "mean_p": 0.99927581440492,
+              "loss": 0.0007261710027460623,
+              "ece": 0.0007241855950800402
+            },
+            "raid-attacks/gpt2/homoglyph": {
+              "n": 3,
+              "errors": 0,
+              "mean_p": 0.9971943665334232,
+              "loss": 0.0028116176984654307,
+              "ece": 0.002805633466576807
+            },
+            "raid-attacks/gpt2/insert_paragraphs": {
+              "n": 2,
+              "errors": 0,
+              "mean_p": 0.999971120119025,
+              "loss": 2.888070009719388e-05,
+              "ece": 2.887988097499683e-05
+            },
+            "raid-attacks/gpt2/number": {
+              "n": 13,
+              "errors": 0,
+              "mean_p": 0.9999863663825141,
+              "loss": 1.3633888537493717e-05,
+              "ece": 1.3633617485947065e-05
+            },
+            "raid-attacks/gpt2/paraphrase": {
+              "n": 15,
+              "errors": 0,
+              "mean_p": 0.999297826180881,
+              "loss": 0.0007034069288180115,
+              "ece": 0.0007021738191188046
+            },
+            "raid-attacks/gpt2/perplexity_misspelling": {
+              "n": 9,
+              "errors": 0,
+              "mean_p": 0.9998350595435297,
+              "loss": 0.00016501674984040923,
+              "ece": 0.00016494045647029597
+            },
+            "raid-attacks/gpt2/synonym": {
+              "n": 16,
+              "errors": 0,
+              "mean_p": 0.9999173379941501,
+              "loss": 8.267231474388624e-05,
+              "ece": 8.266200584988032e-05
+            },
+            "raid-attacks/llama-chat/alternative_spelling": {
+              "n": 14,
+              "errors": 0,
+              "mean_p": 0.9999927840142134,
+              "loss": 7.216104321213981e-06,
+              "ece": 7.2159857864890446e-06
+            },
+            "raid-attacks/llama-chat/article_deletion": {
+              "n": 8,
+              "errors": 0,
+              "mean_p": 0.9999893384886374,
+              "loss": 1.0661630708385753e-05,
+              "ece": 1.0661511362683451e-05
+            },
+            "raid-attacks/llama-chat/homoglyph": {
+              "n": 1,
+              "errors": 0,
+              "mean_p": 0.9980374829482126,
+              "loss": 0.0019644453116182386,
+              "ece": 0.0019625170517874047
+            },
+            "raid-attacks/llama-chat/number": {
+              "n": 10,
+              "errors": 0,
+              "mean_p": 0.9999998170600447,
+              "loss": 1.8294001601330924e-07,
+              "ece": 1.8293995528440022e-07
+            },
+            "raid-attacks/llama-chat/paraphrase": {
+              "n": 11,
+              "errors": 0,
+              "mean_p": 0.9999860120866523,
+              "loss": 1.3988331888406013e-05,
+              "ece": 1.3987913347673404e-05
+            },
+            "raid-attacks/llama-chat/perplexity_misspelling": {
+              "n": 11,
+              "errors": 0,
+              "mean_p": 0.9999937966908738,
+              "loss": 6.2033745398635796e-06,
+              "ece": 6.203309126201988e-06
+            },
+            "raid-attacks/llama-chat/synonym": {
+              "n": 15,
+              "errors": 0,
+              "mean_p": 0.999722052946103,
+              "loss": 0.00027821643763424207,
+              "ece": 0.0002779470538968987
+            },
+            "raid-attacks/mistral-chat/alternative_spelling": {
+              "n": 5,
+              "errors": 0,
+              "mean_p": 0.9999970435761913,
+              "loss": 2.956430720027047e-06,
+              "ece": 2.956423808608832e-06
+            },
+            "raid-attacks/mistral-chat/article_deletion": {
+              "n": 3,
+              "errors": 0,
+              "mean_p": 0.9996102916579979,
+              "loss": 0.0003899328717149077,
+              "ece": 0.0003897083420021004
+            },
+            "raid-attacks/mistral-chat/homoglyph": {
+              "n": 1,
+              "errors": 0,
+              "mean_p": 0.9983700072688936,
+              "loss": 0.001631322614588225,
+              "ece": 0.0016299927311064222
+            },
+            "raid-attacks/mistral-chat/number": {
+              "n": 3,
+              "errors": 0,
+              "mean_p": 0.9999988152486831,
+              "loss": 1.1847523354911176e-06,
+              "ece": 1.1847513169035058e-06
+            },
+            "raid-attacks/mistral-chat/paraphrase": {
+              "n": 3,
+              "errors": 0,
+              "mean_p": 0.9999942574705866,
+              "loss": 5.742549420883563e-06,
+              "ece": 5.742529413506799e-06
+            },
+            "raid-attacks/mistral-chat/perplexity_misspelling": {
+              "n": 5,
+              "errors": 0,
+              "mean_p": 0.9999942884099642,
+              "loss": 5.7116199860835725e-06,
+              "ece": 5.711590035861747e-06
+            },
+            "raid-attacks/mistral-chat/synonym": {
+              "n": 6,
+              "errors": 0,
+              "mean_p": 0.9999775361576543,
+              "loss": 2.246419858869477e-05,
+              "ece": 2.2463842345647283e-05
+            },
+            "raid-attacks/mistral/alternative_spelling": {
+              "n": 15,
+              "errors": 0,
+              "mean_p": 0.9999935025261212,
+              "loss": 6.4975306893212295e-06,
+              "ece": 6.497473878922892e-06
+            },
+            "raid-attacks/mistral/article_deletion": {
+              "n": 13,
+              "errors": 0,
+              "mean_p": 0.9999788350130158,
+              "loss": 2.1165519335506414e-05,
+              "ece": 2.116498698439679e-05
+            },
+            "raid-attacks/mistral/homoglyph": {
+              "n": 3,
+              "errors": 0,
+              "mean_p": 0.9985846850254404,
+              "loss": 0.001416777561792089,
+              "ece": 0.0014153149745597486
+            },
+            "raid-attacks/mistral/insert_paragraphs": {
+              "n": 2,
+              "errors": 0,
+              "mean_p": 0.9999746387112034,
+              "loss": 2.5361922646292626e-05,
+              "ece": 2.536128879665478e-05
+            },
+            "raid-attacks/mistral/number": {
+              "n": 20,
+              "errors": 0,
+              "mean_p": 0.999934098565363,
+              "loss": 6.591954337202528e-05,
+              "ece": 6.590143463710562e-05
+            },
+            "raid-attacks/mistral/paraphrase": {
+              "n": 9,
+              "errors": 0,
+              "mean_p": 0.9998053524222702,
+              "loss": 0.00019468883277994707,
+              "ece": 0.00019464757772982535
+            },
+            "raid-attacks/mistral/perplexity_misspelling": {
+              "n": 10,
+              "errors": 0,
+              "mean_p": 0.9999124587420335,
+              "loss": 8.755245211269698e-05,
+              "ece": 8.754125796643919e-05
+            },
+            "raid-attacks/mistral/synonym": {
+              "n": 20,
+              "errors": 0,
+              "mean_p": 0.9997143697974005,
+              "loss": 0.0002859027622464218,
+              "ece": 0.0002856302025993851
+            },
+            "raid-attacks/mpt-chat/alternative_spelling": {
+              "n": 11,
+              "errors": 0,
+              "mean_p": 0.9999508528132807,
+              "loss": 4.914967673319773e-05,
+              "ece": 4.9147186719444846e-05
+            },
+            "raid-attacks/mpt-chat/article_deletion": {
+              "n": 5,
+              "errors": 0,
+              "mean_p": 0.9999626097722555,
+              "loss": 3.739121107493118e-05,
+              "ece": 3.7390227744604763e-05
+            },
+            "raid-attacks/mpt-chat/homoglyph": {
+              "n": 10,
+              "errors": 0,
+              "mean_p": 0.997937339369812,
+              "loss": 0.002065291116927908,
+              "ece": 0.0020626606301879734
+            },
+            "raid-attacks/mpt-chat/number": {
+              "n": 2,
+              "errors": 0,
+              "mean_p": 0.9999608218884537,
+              "loss": 3.917910006594895e-05,
+              "ece": 3.917811154635631e-05
+            },
+            "raid-attacks/mpt-chat/perplexity_misspelling": {
+              "n": 10,
+              "errors": 0,
+              "mean_p": 0.9999360503361243,
+              "loss": 6.395330356009296e-05,
+              "ece": 6.394966387573975e-05
+            },
+            "raid-attacks/mpt-chat/synonym": {
+              "n": 9,
+              "errors": 0,
+              "mean_p": 0.9999264201617272,
+              "loss": 7.358603955977485e-05,
+              "ece": 7.357983827284266e-05
+            },
+            "raid-attacks/mpt/alternative_spelling": {
+              "n": 10,
+              "errors": 0,
+              "mean_p": 0.9999975602472035,
+              "loss": 2.4397586011591977e-06,
+              "ece": 2.4397527963460064e-06
+            },
+            "raid-attacks/mpt/article_deletion": {
+              "n": 12,
+              "errors": 0,
+              "mean_p": 0.9996586127590114,
+              "loss": 0.0003419422712402158,
+              "ece": 0.00034138724098851475
+            },
+            "raid-attacks/mpt/homoglyph": {
+              "n": 5,
+              "errors": 0,
+              "mean_p": 0.9949294706085994,
+              "loss": 0.005104667498230749,
+              "ece": 0.0050705293914007354
+            },
+            "raid-attacks/mpt/insert_paragraphs": {
+              "n": 14,
+              "errors": 0,
+              "mean_p": 0.9999909237090334,
+              "loss": 9.076525741541296e-06,
+              "ece": 9.076290966691936e-06
+            },
+            "raid-attacks/mpt/number": {
+              "n": 10,
+              "errors": 0,
+              "mean_p": 0.9999472660150582,
+              "loss": 5.273848158686684e-05,
+              "ece": 5.273398494157755e-05
+            },
+            "raid-attacks/mpt/paraphrase": {
+              "n": 11,
+              "errors": 0,
+              "mean_p": 0.9990057783571875,
+              "loss": 0.0009974632842510796,
+              "ece": 0.0009942216428125478
+            },
+            "raid-attacks/mpt/perplexity_misspelling": {
+              "n": 14,
+              "errors": 0,
+              "mean_p": 0.9999009374152307,
+              "loss": 9.909880344306084e-05,
+              "ece": 9.9062584769232e-05
+            },
+            "raid-attacks/mpt/synonym": {
+              "n": 9,
+              "errors": 0,
+              "mean_p": 0.9999213656474909,
+              "loss": 7.86486884118878e-05,
+              "ece": 7.863435250914868e-05
+            },
+            "raid/chatgpt/none": {
+              "n": 67,
+              "errors": 0,
+              "mean_p": 0.9999465747248107,
+              "loss": 5.348431857357857e-05,
+              "ece": 5.34252751892329e-05
+            },
+            "raid/cohere-chat/none": {
+              "n": 61,
+              "errors": 2,
+              "mean_p": 0.9686490982083648,
+              "loss": 0.08738507134116875,
+              "ece": 0.031350901791635244
+            },
+            "raid/cohere/none": {
+              "n": 53,
+              "errors": 0,
+              "mean_p": 0.9897602864885171,
+              "loss": 0.011784248800099732,
+              "ece": 0.010239713511483043
+            },
+            "raid/gpt2/none": {
+              "n": 53,
+              "errors": 1,
+              "mean_p": 0.9704036206829102,
+              "loss": 0.06529379841254368,
+              "ece": 0.02959637931708965
+            },
+            "raid/gpt3/none": {
+              "n": 64,
+              "errors": 0,
+              "mean_p": 0.9972995533484745,
+              "loss": 0.0027808036014536426,
+              "ece": 0.0027004466515255215
+            },
+            "raid/gpt4/none": {
+              "n": 64,
+              "errors": 0,
+              "mean_p": 0.9999748880827085,
+              "loss": 2.5115208870350604e-05,
+              "ece": 2.5111917291454136e-05
+            },
+            "raid/human/none": {
+              "n": 182,
+              "errors": 5,
+              "mean_p": 0.03488835497180114,
+              "loss": 0.06425641445369557,
+              "ece": 0.03488835497180114
+            },
+            "raid/llama-chat/none": {
+              "n": 58,
+              "errors": 0,
+              "mean_p": 0.9999803990039727,
+              "loss": 1.9606169322456028e-05,
+              "ece": 1.960099602723663e-05
+            },
+            "raid/mistral-chat/none": {
+              "n": 59,
+              "errors": 0,
+              "mean_p": 0.9999558997900482,
+              "loss": 4.411713926252812e-05,
+              "ece": 4.410020995170275e-05
+            },
+            "raid/mistral/none": {
+              "n": 57,
+              "errors": 1,
+              "mean_p": 0.9825277217333876,
+              "loss": 0.04304243718309293,
+              "ece": 0.017472278266612233
+            },
+            "raid/mpt-chat/none": {
+              "n": 60,
+              "errors": 0,
+              "mean_p": 0.9999076512443213,
+              "loss": 9.241325938016666e-05,
+              "ece": 9.234875567863954e-05
+            },
+            "raid/mpt/none": {
+              "n": 69,
+              "errors": 0,
+              "mean_p": 0.9965441495775591,
+              "loss": 0.0037398388797619357,
+              "ece": 0.0034558504224409255
+            }
+          },
+          "rewrite_by_family": {
+            "gpt2": {
+              "n": 31,
+              "errors": 0,
+              "mean_p": 0.9996175742135363,
+              "loss": 0.0003830277731668501,
+              "ece": 0.00038242578646387594
+            },
+            "llama-chat": {
+              "n": 26,
+              "errors": 0,
+              "mean_p": 0.9998337279671047,
+              "loss": 0.00016642762366484993,
+              "ece": 0.00016627203289530337
+            },
+            "mistral": {
+              "n": 29,
+              "errors": 0,
+              "mean_p": 0.9997426057844291,
+              "loss": 0.00025759499103268825,
+              "ece": 0.00025739421557090106
+            },
+            "mistral-chat": {
+              "n": 9,
+              "errors": 0,
+              "mean_p": 0.9999831099286318,
+              "loss": 1.68903155327577e-05,
+              "ece": 1.689007136826712e-05
+            },
+            "mpt": {
+              "n": 20,
+              "errors": 0,
+              "mean_p": 0.9994177926378238,
+              "loss": 0.0005839967161234432,
+              "ece": 0.0005822073621760182
+            },
+            "mpt-chat": {
+              "n": 9,
+              "errors": 0,
+              "mean_p": 0.9999264201617272,
+              "loss": 7.358603955977485e-05,
+              "ece": 7.357983827284266e-05
+            }
+          }
+        },
+        "paired_95_delta": {
+          "auc": [
+            -5.987757338258846e-05,
+            0.00015148989947647018
+          ],
+          "ece": [
+            -0.002541091706988883,
+            0.0020328296081466458
+          ],
+          "macro_loss_n5": [
+            -0.0027165736705029326,
+            0.000483181230832139
+          ],
+          "worst_ece_n5": [
+            -0.013222555332661694,
+            0.01829307354201121
+          ],
+          "pooled_loss": [
+            -0.006088325050752219,
+            0.004314967892450146
+          ],
+          "paraphrase_loss": [
+            -0.00524389132961961,
+            -3.752922662132572e-05
+          ],
+          "paraphrase_err_rate": [
+            0.0,
+            0.0
+          ],
+          "rewrite_loss": [
+            -0.0021354367024261833,
+            -7.489915301349916e-05
+          ],
+          "rewrite_err_rate": [
+            0.0,
+            0.0
+          ],
+          "all_attacks_loss": [
+            -0.0007284938293709045,
+            -2.398505804082725e-05
+          ],
+          "all_attacks_err_rate": [
+            0.0,
+            0.0
+          ],
+          "clean_machine_loss": [
+            -0.009649572985991667,
+            -0.0002603302890990596
+          ],
+          "clean_machine_err_rate": [
+            0.0,
+            0.0
+          ],
+          "human_loss": [
+            -0.012622778691428208,
+            0.017536870570139366
+          ],
+          "human_err_rate": [
+            -0.005449747477243301,
+            0.013109887604986761
+          ]
+        }
+      }
+    },
+    "expanded_all": {
+      "n": 2772,
+      "source_groups": 1224,
+      "document_sha": "bbcc7db980ec9ce1a2bd986ed12ddc13603ab3622f97d8f73e7f58d64df4312e",
+      "group_sha": "ad27eeec62471d33d99c16c4738d92c30f36423d4e4ebea76d315649f416dcc6",
+      "logistic": {
+        "original": {
+          "subgroups": {
+            "pooled": {
+              "n": 2772,
+              "errors": 30,
+              "mean_p": 0.7253464233674052,
+              "loss": 0.030550271921557626,
+              "ece": 0.008066216336868392
+            },
+            "paraphrase": {
+              "n": 91,
+              "errors": 3,
+              "mean_p": 0.9550684248250756,
+              "loss": 0.10137130580360207,
+              "ece": 0.04493157517492444
+            },
+            "synonym": {
+              "n": 130,
+              "errors": 0,
+              "mean_p": 0.9980055217559521,
+              "loss": 0.0020532335850327412,
+              "ece": 0.0019944782440478987
+            },
+            "rewrite": {
+              "n": 221,
+              "errors": 3,
+              "mean_p": 0.9803255406667677,
+              "loss": 0.04294891038091424,
+              "ece": 0.019674459333232357
+            },
+            "all_attacks": {
+              "n": 733,
+              "errors": 3,
+              "mean_p": 0.9935969444840517,
+              "loss": 0.013423564883715839,
+              "ece": 0.006403055515948373
+            },
+            "clean_machine": {
+              "n": 1300,
+              "errors": 22,
+              "mean_p": 0.9780773908003735,
+              "loss": 0.04719548290466528,
+              "ece": 0.021922609199626516
+            },
+            "human": {
+              "n": 739,
+              "errors": 5,
+              "mean_p": 0.014686220875712745,
+              "loss": 0.018256769865668702,
+              "ece": 0.014686220875712745
+            }
+          },
+          "auroc": 0.9993556919755031,
+          "macro_loss_n5": 0.01892633037568368,
+          "worst_ece_n5": 0.1163178208042626,
+          "small_cells": 7,
+          "small_rows": 16,
+          "small_errors": 0,
+          "cells": {
+            "asap/human/none": {
+              "n": 390,
+              "errors": 3,
+              "mean_p": 0.016467488089662512,
+              "loss": 0.01978752602717689,
+              "ece": 0.016467488089662512
+            },
+            "ellipse/human/none": {
+              "n": 167,
+              "errors": 0,
+              "mean_p": 0.002934618725242008,
+              "loss": 0.002989832878578201,
+              "ece": 0.002934618725242008
+            },
+            "raid-attacks/gpt2/alternative_spelling": {
+              "n": 28,
+              "errors": 0,
+              "mean_p": 0.9984378963708878,
+              "loss": 0.0015707080778545681,
+              "ece": 0.0015621036291122437
+            },
+            "raid-attacks/gpt2/article_deletion": {
+              "n": 31,
+              "errors": 0,
+              "mean_p": 0.9983706205121933,
+              "loss": 0.0016445492125246738,
+              "ece": 0.001629379487806751
+            },
+            "raid-attacks/gpt2/homoglyph": {
+              "n": 7,
+              "errors": 0,
+              "mean_p": 0.9976634212902614,
+              "loss": 0.0023461609077468424,
+              "ece": 0.0023365787097385953
+            },
+            "raid-attacks/gpt2/insert_paragraphs": {
+              "n": 2,
+              "errors": 0,
+              "mean_p": 0.9996678531169891,
+              "loss": 0.000332251058715067,
+              "ece": 0.00033214688301086426
+            },
+            "raid-attacks/gpt2/number": {
+              "n": 21,
+              "errors": 0,
+              "mean_p": 0.9990134721710568,
+              "loss": 0.0009875010376018737,
+              "ece": 0.0009865278289431618
+            },
+            "raid-attacks/gpt2/paraphrase": {
+              "n": 27,
+              "errors": 3,
+              "mean_p": 0.8836821791957374,
+              "loss": 0.30251755417060194,
+              "ece": 0.1163178208042626
+            },
+            "raid-attacks/gpt2/perplexity_misspelling": {
+              "n": 26,
+              "errors": 0,
+              "mean_p": 0.9961815247168908,
+              "loss": 0.003869240680109784,
+              "ece": 0.003818475283109225
+            },
+            "raid-attacks/gpt2/synonym": {
+              "n": 31,
+              "errors": 0,
+              "mean_p": 0.9980053132580172,
+              "loss": 0.0020465317329274946,
+              "ece": 0.001994686741982737
+            },
+            "raid-attacks/llama-chat/alternative_spelling": {
+              "n": 23,
+              "errors": 0,
+              "mean_p": 0.9994714026865752,
+              "loss": 0.0005303923644895863,
+              "ece": 0.0005285973134248153
+            },
+            "raid-attacks/llama-chat/article_deletion": {
+              "n": 25,
+              "errors": 0,
+              "mean_p": 0.9986502742767334,
+              "loss": 0.0013564315763250887,
+              "ece": 0.0013497257232666015
+            },
+            "raid-attacks/llama-chat/homoglyph": {
+              "n": 5,
+              "errors": 0,
+              "mean_p": 0.9992911338806152,
+              "loss": 0.0007097727674297133,
+              "ece": 0.0007088661193847656
+            },
+            "raid-attacks/llama-chat/number": {
+              "n": 15,
+              "errors": 0,
+              "mean_p": 0.9999531944592793,
+              "loss": 4.680753038127718e-05,
+              "ece": 4.6805540720621744e-05
+            },
+            "raid-attacks/llama-chat/paraphrase": {
+              "n": 22,
+              "errors": 0,
+              "mean_p": 0.9979737048799341,
+              "loss": 0.002035950291798301,
+              "ece": 0.0020262951200658626
+            },
+            "raid-attacks/llama-chat/perplexity_misspelling": {
+              "n": 25,
+              "errors": 0,
+              "mean_p": 0.999775869846344,
+              "loss": 0.00022421630443085876,
+              "ece": 0.00022413015365600587
+            },
+            "raid-attacks/llama-chat/synonym": {
+              "n": 25,
+              "errors": 0,
+              "mean_p": 0.9930065274238586,
+              "loss": 0.007233866744412464,
+              "ece": 0.006993472576141357
+            },
+            "raid-attacks/mistral-chat/alternative_spelling": {
+              "n": 5,
+              "errors": 0,
+              "mean_p": 0.9999676942825317,
+              "loss": 3.230638395902646e-05,
+              "ece": 3.230571746826172e-05
+            },
+            "raid-attacks/mistral-chat/article_deletion": {
+              "n": 3,
+              "errors": 0,
+              "mean_p": 0.9984062314033508,
+              "loss": 0.0015974316201380855,
+              "ece": 0.00159376859664917
+            },
+            "raid-attacks/mistral-chat/homoglyph": {
+              "n": 1,
+              "errors": 0,
+              "mean_p": 0.9999551773071289,
+              "loss": 4.482369743801023e-05,
+              "ece": 4.482269287109375e-05
+            },
+            "raid-attacks/mistral-chat/number": {
+              "n": 3,
+              "errors": 0,
+              "mean_p": 0.9999762376149496,
+              "loss": 2.3762769879871246e-05,
+              "ece": 2.376238505045573e-05
+            },
+            "raid-attacks/mistral-chat/paraphrase": {
+              "n": 3,
+              "errors": 0,
+              "mean_p": 0.9992407361666361,
+              "loss": 0.0007596913412914794,
+              "ece": 0.000759263833363851
+            },
+            "raid-attacks/mistral-chat/perplexity_misspelling": {
+              "n": 5,
+              "errors": 0,
+              "mean_p": 0.9999441862106323,
+              "loss": 5.5815892505497405e-05,
+              "ece": 5.581378936767578e-05
+            },
+            "raid-attacks/mistral-chat/synonym": {
+              "n": 6,
+              "errors": 0,
+              "mean_p": 0.999808132648468,
+              "loss": 0.00019189281349010995,
+              "ece": 0.00019186735153198242
+            },
+            "raid-attacks/mistral/alternative_spelling": {
+              "n": 28,
+              "errors": 0,
+              "mean_p": 0.9998722395726612,
+              "loss": 0.00012779972953774727,
+              "ece": 0.0001277604273387364
+            },
+            "raid-attacks/mistral/article_deletion": {
+              "n": 28,
+              "errors": 0,
+              "mean_p": 0.9997500777244568,
+              "loss": 0.00025002013242590596,
+              "ece": 0.0002499222755432129
+            },
+            "raid-attacks/mistral/homoglyph": {
+              "n": 7,
+              "errors": 0,
+              "mean_p": 0.9992152452468872,
+              "loss": 0.0007853165425902428,
+              "ece": 0.000784754753112793
+            },
+            "raid-attacks/mistral/insert_paragraphs": {
+              "n": 2,
+              "errors": 0,
+              "mean_p": 0.9997537136077881,
+              "loss": 0.00024634014409682855,
+              "ece": 0.00024628639221191406
+            },
+            "raid-attacks/mistral/number": {
+              "n": 29,
+              "errors": 0,
+              "mean_p": 0.9998367531546231,
+              "loss": 0.0001633078916769621,
+              "ece": 0.00016324684537690262
+            },
+            "raid-attacks/mistral/paraphrase": {
+              "n": 13,
+              "errors": 0,
+              "mean_p": 0.9960802564254174,
+              "loss": 0.003948217362729983,
+              "ece": 0.003919743574582613
+            },
+            "raid-attacks/mistral/perplexity_misspelling": {
+              "n": 28,
+              "errors": 0,
+              "mean_p": 0.9996575457709176,
+              "loss": 0.0003426391617823245,
+              "ece": 0.00034245422908238003
+            },
+            "raid-attacks/mistral/synonym": {
+              "n": 36,
+              "errors": 0,
+              "mean_p": 0.9996703548563851,
+              "loss": 0.0003298377830756574,
+              "ece": 0.0003296451436148749
+            },
+            "raid-attacks/mpt-chat/alternative_spelling": {
+              "n": 11,
+              "errors": 0,
+              "mean_p": 0.9999991438605569,
+              "loss": 8.561400432237992e-07,
+              "ece": 8.56139443137429e-07
+            },
+            "raid-attacks/mpt-chat/article_deletion": {
+              "n": 5,
+              "errors": 0,
+              "mean_p": 0.9999991893768311,
+              "loss": 8.106236037978175e-07,
+              "ece": 8.106231689453125e-07
+            },
+            "raid-attacks/mpt-chat/homoglyph": {
+              "n": 10,
+              "errors": 0,
+              "mean_p": 0.9998316109180451,
+              "loss": 0.00016841047965604857,
+              "ece": 0.00016838908195495605
+            },
+            "raid-attacks/mpt-chat/number": {
+              "n": 2,
+              "errors": 0,
+              "mean_p": 0.9999991655349731,
+              "loss": 8.344654034433599e-07,
+              "ece": 8.344650268554688e-07
+            },
+            "raid-attacks/mpt-chat/perplexity_misspelling": {
+              "n": 10,
+              "errors": 0,
+              "mean_p": 0.9999971747398376,
+              "loss": 2.8252808074411862e-06,
+              "ece": 2.8252601623535155e-06
+            },
+            "raid-attacks/mpt-chat/synonym": {
+              "n": 9,
+              "errors": 0,
+              "mean_p": 0.9999985297520956,
+              "loss": 1.4702498647724972e-06,
+              "ece": 1.4702479044596355e-06
+            },
+            "raid-attacks/mpt/alternative_spelling": {
+              "n": 23,
+              "errors": 0,
+              "mean_p": 0.9999668727750364,
+              "loss": 3.312943790932546e-05,
+              "ece": 3.3127224963644274e-05
+            },
+            "raid-attacks/mpt/article_deletion": {
+              "n": 25,
+              "errors": 0,
+              "mean_p": 0.9996350312232971,
+              "loss": 0.0003651897973941749,
+              "ece": 0.00036496877670288085
+            },
+            "raid-attacks/mpt/homoglyph": {
+              "n": 11,
+              "errors": 0,
+              "mean_p": 0.9994266466660933,
+              "loss": 0.000574430358601428,
+              "ece": 0.0005733533339066939
+            },
+            "raid-attacks/mpt/insert_paragraphs": {
+              "n": 14,
+              "errors": 0,
+              "mean_p": 0.9999986716679165,
+              "loss": 1.3283379354397913e-06,
+              "ece": 1.3283320835658482e-06
+            },
+            "raid-attacks/mpt/number": {
+              "n": 25,
+              "errors": 0,
+              "mean_p": 0.999956955909729,
+              "loss": 4.30492720946653e-05,
+              "ece": 4.304409027099609e-05
+            },
+            "raid-attacks/mpt/paraphrase": {
+              "n": 26,
+              "errors": 0,
+              "mean_p": 0.9672931065926185,
+              "loss": 0.03686223305240815,
+              "ece": 0.0327068934073815
+            },
+            "raid-attacks/mpt/perplexity_misspelling": {
+              "n": 29,
+              "errors": 0,
+              "mean_p": 0.9998920929842982,
+              "loss": 0.00010796310813277468,
+              "ece": 0.00010790701570182012
+            },
+            "raid-attacks/mpt/synonym": {
+              "n": 23,
+              "errors": 0,
+              "mean_p": 0.9995835475299669,
+              "loss": 0.0004170636696845706,
+              "ece": 0.00041645247003306514
+            },
+            "raid/chatgpt/none": {
+              "n": 132,
+              "errors": 0,
+              "mean_p": 0.9990707708127571,
+              "loss": 0.0009443053284559355,
+              "ece": 0.0009292291872429125
+            },
+            "raid/cohere-chat/none": {
+              "n": 125,
+              "errors": 8,
+              "mean_p": 0.936506414949894,
+              "loss": 0.15859856256940147,
+              "ece": 0.06349358505010605
+            },
+            "raid/cohere/none": {
+              "n": 101,
+              "errors": 2,
+              "mean_p": 0.9564944125048005,
+              "loss": 0.07060080291953753,
+              "ece": 0.043505587495199526
+            },
+            "raid/gpt2/none": {
+              "n": 109,
+              "errors": 1,
+              "mean_p": 0.9676892921465252,
+              "loss": 0.054110289001325224,
+              "ece": 0.03231070785347475
+            },
+            "raid/gpt3/none": {
+              "n": 87,
+              "errors": 1,
+              "mean_p": 0.983822863773796,
+              "loss": 0.08065408379977895,
+              "ece": 0.016177136226203936
+            },
+            "raid/gpt4/none": {
+              "n": 121,
+              "errors": 1,
+              "mean_p": 0.9928594279634065,
+              "loss": 0.012641916296401328,
+              "ece": 0.007140572036593414
+            },
+            "raid/human/none": {
+              "n": 182,
+              "errors": 2,
+              "mean_p": 0.021652283214658924,
+              "loss": 0.028985251040701234,
+              "ece": 0.021652283214658924
+            },
+            "raid/llama-chat/none": {
+              "n": 117,
+              "errors": 1,
+              "mean_p": 0.9925258286997803,
+              "loss": 0.013206447922464047,
+              "ece": 0.007474171300219675
+            },
+            "raid/mistral-chat/none": {
+              "n": 131,
+              "errors": 0,
+              "mean_p": 0.9994828687369368,
+              "loss": 0.0005193308422242757,
+              "ece": 0.0005171312630631542
+            },
+            "raid/mistral/none": {
+              "n": 108,
+              "errors": 3,
+              "mean_p": 0.9677136231826067,
+              "loss": 0.08610293748652983,
+              "ece": 0.03228637681739336
+            },
+            "raid/mpt-chat/none": {
+              "n": 130,
+              "errors": 0,
+              "mean_p": 0.9996277245191427,
+              "loss": 0.0003759885702872087,
+              "ece": 0.00037227548085726225
+            },
+            "raid/mpt/none": {
+              "n": 139,
+              "errors": 5,
+              "mean_p": 0.9584522498704546,
+              "loss": 0.06379997757646172,
+              "ece": 0.041547750129545334
+            }
+          },
+          "rewrite_by_family": {
+            "gpt2": {
+              "n": 58,
+              "errors": 3,
+              "mean_p": 0.9447859232635076,
+              "loss": 0.14192097321253455,
+              "ece": 0.055214076736492326
+            },
+            "llama-chat": {
+              "n": 47,
+              "errors": 0,
+              "mean_p": 0.9953315892118089,
+              "loss": 0.004800799468720728,
+              "ece": 0.004668410788191126
+            },
+            "mistral": {
+              "n": 49,
+              "errors": 0,
+              "mean_p": 0.998717879762455,
+              "loss": 0.0012898160389023148,
+              "ece": 0.0012821202375450913
+            },
+            "mistral-chat": {
+              "n": 9,
+              "errors": 0,
+              "mean_p": 0.9996190004878573,
+              "loss": 0.00038115898942389984,
+              "ece": 0.00038099951214260526
+            },
+            "mpt": {
+              "n": 49,
+              "errors": 0,
+              "mean_p": 0.9824498441754556,
+              "loss": 0.019755316811537898,
+              "ece": 0.01755015582454448
+            },
+            "mpt-chat": {
+              "n": 9,
+              "errors": 0,
+              "mean_p": 0.9999985297520956,
+              "loss": 1.4702498647724972e-06,
+              "ece": 1.4702479044596355e-06
+            }
+          }
+        },
+        "expanded": {
+          "subgroups": {
+            "pooled": {
+              "n": 2772,
+              "errors": 24,
+              "mean_p": 0.7269517018433179,
+              "loss": 0.026319094963879533,
+              "ece": 0.006615270413076917
+            },
+            "paraphrase": {
+              "n": 91,
+              "errors": 3,
+              "mean_p": 0.9645021880905216,
+              "loss": 0.08889993343104509,
+              "ece": 0.03549781190947844
+            },
+            "synonym": {
+              "n": 130,
+              "errors": 0,
+              "mean_p": 0.9984130254158607,
+              "loss": 0.0016160235779028851,
+              "ece": 0.0015869745841393104
+            },
+            "rewrite": {
+              "n": 221,
+              "errors": 3,
+              "mean_p": 0.9844497394583681,
+              "loss": 0.037556457046843815,
+              "ece": 0.015550260541631895
+            },
+            "all_attacks": {
+              "n": 733,
+              "errors": 3,
+              "mean_p": 0.9948964503035965,
+              "loss": 0.011742081681437214,
+              "ece": 0.005103549696403425
+            },
+            "clean_machine": {
+              "n": 1300,
+              "errors": 18,
+              "mean_p": 0.9822016722300592,
+              "loss": 0.039578745702762146,
+              "ece": 0.017798327769940864
+            },
+            "human": {
+              "n": 739,
+              "errors": 3,
+              "mean_p": 0.01216352576192717,
+              "loss": 0.0174522543353042,
+              "ece": 0.01216352576192717
+            }
+          },
+          "auroc": 0.9995673551488399,
+          "macro_loss_n5": 0.016307453700068905,
+          "worst_ece_n5": 0.10574552675502168,
+          "small_cells": 7,
+          "small_rows": 16,
+          "small_errors": 0,
+          "cells": {
+            "asap/human/none": {
+              "n": 390,
+              "errors": 0,
+              "mean_p": 0.009842307745314178,
+              "loss": 0.011263823468267172,
+              "ece": 0.00984230774531418
+            },
+            "ellipse/human/none": {
+              "n": 167,
+              "errors": 0,
+              "mean_p": 0.003123882316834946,
+              "loss": 0.0031748531834410497,
+              "ece": 0.003123882316834946
+            },
+            "raid-attacks/gpt2/alternative_spelling": {
+              "n": 28,
+              "errors": 0,
+              "mean_p": 0.9984399506023952,
+              "loss": 0.0015716528754037005,
+              "ece": 0.001560049397604806
+            },
+            "raid-attacks/gpt2/article_deletion": {
+              "n": 31,
+              "errors": 0,
+              "mean_p": 0.9980131349255962,
+              "loss": 0.002017277369666494,
+              "ece": 0.0019868650744038242
+            },
+            "raid-attacks/gpt2/homoglyph": {
+              "n": 7,
+              "errors": 0,
+              "mean_p": 0.9991538950375148,
+              "loss": 0.0008472662089952569,
+              "ece": 0.0008461049624851771
+            },
+            "raid-attacks/gpt2/insert_paragraphs": {
+              "n": 2,
+              "errors": 0,
+              "mean_p": 0.9995661079883575,
+              "loss": 0.00043406266777090246,
+              "ece": 0.00043389201164245605
+            },
+            "raid-attacks/gpt2/number": {
+              "n": 21,
+              "errors": 0,
+              "mean_p": 0.9989316349937802,
+              "loss": 0.0010697411055094845,
+              "ece": 0.0010683650062197731
+            },
+            "raid-attacks/gpt2/paraphrase": {
+              "n": 27,
+              "errors": 3,
+              "mean_p": 0.8942544732449783,
+              "loss": 0.2852070301084492,
+              "ece": 0.10574552675502168
+            },
+            "raid-attacks/gpt2/perplexity_misspelling": {
+              "n": 26,
+              "errors": 0,
+              "mean_p": 0.996870199075112,
+              "loss": 0.0031721978576126496,
+              "ece": 0.003129800924888024
+            },
+            "raid-attacks/gpt2/synonym": {
+              "n": 31,
+              "errors": 0,
+              "mean_p": 0.9984228187991727,
+              "loss": 0.0016071464511426578,
+              "ece": 0.0015771812008273218
+            },
+            "raid-attacks/llama-chat/alternative_spelling": {
+              "n": 23,
+              "errors": 0,
+              "mean_p": 0.9996307388595913,
+              "loss": 0.0003701719318591448,
+              "ece": 0.00036926114040872324
+            },
+            "raid-attacks/llama-chat/article_deletion": {
+              "n": 25,
+              "errors": 0,
+              "mean_p": 0.9986806559562683,
+              "loss": 0.001328067968459991,
+              "ece": 0.0013193440437316893
+            },
+            "raid-attacks/llama-chat/homoglyph": {
+              "n": 5,
+              "errors": 0,
+              "mean_p": 0.9999440789222718,
+              "loss": 5.592630270408686e-05,
+              "ece": 5.592107772827149e-05
+            },
+            "raid-attacks/llama-chat/number": {
+              "n": 15,
+              "errors": 0,
+              "mean_p": 0.9999660015106201,
+              "loss": 3.3999643679613676e-05,
+              "ece": 3.399848937988281e-05
+            },
+            "raid-attacks/llama-chat/paraphrase": {
+              "n": 22,
+              "errors": 0,
+              "mean_p": 0.9994092583656311,
+              "loss": 0.0005918197130915065,
+              "ece": 0.0005907416343688965
+            },
+            "raid-attacks/llama-chat/perplexity_misspelling": {
+              "n": 25,
+              "errors": 0,
+              "mean_p": 0.9997387480735779,
+              "loss": 0.00026153672795136676,
+              "ece": 0.00026125192642211914
+            },
+            "raid-attacks/llama-chat/synonym": {
+              "n": 25,
+              "errors": 0,
+              "mean_p": 0.994640519618988,
+              "loss": 0.005471288788120588,
+              "ece": 0.005359480381011963
+            },
+            "raid-attacks/mistral-chat/alternative_spelling": {
+              "n": 5,
+              "errors": 0,
+              "mean_p": 0.9999626636505127,
+              "loss": 3.733740788587342e-05,
+              "ece": 3.7336349487304686e-05
+            },
+            "raid-attacks/mistral-chat/article_deletion": {
+              "n": 3,
+              "errors": 0,
+              "mean_p": 0.9992882212003072,
+              "loss": 0.0007124621413911418,
+              "ece": 0.0007117787996927897
+            },
+            "raid-attacks/mistral-chat/homoglyph": {
+              "n": 1,
+              "errors": 0,
+              "mean_p": 0.9999920129776001,
+              "loss": 7.98705429633559e-06,
+              "ece": 7.987022399902344e-06
+            },
+            "raid-attacks/mistral-chat/number": {
+              "n": 3,
+              "errors": 0,
+              "mean_p": 0.9999752442042033,
+              "loss": 2.475626945969093e-05,
+              "ece": 2.475579579671224e-05
+            },
+            "raid-attacks/mistral-chat/paraphrase": {
+              "n": 3,
+              "errors": 0,
+              "mean_p": 0.9998871684074402,
+              "loss": 0.00011284082938154819,
+              "ece": 0.00011283159255981445
+            },
+            "raid-attacks/mistral-chat/perplexity_misspelling": {
+              "n": 5,
+              "errors": 0,
+              "mean_p": 0.9999385833740234,
+              "loss": 6.141938037823496e-05,
+              "ece": 6.14166259765625e-05
+            },
+            "raid-attacks/mistral-chat/synonym": {
+              "n": 6,
+              "errors": 0,
+              "mean_p": 0.9997983276844025,
+              "loss": 0.0002016998165186102,
+              "ece": 0.00020167231559753418
+            },
+            "raid-attacks/mistral/alternative_spelling": {
+              "n": 28,
+              "errors": 0,
+              "mean_p": 0.9999158574002129,
+              "loss": 8.415588916412503e-05,
+              "ece": 8.41425997870309e-05
+            },
+            "raid-attacks/mistral/article_deletion": {
+              "n": 28,
+              "errors": 0,
+              "mean_p": 0.9998534534658704,
+              "loss": 0.0001465774288311186,
+              "ece": 0.0001465465341295515
+            },
+            "raid-attacks/mistral/homoglyph": {
+              "n": 7,
+              "errors": 0,
+              "mean_p": 0.9998584645135062,
+              "loss": 0.00014155209300980844,
+              "ece": 0.00014153548649379184
+            },
+            "raid-attacks/mistral/insert_paragraphs": {
+              "n": 2,
+              "errors": 0,
+              "mean_p": 0.9997089803218842,
+              "loss": 0.0002910972689084395,
+              "ece": 0.0002910196781158447
+            },
+            "raid-attacks/mistral/number": {
+              "n": 29,
+              "errors": 0,
+              "mean_p": 0.9998497942398334,
+              "loss": 0.00015025102617934876,
+              "ece": 0.00015020576016656282
+            },
+            "raid-attacks/mistral/paraphrase": {
+              "n": 13,
+              "errors": 0,
+              "mean_p": 0.9984290462273818,
+              "loss": 0.0015779727529254635,
+              "ece": 0.0015709537726182204
+            },
+            "raid-attacks/mistral/perplexity_misspelling": {
+              "n": 28,
+              "errors": 0,
+              "mean_p": 0.9997150131634304,
+              "loss": 0.00028512326646984383,
+              "ece": 0.00028498683656964986
+            },
+            "raid-attacks/mistral/synonym": {
+              "n": 36,
+              "errors": 0,
+              "mean_p": 0.9997509651713901,
+              "loss": 0.00024918871622599644,
+              "ece": 0.0002490348286098904
+            },
+            "raid-attacks/mpt-chat/alternative_spelling": {
+              "n": 11,
+              "errors": 0,
+              "mean_p": 0.9999977350234985,
+              "loss": 2.2649814423402804e-06,
+              "ece": 2.2649765014648438e-06
+            },
+            "raid-attacks/mpt-chat/article_deletion": {
+              "n": 5,
+              "errors": 0,
+              "mean_p": 0.999997591972351,
+              "loss": 2.4080313281240033e-06,
+              "ece": 2.408027648925781e-06
+            },
+            "raid-attacks/mpt-chat/homoglyph": {
+              "n": 10,
+              "errors": 0,
+              "mean_p": 0.9999026834964753,
+              "loss": 9.732586691249659e-05,
+              "ece": 9.731650352478028e-05
+            },
+            "raid-attacks/mpt-chat/number": {
+              "n": 2,
+              "errors": 0,
+              "mean_p": 0.9999972581863403,
+              "loss": 2.7418174184459116e-06,
+              "ece": 2.7418136596679688e-06
+            },
+            "raid-attacks/mpt-chat/perplexity_misspelling": {
+              "n": 10,
+              "errors": 0,
+              "mean_p": 0.9999923229217529,
+              "loss": 7.677226758420888e-06,
+              "ece": 7.677078247070313e-06
+            },
+            "raid-attacks/mpt-chat/synonym": {
+              "n": 9,
+              "errors": 0,
+              "mean_p": 0.9999969138039483,
+              "loss": 3.086205864359428e-06,
+              "ece": 3.086196051703559e-06
+            },
+            "raid-attacks/mpt/alternative_spelling": {
+              "n": 23,
+              "errors": 0,
+              "mean_p": 0.9999723304872927,
+              "loss": 2.767174331181904e-05,
+              "ece": 2.766951270725416e-05
+            },
+            "raid-attacks/mpt/article_deletion": {
+              "n": 25,
+              "errors": 0,
+              "mean_p": 0.9997103977203369,
+              "loss": 0.00028974252872373423,
+              "ece": 0.00028960227966308595
+            },
+            "raid-attacks/mpt/homoglyph": {
+              "n": 11,
+              "errors": 0,
+              "mean_p": 0.9996313398534601,
+              "loss": 0.00036926158055950316,
+              "ece": 0.0003686601465398615
+            },
+            "raid-attacks/mpt/insert_paragraphs": {
+              "n": 14,
+              "errors": 0,
+              "mean_p": 0.9999965599605015,
+              "loss": 3.4400871100130163e-06,
+              "ece": 3.440039498465402e-06
+            },
+            "raid-attacks/mpt/number": {
+              "n": 25,
+              "errors": 0,
+              "mean_p": 0.9999790382385254,
+              "loss": 2.096235947908448e-05,
+              "ece": 2.0961761474609375e-05
+            },
+            "raid-attacks/mpt/paraphrase": {
+              "n": 26,
+              "errors": 0,
+              "mean_p": 0.9868686749384954,
+              "loss": 0.013670458743568793,
+              "ece": 0.013131325061504658
+            },
+            "raid-attacks/mpt/perplexity_misspelling": {
+              "n": 29,
+              "errors": 0,
+              "mean_p": 0.9998984028553141,
+              "loss": 0.00010166420254717942,
+              "ece": 0.00010159714468594254
+            },
+            "raid-attacks/mpt/synonym": {
+              "n": 23,
+              "errors": 0,
+              "mean_p": 0.9994250432304714,
+              "loss": 0.0005769798653439634,
+              "ece": 0.0005749567695285963
+            },
+            "raid/chatgpt/none": {
+              "n": 132,
+              "errors": 0,
+              "mean_p": 0.9986605594555537,
+              "loss": 0.001404589492589448,
+              "ece": 0.0013394405444463093
+            },
+            "raid/cohere-chat/none": {
+              "n": 125,
+              "errors": 6,
+              "mean_p": 0.9457086676880717,
+              "loss": 0.13696137041320758,
+              "ece": 0.05429133231192827
+            },
+            "raid/cohere/none": {
+              "n": 101,
+              "errors": 2,
+              "mean_p": 0.9660631161883916,
+              "loss": 0.07754292637992592,
+              "ece": 0.0339368838116084
+            },
+            "raid/gpt2/none": {
+              "n": 109,
+              "errors": 3,
+              "mean_p": 0.9705386413688507,
+              "loss": 0.05911466212104171,
+              "ece": 0.029461358631149345
+            },
+            "raid/gpt3/none": {
+              "n": 87,
+              "errors": 1,
+              "mean_p": 0.9843768897070282,
+              "loss": 0.04797867728327541,
+              "ece": 0.01562311029297182
+            },
+            "raid/gpt4/none": {
+              "n": 121,
+              "errors": 1,
+              "mean_p": 0.9925868453319407,
+              "loss": 0.014053740510158499,
+              "ece": 0.007413154668059231
+            },
+            "raid/human/none": {
+              "n": 182,
+              "errors": 3,
+              "mean_p": 0.025432182255385793,
+              "loss": 0.04381386988753272,
+              "ece": 0.025432182255385793
+            },
+            "raid/llama-chat/none": {
+              "n": 117,
+              "errors": 1,
+              "mean_p": 0.9923074362624404,
+              "loss": 0.0174163323750952,
+              "ece": 0.0076925637375595225
+            },
+            "raid/mistral-chat/none": {
+              "n": 131,
+              "errors": 0,
+              "mean_p": 0.9994535468916856,
+              "loss": 0.0005508708544555836,
+              "ece": 0.0005464531083143394
+            },
+            "raid/mistral/none": {
+              "n": 108,
+              "errors": 1,
+              "mean_p": 0.9805613274651545,
+              "loss": 0.05004538882456363,
+              "ece": 0.019438672534845495
+            },
+            "raid/mpt-chat/none": {
+              "n": 130,
+              "errors": 0,
+              "mean_p": 0.9998098795230572,
+              "loss": 0.00019075413186055834,
+              "ece": 0.00019012047694279597
+            },
+            "raid/mpt/none": {
+              "n": 139,
+              "errors": 3,
+              "mean_p": 0.9699008623473078,
+              "loss": 0.0464549355249156,
+              "ece": 0.030099137652692176
+            }
+          },
+          "rewrite_by_family": {
+            "gpt2": {
+              "n": 58,
+              "errors": 3,
+              "mean_p": 0.9499306579377373,
+              "loss": 0.13362778194678535,
+              "ece": 0.05006934206226263
+            },
+            "llama-chat": {
+              "n": 47,
+              "errors": 0,
+              "mean_p": 0.9968726952025231,
+              "loss": 0.0031872819870431457,
+              "ece": 0.0031273047974769105
+            },
+            "mistral": {
+              "n": 49,
+              "errors": 0,
+              "mean_p": 0.9994002519821634,
+              "loss": 0.0006017232565748347,
+              "ece": 0.0005997480178365902
+            },
+            "mistral-chat": {
+              "n": 9,
+              "errors": 0,
+              "mean_p": 0.9998279412587484,
+              "loss": 0.00017208015413958954,
+              "ece": 0.0001720587412516276
+            },
+            "mpt": {
+              "n": 49,
+              "errors": 0,
+              "mean_p": 0.9927624804633004,
+              "loss": 0.007524540086442852,
+              "ece": 0.007237519536699567
+            },
+            "mpt-chat": {
+              "n": 9,
+              "errors": 0,
+              "mean_p": 0.9999969138039483,
+              "loss": 3.086205864359428e-06,
+              "ece": 3.086196051703559e-06
+            }
+          }
+        },
+        "paired_95_delta": {
+          "auc": [
+            1.529247633285658e-05,
+            0.00046156171290914473
+          ],
+          "ece": [
+            -0.003439580010161111,
+            0.00026646578109984856
+          ],
+          "macro_loss_n5": [
+            -0.004982147127407012,
+            -0.000337665366437676
+          ],
+          "worst_ece_n5": [
+            -0.02551805012147217,
+            0.0030220946543952315
+          ],
+          "pooled_loss": [
+            -0.00861201063210464,
+            -0.00015344117325170065
+          ],
+          "paraphrase_loss": [
+            -0.030631687063030866,
+            0.003913228052638353
+          ],
+          "paraphrase_err_rate": [
+            0.0,
+            0.0
+          ],
+          "rewrite_loss": [
+            -0.013164839612229222,
+            0.0013783356540659028
+          ],
+          "rewrite_err_rate": [
+            0.0,
+            0.0
+          ],
+          "all_attacks_loss": [
+            -0.003963741640672047,
+            0.0003314091016995407
+          ],
+          "all_attacks_err_rate": [
+            0.0,
+            0.0
+          ],
+          "clean_machine_loss": [
+            -0.01637753123440332,
+            0.00011374202347298931
+          ],
+          "clean_machine_err_rate": [
+            -0.008601525095486577,
+            0.0019223616236162223
+          ],
+          "human_loss": [
+            -0.006073634557878176,
+            0.005887637298414068
+          ],
+          "human_err_rate": [
+            -0.009469899237422965,
+            0.004010970450560586
+          ]
+        }
+      },
+      "svm": {
+        "original": {
+          "subgroups": {
+            "pooled": {
+              "n": 2772,
+              "errors": 18,
+              "mean_p": 0.7320825626372879,
+              "loss": 0.02124221126022727,
+              "ece": 0.0043983154993483195
+            },
+            "paraphrase": {
+              "n": 91,
+              "errors": 1,
+              "mean_p": 0.9838689238634409,
+              "loss": 0.021801923340805836,
+              "ece": 0.016131076136559244
+            },
+            "synonym": {
+              "n": 130,
+              "errors": 0,
+              "mean_p": 0.9997562790480023,
+              "loss": 0.00024388260286827067,
+              "ece": 0.00024372095199765107
+            },
+            "rewrite": {
+              "n": 221,
+              "errors": 1,
+              "mean_p": 0.993214426913183,
+              "loss": 0.009120722906724915,
+              "ece": 0.00678557308681713
+            },
+            "all_attacks": {
+              "n": 733,
+              "errors": 1,
+              "mean_p": 0.9974713810163859,
+              "loss": 0.0032542319703222455,
+              "ece": 0.0025286189836139896
+            },
+            "clean_machine": {
+              "n": 1300,
+              "errors": 10,
+              "mean_p": 0.9886019980956373,
+              "loss": 0.026648695811465013,
+              "ece": 0.01139800190436279
+            },
+            "human": {
+              "n": 739,
+              "errors": 7,
+              "mean_p": 0.017596405712073878,
+              "loss": 0.029573414105817684,
+              "ece": 0.01759640571207388
+            }
+          },
+          "auroc": 0.9996532185116085,
+          "macro_loss_n5": 0.009488233956286405,
+          "worst_ece_n5": 0.047552818242572154,
+          "small_cells": 7,
+          "small_rows": 16,
+          "small_errors": 0,
+          "cells": {
+            "asap/human/none": {
+              "n": 390,
+              "errors": 5,
+              "mean_p": 0.01788639106689318,
+              "loss": 0.03412444445858799,
+              "ece": 0.017886391066893187
+            },
+            "ellipse/human/none": {
+              "n": 167,
+              "errors": 1,
+              "mean_p": 0.011240562078334047,
+              "loss": 0.014089256191413803,
+              "ece": 0.011240562078334047
+            },
+            "raid-attacks/gpt2/alternative_spelling": {
+              "n": 28,
+              "errors": 0,
+              "mean_p": 0.9991392832283871,
+              "loss": 0.000866542706624087,
+              "ece": 0.0008607167716128009
+            },
+            "raid-attacks/gpt2/article_deletion": {
+              "n": 31,
+              "errors": 0,
+              "mean_p": 0.9987991881824022,
+              "loss": 0.0012139011466624358,
+              "ece": 0.0012008118175976443
+            },
+            "raid-attacks/gpt2/homoglyph": {
+              "n": 7,
+              "errors": 0,
+              "mean_p": 0.9980768202361636,
+              "loss": 0.001927777805462182,
+              "ece": 0.0019231797638363801
+            },
+            "raid-attacks/gpt2/insert_paragraphs": {
+              "n": 2,
+              "errors": 0,
+              "mean_p": 0.999977796615561,
+              "loss": 2.2203872295694532e-05,
+              "ece": 2.220338443909009e-05
+            },
+            "raid-attacks/gpt2/number": {
+              "n": 21,
+              "errors": 0,
+              "mean_p": 0.9999637347297659,
+              "loss": 3.6267099372575764e-05,
+              "ece": 3.626527023413759e-05
+            },
+            "raid-attacks/gpt2/paraphrase": {
+              "n": 27,
+              "errors": 1,
+              "mean_p": 0.9524471817574279,
+              "loss": 0.06647932170720669,
+              "ece": 0.047552818242572154
+            },
+            "raid-attacks/gpt2/perplexity_misspelling": {
+              "n": 26,
+              "errors": 0,
+              "mean_p": 0.9932696034460494,
+              "loss": 0.007311133231159126,
+              "ece": 0.006730396553950639
+            },
+            "raid-attacks/gpt2/synonym": {
+              "n": 31,
+              "errors": 0,
+              "mean_p": 0.999753324947382,
+              "loss": 0.00024677083869517765,
+              "ece": 0.0002466750526178482
+            },
+            "raid-attacks/llama-chat/alternative_spelling": {
+              "n": 23,
+              "errors": 0,
+              "mean_p": 0.9999779203288612,
+              "loss": 2.2081748906387636e-05,
+              "ece": 2.2079671138623873e-05
+            },
+            "raid-attacks/llama-chat/article_deletion": {
+              "n": 25,
+              "errors": 0,
+              "mean_p": 0.9999322626162791,
+              "loss": 6.774505748590725e-05,
+              "ece": 6.773738372087835e-05
+            },
+            "raid-attacks/llama-chat/homoglyph": {
+              "n": 5,
+              "errors": 0,
+              "mean_p": 0.9976546653813372,
+              "loss": 0.0023482612901456696,
+              "ece": 0.002345334618662864
+            },
+            "raid-attacks/llama-chat/number": {
+              "n": 15,
+              "errors": 0,
+              "mean_p": 0.9999988208789742,
+              "loss": 1.179122893279975e-06,
+              "ece": 1.1791210257442823e-06
+            },
+            "raid-attacks/llama-chat/paraphrase": {
+              "n": 22,
+              "errors": 0,
+              "mean_p": 0.9999338091350726,
+              "loss": 6.620507271526922e-05,
+              "ece": 6.619086492760561e-05
+            },
+            "raid-attacks/llama-chat/perplexity_misspelling": {
+              "n": 25,
+              "errors": 0,
+              "mean_p": 0.9999878209549028,
+              "loss": 1.2179506211521395e-05,
+              "ece": 1.2179045097178153e-05
+            },
+            "raid-attacks/llama-chat/synonym": {
+              "n": 25,
+              "errors": 0,
+              "mean_p": 0.9996575576249728,
+              "loss": 0.0003428342005372281,
+              "ece": 0.0003424423750271588
+            },
+            "raid-attacks/mistral-chat/alternative_spelling": {
+              "n": 5,
+              "errors": 0,
+              "mean_p": 0.9999899292100306,
+              "loss": 1.0070862368433436e-05,
+              "ece": 1.0070789969396365e-05
+            },
+            "raid-attacks/mistral-chat/article_deletion": {
+              "n": 3,
+              "errors": 0,
+              "mean_p": 0.9995116091267332,
+              "loss": 0.000488730416829145,
+              "ece": 0.0004883908732668344
+            },
+            "raid-attacks/mistral-chat/homoglyph": {
+              "n": 1,
+              "errors": 0,
+              "mean_p": 0.9982175600244981,
+              "loss": 0.0017840304118208403,
+              "ece": 0.0017824399755018705
+            },
+            "raid-attacks/mistral-chat/number": {
+              "n": 3,
+              "errors": 0,
+              "mean_p": 0.9999944236330469,
+              "loss": 5.5763908515038495e-06,
+              "ece": 5.576366953049157e-06
+            },
+            "raid-attacks/mistral-chat/paraphrase": {
+              "n": 3,
+              "errors": 0,
+              "mean_p": 0.9999803024281254,
+              "loss": 1.9697940065559577e-05,
+              "ece": 1.969757187466244e-05
+            },
+            "raid-attacks/mistral-chat/perplexity_misspelling": {
+              "n": 5,
+              "errors": 0,
+              "mean_p": 0.9999860735696006,
+              "loss": 1.3926586868598953e-05,
+              "ece": 1.3926430399457956e-05
+            },
+            "raid-attacks/mistral-chat/synonym": {
+              "n": 6,
+              "errors": 0,
+              "mean_p": 0.9999672913949889,
+              "loss": 3.2709320503022134e-05,
+              "ece": 3.27086050111447e-05
+            },
+            "raid-attacks/mistral/alternative_spelling": {
+              "n": 28,
+              "errors": 0,
+              "mean_p": 0.9999643630944391,
+              "loss": 3.563879825045355e-05,
+              "ece": 3.563690556085408e-05
+            },
+            "raid-attacks/mistral/article_deletion": {
+              "n": 28,
+              "errors": 0,
+              "mean_p": 0.9997637670139016,
+              "loss": 0.0002364436288341646,
+              "ece": 0.00023623298609866197
+            },
+            "raid-attacks/mistral/homoglyph": {
+              "n": 7,
+              "errors": 0,
+              "mean_p": 0.9979074128080024,
+              "loss": 0.0020958280733357894,
+              "ece": 0.0020925871919975953
+            },
+            "raid-attacks/mistral/insert_paragraphs": {
+              "n": 2,
+              "errors": 0,
+              "mean_p": 0.9999786676186178,
+              "loss": 2.133280010538681e-05,
+              "ece": 2.1332381382244137e-05
+            },
+            "raid-attacks/mistral/number": {
+              "n": 29,
+              "errors": 0,
+              "mean_p": 0.9999126753657962,
+              "loss": 8.736106691398052e-05,
+              "ece": 8.732463420385392e-05
+            },
+            "raid-attacks/mistral/paraphrase": {
+              "n": 13,
+              "errors": 0,
+              "mean_p": 0.9944843737605544,
+              "loss": 0.005678070618824065,
+              "ece": 0.005515626239445647
+            },
+            "raid-attacks/mistral/perplexity_misspelling": {
+              "n": 28,
+              "errors": 0,
+              "mean_p": 0.9998570886367723,
+              "loss": 0.00014294810282754165,
+              "ece": 0.00014291136322763402
+            },
+            "raid-attacks/mistral/synonym": {
+              "n": 36,
+              "errors": 0,
+              "mean_p": 0.9997418676011213,
+              "loss": 0.0002583112076842236,
+              "ece": 0.0002581323988790105
+            },
+            "raid-attacks/mpt-chat/alternative_spelling": {
+              "n": 11,
+              "errors": 0,
+              "mean_p": 0.999892538264854,
+              "loss": 0.00010747163651551257,
+              "ece": 0.00010746173514601539
+            },
+            "raid-attacks/mpt-chat/article_deletion": {
+              "n": 5,
+              "errors": 0,
+              "mean_p": 0.9998841783424103,
+              "loss": 0.00011583141349089362,
+              "ece": 0.00011582165758976526
+            },
+            "raid-attacks/mpt-chat/homoglyph": {
+              "n": 10,
+              "errors": 0,
+              "mean_p": 0.9987026153274474,
+              "loss": 0.0012986102614881213,
+              "ece": 0.0012973846725527038
+            },
+            "raid-attacks/mpt-chat/number": {
+              "n": 2,
+              "errors": 0,
+              "mean_p": 0.9998963017321034,
+              "loss": 0.00010370718424558485,
+              "ece": 0.00010369826789657921
+            },
+            "raid-attacks/mpt-chat/perplexity_misspelling": {
+              "n": 10,
+              "errors": 0,
+              "mean_p": 0.9998491065135724,
+              "loss": 0.00015091199838964946,
+              "ece": 0.00015089348642757238
+            },
+            "raid-attacks/mpt-chat/synonym": {
+              "n": 9,
+              "errors": 0,
+              "mean_p": 0.9998109201967424,
+              "loss": 0.00018912175234598444,
+              "ece": 0.0001890798032575278
+            },
+            "raid-attacks/mpt/alternative_spelling": {
+              "n": 23,
+              "errors": 0,
+              "mean_p": 0.9998958791903665,
+              "loss": 0.00010417764686763194,
+              "ece": 0.00010412080963361842
+            },
+            "raid-attacks/mpt/article_deletion": {
+              "n": 25,
+              "errors": 0,
+              "mean_p": 0.9996618812108571,
+              "loss": 0.00033844356827532953,
+              "ece": 0.0003381187891430493
+            },
+            "raid-attacks/mpt/homoglyph": {
+              "n": 11,
+              "errors": 0,
+              "mean_p": 0.9982758179730655,
+              "loss": 0.0017268569876097836,
+              "ece": 0.0017241820269346044
+            },
+            "raid-attacks/mpt/insert_paragraphs": {
+              "n": 14,
+              "errors": 0,
+              "mean_p": 0.9999299857363887,
+              "loss": 7.002710924413845e-05,
+              "ece": 7.001426361143346e-05
+            },
+            "raid-attacks/mpt/number": {
+              "n": 25,
+              "errors": 0,
+              "mean_p": 0.99990142113623,
+              "loss": 9.859922858314042e-05,
+              "ece": 9.857886376991587e-05
+            },
+            "raid-attacks/mpt/paraphrase": {
+              "n": 26,
+              "errors": 0,
+              "mean_p": 0.9957390998838224,
+              "loss": 0.004373185171311725,
+              "ece": 0.004260900116177626
+            },
+            "raid-attacks/mpt/perplexity_misspelling": {
+              "n": 29,
+              "errors": 0,
+              "mean_p": 0.999755138009373,
+              "loss": 0.0002450536977654961,
+              "ece": 0.00024486199062696785
+            },
+            "raid-attacks/mpt/synonym": {
+              "n": 23,
+              "errors": 0,
+              "mean_p": 0.9998136955854855,
+              "loss": 0.00018636661691869257,
+              "ece": 0.00018630441451449465
+            },
+            "raid/chatgpt/none": {
+              "n": 132,
+              "errors": 0,
+              "mean_p": 0.9998808285769177,
+              "loss": 0.00011968038682421424,
+              "ece": 0.0001191714230823364
+            },
+            "raid/cohere-chat/none": {
+              "n": 125,
+              "errors": 5,
+              "mean_p": 0.954753870324431,
+              "loss": 0.11525220586796558,
+              "ece": 0.045246129675569124
+            },
+            "raid/cohere/none": {
+              "n": 101,
+              "errors": 1,
+              "mean_p": 0.9767254082979716,
+              "loss": 0.06892509875550577,
+              "ece": 0.023274591702028488
+            },
+            "raid/gpt2/none": {
+              "n": 109,
+              "errors": 2,
+              "mean_p": 0.9775981489254464,
+              "loss": 0.041405944883662366,
+              "ece": 0.02240185107455368
+            },
+            "raid/gpt3/none": {
+              "n": 87,
+              "errors": 0,
+              "mean_p": 0.9960789758071982,
+              "loss": 0.004082752555030391,
+              "ece": 0.003921024192801933
+            },
+            "raid/gpt4/none": {
+              "n": 121,
+              "errors": 0,
+              "mean_p": 0.9996811538303924,
+              "loss": 0.00032092892851259044,
+              "ece": 0.0003188461696075679
+            },
+            "raid/human/none": {
+              "n": 182,
+              "errors": 1,
+              "mean_p": 0.022807018890398177,
+              "loss": 0.03402919726035081,
+              "ece": 0.022807018890398177
+            },
+            "raid/llama-chat/none": {
+              "n": 117,
+              "errors": 1,
+              "mean_p": 0.9917245432997247,
+              "loss": 0.018945644709136886,
+              "ece": 0.008275456700275224
+            },
+            "raid/mistral-chat/none": {
+              "n": 131,
+              "errors": 0,
+              "mean_p": 0.9999394062187992,
+              "loss": 6.0608280475667614e-05,
+              "ece": 6.0593781200935796e-05
+            },
+            "raid/mistral/none": {
+              "n": 108,
+              "errors": 1,
+              "mean_p": 0.9838284367476027,
+              "loss": 0.04424953115236073,
+              "ece": 0.016171563252397502
+            },
+            "raid/mpt-chat/none": {
+              "n": 130,
+              "errors": 0,
+              "mean_p": 0.9991895616614753,
+              "loss": 0.0008236644264173683,
+              "ece": 0.0008104383385247694
+            },
+            "raid/mpt/none": {
+              "n": 139,
+              "errors": 0,
+              "mean_p": 0.9917582116293925,
+              "loss": 0.008932808025068545,
+              "ece": 0.008241788370607456
+            }
+          },
+          "rewrite_by_family": {
+            "gpt2": {
+              "n": 58,
+              "errors": 1,
+              "mean_p": 0.9777314996693001,
+              "loss": 0.031079165208519506,
+              "ece": 0.022268500330700026
+            },
+            "llama-chat": {
+              "n": 47,
+              "errors": 0,
+              "mean_p": 0.9997868668424663,
+              "loss": 0.00021334822581205588,
+              "ece": 0.00021313315753375092
+            },
+            "mistral": {
+              "n": 49,
+              "errors": 0,
+              "mean_p": 0.998347022296481,
+              "loss": 0.0016962065616601002,
+              "ece": 0.0016529777035191385
+            },
+            "mistral-chat": {
+              "n": 9,
+              "errors": 0,
+              "mean_p": 0.9999716284060344,
+              "loss": 2.837219369053461e-05,
+              "ece": 2.8371593965650613e-05
+            },
+            "mpt": {
+              "n": 49,
+              "errors": 0,
+              "mean_p": 0.9976516652131745,
+              "loss": 0.002407943809045608,
+              "ece": 0.002348334786825544
+            },
+            "mpt-chat": {
+              "n": 9,
+              "errors": 0,
+              "mean_p": 0.9998109201967424,
+              "loss": 0.00018912175234598444,
+              "ece": 0.0001890798032575278
+            }
+          }
+        },
+        "expanded": {
+          "subgroups": {
+            "pooled": {
+              "n": 2772,
+              "errors": 17,
+              "mean_p": 0.7331871329597385,
+              "loss": 0.018978734413600547,
+              "ece": 0.0029405621899541786
+            },
+            "paraphrase": {
+              "n": 91,
+              "errors": 0,
+              "mean_p": 0.9968570515017082,
+              "loss": 0.003223972573737821,
+              "ece": 0.0031429484982917586
+            },
+            "synonym": {
+              "n": 130,
+              "errors": 0,
+              "mean_p": 0.999837251114788,
+              "loss": 0.0001628575815731858,
+              "ece": 0.00016274888521194877
+            },
+            "rewrite": {
+              "n": 221,
+              "errors": 0,
+              "mean_p": 0.9986101100976376,
+              "loss": 0.0014233166959939177,
+              "ece": 0.0013898899023624587
+            },
+            "all_attacks": {
+              "n": 733,
+              "errors": 0,
+              "mean_p": 0.9990437367398703,
+              "loss": 0.0010116382327737552,
+              "ece": 0.0009562632601295242
+            },
+            "clean_machine": {
+              "n": 1300,
+              "errors": 9,
+              "mean_p": 0.990906229092866,
+              "loss": 0.024552725538435446,
+              "ece": 0.009093770907134143
+            },
+            "human": {
+              "n": 739,
+              "errors": 8,
+              "mean_p": 0.01612662478125107,
+              "loss": 0.026994557198797654,
+              "ece": 0.016126624781251063
+            }
+          },
+          "auroc": 0.9996678618758017,
+          "macro_loss_n5": 0.008075930126623564,
+          "worst_ece_n5": 0.03488835497180114,
+          "small_cells": 7,
+          "small_rows": 16,
+          "small_errors": 0,
+          "cells": {
+            "asap/human/none": {
+              "n": 390,
+              "errors": 2,
+              "mean_p": 0.009533943960024464,
+              "loss": 0.015072935521003531,
+              "ece": 0.009533943960024467
+            },
+            "ellipse/human/none": {
+              "n": 167,
+              "errors": 1,
+              "mean_p": 0.011075790203995142,
+              "loss": 0.014226739438008966,
+              "ece": 0.011075790203995144
+            },
+            "raid-attacks/gpt2/alternative_spelling": {
+              "n": 28,
+              "errors": 0,
+              "mean_p": 0.9992833104496089,
+              "loss": 0.0007192431437710068,
+              "ece": 0.0007166895503909754
+            },
+            "raid-attacks/gpt2/article_deletion": {
+              "n": 31,
+              "errors": 0,
+              "mean_p": 0.9994024457359724,
+              "loss": 0.0005989720724055078,
+              "ece": 0.0005975542640274793
+            },
+            "raid-attacks/gpt2/homoglyph": {
+              "n": 7,
+              "errors": 0,
+              "mean_p": 0.9982853786152821,
+              "loss": 0.0017175595939542055,
+              "ece": 0.0017146213847178166
+            },
+            "raid-attacks/gpt2/insert_paragraphs": {
+              "n": 2,
+              "errors": 0,
+              "mean_p": 0.999971120119025,
+              "loss": 2.888070009719388e-05,
+              "ece": 2.887988097499683e-05
+            },
+            "raid-attacks/gpt2/number": {
+              "n": 21,
+              "errors": 0,
+              "mean_p": 0.999984042364123,
+              "loss": 1.5957966956876362e-05,
+              "ece": 1.5957635877150183e-05
+            },
+            "raid-attacks/gpt2/paraphrase": {
+              "n": 27,
+              "errors": 0,
+              "mean_p": 0.9933994111753316,
+              "loss": 0.006793784867636537,
+              "ece": 0.006600588824668457
+            },
+            "raid-attacks/gpt2/perplexity_misspelling": {
+              "n": 26,
+              "errors": 0,
+              "mean_p": 0.9908903059215882,
+              "loss": 0.01037185933500025,
+              "ece": 0.009109694078411805
+            },
+            "raid-attacks/gpt2/synonym": {
+              "n": 31,
+              "errors": 0,
+              "mean_p": 0.9998638267121479,
+              "loss": 0.00013622048471368593,
+              "ece": 0.00013617328785192438
+            },
+            "raid-attacks/llama-chat/alternative_spelling": {
+              "n": 23,
+              "errors": 0,
+              "mean_p": 0.9999937848443693,
+              "loss": 6.2152451538700375e-06,
+              "ece": 6.215155630600431e-06
+            },
+            "raid-attacks/llama-chat/article_deletion": {
+              "n": 25,
+              "errors": 0,
+              "mean_p": 0.9999642855511978,
+              "loss": 3.571739359175091e-05,
+              "ece": 3.57144488022243e-05
+            },
+            "raid-attacks/llama-chat/homoglyph": {
+              "n": 5,
+              "errors": 0,
+              "mean_p": 0.9979623338169684,
+              "loss": 0.0020397630722202528,
+              "ece": 0.0020376661830316055
+            },
+            "raid-attacks/llama-chat/number": {
+              "n": 15,
+              "errors": 0,
+              "mean_p": 0.9999995026457171,
+              "loss": 4.973550866157743e-07,
+              "ece": 4.973542829652307e-07
+            },
+            "raid-attacks/llama-chat/paraphrase": {
+              "n": 22,
+              "errors": 0,
+              "mean_p": 0.9999832050119799,
+              "loss": 1.6795660960409737e-05,
+              "ece": 1.6794988020127104e-05
+            },
+            "raid-attacks/llama-chat/perplexity_misspelling": {
+              "n": 25,
+              "errors": 0,
+              "mean_p": 0.9999892418446334,
+              "loss": 1.0758528266233886e-05,
+              "ece": 1.075815536646374e-05
+            },
+            "raid-attacks/llama-chat/synonym": {
+              "n": 25,
+              "errors": 0,
+              "mean_p": 0.9996947997973474,
+              "loss": 0.00030546581749790486,
+              "ece": 0.00030520020265246473
+            },
+            "raid-attacks/mistral-chat/alternative_spelling": {
+              "n": 5,
+              "errors": 0,
+              "mean_p": 0.9999970435761913,
+              "loss": 2.956430720027047e-06,
+              "ece": 2.956423808608832e-06
+            },
+            "raid-attacks/mistral-chat/article_deletion": {
+              "n": 3,
+              "errors": 0,
+              "mean_p": 0.9996102916579979,
+              "loss": 0.0003899328717149077,
+              "ece": 0.0003897083420021004
+            },
+            "raid-attacks/mistral-chat/homoglyph": {
+              "n": 1,
+              "errors": 0,
+              "mean_p": 0.9983700072688936,
+              "loss": 0.001631322614588225,
+              "ece": 0.0016299927311064222
+            },
+            "raid-attacks/mistral-chat/number": {
+              "n": 3,
+              "errors": 0,
+              "mean_p": 0.9999988152486831,
+              "loss": 1.1847523354911176e-06,
+              "ece": 1.1847513169035058e-06
+            },
+            "raid-attacks/mistral-chat/paraphrase": {
+              "n": 3,
+              "errors": 0,
+              "mean_p": 0.9999942574705866,
+              "loss": 5.742549420883563e-06,
+              "ece": 5.742529413506799e-06
+            },
+            "raid-attacks/mistral-chat/perplexity_misspelling": {
+              "n": 5,
+              "errors": 0,
+              "mean_p": 0.9999942884099642,
+              "loss": 5.7116199860835725e-06,
+              "ece": 5.711590035861747e-06
+            },
+            "raid-attacks/mistral-chat/synonym": {
+              "n": 6,
+              "errors": 0,
+              "mean_p": 0.9999775361576543,
+              "loss": 2.246419858869477e-05,
+              "ece": 2.2463842345647283e-05
+            },
+            "raid-attacks/mistral/alternative_spelling": {
+              "n": 28,
+              "errors": 0,
+              "mean_p": 0.9999756312117822,
+              "loss": 2.436974056997543e-05,
+              "ece": 2.436878821786876e-05
+            },
+            "raid-attacks/mistral/article_deletion": {
+              "n": 28,
+              "errors": 0,
+              "mean_p": 0.9999077395146417,
+              "loss": 9.22850605881646e-05,
+              "ece": 9.226048535829598e-05
+            },
+            "raid-attacks/mistral/homoglyph": {
+              "n": 7,
+              "errors": 0,
+              "mean_p": 0.9982922995708011,
+              "loss": 0.0017095044396910756,
+              "ece": 0.0017077004291987821
+            },
+            "raid-attacks/mistral/insert_paragraphs": {
+              "n": 2,
+              "errors": 0,
+              "mean_p": 0.9999746387112034,
+              "loss": 2.5361922646292626e-05,
+              "ece": 2.536128879665478e-05
+            },
+            "raid-attacks/mistral/number": {
+              "n": 29,
+              "errors": 0,
+              "mean_p": 0.9999519691882008,
+              "loss": 4.804333041955987e-05,
+              "ece": 4.803081179928647e-05
+            },
+            "raid-attacks/mistral/paraphrase": {
+              "n": 13,
+              "errors": 0,
+              "mean_p": 0.9997815821269689,
+              "loss": 0.0002184840170365659,
+              "ece": 0.0002184178730311096
+            },
+            "raid-attacks/mistral/perplexity_misspelling": {
+              "n": 28,
+              "errors": 0,
+              "mean_p": 0.9998571120238674,
+              "loss": 0.00014293478365190484,
+              "ece": 0.00014288797613261152
+            },
+            "raid-attacks/mistral/synonym": {
+              "n": 36,
+              "errors": 0,
+              "mean_p": 0.9998288555711642,
+              "loss": 0.00017129658216409886,
+              "ece": 0.0001711444288360712
+            },
+            "raid-attacks/mpt-chat/alternative_spelling": {
+              "n": 11,
+              "errors": 0,
+              "mean_p": 0.9999508528132807,
+              "loss": 4.914967673319773e-05,
+              "ece": 4.9147186719444846e-05
+            },
+            "raid-attacks/mpt-chat/article_deletion": {
+              "n": 5,
+              "errors": 0,
+              "mean_p": 0.9999626097722555,
+              "loss": 3.739121107493118e-05,
+              "ece": 3.7390227744604763e-05
+            },
+            "raid-attacks/mpt-chat/homoglyph": {
+              "n": 10,
+              "errors": 0,
+              "mean_p": 0.997937339369812,
+              "loss": 0.002065291116927908,
+              "ece": 0.0020626606301879734
+            },
+            "raid-attacks/mpt-chat/number": {
+              "n": 2,
+              "errors": 0,
+              "mean_p": 0.9999608218884537,
+              "loss": 3.917910006594895e-05,
+              "ece": 3.917811154635631e-05
+            },
+            "raid-attacks/mpt-chat/perplexity_misspelling": {
+              "n": 10,
+              "errors": 0,
+              "mean_p": 0.9999360503361243,
+              "loss": 6.395330356009296e-05,
+              "ece": 6.394966387573975e-05
+            },
+            "raid-attacks/mpt-chat/synonym": {
+              "n": 9,
+              "errors": 0,
+              "mean_p": 0.9999264201617272,
+              "loss": 7.358603955977485e-05,
+              "ece": 7.357983827284266e-05
+            },
+            "raid-attacks/mpt/alternative_spelling": {
+              "n": 23,
+              "errors": 0,
+              "mean_p": 0.9999847221974651,
+              "loss": 1.5278527935639678e-05,
+              "ece": 1.527780253507416e-05
+            },
+            "raid-attacks/mpt/article_deletion": {
+              "n": 25,
+              "errors": 0,
+              "mean_p": 0.9997159592049926,
+              "loss": 0.00028437566670630693,
+              "ece": 0.0002840407950074164
+            },
+            "raid-attacks/mpt/homoglyph": {
+              "n": 11,
+              "errors": 0,
+              "mean_p": 0.9968824745524106,
+              "loss": 0.003133801783447686,
+              "ece": 0.0031175254475893544
+            },
+            "raid-attacks/mpt/insert_paragraphs": {
+              "n": 14,
+              "errors": 0,
+              "mean_p": 0.9999909237090334,
+              "loss": 9.076525741541296e-06,
+              "ece": 9.076290966691936e-06
+            },
+            "raid-attacks/mpt/number": {
+              "n": 25,
+              "errors": 0,
+              "mean_p": 0.9999602405605854,
+              "loss": 3.976321416059666e-05,
+              "ece": 3.9759439414668304e-05
+            },
+            "raid-attacks/mpt/paraphrase": {
+              "n": 26,
+              "errors": 0,
+              "mean_p": 0.9959782205613685,
+              "loss": 0.004104703398964929,
+              "ece": 0.004021779438631305
+            },
+            "raid-attacks/mpt/perplexity_misspelling": {
+              "n": 29,
+              "errors": 0,
+              "mean_p": 0.9997935274473008,
+              "loss": 0.00020677310085466148,
+              "ece": 0.00020647255269916006
+            },
+            "raid-attacks/mpt/synonym": {
+              "n": 23,
+              "errors": 0,
+              "mean_p": 0.9998979227369041,
+              "loss": 0.00010209863632454652,
+              "ece": 0.00010207726309582767
+            },
+            "raid/chatgpt/none": {
+              "n": 132,
+              "errors": 0,
+              "mean_p": 0.999957787199098,
+              "loss": 4.224798908356687e-05,
+              "ece": 4.221280090203768e-05
+            },
+            "raid/cohere-chat/none": {
+              "n": 125,
+              "errors": 4,
+              "mean_p": 0.9682177896760591,
+              "loss": 0.09241569880129359,
+              "ece": 0.03178221032394085
+            },
+            "raid/cohere/none": {
+              "n": 101,
+              "errors": 1,
+              "mean_p": 0.9815232141419922,
+              "loss": 0.07430758811176816,
+              "ece": 0.018476785858007785
+            },
+            "raid/gpt2/none": {
+              "n": 109,
+              "errors": 2,
+              "mean_p": 0.9758956532402923,
+              "loss": 0.0664273924866552,
+              "ece": 0.024104346759707837
+            },
+            "raid/gpt3/none": {
+              "n": 87,
+              "errors": 0,
+              "mean_p": 0.9952823621897812,
+              "loss": 0.005084897222172724,
+              "ece": 0.0047176378102188905
+            },
+            "raid/gpt4/none": {
+              "n": 121,
+              "errors": 0,
+              "mean_p": 0.9996997101770662,
+              "loss": 0.00030387477709757583,
+              "ece": 0.0003002898229339175
+            },
+            "raid/human/none": {
+              "n": 182,
+              "errors": 5,
+              "mean_p": 0.03488835497180114,
+              "loss": 0.06425641445369557,
+              "ece": 0.03488835497180114
+            },
+            "raid/llama-chat/none": {
+              "n": 117,
+              "errors": 1,
+              "mean_p": 0.9935519922631296,
+              "loss": 0.01176110686396631,
+              "ece": 0.0064480077368703845
+            },
+            "raid/mistral-chat/none": {
+              "n": 131,
+              "errors": 0,
+              "mean_p": 0.9999660388330717,
+              "loss": 3.397031883957851e-05,
+              "ece": 3.3961166928297386e-05
+            },
+            "raid/mistral/none": {
+              "n": 108,
+              "errors": 1,
+              "mean_p": 0.988959604369775,
+              "loss": 0.024641026567807204,
+              "ece": 0.011040395630224967
+            },
+            "raid/mpt-chat/none": {
+              "n": 130,
+              "errors": 0,
+              "mean_p": 0.9995070272233464,
+              "loss": 0.0005031943986726315,
+              "ece": 0.0004929727766537576
+            },
+            "raid/mpt/none": {
+              "n": 139,
+              "errors": 0,
+              "mean_p": 0.9936119419753886,
+              "loss": 0.007403246565114071,
+              "ece": 0.006388058024611478
+            }
+          },
+          "rewrite_by_family": {
+            "gpt2": {
+              "n": 58,
+              "errors": 0,
+              "mean_p": 0.9968545298243197,
+              "loss": 0.003235431490557082,
+              "ece": 0.00314547017568031
+            },
+            "llama-chat": {
+              "n": 47,
+              "errors": 0,
+              "mean_p": 0.9998297979829203,
+              "loss": 0.00017034361656546035,
+              "ece": 0.00017020201707988115
+            },
+            "mistral": {
+              "n": 49,
+              "errors": 0,
+              "mean_p": 0.9998163136369896,
+              "loss": 0.00018381569753842683,
+              "ece": 0.00018368636301026507
+            },
+            "mistral-chat": {
+              "n": 9,
+              "errors": 0,
+              "mean_p": 0.9999831099286318,
+              "loss": 1.68903155327577e-05,
+              "ece": 1.689007136826712e-05
+            },
+            "mpt": {
+              "n": 49,
+              "errors": 0,
+              "mean_p": 0.9978180807662118,
+              "loss": 0.002225929734868423,
+              "ece": 0.0021819192337881217
+            },
+            "mpt-chat": {
+              "n": 9,
+              "errors": 0,
+              "mean_p": 0.9999264201617272,
+              "loss": 7.358603955977485e-05,
+              "ece": 7.357983827284266e-05
+            }
+          }
+        },
+        "paired_95_delta": {
+          "auc": [
+            -0.00010518610954352581,
+            0.0001545289302456953
+          ],
+          "ece": [
+            -0.0037233988614962864,
+            0.0008741954818311021
+          ],
+          "macro_loss_n5": [
+            -0.003588476178866382,
+            0.0004413760194367687
+          ],
+          "worst_ece_n5": [
+            -0.06902129037121706,
+            0.011354091388754812
+          ],
+          "pooled_loss": [
+            -0.006645780023841299,
+            0.0016050016777932011
+          ],
+          "paraphrase_loss": [
+            -0.04425193028205015,
+            -0.0012878634838711007
+          ],
+          "paraphrase_err_rate": [
+            -0.03661311914323962,
+            0.0
+          ],
+          "rewrite_loss": [
+            -0.01803807276119726,
+            -0.0005571401449798134
+          ],
+          "rewrite_err_rate": [
+            -0.014782323820617355,
+            0.0
+          ],
+          "all_attacks_loss": [
+            -0.005447191320649494,
+            -9.232184690930108e-05
+          ],
+          "all_attacks_err_rate": [
+            -0.004450762155579102,
+            0.0
+          ],
+          "clean_machine_loss": [
+            -0.008248266796667566,
+            0.0038644325067987233
+          ],
+          "clean_machine_err_rate": [
+            -0.002432263098165311,
+            0.0
+          ],
+          "human_loss": [
+            -0.014336492292887245,
+            0.008514680306151054
+          ],
+          "human_err_rate": [
+            -0.005594606421968164,
+            0.008170954144561964
+          ]
+        }
+      }
+    },
+    "new_sources_only": {
+      "n": 372,
+      "source_groups": 320,
+      "document_sha": "d5785839bdfe7ad16d91d500d5cc357cc751522a19f1cc8c0477ce37ed825f08",
+      "group_sha": "35f6d445fdc625888a06cb331ab881f890e88a2afa6e012684e83db589901b3a",
+      "logistic": {
+        "original": {
+          "subgroups": {
+            "pooled": {
+              "n": 372,
+              "errors": 6,
+              "mean_p": 0.4480750540029457,
+              "loss": 0.0335899406468728,
+              "ece": 0.010552706186729637
+            },
+            "paraphrase": {
+              "n": 0,
+              "errors": 0,
+              "mean_p": null,
+              "loss": null,
+              "ece": null
+            },
+            "synonym": {
+              "n": 0,
+              "errors": 0,
+              "mean_p": null,
+              "loss": null,
+              "ece": null
+            },
+            "rewrite": {
+              "n": 0,
+              "errors": 0,
+              "mean_p": null,
+              "loss": null,
+              "ece": null
+            },
+            "all_attacks": {
+              "n": 3,
+              "errors": 0,
+              "mean_p": 0.9999003012975057,
+              "loss": 9.970384350415902e-05,
+              "ece": 9.969870249430339e-05
+            },
+            "clean_machine": {
+              "n": 164,
+              "errors": 4,
+              "mean_p": 0.9762255200525609,
+              "loss": 0.0497622452542931,
+              "ece": 0.023774479947439055
+            },
+            "human": {
+              "n": 205,
+              "errors": 2,
+              "mean_p": 0.017479189739430648,
+              "loss": 0.02114219798732733,
+              "ece": 0.017479189739430648
+            }
+          },
+          "auroc": 0.9990652840660144,
+          "macro_loss_n5": 0.048522057065825054,
+          "worst_ece_n5": 0.10058257728815079,
+          "small_cells": 3,
+          "small_rows": 3,
+          "small_errors": 0,
+          "cells": {
+            "asap/human/none": {
+              "n": 205,
+              "errors": 2,
+              "mean_p": 0.017479189739430648,
+              "loss": 0.02114219798732733,
+              "ece": 0.017479189739430648
+            },
+            "raid-attacks/gpt2/alternative_spelling": {
+              "n": 1,
+              "errors": 0,
+              "mean_p": 0.999881386756897,
+              "loss": 0.00011862027821005712,
+              "ece": 0.00011861324310302734
+            },
+            "raid-attacks/gpt2/number": {
+              "n": 1,
+              "errors": 0,
+              "mean_p": 0.9998941421508789,
+              "loss": 0.00010586345245864569,
+              "ece": 0.00010585784912109375
+            },
+            "raid-attacks/mistral/perplexity_misspelling": {
+              "n": 1,
+              "errors": 0,
+              "mean_p": 0.9999253749847412,
+              "loss": 7.462779984377424e-05,
+              "ece": 7.462501525878906e-05
+            },
+            "raid/chatgpt/none": {
+              "n": 12,
+              "errors": 0,
+              "mean_p": 0.9999273469050726,
+              "loss": 7.265718672778031e-05,
+              "ece": 7.26530949274699e-05
+            },
+            "raid/cohere-chat/none": {
+              "n": 12,
+              "errors": 1,
+              "mean_p": 0.9145089313387871,
+              "loss": 0.2855434932785769,
+              "ece": 0.08549106866121292
+            },
+            "raid/cohere/none": {
+              "n": 8,
+              "errors": 0,
+              "mean_p": 0.9886660799384117,
+              "loss": 0.011559911009355765,
+              "ece": 0.011333920061588287
+            },
+            "raid/gpt2/none": {
+              "n": 15,
+              "errors": 0,
+              "mean_p": 0.9960083166758219,
+              "loss": 0.004038462837737045,
+              "ece": 0.00399168332417806
+            },
+            "raid/gpt3/none": {
+              "n": 8,
+              "errors": 0,
+              "mean_p": 0.9989265501499176,
+              "loss": 0.0010744865667723683,
+              "ece": 0.0010734498500823975
+            },
+            "raid/gpt4/none": {
+              "n": 19,
+              "errors": 0,
+              "mean_p": 0.9995972576894259,
+              "loss": 0.00040308297784145286,
+              "ece": 0.0004027423105741802
+            },
+            "raid/llama-chat/none": {
+              "n": 13,
+              "errors": 0,
+              "mean_p": 0.993760333611415,
+              "loss": 0.006479403308995593,
+              "ece": 0.006239666388585017
+            },
+            "raid/mistral-chat/none": {
+              "n": 11,
+              "errors": 0,
+              "mean_p": 0.9978370883248069,
+              "loss": 0.0021857215966931275,
+              "ece": 0.002162911675193093
+            },
+            "raid/mistral/none": {
+              "n": 16,
+              "errors": 2,
+              "mean_p": 0.8994174227118492,
+              "loss": 0.192320758862595,
+              "ece": 0.10058257728815079
+            },
+            "raid/mpt-chat/none": {
+              "n": 26,
+              "errors": 0,
+              "mean_p": 0.9998859740220584,
+              "loss": 0.00011408686478926478,
+              "ece": 0.00011402597794165977
+            },
+            "raid/mpt/none": {
+              "n": 24,
+              "errors": 1,
+              "mean_p": 0.9588220777610937,
+              "loss": 0.05733042231248892,
+              "ece": 0.04117792223890623
+            }
+          },
+          "rewrite_by_family": {}
+        },
+        "expanded": {
+          "subgroups": {
+            "pooled": {
+              "n": 372,
+              "errors": 1,
+              "mean_p": 0.44790943657944315,
+              "loss": 0.01855737170458938,
+              "ece": 0.007321657131986841
+            },
+            "paraphrase": {
+              "n": 0,
+              "errors": 0,
+              "mean_p": null,
+              "loss": null,
+              "ece": null
+            },
+            "synonym": {
+              "n": 0,
+              "errors": 0,
+              "mean_p": null,
+              "loss": null,
+              "ece": null
+            },
+            "rewrite": {
+              "n": 0,
+              "errors": 0,
+              "mean_p": null,
+              "loss": null,
+              "ece": null
+            },
+            "all_attacks": {
+              "n": 3,
+              "errors": 0,
+              "mean_p": 0.9998827775319418,
+              "loss": 0.00011722943185494003,
+              "ece": 0.00011722246805826823
+            },
+            "clean_machine": {
+              "n": 164,
+              "errors": 1,
+              "mean_p": 0.985450192786208,
+              "loss": 0.02821286832177179,
+              "ece": 0.014549807213791987
+            },
+            "human": {
+              "n": 205,
+              "errors": 0,
+              "mean_p": 0.009799172965945978,
+              "loss": 0.011102830151420055,
+              "ece": 0.009799172965945978
+            }
+          },
+          "auroc": 0.9997663210165035,
+          "macro_loss_n5": 0.0288400225468558,
+          "worst_ece_n5": 0.08183731324970722,
+          "small_cells": 3,
+          "small_rows": 3,
+          "small_errors": 0,
+          "cells": {
+            "asap/human/none": {
+              "n": 205,
+              "errors": 0,
+              "mean_p": 0.009799172965945978,
+              "loss": 0.011102830151420055,
+              "ece": 0.009799172965945978
+            },
+            "raid-attacks/gpt2/alternative_spelling": {
+              "n": 1,
+              "errors": 0,
+              "mean_p": 0.9998681545257568,
+              "loss": 0.00013185416662174552,
+              "ece": 0.00013184547424316406
+            },
+            "raid-attacks/gpt2/number": {
+              "n": 1,
+              "errors": 0,
+              "mean_p": 0.9998792409896851,
+              "loss": 0.00012076630227127972,
+              "ece": 0.0001207590103149414
+            },
+            "raid-attacks/mistral/perplexity_misspelling": {
+              "n": 1,
+              "errors": 0,
+              "mean_p": 0.9999009370803833,
+              "loss": 9.906782667179485e-05,
+              "ece": 9.906291961669922e-05
+            },
+            "raid/chatgpt/none": {
+              "n": 12,
+              "errors": 0,
+              "mean_p": 0.999931255976359,
+              "loss": 6.87508824970061e-05,
+              "ece": 6.874402364095052e-05
+            },
+            "raid/cohere-chat/none": {
+              "n": 12,
+              "errors": 1,
+              "mean_p": 0.9181626867502928,
+              "loss": 0.24439111755545959,
+              "ece": 0.08183731324970722
+            },
+            "raid/cohere/none": {
+              "n": 8,
+              "errors": 0,
+              "mean_p": 0.9966267719864845,
+              "loss": 0.0033860180070125496,
+              "ece": 0.0033732280135154724
+            },
+            "raid/gpt2/none": {
+              "n": 15,
+              "errors": 0,
+              "mean_p": 0.9978331804275513,
+              "loss": 0.0021799023875513257,
+              "ece": 0.0021668195724487303
+            },
+            "raid/gpt3/none": {
+              "n": 8,
+              "errors": 0,
+              "mean_p": 0.9988770335912704,
+              "loss": 0.0011246301146231842,
+              "ece": 0.0011229664087295532
+            },
+            "raid/gpt4/none": {
+              "n": 19,
+              "errors": 0,
+              "mean_p": 0.9996373465186671,
+              "loss": 0.0003630462296261504,
+              "ece": 0.0003626534813328793
+            },
+            "raid/llama-chat/none": {
+              "n": 13,
+              "errors": 0,
+              "mean_p": 0.9988868649189289,
+              "loss": 0.0011170580366319002,
+              "ece": 0.00111313508107112
+            },
+            "raid/mistral-chat/none": {
+              "n": 11,
+              "errors": 0,
+              "mean_p": 0.9969171773303639,
+              "loss": 0.0031324990285855887,
+              "ece": 0.0030828226696361194
+            },
+            "raid/mistral/none": {
+              "n": 16,
+              "errors": 0,
+              "mean_p": 0.9641844742000103,
+              "loss": 0.041567653060244555,
+              "ece": 0.0358155257999897
+            },
+            "raid/mpt-chat/none": {
+              "n": 26,
+              "errors": 0,
+              "mean_p": 0.9999368511713468,
+              "loss": 6.316450222358552e-05,
+              "ece": 6.314882865318886e-05
+            },
+            "raid/mpt/none": {
+              "n": 24,
+              "errors": 0,
+              "mean_p": 0.970630777378877,
+              "loss": 0.0375836006063941,
+              "ece": 0.029369222621122997
+            }
+          },
+          "rewrite_by_family": {}
+        },
+        "paired_95_delta": {
+          "auc": [
+            0.0,
+            0.0018423473862742364
+          ],
+          "ece": [
+            -0.00946878159757066,
+            -0.00037169345939660223
+          ],
+          "macro_loss_n5": [
+            -0.03952831632569487,
+            -0.0029052530915082914
+          ],
+          "worst_ece_n5": [
+            -0.14636729145629535,
+            -0.0021223407988953864
+          ],
+          "pooled_loss": [
+            -0.025440735624324105,
+            -0.00582834713637971
+          ],
+          "paraphrase_loss": null,
+          "paraphrase_err_rate": null,
+          "rewrite_loss": null,
+          "rewrite_err_rate": null,
+          "all_attacks_loss": [
+            1.7525588350781013e-05,
+            1.7525588350781013e-05
+          ],
+          "all_attacks_err_rate": [
+            0.0,
+            0.0
+          ],
+          "clean_machine_loss": [
+            -0.04362554539396265,
+            -0.002830330924513647
+          ],
+          "clean_machine_err_rate": [
+            -0.04170252824098978,
+            0.0
+          ],
+          "human_loss": [
+            -0.019089758082790224,
+            -0.0038806153038569977
+          ],
+          "human_err_rate": [
+            -0.0251998730964467,
+            0.0
+          ]
+        }
+      },
+      "svm": {
+        "original": {
+          "subgroups": {
+            "pooled": {
+              "n": 372,
+              "errors": 3,
+              "mean_p": 0.4527478729524848,
+              "loss": 0.02749555914931875,
+              "ece": 0.008696391026213257
+            },
+            "paraphrase": {
+              "n": 0,
+              "errors": 0,
+              "mean_p": null,
+              "loss": null,
+              "ece": null
+            },
+            "synonym": {
+              "n": 0,
+              "errors": 0,
+              "mean_p": null,
+              "loss": null,
+              "ece": null
+            },
+            "rewrite": {
+              "n": 0,
+              "errors": 0,
+              "mean_p": null,
+              "loss": null,
+              "ece": null
+            },
+            "all_attacks": {
+              "n": 3,
+              "errors": 0,
+              "mean_p": 0.9999864132960501,
+              "loss": 1.3586957168769078e-05,
+              "ece": 1.3586703949908241e-05
+            },
+            "clean_machine": {
+              "n": 164,
+              "errors": 1,
+              "mean_p": 0.9894522882880445,
+              "loss": 0.021961060414604012,
+              "ece": 0.010547711711955482
+            },
+            "human": {
+              "n": 205,
+              "errors": 2,
+              "mean_p": 0.015375971800960479,
+              "loss": 0.03232533333990249,
+              "ece": 0.015375971800960477
+            }
+          },
+          "auroc": 0.9997079012706295,
+          "macro_loss_n5": 0.02601378137456001,
+          "worst_ece_n5": 0.07724226773839066,
+          "small_cells": 3,
+          "small_rows": 3,
+          "small_errors": 0,
+          "cells": {
+            "asap/human/none": {
+              "n": 205,
+              "errors": 2,
+              "mean_p": 0.015375971800960479,
+              "loss": 0.03232533333990249,
+              "ece": 0.015375971800960477
+            },
+            "raid-attacks/gpt2/alternative_spelling": {
+              "n": 1,
+              "errors": 0,
+              "mean_p": 0.9999991020087712,
+              "loss": 8.97991632015314e-07,
+              "ece": 8.979912288209491e-07
+            },
+            "raid-attacks/gpt2/number": {
+              "n": 1,
+              "errors": 0,
+              "mean_p": 0.9999990948828869,
+              "loss": 9.051175227667433e-07,
+              "ece": 9.051171131480018e-07
+            },
+            "raid-attacks/mistral/perplexity_misspelling": {
+              "n": 1,
+              "errors": 0,
+              "mean_p": 0.9999610429964922,
+              "loss": 3.8957762351525176e-05,
+              "ece": 3.895700350775577e-05
+            },
+            "raid/chatgpt/none": {
+              "n": 12,
+              "errors": 0,
+              "mean_p": 0.9999977186299088,
+              "loss": 2.28137645926763e-06,
+              "ece": 2.2813700912468113e-06
+            },
+            "raid/cohere-chat/none": {
+              "n": 12,
+              "errors": 1,
+              "mean_p": 0.9227577322616093,
+              "loss": 0.21634269644088722,
+              "ece": 0.07724226773839066
+            },
+            "raid/cohere/none": {
+              "n": 8,
+              "errors": 0,
+              "mean_p": 0.9995439244987808,
+              "loss": 0.00045641592174021784,
+              "ece": 0.0004560755012191636
+            },
+            "raid/gpt2/none": {
+              "n": 15,
+              "errors": 0,
+              "mean_p": 0.998163185666996,
+              "loss": 0.001845729499615327,
+              "ece": 0.0018368143330038667
+            },
+            "raid/gpt3/none": {
+              "n": 8,
+              "errors": 0,
+              "mean_p": 0.9997995440112575,
+              "loss": 0.00020050338810157056,
+              "ece": 0.00020045598874258996
+            },
+            "raid/gpt4/none": {
+              "n": 19,
+              "errors": 0,
+              "mean_p": 0.9999160898647721,
+              "loss": 8.394156455304155e-05,
+              "ece": 8.39101352279048e-05
+            },
+            "raid/llama-chat/none": {
+              "n": 13,
+              "errors": 0,
+              "mean_p": 0.9936565681623659,
+              "loss": 0.006618225177908532,
+              "ece": 0.006343431837634058
+            },
+            "raid/mistral-chat/none": {
+              "n": 11,
+              "errors": 0,
+              "mean_p": 0.9999090345054015,
+              "loss": 9.099623582914549e-05,
+              "ece": 9.096549459835563e-05
+            },
+            "raid/mistral/none": {
+              "n": 16,
+              "errors": 0,
+              "mean_p": 0.9602447152178138,
+              "loss": 0.05217671836046778,
+              "ece": 0.03975528478218615
+            },
+            "raid/mpt-chat/none": {
+              "n": 26,
+              "errors": 0,
+              "mean_p": 0.9997342542140449,
+              "loss": 0.00026588163544004155,
+              "ece": 0.0002657457859551225
+            },
+            "raid/mpt/none": {
+              "n": 24,
+              "errors": 0,
+              "mean_p": 0.9982486587210335,
+              "loss": 0.001756653553815491,
+              "ece": 0.001751341278966571
+            }
+          },
+          "rewrite_by_family": {}
+        },
+        "expanded": {
+          "subgroups": {
+            "pooled": {
+              "n": 372,
+              "errors": 2,
+              "mean_p": 0.45134253639144584,
+              "loss": 0.021705579623707356,
+              "ece": 0.005532550995147363
+            },
+            "paraphrase": {
+              "n": 0,
+              "errors": 0,
+              "mean_p": null,
+              "loss": null,
+              "ece": null
+            },
+            "synonym": {
+              "n": 0,
+              "errors": 0,
+              "mean_p": null,
+              "loss": null,
+              "ece": null
+            },
+            "rewrite": {
+              "n": 0,
+              "errors": 0,
+              "mean_p": null,
+              "loss": null,
+              "ece": null
+            },
+            "all_attacks": {
+              "n": 3,
+              "errors": 0,
+              "mean_p": 0.9999920847105176,
+              "loss": 7.915335594146097e-06,
+              "ece": 7.91528948233348e-06
+            },
+            "clean_machine": {
+              "n": 164,
+              "errors": 1,
+              "mean_p": 0.9926832829467416,
+              "loss": 0.02767934588352919,
+              "ece": 0.007316717053258597
+            },
+            "human": {
+              "n": 205,
+              "errors": 1,
+              "mean_p": 0.010240921366930176,
+              "loss": 0.017244093410310083,
+              "ece": 0.010240921366930174
+            }
+          },
+          "auroc": 0.9995326420330072,
+          "macro_loss_n5": 0.03258487310976475,
+          "worst_ece_n5": 0.08237594382244477,
+          "small_cells": 3,
+          "small_rows": 3,
+          "small_errors": 0,
+          "cells": {
+            "asap/human/none": {
+              "n": 205,
+              "errors": 1,
+              "mean_p": 0.010240921366930176,
+              "loss": 0.017244093410310083,
+              "ece": 0.010240921366930174
+            },
+            "raid-attacks/gpt2/alternative_spelling": {
+              "n": 1,
+              "errors": 0,
+              "mean_p": 0.9999958227316894,
+              "loss": 4.177277035399632e-06,
+              "ece": 4.1772683105900654e-06
+            },
+            "raid-attacks/gpt2/number": {
+              "n": 1,
+              "errors": 0,
+              "mean_p": 0.999996036079049,
+              "loss": 3.9639288073887876e-06,
+              "ece": 3.963920951033373e-06
+            },
+            "raid-attacks/mistral/perplexity_misspelling": {
+              "n": 1,
+              "errors": 0,
+              "mean_p": 0.9999843953208146,
+              "loss": 1.5604800939649868e-05,
+              "ece": 1.5604679185377002e-05
+            },
+            "raid/chatgpt/none": {
+              "n": 12,
+              "errors": 0,
+              "mean_p": 0.9999982561592905,
+              "loss": 1.743847405789283e-06,
+              "ece": 1.743840709463503e-06
+            },
+            "raid/cohere-chat/none": {
+              "n": 12,
+              "errors": 1,
+              "mean_p": 0.9176240561775554,
+              "loss": 0.3597394962072668,
+              "ece": 0.08237594382244477
+            },
+            "raid/cohere/none": {
+              "n": 8,
+              "errors": 0,
+              "mean_p": 0.9997802968756844,
+              "loss": 0.00021975951721891766,
+              "ece": 0.00021970312431569827
+            },
+            "raid/gpt2/none": {
+              "n": 15,
+              "errors": 0,
+              "mean_p": 0.9978891190668969,
+              "loss": 0.0021236354301363784,
+              "ece": 0.0021108809331028913
+            },
+            "raid/gpt3/none": {
+              "n": 8,
+              "errors": 0,
+              "mean_p": 0.9998450789781141,
+              "loss": 0.00015495118465902073,
+              "ece": 0.00015492102188589818
+            },
+            "raid/gpt4/none": {
+              "n": 19,
+              "errors": 0,
+              "mean_p": 0.9999577753821829,
+              "loss": 4.223225749009619e-05,
+              "ece": 4.222461781712209e-05
+            },
+            "raid/llama-chat/none": {
+              "n": 13,
+              "errors": 0,
+              "mean_p": 0.999464927415288,
+              "loss": 0.0005368505496482015,
+              "ece": 0.0005350725847119452
+            },
+            "raid/mistral-chat/none": {
+              "n": 11,
+              "errors": 0,
+              "mean_p": 0.999960522933053,
+              "loss": 3.9484717140514483e-05,
+              "ece": 3.947706694688731e-05
+            },
+            "raid/mistral/none": {
+              "n": 16,
+              "errors": 0,
+              "mean_p": 0.9903369994097416,
+              "loss": 0.010342501747070224,
+              "ece": 0.009663000590258417
+            },
+            "raid/mpt-chat/none": {
+              "n": 26,
+              "errors": 0,
+              "mean_p": 0.9998998683865761,
+              "loss": 0.0001001572621487122,
+              "ece": 0.00010013161342395597
+            },
+            "raid/mpt/none": {
+              "n": 24,
+              "errors": 0,
+              "mean_p": 0.999527281369123,
+              "loss": 0.0004735711866822234,
+              "ece": 0.000472718630877042
+            }
+          },
+          "rewrite_by_family": {}
+        },
+        "paired_95_delta": {
+          "auc": [
+            -0.0008288029776208517,
+            0.00020946487543078418
+          ],
+          "ece": [
+            -0.007673202164494436,
+            0.00014604108070090667
+          ],
+          "macro_loss_n5": [
+            -0.009062786838187566,
+            0.035840328034634335
+          ],
+          "worst_ece_n5": [
+            -0.05932082509688081,
+            0.01754934400493822
+          ],
+          "pooled_loss": [
+            -0.01857623522782573,
+            0.006375501603567568
+          ],
+          "paraphrase_loss": null,
+          "paraphrase_err_rate": null,
+          "rewrite_loss": null,
+          "rewrite_err_rate": null,
+          "all_attacks_loss": [
+            -5.6716215746229815e-06,
+            -5.671621574622981e-06
+          ],
+          "all_attacks_err_rate": [
+            0.0,
+            0.0
+          ],
+          "clean_machine_loss": [
+            -0.009635851786764892,
+            0.030313511321215732
+          ],
+          "clean_machine_err_rate": [
+            0.0,
+            0.0
+          ],
+          "human_loss": [
+            -0.034421453773913986,
+            -0.0020967494085259324
+          ],
+          "human_err_rate": [
+            -0.015,
+            0.0
+          ]
+        }
+      }
+    }
+  }
+}

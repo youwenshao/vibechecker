@@ -1,0 +1,624 @@
+{
+  "audit": "phase-1-expanded-guarded-probe-source-membership",
+  "scheme": "All selected pinned human originals, every split and length; casefold and collapse whitespace. Compare publisher source_id or normalized document hash when source_id is missing. Historical score values were not used.",
+  "input_manifest": {
+    "raid": {
+      "version": "train-none-2024-06-04",
+      "sha256": [
+        "c5467bca6fc7f5c728c676450c7f84ce401df6c6ccc6d82c47e3b5f3c6d6fce4"
+      ]
+    },
+    "raid-attacks": {
+      "version": "5008b2d167f74bfd4ceff6b3b0512b7097d7cbb1",
+      "sha256": [
+        "ec962e229a2bf0d1726e7ed1852be01e1b808dfb395294cbcb62307eea63c514"
+      ]
+    },
+    "asap": {
+      "version": "060ab225ca0984c0bf43ff222bf6bb2bc6195b6f",
+      "sha256": [
+        "aec01e98eb16cc3bc3828010ca053a09daecc2821dd2105f8a7333089271beb4"
+      ]
+    },
+    "ellipse": {
+      "version": "710963bbf1acf23a28e40643d9f937d06f047dd4",
+      "sha256": [
+        "782344e99668a3ff508d7410c0eb6e36da70f3b28f81c96e367f1ca04924b06c"
+      ]
+    },
+    "liang": {
+      "version": "1d05ed8242d4694a0ed7b73a79c52be8864470f9",
+      "sha256": [
+        "ca1993970a87c5e95cd1e5a90da0cec1fc85c3c3719de7d809af90bb44de1391",
+        "711b5b1adf0ca5beedb68dcf028b59298b25aaab312e4dc395e6862ae02b19de",
+        "c1e3ad86e5165c6ed650abf0e29729f8b06847737c6dd154e24e1c27d51e2cbd",
+        "86dea70272f44201446d8fa200b65cee61bb49e14b9a342a12d131709cdf7f29"
+      ]
+    }
+  },
+  "original_stack_plan_sha256": "b962ca4a703d509e02bc92c6d7fe8ae789a6c25fbed1788591183e7938f69933",
+  "original_final_doc_sha256": "01596ba9924def69ede8c8d8d22691f4384862b0d625c8d66a354f515854ba2d",
+  "source_aliases": {
+    "scheme": "normalized-human-source-aliases-v1",
+    "group_count": 200,
+    "passage_count": 98,
+    "sha256": "df5312e7d74b4973030b5c7914c25d9f93db4acc3d9de753c45a684dbea4ea8f"
+  },
+  "expanded_probe": {
+    "sampling_caps": {
+      "human": 2400,
+      "clean_machine": 640,
+      "attacked_machine": 128
+    },
+    "seed": 42,
+    "head_fold": 0,
+    "fit_document_ids_sha256": "21e4dc66e867c604a9cac7e2ef795a7eb06b57aa1a5ecd49e26938881132286c",
+    "fit_group_ids_sha256": "f3a2f4d318d898c9c9874ef7cd41bb47c63b3b028767206977d15dbe3b66c7fa",
+    "probe_artifact_sha256": "8429311376dc5a8717ab3dc38c9f43b1e67356a9d44175c184cdd881b49e27ea",
+    "probe_provenance_sha256": "9cfdcf4f1b65690dd199cccf56848d63c9a23456fc379f4ca3ed379ff29c634c",
+    "documents_observed_outside_train_head_zero": 0,
+    "source_groups_observed_outside_train_head_zero": 0,
+    "normalized_documents_with_additional_publisher_ids_within_training_fold": 1,
+    "selection_count": 12989,
+    "guarded_group_count": 6075
+  },
+  "original_stack_plan_rows": 2606,
+  "protocol": {
+    "frozen_parent_training_reservoir": 16,
+    "frozen_parent_training_seed": 42,
+    "refit_reserved_validation_reservoir": 96,
+    "final_reservoir": 72,
+    "final_seed": 42
+  },
+  "scope_notes": {
+    "stack_calibration_validation": "Full word-gated refit plan, including pending language refusals. Zero overlap for a superset also holds after refusals.",
+    "old_frozen_heads": "Original pre-language-screening source envelope. The fitted parent accepted 32 of these documents. Its mixed training samples reuse passages within that envelope.",
+    "old_stack_old_cal": "Parent training and calibration envelopes before language screening. The refit replaces these fitted parameters when a challenger wins.",
+    "head_probe": "The actual 12,989 post-quarantine IDs and stored group assignments were read from the expanded vector archive and independently matched to the source corpus, train/head fold 0 and the fitted probe metadata. Before/after counts for this role are identical because filtering occurred before the expanded archive was written.",
+    "historical_final": "Accepted documents reconstructed with the original 72-row class reservoir and text admission checks. Membership digest matched the previously audited historical 221-document digest. Historical scores and model traces were never opened for this audit.",
+    "ambiguities": "The audit identifies exact normalized human-text aliases and publisher IDs. Unmarked paraphrases, shared topics and pretrained encoder overlap are outside this test."
+  },
+  "before": {
+    "head_probe": {
+      "documents": 12989,
+      "source_groups": 6075,
+      "document_id_sha256": "21e4dc66e867c604a9cac7e2ef795a7eb06b57aa1a5ecd49e26938881132286c"
+    },
+    "stack": {
+      "documents": 771,
+      "source_groups": 760,
+      "document_id_sha256": "e0086cde412c6558a461b4f182d21d43ceb6b802e07f176e16f77b6b09b56876"
+    },
+    "calibration": {
+      "documents": 1537,
+      "source_groups": 1472,
+      "document_id_sha256": "23fe0c5514dd2ac8f206da3c93358286cc616a8df9209812feb9fefa27c9fc87"
+    },
+    "validation": {
+      "documents": 298,
+      "source_groups": 291,
+      "document_id_sha256": "e53ca9e19271d1a21300f649c70b805401e391e3e4a32aa612f39961f459d7bf"
+    },
+    "historical_final": {
+      "documents": 221,
+      "source_groups": 218,
+      "document_id_sha256": "01596ba9924def69ede8c8d8d22691f4384862b0d625c8d66a354f515854ba2d"
+    },
+    "old_frozen_heads": {
+      "documents": 39,
+      "source_groups": 39,
+      "document_id_sha256": "8c7d4208295558ed7d2cc221a9273194c25ff8ea91b288f7ca000eb4890191b0"
+    },
+    "old_stack": {
+      "documents": 51,
+      "source_groups": 44,
+      "document_id_sha256": "cf72416c0d249a5d532b415fef8600c62c128170fe6abd1a14239109abc68c0c"
+    },
+    "old_cal": {
+      "documents": 81,
+      "source_groups": 81,
+      "document_id_sha256": "dffbac236d2c720ce87b5bc4d4ff11c9d701f8ac57af80800f0e7d3c82ff59e1"
+    },
+    "final_envelope": {
+      "documents": 266,
+      "source_groups": 262,
+      "document_id_sha256": "9a8891ffebd90349ecbe07c0c42216b48a14305389e462f21c7e9407d13f3a91"
+    }
+  },
+  "after": {
+    "head_probe": {
+      "documents": 12989,
+      "source_groups": 6075,
+      "document_id_sha256": "21e4dc66e867c604a9cac7e2ef795a7eb06b57aa1a5ecd49e26938881132286c"
+    },
+    "stack": {
+      "documents": 767,
+      "source_groups": 756,
+      "document_id_sha256": "77571c2a2acbff6893d3c4e06f3c55c1428304fca5dc067830bfb315d86e1def"
+    },
+    "calibration": {
+      "documents": 1531,
+      "source_groups": 1466,
+      "document_id_sha256": "8adc3a210040c4e734cc0150ac4096118e7b48f509c77858745b438da5d32205"
+    },
+    "validation": {
+      "documents": 298,
+      "source_groups": 291,
+      "document_id_sha256": "e53ca9e19271d1a21300f649c70b805401e391e3e4a32aa612f39961f459d7bf"
+    },
+    "historical_final": {
+      "documents": 221,
+      "source_groups": 218,
+      "document_id_sha256": "01596ba9924def69ede8c8d8d22691f4384862b0d625c8d66a354f515854ba2d"
+    },
+    "old_frozen_heads": {
+      "documents": 39,
+      "source_groups": 39,
+      "document_id_sha256": "8c7d4208295558ed7d2cc221a9273194c25ff8ea91b288f7ca000eb4890191b0"
+    },
+    "old_stack": {
+      "documents": 51,
+      "source_groups": 44,
+      "document_id_sha256": "cf72416c0d249a5d532b415fef8600c62c128170fe6abd1a14239109abc68c0c"
+    },
+    "old_cal": {
+      "documents": 81,
+      "source_groups": 81,
+      "document_id_sha256": "dffbac236d2c720ce87b5bc4d4ff11c9d701f8ac57af80800f0e7d3c82ff59e1"
+    },
+    "final_envelope": {
+      "documents": 266,
+      "source_groups": 262,
+      "document_id_sha256": "9a8891ffebd90349ecbe07c0c42216b48a14305389e462f21c7e9407d13f3a91"
+    }
+  },
+  "ambiguous_rows_in_each_role": {
+    "head_probe": {
+      "documents": 0,
+      "source_groups": 0,
+      "document_id_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stack": {
+      "documents": 4,
+      "source_groups": 4,
+      "document_id_sha256": "e13e610f022eeb5634f615eaa1259b1db6c0eaf699e124ed908860cc5a82a51e"
+    },
+    "calibration": {
+      "documents": 6,
+      "source_groups": 6,
+      "document_id_sha256": "200b00ed119eeb4e5653ba50e69a9805e3ca09a34c8f1f734d1d02ec5649997b"
+    },
+    "validation": {
+      "documents": 0,
+      "source_groups": 0,
+      "document_id_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "historical_final": {
+      "documents": 3,
+      "source_groups": 3,
+      "document_id_sha256": "d1a0d2b886322fe1ec3b66bff9f8a3711c921980200dcaa152b43aa01b6eef6a"
+    },
+    "old_frozen_heads": {
+      "documents": 0,
+      "source_groups": 0,
+      "document_id_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "old_stack": {
+      "documents": 1,
+      "source_groups": 1,
+      "document_id_sha256": "1f35d5fad38dfffd2e51dc896a42e1c072373b5459d1f1f93c2480071ae9fb60"
+    },
+    "old_cal": {
+      "documents": 2,
+      "source_groups": 2,
+      "document_id_sha256": "369d953f06cb86a482d15fa5a2c4bcbb05a82b4a75bdf3305375d6b98261c585"
+    },
+    "final_envelope": {
+      "documents": 3,
+      "source_groups": 3,
+      "document_id_sha256": "d1a0d2b886322fe1ec3b66bff9f8a3711c921980200dcaa152b43aa01b6eef6a"
+    }
+  },
+  "pairwise_before": {
+    "head_probe/stack": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "head_probe/calibration": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "head_probe/validation": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "head_probe/historical_final": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "head_probe/old_frozen_heads": {
+      "documents": 26,
+      "source_groups": 35,
+      "human_passage_components": 35
+    },
+    "head_probe/old_stack": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "head_probe/old_cal": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "head_probe/final_envelope": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "stack/calibration": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 1
+    },
+    "stack/validation": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "stack/historical_final": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "stack/old_frozen_heads": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "stack/old_stack": {
+      "documents": 5,
+      "source_groups": 9,
+      "human_passage_components": 9
+    },
+    "stack/old_cal": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "stack/final_envelope": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "calibration/validation": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "calibration/historical_final": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 1
+    },
+    "calibration/old_frozen_heads": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "calibration/old_stack": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "calibration/old_cal": {
+      "documents": 17,
+      "source_groups": 37,
+      "human_passage_components": 37
+    },
+    "calibration/final_envelope": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 1
+    },
+    "validation/historical_final": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "validation/old_frozen_heads": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "validation/old_stack": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "validation/old_cal": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "validation/final_envelope": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "historical_final/old_frozen_heads": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "historical_final/old_stack": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "historical_final/old_cal": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "old_frozen_heads/old_stack": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "old_frozen_heads/old_cal": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "old_frozen_heads/final_envelope": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "old_stack/old_cal": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "old_stack/final_envelope": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "old_cal/final_envelope": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    }
+  },
+  "pairwise_after": {
+    "head_probe/stack": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "head_probe/calibration": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "head_probe/validation": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "head_probe/historical_final": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "head_probe/old_frozen_heads": {
+      "documents": 26,
+      "source_groups": 35,
+      "human_passage_components": 35
+    },
+    "head_probe/old_stack": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "head_probe/old_cal": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "head_probe/final_envelope": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "stack/calibration": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "stack/validation": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "stack/historical_final": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "stack/old_frozen_heads": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "stack/old_stack": {
+      "documents": 5,
+      "source_groups": 9,
+      "human_passage_components": 9
+    },
+    "stack/old_cal": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "stack/final_envelope": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "calibration/validation": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "calibration/historical_final": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "calibration/old_frozen_heads": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "calibration/old_stack": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "calibration/old_cal": {
+      "documents": 17,
+      "source_groups": 37,
+      "human_passage_components": 37
+    },
+    "calibration/final_envelope": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "validation/historical_final": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "validation/old_frozen_heads": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "validation/old_stack": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "validation/old_cal": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "validation/final_envelope": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "historical_final/old_frozen_heads": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "historical_final/old_stack": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "historical_final/old_cal": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "old_frozen_heads/old_stack": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "old_frozen_heads/old_cal": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "old_frozen_heads/final_envelope": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "old_stack/old_cal": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "old_stack/final_envelope": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    },
+    "old_cal/final_envelope": {
+      "documents": 0,
+      "source_groups": 0,
+      "human_passage_components": 0
+    }
+  },
+  "guarded_primary_pairwise_unions": {
+    "documents": 0,
+    "source_groups": 0,
+    "human_passage_components": 0
+  },
+  "standard_cli_binding": {
+    "protocol": "Read-only CPU comparison of archived document/group IDs, fitted estimator parameters and every fitted state field. No document or model scoring.",
+    "training_documents": 12989,
+    "training_source_groups": 6075,
+    "training_document_ids_sha256": "21e4dc66e867c604a9cac7e2ef795a7eb06b57aa1a5ecd49e26938881132286c",
+    "training_group_ids_sha256": "f3a2f4d318d898c9c9874ef7cd41bb47c63b3b028767206977d15dbe3b66c7fa",
+    "sorted_document_group_assignments_sha256": "d767e7f4726c2ffe94fbec19cd7544f33a43440ffdf18c78c56e30928f470b94",
+    "guarded_id_archive_sha256": "0ca7315690e4e9c405403814697d59171039965d701aa3fd3bd85aa409b61c61",
+    "compared_estimator_steps": [
+      {
+        "step": "standardscaler",
+        "class": "sklearn.preprocessing._data.StandardScaler",
+        "verified_fitted_fields": [
+          "mean_",
+          "n_features_in_",
+          "n_samples_seen_",
+          "scale_",
+          "var_"
+        ]
+      },
+      {
+        "step": "logisticregression",
+        "class": "sklearn.linear_model._logistic.LogisticRegression",
+        "verified_fitted_fields": [
+          "classes_",
+          "coef_",
+          "intercept_",
+          "n_features_in_",
+          "n_iter_"
+        ]
+      }
+    ],
+    "estimator_learned_arrays_bitwise_equal": true,
+    "all_stage_state_and_constructor_parameters_equal": true,
+    "fixed_repeat_exact_bytes": true,
+    "fixed_provenance_matches_audited_except_external_budget_study_reference": true,
+    "budget_study_sha256": "7f09ea2d8b98dc10cf5daf4dbb6a938e943fe7499a19315c9884098030b3d0d9",
+    "original_audit_file_sha256": "5d8f8e3f1817fcf1faaab0070845b1c122c59e974bd93df64bb5fed590469a64",
+    "original_probe_sha256": "ea883ac6a91b09ec5e43cbd0a3c78907f0c2897ad936872f36e0a9d9236246ac",
+    "original_probe_provenance_sha256": "387e3eaf3b000e35dbdde6e6a36d7a88fce08b5e93993329f461230d1f867002",
+    "cli_probe_sha256": "8429311376dc5a8717ab3dc38c9f43b1e67356a9d44175c184cdd881b49e27ea",
+    "cli_provenance_sha256": "9cfdcf4f1b65690dd199cccf56848d63c9a23456fc379f4ca3ed379ff29c634c"
+  }
+}

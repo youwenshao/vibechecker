@@ -1,0 +1,8 @@
+{
+  "cohort": "validation",
+  "model_sha256": "8c8a23e4ecb5bdaaccee57516fb1d8f1b0703106748668b8af09e936846c915b",
+  "documents": 268,
+  "max_index_delta": 0,
+  "different_indexes": 0,
+  "max_probe_probability_delta": 2.086162567138672e-07
+}
