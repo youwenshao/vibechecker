@@ -1,0 +1,164 @@
+{
+  "scheme": "raid-paired-rewrite-origin-v1",
+  "commercial_ok": false,
+  "upstream": "liamdugan/raid",
+  "revision": "5008b2d167f74bfd4ceff6b3b0512b7097d7cbb1",
+  "word_bounds": [
+    300,
+    2500
+  ],
+  "language": "English; production Deep admission on all four documents",
+  "selection_method": "Seed 42. Only singleton source components from the original five datasets, PERSUADE control corpus and both new shards. One human rewrite, one machine rewrite and both exact clean parents per source. Stress draws first from stack-training sources absent from prior fits.",
+  "role_caps_per_domain": {
+    "stress": 32,
+    "head": 120,
+    "stack": 64,
+    "calibration": 64
+  },
+  "input_manifest": {
+    "raid": {
+      "version": "train-none-2024-06-04",
+      "sha256": [
+        "c5467bca6fc7f5c728c676450c7f84ce401df6c6ccc6d82c47e3b5f3c6d6fce4"
+      ]
+    },
+    "raid-attacks": {
+      "version": "5008b2d167f74bfd4ceff6b3b0512b7097d7cbb1",
+      "sha256": [
+        "ec962e229a2bf0d1726e7ed1852be01e1b808dfb395294cbcb62307eea63c514"
+      ]
+    },
+    "asap": {
+      "version": "060ab225ca0984c0bf43ff222bf6bb2bc6195b6f",
+      "sha256": [
+        "aec01e98eb16cc3bc3828010ca053a09daecc2821dd2105f8a7333089271beb4"
+      ]
+    },
+    "ellipse": {
+      "version": "710963bbf1acf23a28e40643d9f937d06f047dd4",
+      "sha256": [
+        "782344e99668a3ff508d7410c0eb6e36da70f3b28f81c96e367f1ca04924b06c"
+      ]
+    },
+    "liang": {
+      "version": "1d05ed8242d4694a0ed7b73a79c52be8864470f9",
+      "sha256": [
+        "ca1993970a87c5e95cd1e5a90da0cec1fc85c3c3719de7d809af90bb44de1391",
+        "711b5b1adf0ca5beedb68dcf028b59298b25aaab312e4dc395e6862ae02b19de",
+        "c1e3ad86e5165c6ed650abf0e29729f8b06847737c6dd154e24e1c27d51e2cbd",
+        "86dea70272f44201446d8fa200b65cee61bb49e14b9a342a12d131709cdf7f29"
+      ]
+    }
+  },
+  "control_corpora_for_hash_exclusion": {
+    "persuade": {
+      "version": "5bdbad1175d1d5adec082b3f1c4e3ce37b7bd1bf",
+      "sha256": [
+        "f61319edd8bf16a982711ea0399fad59c05afaec05cdf0767f16a2c05c467e23"
+      ]
+    }
+  },
+  "supplement_shards": {
+    "books": {
+      "url": "https://huggingface.co/datasets/liamdugan/raid/resolve/5008b2d167f74bfd4ceff6b3b0512b7097d7cbb1/raid/partial-train/0003.parquet?download=true",
+      "sha256": "be6a92c05534834780bc929c0fb5485fb5249d5ba0d04e6468872dfde17ab8db",
+      "paraphrase_row_groups_inclusive": [
+        87,
+        110
+      ]
+    },
+    "news": {
+      "url": "https://huggingface.co/datasets/liamdugan/raid/resolve/5008b2d167f74bfd4ceff6b3b0512b7097d7cbb1/raid/partial-train/0006.parquet?download=true",
+      "sha256": "57d77923b4137057f0b272bc357e012e0a765abdd94da8cb895249713b05158b",
+      "paraphrase_row_groups_inclusive": [
+        125,
+        148
+      ]
+    }
+  },
+  "original_source_aliases": {
+    "scheme": "normalized-human-source-aliases-v1",
+    "group_count": 200,
+    "passage_count": 98,
+    "sha256": "df5312e7d74b4973030b5c7914c25d9f93db4acc3d9de753c45a684dbea4ea8f"
+  },
+  "combined_human_alias_group_count": 200,
+  "new_human_alias_group_hashes": [],
+  "historical_envelope_documents": 266,
+  "historical_envelope_sha256": "9a8891ffebd90349ecbe07c0c42216b48a14305389e462f21c7e9407d13f3a91",
+  "prospective_reservation_sha256": "98e100bdc12a14cefbe35c88f6b48397577e4f11388978c007dbdea6aabaf170",
+  "prior_refit_plan_sha256": "b962ca4a703d509e02bc92c6d7fe8ae789a6c25fbed1788591183e7938f69933",
+  "selection_sha256": "1558a0004e629dd4e670c05a4584d726e71e95ac41af2c2d6245b0a3c7aafeac",
+  "pair_count": 560,
+  "document_count": 2240,
+  "document_identity": "Each .id is SHA-256 of casefolded, whitespace-collapsed UTF-8 text. The full projection binds each document's exact UTF-8 SHA-256, publisher/parent IDs, word count, generator, group, role and domain.",
+  "machine_generators_by_role": {
+    "stress": {
+      "gpt2": 16,
+      "llama-chat": 17,
+      "mistral": 12,
+      "mistral-chat": 8,
+      "mpt": 10,
+      "mpt-chat": 1
+    },
+    "head": {
+      "gpt2": 69,
+      "llama-chat": 78,
+      "mistral": 31,
+      "mistral-chat": 18,
+      "mpt": 41,
+      "mpt-chat": 3
+    },
+    "stack": {
+      "gpt2": 33,
+      "llama-chat": 36,
+      "mistral": 20,
+      "mistral-chat": 11,
+      "mpt": 25,
+      "mpt-chat": 3
+    },
+    "calibration": {
+      "gpt2": 29,
+      "llama-chat": 50,
+      "mistral": 14,
+      "mistral-chat": 3,
+      "mpt": 27,
+      "mpt-chat": 5
+    }
+  },
+  "support": {
+    "books": {
+      "stress": 32,
+      "head": 120,
+      "stack": 64,
+      "calibration": 64
+    },
+    "news": {
+      "stress": 32,
+      "head": 120,
+      "stack": 64,
+      "calibration": 64
+    }
+  },
+  "role_groups_sha256": {
+    "stress": "68ba89c1525b627c4891555f96e4c8182f0bd0ef102ac053c64f174f057381aa",
+    "head": "74503928a9092f9d4e9c776eb5d64f2370c41d89b2de451a0fdce593aed35a40",
+    "stack": "29f55b65e71627789a9f1e4b171a7e635d81118fa7e16fb6f7e0009d11530d81",
+    "calibration": "2797209078f7689e48e835cbe7c1ac1d3e67d64ecd198140e8f2bbf53e1f1a5f"
+  },
+  "isolation": {
+    "selected_components": 560,
+    "non_singleton_selected_components": 0,
+    "historical_document_overlap": 0,
+    "prospective_document_overlap": 0,
+    "reserved_validation_document_overlap": 0,
+    "conflicting_label_document_overlap": 0,
+    "input_hashes_with_both_origin_labels": 1,
+    "held_out_component_overlap": 0,
+    "stress_prior_fit_component_overlap": 0,
+    "selected_human_alias_groups": 0,
+    "complete_input_components_with_multiple_source_ids": 186,
+    "distinct_input_document_hashes": 873746,
+    "distinct_input_source_ids": 42297
+  }
+}

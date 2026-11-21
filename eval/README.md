@@ -38,6 +38,8 @@ Training accepts `--commercial-only` and fails explicitly if the resulting train
 
 ## Deep evaluation
 
+The paired rewrite study covers human- and machine-origin paraphrases from two English domains. Its source audit, licensing and reproduction command are documented in the [Phase 1 rewrite supplement](reports/phase-1/rewrite-origin-supplement.md).
+
 Fit from pinned local checkpoints. `VIBECHECKER_LM` and `VIBECHECKER_ENCODER` point to the Quick models. `VIBECHECKER_PAIR_OBSERVER` points to the base model and `VIBECHECKER_PAIR_PERFORMER` to its instruct counterpart. Sampling, training and validation run locally on the named MLX backend. Use the same file contents on both inference hosts.
 
 ```sh
