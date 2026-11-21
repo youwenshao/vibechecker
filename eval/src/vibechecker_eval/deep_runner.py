@@ -145,6 +145,37 @@ def read(path):
     return json.loads(path.read_bytes()) if path else None
 
 
+def evaluation_training_scope(model, requested):
+    scope = getattr(model, "training_scope", None)
+    supplements = []
+    if scope and "supplements" in scope:
+        from .rewrite_sidecar import metadata_hash
+
+        scope = dict(scope)
+        supplements = scope.pop("supplements")
+        if (
+            requested["commercial_only"]
+            or not isinstance(supplements, list)
+            or not supplements
+            or any(
+                not isinstance(s, dict) or s.get("commercial_only") is not False
+                for s in supplements
+            )
+            or metadata_hash(supplements)
+            != getattr(model, "refit_provenance", {}).get("supplements_sha256")
+        ):
+            raise ValueError(
+                "Supplemental Deep training scope and research licensing could not be verified"
+            )
+    if (scope is not None and scope != requested) or (
+        scope is None and requested["commercial_only"]
+    ):
+        raise ValueError(
+            "Fitted Deep model and selected weights, datasets or commercial-use scope differ"
+        )
+    return scope == requested, supplements
+
+
 def run_deep(args, datasets):
     from vibechecker_engine.deep import DeepEngine, DeepExtractor, DeepModel
     from vibechecker_engine.text import Refusal, count_words
@@ -152,13 +183,33 @@ def run_deep(args, datasets):
     manifest = {
         d.id: {"version": d.version, "sha256": [a.sha256 for a in d.artifacts]} for d in datasets
     }
-    chosen, skipped = sample(
-        examples(datasets, args.cache),
-        args.limit_per_class,
-        args.seed,
-        count_words,
-        length_range=(300, 2500),
-    )
+    audit_plan = getattr(args, "audit_plan", None)
+    if args.cohort == "prospective":
+        from .prospective import resolve
+
+        if not audit_plan or not args.model_in or sha256(args.model_in) != args.audit_model_sha256:
+            raise ValueError(
+                "The prospective audit requires its plan and a SHA-pinned frozen model"
+            )
+        plan = read(audit_plan)
+        chosen = resolve(
+            plan, args.audit_plan_sha256, datasets, examples(datasets, args.cache), count_words
+        )
+        skipped = Counter()
+    else:
+        if (
+            audit_plan
+            or getattr(args, "audit_plan_sha256", None)
+            or getattr(args, "audit_model_sha256", None)
+        ):
+            raise ValueError("Audit plan arguments require --cohort prospective")
+        chosen, skipped = sample(
+            examples(datasets, args.cache),
+            args.limit_per_class,
+            args.seed,
+            count_words,
+            length_range=(300, 2500),
+        )
     extractor = DeepExtractor.from_env()
     weights = extractor.identity
     quick_prefill = extractor.quick.lm.chunk_size
@@ -170,20 +221,17 @@ def run_deep(args, datasets):
         "commercial_only": args.commercial_only,
     }
     fit_counts = {}
+    supplements = []
+    verified_scope = False
     if args.model_in:
         model = DeepModel.load(fitted)
         model.verify(extractor)
-        provenance = getattr(model, "training_scope", None)
-        if (provenance is not None and provenance != training_scope) or (
-            provenance is None and args.commercial_only
-        ):
-            raise ValueError(
-                "Fitted Deep model and selected weights, datasets or commercial-use scope differ"
-            )
+        verified_scope, supplements = evaluation_training_scope(model, training_scope)
         fit_counts = getattr(model, "fit_counts", {})
     else:
         model, fit_counts = fit(extractor, chosen, skipped, args)
         model.training_scope = training_scope
+        verified_scope = True
         model.fit_selection = {
             "seed": args.seed,
             "limit_per_class_per_dataset_split": args.limit_per_class,
@@ -199,7 +247,7 @@ def run_deep(args, datasets):
     evaluation = [
         (item, n)
         for item, n in chosen
-        if item.split == "test" and fold(item, "bakeoff") == int(args.cohort == "test")
+        if item.split == "test" and fold(item, "bakeoff") == int(args.cohort != "validation")
     ]
     for item, n in _progress("Document evaluation", evaluation, len(evaluation)):
         start = perf_counter()
@@ -233,12 +281,16 @@ def run_deep(args, datasets):
     sentence = sentence_metrics(truth, scores)
     scope = {
         "seed": args.seed,
-        "limit_per_class_per_dataset_split": args.limit_per_class,
+        "limit_per_class_per_dataset_split": None if audit_plan else args.limit_per_class,
         "commercial_only": args.commercial_only,
         "cohort": args.cohort,
         "manifest": manifest,
         "scored_ids_sha256": fingerprint(" ".join(sorted(sentences))),
     }
+    if audit_plan:
+        scope["audit_plan_sha256"] = args.audit_plan_sha256
+        scope["reserved_ids_sha256"] = plan["member_ids_sha256"]
+        scope["reserved_documents"] = len(chosen)
     trace = {
         "version": args.version,
         "backend": extractor.backend,
@@ -298,6 +350,7 @@ def run_deep(args, datasets):
         "fit_counts": fit_counts,
         "fit_selection": getattr(model, "fit_selection", None),
         "refit_provenance": getattr(model, "refit_provenance", None),
+        **({"training_supplements": supplements} if supplements else {}),
         "regression_reference": {
             "version": previous.get("version"),
             "model_sha256": previous.get("model_sha256"),
@@ -320,7 +373,7 @@ def run_deep(args, datasets):
         "gates": gate,
         "release_ready": bool(
             args.cohort == "test"
-            and getattr(model, "training_scope", None) == training_scope
+            and verified_scope
             and gate["eligible"]
             and parallel
             and parallel["pass"]

@@ -114,10 +114,15 @@ def write_report(report, directory):
             )
         else:
             lines.append("The fitted artifact has no recorded training selection.")
-        lines.append(
-            f"Evaluation used seed {report['scope']['seed']} and a reservoir limit of "
-            f"{report['scope']['limit_per_class_per_dataset_split']} on the {report['scope']['cohort']} cohort."
-        )
+        if report["scope"].get("audit_plan_sha256"):
+            lines.append(
+                f"The prospective audit reserved {report['scope']['reserved_documents']} documents before language screening. Plan SHA-256 was `{report['scope']['audit_plan_sha256']}`."
+            )
+        else:
+            lines.append(
+                f"Evaluation used seed {report['scope']['seed']} and a reservoir limit of "
+                f"{report['scope']['limit_per_class_per_dataset_split']} on the {report['scope']['cohort']} cohort."
+            )
         lines.append(
             f"The Quick LM used {report.get('quick_prefill', 64)} tokens per prefill during evaluation."
         )

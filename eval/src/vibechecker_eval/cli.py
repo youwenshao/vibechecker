@@ -131,7 +131,14 @@ def main(argv=None):
             model.add_argument("--model-out", type=Path)
             model.add_argument("--model-in", type=Path)
         if name == "deep":
-            cmd.add_argument("--cohort", choices=["validation", "test"], default="test")
+            cmd.add_argument(
+                "--cohort", choices=["validation", "test", "prospective"], default="test"
+            )
+            cmd.add_argument("--audit-plan", type=Path, help="Frozen prospective audit membership")
+            cmd.add_argument("--audit-plan-sha256", help="Preregistered prospective plan digest")
+            cmd.add_argument(
+                "--audit-model-sha256", help="Frozen candidate digest for the prospective audit"
+            )
             cmd.add_argument("--pair-family", help="Base/instruct source family, e.g. Qwen2.5-7B")
             for gate in ("reference", "bakeoff", "load"):
                 cmd.add_argument(f"--{gate}-report", type=Path)

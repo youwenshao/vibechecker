@@ -151,3 +151,58 @@ Each refit verifies the original corpus manifest and looks for normalized human 
 Each candidate retains the original eight displayed signals. The base candidates vary gradient-boosting complexity. Optional probe candidates append the probability from an independently fitted frozen-encoder probe. Two candidates assign a fixed weight of 0.50 or 0.75 to its log-odds before fitting the balanced-prior isotonic and 200 bootstrap calibrators. During refit, the probe and Deep cache must identify the same extraction backend, complete encoder files, prefill profile, representation version, dataset manifest and reserved head-training fold. The fitted model can then be evaluated across backends for parity.
 
 The selection report identifies the parent and winner by SHA-256 and records each candidate’s settings, document metrics, worst stratum and gate results. Selection requires improvement in both validation ECE measures and preservation of other passing quality gates. Among qualifying candidates it minimizes the larger error relative to the 0.05 pooled and 0.08 stratum gates. If none qualifies, the output is an exact copy of the parent. Use `deep --model-in eval/artifacts/selected.joblib --cohort test` with the original final-test seed, limits and dataset order to produce the independent scorecard.
+
+## Prospective final audit
+
+The [frozen reservation](reports/phase-1/prospective-audit-reservation.json) contains 512 opaque document/source pairs, one per independent component, drawn from 16,711 length-eligible candidates. The reservation reconstructs the full historical 266-document envelope from its pinned corpus. It excludes every group in that envelope, every training, calibration and validation group, all groups linked by duplicate normalized text at any length, and all known human source aliases. Sampling rotates across datasets and generator, attack and length strata. The resulting proportions describe this coverage sample. Language screening happens during inference, with each refusal retained in the report counts.
+
+The 512 reserved documents include 131 ASAP essays, 131 ELLIPSE essays, 130 clean RAID passages and 120 attacked RAID passages. No Liang group remained eligible after the exclusions. The audit can measure pooled discrimination and essay false positives. Generated-essay discrimination requires additional independent sources.
+
+Reproduce the reservation on CPU without loading a detector.
+
+```sh
+uv run python -m vibechecker_eval.prospective --cache eval/.cache \
+  --historical-audit eval/reports/phase-1/expanded-source-membership.json \
+  --out eval/artifacts/prospective-audit-reservation.json
+```
+
+After model selection is complete, record the candidate SHA-256 and use a separate report version. The normal Deep evaluator applies the serving predictor, sentence metrics, unchanged quality gates and the frozen plan. The canonical plan digest below covers the complete JSON contents independent of indentation.
+
+```sh
+VIBECHECKER_QUICK_PREFILL=512 uv run vibechecker-eval deep --cohort prospective \
+  --datasets raid raid-attacks asap ellipse liang --cache eval/.cache --seed 42 \
+  --model-in "$frozen_model" --audit-model-sha256 "$frozen_model_sha256" \
+  --audit-plan eval/reports/phase-1/prospective-audit-reservation.json \
+  --audit-plan-sha256 98e100bdc12a14cefbe35c88f6b48397577e4f11388978c007dbdea6aabaf170 \
+  --version "$prospective_version" --pair-family Qwen2.5-7B
+```
+
+## Paired rewrite stacker refit
+
+The research-only rewrite experiment links rewritten human and machine text to their publisher originals in books and news. Its sidecar stores the 13 frozen document features and the 769-value encoder representation for each rewrite. SQLite rows commit independently. A refusal removes the whole pair from fitting or stress evaluation. The original Deep cache supplies the ordinary stacker and calibration rows and all 268 live validation documents.
+
+The following commands use the Phase 1 verification checkout's artifact layout. Set the original Metal checkpoint paths and a 512-token Quick prefill. The CPU plan verifies the signed projection, original input manifest, frozen heads, v2 artifact, original numeric cache and protected document/source membership before selecting up to 48 groups per domain and role.
+
+```sh
+set -- --parent deep-qwen7b-q4-p512-v1.joblib --incumbent deep-qwen7b-q4-p512-v2.joblib \
+  --incumbent-selection calibration-v2/selection.json --features calibration-v2/stack.sqlite \
+  --cache ../eval/.cache --prospective-plan prospective-audit/reservation-v1.json \
+  --supplement calibration-v2/rewrite-origin-v1/verified-cohort.sqlite \
+  --supplement-sha256 5ab5814717ef46f5fc9f849704503fe49f5434a479e0970911a81339e94a00df \
+  --sidecar calibration-v3/rewrite-stack.sqlite --groups-per-domain 48 --seed 42
+python -m vibechecker_eval.rewrite_refit plan "$@"
+python -m vibechecker_eval.rewrite_refit collect "$@"
+python -m vibechecker_eval.rewrite_refit fit "$@" \
+  --probe calibration-v3/rewrite-probe-v1/origin-probe-v1.joblib \
+  --probe-sha256 f091eed2f254fdd5285ec8cf6ee595b93539d7207eac8b34da2972be173099b9 \
+  --probe-study eval/reports/phase-1/rewrite-origin-probe.json \
+  --probe-membership eval/reports/phase-1/rewrite-origin-membership.json \
+  --band-controls calibration-v3/human-controls.sqlite --band-controls-sha256 "$controls_sha256" \
+  --model-out calibration-v3/selected.joblib --selection-out calibration-v3/selection.json
+```
+
+The fit always compares the incumbent and two ordinary-probe controls trained with the same additional data. Each independently qualified rewrite probe adds its two fixed candidates and requires its preregistered SHA-256. Each seven-leaf stacker uses a 0.50 or 0.75 probe-logit weight, balanced-prior isotonic calibration and 200 bootstrap curves. A separate human calibration set determines its high-band cutoff. The report retains source and document digests, group shortfalls, all stress results by domain and origin, paired wins and ties, Brier and log loss, and ordinary-validation sensitivity before and after cutoff calibration.
+
+A candidate must preserve the incumbent's passing primary gates, lower its worst primary calibration error, reduce matched-rewrite Brier error, increase within-source concordance and preserve pooled rewrite AUROC. The high band must retain at least 90% of ordinary machine hits against both the pre-control cutoff and the incumbent. Among admissible candidates the fit prioritizes passing both primary calibration limits, then the worst gate-relative error. If none qualifies, it emits a byte-identical copy of v2.
+
+The `verify` subcommand takes the same shared inputs, plus `--model-in`, `--model-sha256`, `--selection-in`, `--selection-sha256`, `--band-controls` and `--out`. It compares individual serving indexes with the selection on primary validation and matched stress data. After recording the model and selection digests in version control, run it with `--withheld-specificity` and a separate output path to measure high-band false positives on the reserved RAID and PERSUADE controls.
