@@ -1,0 +1,214 @@
+{
+  "schema": "phase-1-academic-source-record-v1",
+  "scope": "Training and development source membership, before model scoring.",
+  "inputs": {
+    "historical_envelope_sha256": "9a8891ffebd90349ecbe07c0c42216b48a14305389e462f21c7e9407d13f3a91",
+    "legacy_stack_membership_sha256": "b962ca4a703d509e02bc92c6d7fe8ae789a6c25fbed1788591183e7938f69933",
+    "prospective_envelope_sha256": "98e100bdc12a14cefbe35c88f6b48397577e4f11388978c007dbdea6aabaf170",
+    "raid_clean_csv_sha256": "c5467bca6fc7f5c728c676450c7f84ce401df6c6ccc6d82c47e3b5f3c6d6fce4",
+    "raid_partial_train_0000_sha256": "ec962e229a2bf0d1726e7ed1852be01e1b808dfb395294cbcb62307eea63c514",
+    "raid_partial_train_revision": "5008b2d167f74bfd4ceff6b3b0512b7097d7cbb1"
+  },
+  "machine_candidates": {
+    "eligible_clean_human_parents": {
+      "calibration": 0,
+      "stack": 0
+    },
+    "exact_arxiv_title_with_source_date_and_field": 92,
+    "generators": {
+      "calibration": {
+        "gpt2": 12,
+        "llama-chat": 12,
+        "mistral": 12,
+        "mpt": 12
+      },
+      "stack": {
+        "gpt2": 12,
+        "llama-chat": 12,
+        "mistral": 11,
+        "mpt": 12,
+        "mpt-chat": 1
+      }
+    },
+    "groups_with_any_verified_author": 93,
+    "groups_with_exclusive_verified_author_keys": 80,
+    "role_counts": {
+      "calibration": 48,
+      "stack": 48
+    }
+  },
+  "native_candidate_inventory": {
+    "crossref_eligible": 111,
+    "crossref_unique_dois_inspected": 5736,
+    "pmc_eligible": 12,
+    "pmc_publisher_front_matter_records": 150,
+    "selected_native_sources": {
+      "Crossref/publisher": 14,
+      "NCBI PMC/publisher JATS": 2
+    },
+    "shared_known_positive_author": 12,
+    "unique_eligible": 123,
+    "unmapped_subject": 37
+  },
+  "licenses": {
+    "CC BY 4.0": 16
+  },
+  "paper_level_verification": {
+    "Crossref unspecified article-level license": 1,
+    "Crossref vor article-level license": 13,
+    "PMC JATS article-level license": 2
+  },
+  "machine_source_date_evidence": {
+    "arXiv first submitted": 12
+  },
+  "admitted_roles": {
+    "calibration": {
+      "largest_pair_word_difference": 35,
+      "largest_pair_year_difference": 1,
+      "machine_rewrites": 5,
+      "machine_source_submission_years": {
+        "2017": 1,
+        "2018": 1,
+        "2019": 1,
+        "2020": 2
+      },
+      "machine_word_range": [
+        301,
+        376
+      ],
+      "native_papers": 5,
+      "native_word_range": [
+        301,
+        411
+      ],
+      "native_years": {
+        "2018": 3,
+        "2019": 2
+      },
+      "source_pair_digest": "67ddf2f06788b3cae715d90d73e41de85f79ac3c1f69fd5a13b30309246429a9",
+      "subjects": {
+        "machine_learning": 1,
+        "vision": 4
+      }
+    },
+    "external_human_development": {
+      "machine_rewrites": 0,
+      "native_papers": 4,
+      "native_word_range": [
+        306,
+        321
+      ],
+      "native_years": {
+        "2017": 1,
+        "2019": 3
+      },
+      "subjects": {
+        "machine_learning": 2,
+        "vision": 2
+      }
+    },
+    "stack": {
+      "largest_pair_word_difference": 30,
+      "largest_pair_year_difference": 1,
+      "machine_rewrites": 7,
+      "machine_source_submission_years": {
+        "2014": 2,
+        "2018": 1,
+        "2019": 4
+      },
+      "machine_word_range": [
+        326,
+        406
+      ],
+      "native_papers": 7,
+      "native_word_range": [
+        313,
+        407
+      ],
+      "native_years": {
+        "2014": 1,
+        "2015": 1,
+        "2017": 1,
+        "2018": 1,
+        "2019": 3
+      },
+      "source_pair_digest": "c5d0f7fc0b9463d07beb130aa0c019d826b79d0dbc956e56e1550d2b0b662322",
+      "subjects": {
+        "biomedical_vision": 1,
+        "machine_learning": 1,
+        "networks_security": 1,
+        "vision": 4
+      }
+    }
+  },
+  "isolation": {
+    "machine_graph_inventory": {
+      "documents": 873746,
+      "groups": 42297
+    },
+    "machine_overlaps": {
+      "academic_dev": 0,
+      "across_roles_source": 0,
+      "any_reserved_or_training_document": 0,
+      "current_head": 0,
+      "historical": 0,
+      "human_controls": 0,
+      "nonsingleton_or_conflicting_component": 0,
+      "original_or_quick": 0,
+      "original_stack": 0,
+      "paired_rewrite": 0,
+      "prospective": 0
+    },
+    "native_comparison_inventory": {
+      "normalized_documents": 873746,
+      "publisher_title_groups": 13218
+    },
+    "native_overlaps": {
+      "cross_corpora_document_overlaps": 0,
+      "known_positive_author_overlaps": 0,
+      "matched_original_author_keys_on_another_machine_group_in_96": 0,
+      "upstream_title_overlaps": 0,
+      "within_selected_author_overlap": 0
+    }
+  },
+  "selection_sha256": "c3d88b2b60160cd5430ea069cfe6d6d01e7d6459827d7965c2fa526f4ee21888",
+  "snapshot_files_sha256": {
+    "projections": {
+      "pre2020-academic-human-v1.jsonl.gz": "061a97823564348a1234c230ba46bf83fb456acac19029ddbfdf1a4b38ff3a84",
+      "pre2020-academic-human-v1.manifest.json": "3a0dc437997a6d698c6d0ce04105675f377bd6b55ceeda7ab593838aed5aad62",
+      "raid-academic-stack-cal-v1.jsonl.gz": "3069c18b603fcf9f6b2806f2c9522cbef8cb14ab7edf4cf745672b61e733ccf6",
+      "raid-academic-stack-cal-v1.manifest.json": "947dabae78ed133db961470f20848cc7e2ef6c122555f83a5a5f76a8e7a4a427",
+      "raid-academic-subjects-v1.json": "1718a354596a10f621a97f44710d70cf35e2d9574187e92b759f12d4b41b5f95"
+    },
+    "publisher_snapshots": {
+      "academic-positive-bibliography-v1.json.gz": "7200dc132311297d143b75f92ce0f4226e2b451bf82d32c13c3b365d59ba4790",
+      "academic-positive-publisher-bibliography-v2.json.gz": "0081a1ceef13f6fe4984a83e1a956990afdab48c978a72c7cc0d8ec340b358a6",
+      "human-crossref-candidates-v1.json.gz": "2ab12b1d2cb1e357cd2a90ee5b1937a953b54fc5d48e419b4f523d00bf404476",
+      "human-crossref-intake-v1.json": "e82bfd76f102cf94d470d22acf4983fe12ac5c014a632af57f7b62a51d375760",
+      "human-publisher-candidates-v2.json.gz": "02d2314a7d4bcea81385e0f5716eca8911f0a04217c8de8620417cad51d884a1",
+      "human-publisher-intake-v2.json": "cf39cfdd07904c5b138c3847d85d3eee3513adf8e422c8290aba60e7fe5f86e0"
+    },
+    "study": {
+      "input-receipt.json": "996700ef84a3eb8da67133229d1fb2f43776de906533fecdefd4ff577b7a8cb9",
+      "plan.json": "2515cd98323398edeac23c20d54ffc91bc739decfc6d08225a38113501f5a058",
+      "study.json": "b8c016ede7a96517b7375d79ae9655f738c4e10458d2492d60c8b58bfac66eb0"
+    }
+  },
+  "crossref_response_cache": {
+    "file_count": 34,
+    "query_and_uncompressed_response_commitment_sha256": "f6ceb1a97f75ff665f6f9819ed34e24c40a16ae4d30cad03c8a76193e7877dfb"
+  },
+  "private_script_archive": {
+    "members_sha256": {
+      "build_academic_rewrites.py": "0181299dde00a85302168ac64286dbc6e2ce0401dcfd9bc38ed13680b4246f9c",
+      "collect_cs_controls.py": "619e1606d14f46326761bb0586e11161d9b40c5b5d6692548e366ce12dc612c3",
+      "collect_publisher_xml.py": "d6f1a60987d5471d698a29c94a1806ea44507fe575d31311bd3b3c45ece66cd2",
+      "freeze_source_authors.py": "92453764ff37bdfe04fb2ad00cc73389ccac53a834194910c5da37f105f4512a",
+      "match_arxiv_bibliography.py": "294c567bed38c4280f1645fb4533a5bee34dfdec787e5b79e2d214a66b973b31",
+      "match_positive_bibliography.py": "2f962913244ae75d0cb3f7d5e0cf2efdd1cd58be9c284602f91e3e48891b02a0",
+      "project_matched_science.py": "5d41ae467ad7fdcf4ac7af0c98da00649f3825bd78aa06caca7b16e03b7419e8"
+    },
+    "name": "academic-source-selection-scripts-v1.tar.gz",
+    "sha256": "34873f328802204bac27a3f7b072ddb9196fb90ad7a6b548b05eae62d67c9212"
+  }
+}

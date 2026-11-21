@@ -395,7 +395,14 @@ def compare(args, paths, plan, v3, parent, incumbent, probe):
             "academic_role_support": plan["training"]["accepted"],
         }
         model.refit_provenance = {
-            **incumbent.refit_provenance,
+            **{
+                k: v
+                for k, v in incumbent.refit_provenance.items()
+                if k not in ("winner", "settings")
+            },
+            "v2_incumbent_sha256": v3["incumbent_sha256"],
+            "v2_parent_winner": incumbent.refit_provenance["winner"],
+            "settings": {**plan["settings"], "probe_anchor": anchor},
             "candidate": tag,
             "probe_sha256": sha256(paths["probe"]),
             "academic_study_sha256": args.study_sha256,
