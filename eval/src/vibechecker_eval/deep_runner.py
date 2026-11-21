@@ -298,6 +298,13 @@ def run_deep(args, datasets):
         "fit_counts": fit_counts,
         "fit_selection": getattr(model, "fit_selection", None),
         "refit_provenance": getattr(model, "refit_provenance", None),
+        "regression_reference": {
+            "version": previous.get("version"),
+            "model_sha256": previous.get("model_sha256"),
+            "report_sha256": sha256(args.previous),
+        }
+        if previous
+        else None,
         "skipped": dict(sorted(skipped.items())),
         "thresholds": {"mixed": mixed, "high": high},
         "metrics": summary,

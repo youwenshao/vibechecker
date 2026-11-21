@@ -172,12 +172,14 @@ def _svm(groups, labels, width, seed):
     return CalibratedClassifierCV(pipeline, method="sigmoid", cv=splits, ensemble=False, n_jobs=1)
 
 
+def _linear(c, seed):
+    return LogisticRegression(C=c, class_weight="balanced", max_iter=600, random_state=seed)
+
+
 def _canonical_candidates(rows, width, seed):
-    def linear(c):
-        return LogisticRegression(C=c, class_weight="balanced", max_iter=600, random_state=seed)
 
     candidates = [
-        (f"logistic-{c}", make_pipeline(StandardScaler(), linear(c))) for c in (0.01, 0.1, 1)
+        (f"logistic-{c}", make_pipeline(StandardScaler(), _linear(c, seed))) for c in (0.01, 0.1, 1)
     ]
     # The nonlinear readout can separate clusters of writing styles in the same frozen representation.
     dims = min(64, rows - 1, width)
@@ -188,7 +190,7 @@ def _canonical_candidates(rows, width, seed):
                 StandardScaler(),
                 PCA(n_components=dims, whiten=True, random_state=seed),
                 Nystroem(gamma=0.5 / dims, n_components=min(512, rows), random_state=seed),
-                linear(16.0),
+                _linear(16.0, seed),
             ),
         )
     )
@@ -234,6 +236,8 @@ def fit(rows, seed, *, candidate="canonical"):
         raise ValueError("Source groups overlap in probe development")
     if candidate == "canonical":
         candidates = _canonical_candidates((~dev).sum(), x.shape[1], seed)
+    elif candidate == "logistic-c0.1":
+        candidates = [("logistic-0.1", make_pipeline(StandardScaler(), _linear(0.1, seed)))]
     elif candidate == "svm-c16":
         candidates = [(candidate, _svm(groups[~dev], y[~dev], x.shape[1], seed))]
     else:
@@ -261,7 +265,9 @@ def fit(rows, seed, *, candidate="canonical"):
     )
     name, model = candidates[best]
     protocol = {}
-    if name == "svm-c16":
+    if candidate == "logistic-c0.1":
+        protocol = {"selection_rule": "C=0.1 frozen before comparing training budgets"}
+    elif name == "svm-c16":
         # Fold indices above are relative to the inner training matrix. Rebuild
         # them for the final supervised fit on the complete head-training fold.
         model = _svm(groups, y, x.shape[1], seed)
@@ -303,7 +309,9 @@ def main(argv=None):
     parser.add_argument("--clean-cap", type=int, default=320)
     parser.add_argument("--attack-cap", type=int, default=64)
     parser.add_argument("--seed", type=int, default=42)
-    parser.add_argument("--candidate", choices=("canonical", "svm-c16"), default="canonical")
+    parser.add_argument(
+        "--candidate", choices=("canonical", "svm-c16", "logistic-c0.1"), default="canonical"
+    )
     parser.add_argument(
         "--cached-only",
         action="store_true",

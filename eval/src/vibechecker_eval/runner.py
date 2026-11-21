@@ -121,6 +121,11 @@ def write_report(report, directory):
         lines.append(
             f"The Quick LM used {report.get('quick_prefill', 64)} tokens per prefill during evaluation."
         )
+        if reference := report.get("regression_reference"):
+            lines.append(
+                f"Regression checks compare the same cohort with `{reference['version']}` "
+                f"(report SHA-256 `{reference['report_sha256']}`)."
+            )
         lines += [
             "",
             "## Sentence and hardware evidence",

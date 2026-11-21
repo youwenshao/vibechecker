@@ -426,5 +426,12 @@ def test_training_evaluates_disjoint_head_stacker_calibration_and_spliced_test(
 
     del model.fit_selection
     model.save(args.model_in)
+    args.previous = tmp_path / "previous.json"
+    args.previous.write_bytes((tmp_path / "fixture/report.json").read_bytes())
     earlier = deep_runner.run_deep(args, [registry()["asap"]])
     assert earlier["fit_selection"] is None and earlier["fit_counts"] == scored["fit_counts"]
+    assert earlier["regression_reference"] == {
+        "version": scored["version"],
+        "model_sha256": scored["model_sha256"],
+        "report_sha256": deep_runner.sha256(args.previous),
+    }

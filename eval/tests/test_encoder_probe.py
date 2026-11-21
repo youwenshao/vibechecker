@@ -5,7 +5,13 @@ import joblib
 import numpy as np
 import pytest
 from vibechecker_eval.deep_cohort import fold
-from vibechecker_eval.encoder_probe import _source_folds, collect, fit, open_cache, training_sample
+from vibechecker_eval.encoder_probe import (
+    _source_folds,
+    collect,
+    fit,
+    open_cache,
+    training_sample,
+)
 from vibechecker_eval.loaders import Example, fingerprint
 from vibechecker_eval.source_groups import human_source_aliases
 
@@ -180,3 +186,25 @@ def test_probe_quarantines_machine_derivatives_without_refilling_the_reservoir()
     assert [r[0] for r in selected] == [r[0] for r in expected[1:]]
     assert aliases.summary()["group_count"] == 2
     assert aliases.summary()["passage_count"] == 1
+
+
+def test_fixed_logistic_preserves_the_balanced_estimator_and_head_development_split():
+    rng = np.random.default_rng(17)
+    rows = [
+        (f"doc-{i}-{label}", f"g-{i}", label, f"kind-{label}", rng.normal(size=8))
+        for i in range(45)
+        for label in (0, 1)
+    ]
+    model, selection = fit(rows, 42, candidate="logistic-c0.1")
+    assert model.named_steps["logisticregression"].C == 0.1
+    assert model.named_steps["logisticregression"].class_weight == "balanced"
+    assert [c["name"] for c in selection["candidates"]] == ["logistic-0.1"]
+    assert selection["selection_rule"] == "C=0.1 frozen before comparing training budgets"
+    groups = np.asarray([row[1] for row in rows])
+    dev = _source_folds(groups, 42, "probe-validation", 5) == 0
+
+    assert selection["inner_validation_n"] == int(dev.sum())
+    assert selection["inner_validation_group_ids_sha256"] == fingerprint(
+        " ".join(sorted(set(groups[dev])))
+    )
+    assert model.named_steps["standardscaler"].n_samples_seen_ == len(rows)

@@ -90,7 +90,7 @@ uv run vibechecker-eval bakeoff eval/reports/{qwen-bf16,qwen-4,qwen-6}/report.js
 
 ## Refit the Deep stacker with frozen heads
 
-The original Deep model supplies checkpoint identities, source order and the fitted sentence, E7 and caution heads. Set the same checkpoint paths used by Deep, including `VIBECHECKER_ENCODER`. The M6 run used Metal with a 512-token Quick prefill. Both probes use a private cache of 769-value encoder vectors keyed by document hash. The two guarded M6 fits read the completed cache. For a fresh cache, omit `--cached-only` on the first command to extract the vectors.
+The original Deep model supplies checkpoint identities, source order and the fitted sentence, E7 and caution heads. Set the same checkpoint paths used by Deep, including `VIBECHECKER_ENCODER`. The M6 run used Metal with a 512-token Quick prefill. Each probe reads 769-value encoder vectors keyed by document hash from a private SQLite cache. For a fresh cache, omit `--cached-only` on the first command to extract the vectors.
 
 ```sh
 export VIBECHECKER_BACKEND=mlx-metal
@@ -105,9 +105,15 @@ uv run python -m vibechecker_eval.encoder_probe --candidate svm-c16 --cached-onl
   --datasets raid raid-attacks asap ellipse liang --cache eval/.cache --seed 42 \
   --human-cap 1200 --clean-cap 320 --attack-cap 64 --features eval/artifacts/encoder.sqlite \
   --model-out eval/artifacts/encoder-svm-c16-guarded-v1.joblib --report eval/artifacts/encoder-svm-c16-guarded-v1.json
+
+uv run python -m vibechecker_eval.encoder_probe --candidate logistic-c0.1 \
+  --datasets raid raid-attacks asap ellipse liang --cache eval/.cache --seed 42 \
+  --human-cap 2400 --clean-cap 640 --attack-cap 128 --features eval/artifacts/encoder.sqlite \
+  --model-out eval/artifacts/encoder-logistic-expanded-guarded-fixed-v1.joblib \
+  --report eval/artifacts/encoder-logistic-expanded-guarded-fixed-v1.json
 ```
 
-Both probes fit on head fold 0 of the training partition. The canonical run selects among linear and approximate RBF candidates on an inner source-separated development fold. The exact RBF SVM uses `C=16` and fits a sigmoid to out-of-fold margins from three source-group folds. Each fold fits its own scaling, PCA and SVM, keeping all variations of a source together. The SVM rebuilds these folds for the final fit on the full permitted head-training set.
+All three probes fit on head fold 0 of the training partition. The canonical run selects among linear and approximate RBF candidates on an inner source-separated development fold. The exact RBF SVM uses `C=16` and fits a sigmoid to out-of-fold margins from three source-group folds. Each fold fits its own scaling, PCA and SVM, keeping all variations of a source together. The third run fixes logistic regularization at `C=0.1` and doubles the sampling caps. It reuses existing vectors and extracts only the additional documents. Use `--cached-only` once that expanded cache is complete.
 
 The separate Deep cache holds numeric document features, labels, word counts, hashed document/source/stratum identifiers and the optional encoder vectors. Its metadata records dataset coverage, checkpoint digests, the runtime profile and the selection digest.
 
@@ -130,6 +136,7 @@ Repeat `--probe` to compare independently trained encoder probes in one CPU run 
 uv run vibechecker-eval deep-refit --model-in eval/artifacts/deep-qwen7b-q4-p512-v1.joblib \
   --cache eval/.cache --features eval/artifacts/frozen-features.sqlite \
   --probe eval/artifacts/encoder-canonical-guarded-v1.joblib --probe eval/artifacts/encoder-svm-c16-guarded-v1.joblib \
+  --probe eval/artifacts/encoder-logistic-expanded-guarded-fixed-v1.joblib \
   --model-out eval/artifacts/selected.joblib --selection-out eval/artifacts/validation-selection.json
 ```
 
