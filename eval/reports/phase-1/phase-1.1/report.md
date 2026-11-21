@@ -20,6 +20,42 @@ The guarded policy's 95% Wilson interval is **4.41–25.31%** on Liang and **0.8
 
 The score-adjustment candidate chose exponent **1** in both supported calibration cells. Its decisions and probabilities exactly reproduce the empirical policy. High-band cutoffs alone cannot alter ten-bin ECE. Historical pooled ECE was **0.0229**, with **0.1800** on four paraphrases. Prospective pooled ECE was **0.0087**, with **0.1250** on eight Cohere documents. In the combined analysis, the 23 Liang admissions essays of 600–1,199 words had ECE **0.1378**, the largest error after adding source-by-length groups.
 
+## Source and length results
+
+Human and machine columns give high-band counts in v4 / empirical / guarded order. The score-adjusted policy matched the empirical policy in every cell. The machine-readable scorecards also give Wilson intervals and the generator, attack, writer and genre breakdowns.
+
+### Original test
+
+| Source | Words | Human N | Human high | Machine N | Machine high | ECE |
+|---|---|---:|---:|---:|---:|---:|
+| asap | 300-599 | 24 | 0 / 0 / 0 | 0 | — | 0.0000 |
+| asap | 600-1199 | 2 | 0 / 0 / 0 | 0 | — | 0.0000 |
+| ellipse | 300-599 | 23 | 0 / 0 / 0 | 0 | — | 0.0000 |
+| ellipse | 600-1199 | 6 | 0 / 0 / 0 | 0 | — | 0.0000 |
+| liang/college | 300-599 | 13 | 2 / 2 / 2 | 5 | 5 / 5 / 5 | 0.0633 |
+| liang/college | 600-1199 | 23 | 4 / 6 / 2 | 0 | — | 0.1378 |
+| liang/hewlett | 300-599 | 23 | 0 / 0 / 0 | 0 | — | 0.0000 |
+| liang/hewlett | 600-1199 | 1 | 0 / 0 / 0 | 0 | — | 0.0000 |
+| raid-attacks | 300-599 | 1 | 1 / 1 / 1 | 24 | 24 / 24 / 24 | 0.0308 |
+| raid | 1200+ | 1 | 0 / 0 / 0 | 0 | — | 0.0000 |
+| raid | 300-599 | 26 | 1 / 1 / 0 | 40 | 40 / 40 / 40 | 0.0132 |
+| raid | 600-1199 | 9 | 0 / 0 / 0 | 0 | — | 0.0133 |
+
+### Independent audit
+
+| Source | Words | Human N | Human high | Machine N | Machine high | ECE |
+|---|---|---:|---:|---:|---:|---:|
+| asap | 1200+ | 1 | 0 / 0 / 0 | 0 | — | 0.0000 |
+| asap | 300-599 | 58 | 1 / 1 / 0 | 0 | — | 0.0119 |
+| asap | 600-1199 | 56 | 0 / 0 / 0 | 0 | — | 0.0014 |
+| ellipse | 1200+ | 1 | 0 / 0 / 0 | 0 | — | 0.0000 |
+| ellipse | 300-599 | 73 | 1 / 2 / 1 | 0 | — | 0.0105 |
+| ellipse | 600-1199 | 42 | 1 / 1 / 0 | 0 | — | 0.0150 |
+| raid-attacks | 300-599 | 0 | — | 86 | 86 / 86 / 86 | 0.0078 |
+| raid | 1200+ | 8 | 0 / 0 / 0 | 0 | — | 0.0000 |
+| raid | 300-599 | 9 | 0 / 0 / 0 | 92 | 91 / 91 / 89 | 0.0143 |
+| raid | 600-1199 | 9 | 0 / 0 / 0 | 0 | — | 0.0000 |
+
 ## How the policies were fitted
 
 The M6 scored numeric feature rows through the frozen v4 readout after reproducing the historical alias quarantine. The fit used 1,346 ordinary calibration documents, including 914 humans. No Liang record entered this fit. The guarded rule used cutoff 24 in the pooled and 300–599-word cells, and 80 for 600–1,199 words. Source-by-length overrides included 58 for short eligible ASAP essays and 85 for short eligible RAID passages. Every eligible cell, threshold and fallback is in the policy receipt. On 268 development documents the guarded rule flagged 2/138 human essays and detected 77/80 machine texts. The empirical cutoffs flagged 8/138 and detected 78/80. Worst development ECE was 0.4800 for both. The frozen policy SHA-256 is `307b8dee047d15668858b8150146ffa6d84d2fc203627da81984de38bee0a0e9`. [Development scorecards](validation.json) · [Fit receipt](policy.json)
@@ -34,7 +70,27 @@ The coverage sensitivity analysis adds the 36 historical humans to the 435 prosp
 
 The pinned release has **91 records, 90 distinct normalized texts**, ranging from 62 to 148 words. Product Deep refused all 91 as too short. The M6 research run processed the original text of every record through the v4 pair, encoder probe, stacker and length fallback. At cutoff 24 the false-positive rate was **24/91 (26.37%, 95% Wilson 18.41–36.25%)**. The duplicate was below cutoff. The distinct-text estimate was **24/90 (26.67%)**. The guarded policy also flagged 24/91. The empirical and score-adjusted policies used the pooled fallback of 21 and flagged **32/91 (35.16%)**. The release-length TOEFL gate still has zero eligible observations.
 
+## Workstation hardware
+
+The tailnet workstation ran Ubuntu 24.04.4 LTS on a Ryzen 9 9950X3D with one GeForce RTX 5090 (32,607 MiB, driver 595.99.02). The locked environment used MLX 0.32.4, mlx-lm 0.32.2, Torch 2.15.0 and Transformers 5.23.0. Both local runs used the same v4 digest, checkpoint and tokenizer hashes, prefill, held-out IDs and UTF-16 offsets as the M6 report.
+
+The full CUDA replay took **137.22 s**. All **221 indexes** and **5,236 sentence spans** matched the archived M6 Metal trace. One sentence exceeded the 0.02 limit. Its score was 0.253382 on Metal and 0.228442 on CUDA, a difference of **0.024940**. The workstation comparison fails the sentence gate. The first CUDA attempt exhausted memory in the Quick LM. Limiting the MLX scratch cache to 512 MiB and total MLX memory to 23 GiB left room for the Torch encoder during the successful replay.
+
+The repository's Quick LM parity command also compared 127 next-token predictions on the public Thoreau fixture. CUDA versus native MLX CPU maximum absolute differences were 0.025280 in log probability, 12 rank positions and 0.021815 in entropy. Against Torch CPU fp32 they were 0.025122, 13 and 0.021211 respectively.
+
+Only the workstation container `beat-ad-beta-backup-1` was paused. The following times are Shanghai time on 21 November 2026. Docker reported running and unpaused before and after each window.
+
+| Workload | Paused | Restored | Elapsed |
+|---|---:|---:|---:|
+| Initial CUDA replay, memory exhaustion | 15:34:41 | 15:35:53 | 72 s |
+| Complete 221-document CUDA replay | 15:36:19 | 15:38:40 | 141 s |
+| Quick token comparison | 15:39:13 | 15:39:21 | 8 s |
+
+The CPU-only reference ran with CUDA hidden. The backup ran throughout the remaining CPU work. The original plan still requires the Falcon L40S bf16 reference and hosted measurements. Modal remains on hold.
+
 ## Reproduction
+
+Software verification passed all 103 baseline M6 Python tests in 5.39 s and all 108 tests with the five added cases in 4.78 s. On Windows with Node 24.19.0 and pnpm 10.30.2, `pnpm verify` passed contract generation checks, TypeScript and all 13 unit tests in 5.80 s. The final production-build Playwright run passed all 13 tests in 11.9 s with `pnpm --filter @vibechecker/web e2e`. On the M6 the command was `PYTHONPATH=engine/src:eval/src:services/inference/src ~/vibechecker/venv/bin/python -m pytest -q`.
 
 Run from the repository root with the pinned Python environment. On the M6, `$research` is the existing `~/vibechecker/phase1-check` directory, `$cache` is `~/vibechecker/eval/.cache`, and `$output` is a separate research output directory. Set the four checkpoint paths, the v4 joblib, Metal backend and Quick prefill 512 as in the Phase 1 evidence. The v4 artifact SHA-256 is `aeafbb70201caec3029b24799faedd8fee89aacf5ef1bdf09e1eee2673b82d9b`. Fitting took 2.06 s wall time, the TOEFL measurement took 60.48 s including model load, and the final cohort replay took 11.56 s.
 

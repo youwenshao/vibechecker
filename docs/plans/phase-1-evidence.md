@@ -1,5 +1,13 @@
 # Phase 1 verification
 
+## Phase 1.1 decision
+
+**Deep v4 remains ineligible.** Calibration-only fits froze three post-processing policies before final replay. The guarded high cutoff reduced original human-essay errors from 6/115 to 4/115 and Liang admissions errors from 6/36 to 4/36. The empirical policy raised them to 8/115 and 8/36. Every policy retained worst-group ECE of 0.1800 on the historical test and 0.1250 on the independent audit against a limit of 0.08. The guarded rule also lost two generated Cohere Chat detections. [Thresholds, support and fallback](../../eval/reports/phase-1/phase-1.1/policy.json) · [Source-by-length results and blockers](../../eval/reports/phase-1/phase-1.1/report.md)
+
+Of the 70 pinned human admissions essays, 30 belonged to development, 36 were historical scored documents and four triggered the historical language refusal. Adding the 36 historical controls to the audit gave 5/267 guarded false positives (1.87%, 95% Wilson 0.80–4.31%), including 4/36 on admissions essays (11.11%). The independent reservation has no fresh eligible admissions source. The prospective human-FP gate now records incomplete coverage. All 91 TOEFL records were measured offline at their original lengths of 62–148 words. The frozen and guarded rules flagged 24/91 (26.37%). Deep refused all 91 through normal admission. [Membership, estimates and intervals](../../eval/reports/phase-1/phase-1.1/metrics.json)
+
+The RTX 5090 reproduced all 221 M6 Metal indexes and all 5,236 sentence spans. One sentence exceeded the 0.02 difference limit at 0.02494. The backup container resumed after each GPU run. The Modal hold, Falcon L40S reference and hosted training remain outstanding. [Workstation measurements, backup windows and test results](../../eval/reports/phase-1/phase-1.1/report.md)
+
 ## Pair selection
 
 The 4-bit and 6-bit Qwen2.5-7B pairs scored the same 54 validation documents. Both reached an essay TPR of 60% at the 1% FPR operating point. Neither placed any of the nine ESL essays in the high band (95% Wilson interval 0–29.9%). The prespecified memory tie-break advanced the 4-bit pair to testing. The validation process peaked at 12.91 GiB with 4 bits and 16.51 GiB with 6 bits. Mixed-sentence F1 was 0.731 and 0.755 respectively. The missing bf16 comparison keeps production selection open. [Bake-off](../../eval/reports/phase-1/bakeoff.json) · [4-bit validation](../../eval/reports/qwen-4bit-v1/report.md) · [6-bit validation](../../eval/reports/qwen-6bit-v1/report.md)
