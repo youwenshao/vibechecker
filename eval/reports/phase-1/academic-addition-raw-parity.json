@@ -1,0 +1,17 @@
+{
+  "scheme": "academic-frozen-scoring-parity-v1",
+  "selected": "academic-anchor0.75",
+  "model_sha256": "aeafbb70201caec3029b24799faedd8fee89aacf5ef1bdf09e1eee2673b82d9b",
+  "selection_sha256": "6603c6b6e3e0d16412e0bd8da5b543f96eca26beecedbd6cc081b11cf620cbe6",
+  "study_sha256": "b8c016ede7a96517b7375d79ae9655f738c4e10458d2492d60c8b58bfac66eb0",
+  "production_replay": {
+    "documents": 6,
+    "ordinary_academic_machine": 2,
+    "independent_native_human": 4,
+    "exact_index_interval_band": 6,
+    "serving_backend": "mlx-metal",
+    "quick_prefill": 512,
+    "input_ids_sha256": "1d82dfd77192d89c35c86f49285b6e816f739e4d1eaea55b155a19ab12c43c96",
+    "max_abs_display_signal_delta": 0.0
+  }
+}
