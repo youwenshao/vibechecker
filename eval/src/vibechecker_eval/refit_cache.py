@@ -2,6 +2,7 @@
 
 import hashlib
 import json
+import re
 import sqlite3
 import sys
 from collections import Counter, defaultdict
@@ -74,6 +75,23 @@ def runtime_identity():
         except metadata.PackageNotFoundError:
             continue
     return {"engine_source_sha256": implementation, "packages": packages}
+
+
+def same_numeric_runtime(expected, actual):
+    """Allow the audited prefill guard that leaves every numerical operation identical."""
+    if not isinstance(expected, dict) or not isinstance(actual, dict):
+        return False
+    packages = expected.get("packages")
+    if not isinstance(packages, dict) or not packages or packages != actual.get("packages"):
+        return False
+    a, b = expected.get("engine_source_sha256"), actual.get("engine_source_sha256")
+    if not all(isinstance(v, str) and re.fullmatch(r"[0-9a-f]{64}", v) for v in (a, b)):
+        return False
+    # See eval/reports/phase-1/feature-runtime-equivalence.json for both full identities.
+    return a == b or {a, b} == {
+        "cc57e02c051f8fff9fdbc457710298c8f490ac315d2f19f3aa37b55b89ae16e9",
+        "df82c5ac6314d568f7d87cdcb3ed4d40586a71880b3448a71e78379fb556aa1c",
+    }
 
 
 def _initialize(db, provenance):

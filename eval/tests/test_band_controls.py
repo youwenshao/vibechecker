@@ -4,6 +4,24 @@ import numpy as np
 import pytest
 from scipy.stats import binom
 from vibechecker_eval.band_controls import ControlRows, calibrate_high_band, high_cutoff
+from vibechecker_eval.refit_cache import same_numeric_runtime
+from vibechecker_eval.rewrite_verification import reference_specificity
+
+
+def test_numeric_cache_equivalence_is_limited_to_audited_guard():
+    historical = {
+        "engine_source_sha256": "cc57e02c051f8fff9fdbc457710298c8f490ac315d2f19f3aa37b55b89ae16e9",
+        "packages": {"mlx": "0.32.4"},
+    }
+    current = {
+        **historical,
+        "engine_source_sha256": "df82c5ac6314d568f7d87cdcb3ed4d40586a71880b3448a71e78379fb556aa1c",
+    }
+    assert same_numeric_runtime(historical, historical)
+    assert same_numeric_runtime(historical, current)
+    assert not same_numeric_runtime(historical, {**current, "packages": {"mlx": "different"}})
+    assert not same_numeric_runtime(historical, {**current, "engine_source_sha256": "0" * 64})
+    assert not same_numeric_runtime({}, {})
 
 
 def test_cutoff_keeps_ties_and_existing_cutoff():
@@ -44,3 +62,9 @@ def test_calibrated_band_uses_only_independent_essay_fit_sources():
     assert (stacker.low_threshold, stacker.high_threshold) == (2, 84)
     assert report["fit_by_source"]["ellipse"] == {"n": 224, "before": 4, "after": 0}
     assert report["n"] == 448
+    # Specificity verification uses the two held-back sources at the frozen cutoff.
+    indices[:] = np.nan
+    indices[-2:] = [0.84, 0.83]
+    specific = reference_specificity(stacker, None, controls)["high_fpr"]
+    assert specific["persuade"]["count"] == specific["persuade"]["denominator"] == 1
+    assert specific["raid"]["rate"] == 0

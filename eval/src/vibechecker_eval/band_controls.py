@@ -12,9 +12,10 @@ import numpy as np
 from scipy.stats import binom
 from threadpoolctl import threadpool_limits
 
+from .deep_runner import _progress
 from .loaders import examples, fingerprint
 from .refit import append_probe
-from .refit_cache import runtime_identity
+from .refit_cache import runtime_identity, same_numeric_runtime
 from .registry import registry, select, sha256
 from .source_groups import human_source_aliases, source_key
 
@@ -156,7 +157,7 @@ def collect_controls(args):
                 "INSERT OR IGNORE INTO meta VALUES ('manifest',?)",
                 (json.dumps(manifest, sort_keys=True),),
             )
-        for key, group, n, source, item in plan:
+        for key, group, n, source, item in _progress("Independent human controls", plan, len(plan)):
             previous = cached.get(key)
             if previous and previous[:3] != (group, n, source):
                 raise ValueError("Calibration document metadata differs from its source")
@@ -202,7 +203,7 @@ class ControlRows:
 
 
 def load_band_controls(
-    path, *, expected_sha256, parent, parent_sha256, excluded_ids, excluded_groups
+    path, *, expected_sha256, expected_runtime, parent, parent_sha256, excluded_ids, excluded_groups
 ):
     from vibechecker_engine.deep import DEEP_FEATURE_NAMES
 
@@ -216,7 +217,9 @@ def load_band_controls(
         if (
             meta.get("complete") != "1"
             or manifest["scheme"] != SCHEME
+            or not same_numeric_runtime(expected_runtime, manifest["runtime"])
             or manifest["caps"] != CAPS
+            or manifest["source_aliases"] != parent.refit_provenance["source_aliases"]
             or binding["weights"] != parent.identity
             or binding["quick_prefill"] != parent.fit_selection["quick_prefill"]
             or binding["parent_sha256"] != parent_sha256
@@ -265,6 +268,7 @@ def load_band_controls(
     provenance = {
         "scheme": SCHEME,
         "database_sha256": expected_sha256,
+        "runtime": manifest["runtime"],
         "selection_sha256": manifest["selection"],
         "parent_sha256": binding["parent_sha256"],
         "selected": dict(counts),

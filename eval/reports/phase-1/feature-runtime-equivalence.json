@@ -1,0 +1,43 @@
+{
+  "original_runtime": {
+    "engine_source_sha256": "cc57e02c051f8fff9fdbc457710298c8f490ac315d2f19f3aa37b55b89ae16e9",
+    "packages": {
+      "mlx": "0.32.4",
+      "mlx-lm": "0.32.2",
+      "numpy": "2.5.5",
+      "scikit-learn": "1.9.1",
+      "torch": "2.15.0",
+      "transformers": "5.23.0"
+    }
+  },
+  "verified_runtime": {
+    "engine_source_sha256": "df82c5ac6314d568f7d87cdcb3ed4d40586a71880b3448a71e78379fb556aa1c",
+    "packages": {
+      "mlx": "0.32.4",
+      "mlx-lm": "0.32.2",
+      "torch": "2.15.0",
+      "transformers": "5.23.0",
+      "numpy": "2.5.5",
+      "scikit-learn": "1.9.1"
+    }
+  },
+  "original_deep_source_sha256": "162e5b08d9e1d6db02178da5e95d3e93d76d301148a8b93ceb204756777b054b",
+  "verified_deep_source_sha256": "2ca80f632839330ca28722670cd743ad60d3d6c6f531390f41a0134c9fe79101",
+  "identical_numeric_files": [
+    "signals.py",
+    "heads.py",
+    "text.py",
+    "backends/__init__.py",
+    "backends/base.py",
+    "backends/falcon.py",
+    "backends/memory.py",
+    "backends/mlx.py",
+    "backends/pair.py"
+  ],
+  "numeric_ast_sha256": "1883e8fff02d8453d8c8e69a19e21567393b738bbb2ea9ca6baeb9380a1fc2bf",
+  "ast_comparison": "All of deep.py is AST-identical after removing one added guard in DeepModel.verify. The guard raises ValueError when the configured Quick prefill differs from the training prefill. Both runs used 512.",
+  "profile": {
+    "backend": "mlx-metal",
+    "quick_prefill": 512
+  }
+}
