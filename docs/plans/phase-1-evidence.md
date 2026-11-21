@@ -66,7 +66,13 @@ Seven matched academic source pairs entered stack fitting and five entered calib
 
 On the original **221 documents**, v4 had pooled expected calibration error **0.0229** and worst-stratum error **0.1800**, in the four-document paraphrase stratum. Human essays in the high band increased from **3/115** for v2 to **6/115** for v4 (5.22%, 95% Wilson interval 2.41–10.92%). All six were among 36 human college essays from Liang. Zero of the 32 eligible ESL essays reached the high band. The held-out mixed-sentence F1 was 0.6316, and every historical sentence span and score matched the v2 trace. The worst-stratum, human-essay false-positive and regression gates failed. [v4 historical scorecard](../../eval/reports/phase-1/report.md) · [Full metrics and regression reference](../../eval/reports/phase-1/report.json)
 
+Of **512 independently reserved documents**, the M6 scored **435** (257 human and 178 generated). The English-language check refused 77. Pooled ECE was **0.0087** and the worst stratum was **0.1250** on eight Cohere documents. Three of 231 human essays reached the high band (1.30%, 95% Wilson interval 0.44–3.75%), including two of 122 ESL essays. The audit contained no Liang admissions essays and no generated essay-domain documents, so essay AUROC was unmeasured. Mixed-sentence F1 was 0.669 across 2,895 sentences. Source-group and document commitments, model digest, checkpoint weights and score-to-bin arithmetic were verified. Both final evaluations exceed the worst-stratum limit of 0.08. [Independent M6 scorecard](../../eval/reports/phase-1/prospective/report.md) · [Metrics, intervals and refusal counts](../../eval/reports/phase-1/prospective/report.json) · [Score-blind reservation](../../eval/reports/phase-1/prospective-audit-reservation.json)
+
+The college-writing source review found independent human university coursework suitable for a separate research study. The published admissions comparisons with same-prompt machine essays withhold the original human texts. The public four-origin rewrite benchmark lacks the writer and parent identifiers needed to keep these sources separate across fitting and evaluation. The project treats the pinned Liang essays as test material. [College-writing coverage, source terms and measured eligibility](../../eval/reports/phase-1/college-source-coverage.md)
+
 ## Software verification
+
+For the final academic model, all **103 Python tests passed on the M6**. Linux CPU passed 102 with one Metal-only skip. The six predeclared raw-text development replays matched the production word counts, indexes, intervals, bands and all eight displayed signals. Contract generation, TypeScript and 13 web unit tests passed. All 13 Playwright tests passed against the production build, including the English audit counts, both calibration figures in the worst-group row, the bilingual page, mobile layout and accessibility checks. [M6 production replay](../../eval/reports/phase-1/academic-addition-raw-parity.json)
 
 The initial Phase 1 implementation passed all 53 Python tests on the M6. Linux CPU passed 52 with the Metal-only case skipped. The pinned SmolLM2 pair produced identical E3 and E4 values on Linux with a fresh download and an offline cache. The generated contracts matched their schemas, TypeScript compiled and all 13 web unit tests passed. All 13 Playwright tests passed against the production build and the measured scorecard, including keyboard access, axe checks, retry after interrupted streaming and verification of the calibration chart's values. Both SQL test files passed on a disposable Supabase PostgreSQL 17 instance.
 
@@ -111,4 +117,23 @@ VIBECHECKER_QUICK_PREFILL=512 uv run vibechecker-eval deep \
   --previous eval/reports/deep-qwen7b-q4-p512-v1/report.json \
   --bakeoff-report eval/reports/phase-1/bakeoff.json \
   --load-report engine/benchmarks/m6-phase1-calibration-v2.json
+```
+
+For v4, reproduce the [two-anchor fit](../../eval/reports/phase-1/academic-addition-protocol.md), verify the artifact SHA against the [selection receipt](../../eval/reports/phase-1/academic-addition-selection.json), and use the archived v2 scorecard for the original test comparison. The independent audit uses the same artifact and signed load record. From the M6 research directory with the recorded checkpoint environment, reproduce its membership and score it into a fresh report directory.
+
+```sh
+version=deep-qwen7b-q4-p512-v4
+. ../venv/bin/activate
+export PYTHONPATH=engine/src:eval/src
+python -m vibechecker_eval.prospective \
+  --cache ../eval/.cache --historical-audit prospective-audit/historical-membership.json \
+  --out prospective-audit/reservation-v1.json
+VIBECHECKER_QUICK_PREFILL=512 python -m vibechecker_eval.cli deep \
+  --datasets raid raid-attacks asap ellipse liang --cohort prospective \
+  --pair-family Qwen2.5-7B --seed 42 --version "$version" --model-in "$version.joblib" \
+  --audit-plan prospective-audit/reservation-v1.json \
+  --audit-plan-sha256 98e100bdc12a14cefbe35c88f6b48397577e4f11388978c007dbdea6aabaf170 \
+  --audit-model-sha256 aeafbb70201caec3029b24799faedd8fee89aacf5ef1bdf09e1eee2673b82d9b \
+  --cache ../eval/.cache --bakeoff-report bakeoff.json --load-report "$version.load.json" \
+  --reports audit-replay --trace-out "audit-replay/$version.metal.json"
 ```

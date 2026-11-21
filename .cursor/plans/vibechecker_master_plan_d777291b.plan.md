@@ -735,7 +735,7 @@ Monthly cost by scale:
   - Memory stays at or under 18 GB, and beat-ad's health is unchanged.
   - If a target is missed: switch to 4-bit weights, use a smaller pair, or overflow to Modal.
 
-The [Phase 1 verification record](../../docs/plans/phase-1-evidence.md) covers the local implementation, held-out evaluation and measured M6 workloads. The operator retained the hosted GPU hold for the L40S reference and CUDA parity runs.
+The [Phase 1 verification record](../../docs/plans/phase-1-evidence.md) covers the local implementation and measured M6 workloads. The [original 221-document test](../../eval/reports/phase-1/report.md) and [435-document independent audit](../../eval/reports/phase-1/prospective/report.md) both exceeded the worst-stratum calibration limit. The operator retained the hosted GPU hold for the L40S reference and CUDA parity runs.
 
 **Phase 2 (21 Dec-3 Jan): lenses, evidence kit, accounts.** Demo: a feature-complete beta.
 

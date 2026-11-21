@@ -253,6 +253,13 @@ type ReportData = {
 const deepReport: ReportData = JSON.parse(readFileSync(
   new URL("../../../eval/reports/phase-1/report.json", import.meta.url), "utf8",
 ));
+const auditReport = JSON.parse(readFileSync(
+  new URL("../../../eval/reports/phase-1/prospective/report.json", import.meta.url), "utf8",
+)) as {
+  scope: { reserved_documents: number };
+  metrics: { pooled: { count: number }; "genre/essay": { fpr_high: { count: number; denominator: number } } };
+  gates: { checks: { worst_stratum_ece: { value: number; target: number } } };
+};
 
 test("methodology shows measured cohorts separately and explains a change in the base rate", async ({ page }) => {
   await page.goto("/");
@@ -260,6 +267,17 @@ test("methodology shows measured cohorts separately and explains a change in the
   await expect(page.getByRole("heading", { name: "Calibration", exact: true })).toBeVisible();
   await expect(page.getByRole("rowheader", { name: "TOEFL essays" })).toBeVisible();
   const evidence = page.getByRole("region", { name: "Deep evaluation" });
+  const auditRegion = page.getByRole("region", { name: "Independent audit" });
+  await expect(auditRegion.getByText(new RegExp(`reserved ${auditReport.scope.reserved_documents} documents`))).toBeVisible();
+  await expect(auditRegion.getByRole("columnheader", { name: `Audit (${auditReport.metrics.pooled.count})` })).toBeVisible();
+  const errorRow = auditRegion.getByRole("row", { name: /Largest group calibration error/ });
+  const auditPercents = new Intl.NumberFormat("en", { style: "percent", maximumFractionDigits: 2 });
+  const worst = auditReport.gates.checks.worst_stratum_ece;
+  await expect(errorRow.getByRole("cell").nth(1)).toHaveText(auditPercents.format(worst.value));
+  await expect(errorRow.getByRole("cell").last()).toHaveText(auditPercents.format(worst.target));
+  const human = auditReport.metrics["genre/essay"].fpr_high;
+  await expect(auditRegion.getByRole("row", { name: /Human essays flagged high/ }).getByRole("cell").nth(1))
+    .toContainText(`(${human.count}/${human.denominator})`);
   const bins = deepReport.reliability_bins.filter(bin => bin.count > 0);
   if (bins.length) {
     const chart = evidence.getByRole("img", { name: "Calibration" });
