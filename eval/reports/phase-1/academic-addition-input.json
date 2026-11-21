@@ -1,0 +1,112 @@
+{
+  "scheme": "academic-origin-two-anchor-study-v1",
+  "study_sha256": "b8c016ede7a96517b7375d79ae9655f738c4e10458d2492d60c8b58bfac66eb0",
+  "training": {
+    "scheme": "academic-origin-additive-membership-v1",
+    "seed": 42,
+    "selection_rule": "Same declared scientific field; maximum-cardinality 1:1 groups by role at <=1.25 length ratio, then minimum absolute log length distance.",
+    "sources": {
+      "machine_manifest": "947dabae78ed133db961470f20848cc7e2ef6c122555f83a5a5f76a8e7a4a427",
+      "human_manifest": "3a0dc437997a6d698c6d0ce04105675f377bd6b55ceeda7ab593838aed5aad62",
+      "subjects": "1718a354596a10f621a97f44710d70cf35e2d9574187e92b759f12d4b41b5f95",
+      "machine_projection": "3069c18b603fcf9f6b2806f2c9522cbef8cb14ab7edf4cf745672b61e733ccf6",
+      "human_projection": "061a97823564348a1234c230ba46bf83fb456acac19029ddbfdf1a4b38ff3a84"
+    },
+    "available": {
+      "calibration/Crossref/publisher/machine_learning/native_human": 1,
+      "calibration/Crossref/publisher/vision/native_human": 4,
+      "calibration/RAID/algorithms_computing/machine_paraphrase": 1,
+      "calibration/RAID/biomedical_vision/machine_paraphrase": 10,
+      "calibration/RAID/language_speech/machine_paraphrase": 1,
+      "calibration/RAID/machine_learning/machine_paraphrase": 4,
+      "calibration/RAID/other/machine_paraphrase": 20,
+      "calibration/RAID/vision/machine_paraphrase": 12,
+      "external_human_development/Crossref/publisher/machine_learning/native_human": 2,
+      "external_human_development/Crossref/publisher/vision/native_human": 2,
+      "stack/Crossref/publisher/machine_learning/native_human": 1,
+      "stack/Crossref/publisher/networks_security/native_human": 1,
+      "stack/Crossref/publisher/vision/native_human": 3,
+      "stack/NCBI PMC/publisher JATS/biomedical_vision/native_human": 1,
+      "stack/NCBI PMC/publisher JATS/vision/native_human": 1,
+      "stack/RAID/algorithms_computing/machine_paraphrase": 3,
+      "stack/RAID/biomedical_vision/machine_paraphrase": 5,
+      "stack/RAID/machine_learning/machine_paraphrase": 3,
+      "stack/RAID/networks_security/machine_paraphrase": 1,
+      "stack/RAID/other/machine_paraphrase": 19,
+      "stack/RAID/vision/machine_paraphrase": 17
+    },
+    "accepted": {
+      "calibration/Crossref/publisher/machine_learning/native_human": 1,
+      "calibration/Crossref/publisher/vision/native_human": 4,
+      "calibration/RAID/machine_learning/machine_paraphrase": 1,
+      "calibration/RAID/vision/machine_paraphrase": 4,
+      "external_human_development/Crossref/publisher/machine_learning/native_human": 2,
+      "external_human_development/Crossref/publisher/vision/native_human": 2,
+      "stack/Crossref/publisher/machine_learning/native_human": 1,
+      "stack/Crossref/publisher/networks_security/native_human": 1,
+      "stack/Crossref/publisher/vision/native_human": 3,
+      "stack/NCBI PMC/publisher JATS/biomedical_vision/native_human": 1,
+      "stack/NCBI PMC/publisher JATS/vision/native_human": 1,
+      "stack/RAID/biomedical_vision/machine_paraphrase": 1,
+      "stack/RAID/machine_learning/machine_paraphrase": 1,
+      "stack/RAID/networks_security/machine_paraphrase": 1,
+      "stack/RAID/vision/machine_paraphrase": 4
+    },
+    "fit_pairs": {
+      "stack": 7,
+      "calibration": 5
+    },
+    "matched_document_pairs_sha256": {
+      "stack": "c5d0f7fc0b9463d07beb130aa0c019d826b79d0dbc956e56e1550d2b0b662322",
+      "calibration": "67ddf2f06788b3cae715d90d73e41de85f79ac3c1f69fd5a13b30309246429a9"
+    },
+    "independent_human_development": 4,
+    "independent_humans_in_fit_subject": 4,
+    "source_document_overlap": 0,
+    "source_group_overlap": 0,
+    "ready": true,
+    "selection_sha256": "c3d88b2b60160cd5430ea069cfe6d6d01e7d6459827d7965c2fa526f4ee21888",
+    "source_order_sha256": "3253fe842cf47db90dd7aa4ec4901f1cad361dab90810623ead9c433c4c813be"
+  },
+  "selection_sha256": "c3d88b2b60160cd5430ea069cfe6d6d01e7d6459827d7965c2fa526f4ee21888",
+  "v3_selection_sha256": "64e0bf423206b9d5406db375694fff30cc56b0a358971a96824ecc0e58526f88",
+  "incumbent_sha256": "8c8a23e4ecb5bdaaccee57516fb1d8f1b0703106748668b8af09e936846c915b",
+  "settings": {
+    "anchors": [
+      0.5,
+      0.75
+    ],
+    "max_leaf_nodes": 7,
+    "l2_regularization": 1.0,
+    "seed": 42,
+    "probe_sha256": "f091eed2f254fdd5285ec8cf6ee595b93539d7207eac8b34da2972be173099b9",
+    "bootstrap_curves": 200,
+    "reference_prior": 0.5
+  },
+  "ready": true,
+  "selection_rule": "Require all original v3 admissibility checks, preserve at least 90% of v2 high hits independently on 66 machine rewrites and 54 exact clean machine parents, and incur no additional high false positives on the disjoint native human development cohort. Rank admissible anchors by primary worst-stratum ECE, primary pooled ECE, matched stress Brier, then anchor.",
+  "plan_file_sha256": "2515cd98323398edeac23c20d54ffc91bc739decfc6d08225a38113501f5a058",
+  "file_sha256": {
+    "academic_binding": "e128a3bab5fa2905194fa87fd69007f95ed26d60bfc31b7aa18b2f7aaf79930b",
+    "academic_features": "0b423d310914fb1480fe21371409172704600c7f3d32c38ebea9c676ab3fcb08",
+    "academic_plan": "85f43e81a060034a8f106dd2c0e271592f417855f3d197fb2a28bd2c4de45e9e",
+    "band_controls": "4eb4bb77c5cd21f879b8b84838b34eff75e8c908430b37855c8929438f4701c6",
+    "base_features": "45af31948cb305156d5806ea8434f5a6746746706a335203bde05a3b69b4056c",
+    "encoder_expanded": "2260c5871cfbede3efa6b5e8f0205ab19c483f0281dd87c05b0bad746a66c374",
+    "encoder_original": "0babebd828444a10fff6f48a22e4d248d6a7a797e60443908acb1f3ec0194a38",
+    "human_manifest": "3a0dc437997a6d698c6d0ce04105675f377bd6b55ceeda7ab593838aed5aad62",
+    "human_projection": "061a97823564348a1234c230ba46bf83fb456acac19029ddbfdf1a4b38ff3a84",
+    "machine_manifest": "947dabae78ed133db961470f20848cc7e2ef6c122555f83a5a5f76a8e7a4a427",
+    "machine_projection": "3069c18b603fcf9f6b2806f2c9522cbef8cb14ab7edf4cf745672b61e733ccf6",
+    "probe": "f091eed2f254fdd5285ec8cf6ee595b93539d7207eac8b34da2972be173099b9",
+    "rewrite_sidecar": "196a1078333676eeff8ff1b0022bb6e21c5246096373537312b591ef6f716d50",
+    "rewrite_supplement": "5ab5814717ef46f5fc9f849704503fe49f5434a479e0970911a81339e94a00df",
+    "subjects": "1718a354596a10f621a97f44710d70cf35e2d9574187e92b759f12d4b41b5f95",
+    "v1_parent": "f8ea825f8a1793084233e2cb3786e8aec200ce8d579d605684f2c30c765ac2a5",
+    "v2_incumbent": "8c8a23e4ecb5bdaaccee57516fb1d8f1b0703106748668b8af09e936846c915b",
+    "v2_selection": "839b8dfb7bc1188392195d850680adcb994ca37cebcbf28dd0a46bd7705ee5e0",
+    "v3_selection": "64e0bf423206b9d5406db375694fff30cc56b0a358971a96824ecc0e58526f88"
+  },
+  "numeric_features_extracted": false,
+  "candidate_predictions_computed": false
+}
