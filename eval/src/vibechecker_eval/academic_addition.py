@@ -39,6 +39,12 @@ def freeze(paths, study_sha):
     parent_json = json.loads(paths["v3_selection"].read_bytes())
     previous = parent_json["protocol"]["supplement"]
     original = json.loads(paths["machine_manifest"].read_bytes())
+    human = json.loads(paths["human_manifest"].read_bytes())
+    if (
+        human["corpus_identity_scope"]["normalized_documents"]
+        != previous["isolation"]["distinct_input_document_hashes"]
+    ):
+        raise ValueError("Native-paper identity audit did not cover the original complete corpus")
     for native, expected in (
         ("historical_sha256", "historical_envelope_sha256"),
         ("prospective_sha256", "prospective_reservation_sha256"),

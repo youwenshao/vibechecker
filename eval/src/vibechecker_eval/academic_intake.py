@@ -17,6 +17,13 @@ from .rewrite_sidecar import metadata_hash
 
 FIT_ROLES = ("stack", "calibration")
 HUMAN_DEV = "external_human_development"
+HUMAN_ISOLATION = {
+    "cross_corpora_document_overlaps",
+    "known_positive_author_overlaps",
+    "matched_original_author_keys_on_another_machine_group_in_96",
+    "upstream_title_overlaps",
+    "within_selected_author_overlap",
+}
 SEED = 42
 MACHINE_SCHEME = "raid-academic-machine-paraphrase-candidates-v1"
 ISOLATION = {
@@ -231,8 +238,11 @@ def project(paths):
             "Scientific subject evidence must bind the exact machine source projection"
         )
     map_by_group = subjects["groups"]
-    if human_manifest.get("scheme") != "pre2020-academic-human-reference-v1" or any(
-        human_manifest["isolation"].get(k) != 0 for k in ISOLATION
+    if (
+        human_manifest.get("scheme") != "pre2020-academic-human-reference-v1"
+        or human_manifest["positive_projection_sha256"] != sha256(paths["machine_projection"])
+        or human_manifest["source_map_sha256"] != sha256(paths["subjects"])
+        or any(human_manifest["isolation"].get(k) != 0 for k in HUMAN_ISOLATION)
     ):
         raise ValueError("Human reference projection lacks authenticated source/family isolation")
     old_ids, old_groups = protected_keys(paths)

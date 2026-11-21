@@ -47,7 +47,7 @@ def test_frozen_projection_requires_independent_human_common_support(tmp_path, m
         p.write_text("{}")
     scopes = {
         "scheme": "pre2020-academic-human-reference-v1",
-        "isolation": dict.fromkeys(academic_intake.ISOLATION, 0),
+        "isolation": dict.fromkeys(academic_intake.HUMAN_ISOLATION, 0),
     }
 
     def doc(key, gen):
@@ -86,6 +86,10 @@ def test_frozen_projection_requires_independent_human_common_support(tmp_path, m
         },
     }
     paths["subjects"].write_text(json.dumps(mapping))
+    scopes.update(
+        positive_projection_sha256=sha256(paths["machine_projection"]),
+        source_map_sha256=sha256(paths["subjects"]),
+    )
     monkeypatch.setattr(
         academic_intake,
         "projection",
