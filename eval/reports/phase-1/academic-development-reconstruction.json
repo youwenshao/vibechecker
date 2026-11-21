@@ -1,0 +1,28 @@
+{
+  "scheme": "reconstructed-academic-development-v1",
+  "prior_report_sha256": "36107af4a5f15c471c43b9cff7cbb315898d2abc98c705bb84ba990161276324",
+  "documents": 131,
+  "groups": 66,
+  "kinds": {
+    "same_prompt_clean": 11,
+    "rewrite": 66,
+    "original_clean": 54
+  },
+  "domains": {
+    "abstracts": 131
+  },
+  "rewrite_generator_counts": {
+    "gpt2": 25,
+    "llama-chat": 12,
+    "mistral": 9,
+    "mistral-chat": 2,
+    "mpt": 17,
+    "mpt-chat": 1
+  },
+  "rewritten_document_sha256": "b18ff18666e100f301eb7f6a989c7a9be271c39c4111e3c4ae764374b8c5d6e1",
+  "rewritten_group_sha256": "0660962a130684d6dbe7dcfd9ce3d73cc23bf0b0a6c0d8fd9a413793b1a51b39",
+  "scored_document_sha256": "cb2026680dea4d024c818a37f166316d6afd65c6d2a85bad15dd6904ad149923",
+  "plan_sha256": "d514a0e6019336257ed8bc4144c4adf89e3d4ae574e0280534ac89f1977d42c2",
+  "primary_development_group_overlap": 0,
+  "feature_or_prediction_computed": false
+}

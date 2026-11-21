@@ -40,6 +40,8 @@ Training accepts `--commercial-only` and fails explicitly if the resulting train
 
 The paired rewrite study covers human- and machine-origin paraphrases from two English domains. Its source audit, licensing and reproduction command are documented in the [Phase 1 rewrite supplement](reports/phase-1/rewrite-origin-supplement.md).
 
+The [paraphrase development audit](reports/phase-1/paraphrase-development.md) traces frozen model probabilities through calibration and checks the publisher parents of academic rewrites. It includes commands to reconstruct the separate 66-source academic development cohort and its original clean controls.
+
 Fit from pinned local checkpoints. `VIBECHECKER_LM` and `VIBECHECKER_ENCODER` point to the Quick models. `VIBECHECKER_PAIR_OBSERVER` points to the base model and `VIBECHECKER_PAIR_PERFORMER` to its instruct counterpart. Sampling, training and validation run locally on the named MLX backend. Use the same file contents on both inference hosts.
 
 ```sh
