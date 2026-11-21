@@ -18,6 +18,8 @@ The benchmark uses signed HTTP on M6 loopback, following one unmeasured warm-up 
 
 The first 4-bit candidate, `deep-qwen7b-q4-p512-v1`, completed all 120 requests. Quick p95 was **1.967 s** at five-way concurrency. Deep p95 was **12.146 s**, with first sentence chunks at **1.043 s** p95. Its lifetime peak was **15.45 GiB**. The backup job remained loaded with last exit code 0 in all 21 samples and completed two runs during the test. The service used 512-token prefill and the optimized Unicode preparation path. [Full load record](../../engine/benchmarks/m6-phase1-qwen-4bit-prefill512.json)
 
+The refitted `deep-qwen7b-q4-p512-v2` also completed all 100 Quick and 20 Deep requests. Quick p95 was **1.999 s** against a 2.000 s limit. Deep p95 was **12.221 s** and peak physical footprint was **14.63 GiB**. The backup job passed all 21 health samples and completed two runs. The load record binds the model SHA-256 and 512-token prefill to the artifact selected on validation. [Refitted load record](../../engine/benchmarks/m6-phase1-calibration-v2.json)
+
 The smaller-pair run completed all 20 Deep requests at p95 1,831 ms. Of 100 concurrent-workload Quick requests, 99 completed at p95 3,064 ms and one received HTTP 503. Peak physical footprint was 5.16 GiB. The backup job stayed loaded with last exit code 0 throughout. [SmolLM2 load report](../../engine/benchmarks/m6-phase1-smol.json)
 
 Raising Quick's prefill from 64 to 256 tokens and batching full encoder windows reduced single-request Quick p95 from 631 to 404 ms on the public fixture. All nine document features and the displayed verdict matched on that input. The 4-bit Qwen service with this profile completed all 100 Quick and 20 Deep requests. Quick p95 was 2.204 s, Deep p95 was 12.438 s and peak physical footprint was 13.99 GiB. The backup daemon recorded two additional runs with last exit code 0. [Prefill comparison](../../engine/benchmarks/m6-phase1-prefill.json) · [Qwen load report](../../engine/benchmarks/m6-phase1-qwen-4bit.json)
@@ -44,6 +46,10 @@ A third candidate kept logistic regularization fixed and expanded the head-train
 
 The stacker used 680 training documents and 1,346 calibration documents. All 15 candidates were compared on the same 268 validation documents from 265 source groups. The selected seven-leaf stacker assigns 75% weight to the expanded logistic probe's log-odds before isotonic calibration. Validation pooled ECE fell from 0.0486 to 0.0124. The largest validation error fell from 0.7600 to 0.5000 in the two-document paraphrase stratum, above the 0.08 limit. The other previously passing quality gates still passed. All 268 indexes matched when scored individually through the serving predictor. The selected artifact SHA-256 was `8c8a23e4ecb5bdaaccee57516fb1d8f1b0703106748668b8af09e936846c915b`. [Validation selection](../../eval/reports/phase-1/calibration-selection.json) · [Serving comparison](../../eval/reports/phase-1/calibration-validation-parity.json)
 
+The 300–599-word stratum had enough calibration examples for its own isotonic curve. Longer eligible documents use the pooled curve. Both use the 50/50 reference prior and 200 bootstrap curves. The existing human false-positive targeting rule kept the mixed-band cutoff at index 1 and moved the high-band cutoff from 93 to 12.
+
+On the same 221 held-out M6 documents, pooled ECE fell from **0.0801 to 0.0211**, below 0.05. Worst-stratum ECE fell from **0.8300 to 0.2500**, above 0.08. The four-document Cohere stratum improved to 0.0500. The four-document paraphrase stratum was the new worst, and ECE on 36 human college essays was 0.0900. Three of 115 human essays reached the high band (2.61%, above 2%), including zero of the 32 ESL essays. Essay AUROC was 0.9957 on 115 human and five generated essays. All sentence spans and scores matched the historical trace, including mixed-document F1 of 0.6316. The worst metric regression against the unreleased v1 candidate exceeded the 0.01 limit. TOEFL, the hosted reference and CUDA parity remain unmeasured. [Held-out scorecard](../../eval/reports/phase-1/report.md) · [Machine-readable results](../../eval/reports/phase-1/report.json)
+
 ## Software verification
 
 The initial Phase 1 implementation passed all 53 Python tests on the M6. Linux CPU passed 52 with the Metal-only case skipped. The pinned SmolLM2 pair produced identical E3 and E4 values on Linux with a fresh download and an offline cache. The generated contracts matched their schemas, TypeScript compiled and all 13 web unit tests passed. All 13 Playwright tests passed against the production build and the measured scorecard, including keyboard access, axe checks, retry after interrupted streaming and verification of the calibration chart's values. Both SQL test files passed on a disposable Supabase PostgreSQL 17 instance.
@@ -64,7 +70,7 @@ uv run vibechecker-eval deep --datasets raid raid-attacks asap ellipse liang \
 
 The M6 memory preflight projected 20.01 GiB for the 8-bit pair. It added the increase in published packed weight bytes for both models to the measured 4-bit peak, assuming comparable non-weight allocations. This exceeded the 18 GiB budget before scoring. [Calculation and pinned revisions](../../eval/reports/phase-1/8bit-memory-preflight.json)
 
-For the independent test, reuse the fitted 4-bit joblib. This run used seed 42 and raised the per-class, per-dataset, per-split reservoir limit to 72. On the verification host, the fitted file and test trace are under `~/vibechecker/phase1-check/`. Local copies are in `eval/artifacts/phase-1/`.
+The first independent test reused the fitted 4-bit joblib. It used seed 42 and raised the per-class, per-dataset, per-split reservoir limit to 72. On the verification host, the fitted files and test traces are under `~/vibechecker/phase1-check/`. Local copies are in `eval/artifacts/phase-1/`.
 
 ```sh
 VIBECHECKER_QUICK_PREFILL=512 uv run vibechecker-eval deep \
@@ -74,4 +80,19 @@ VIBECHECKER_QUICK_PREFILL=512 uv run vibechecker-eval deep \
   --trace-out eval/artifacts/phase-1/deep-qwen7b-q4-p512-v1.test.metal.json \
   --bakeoff-report eval/reports/phase-1/bakeoff.json \
   --load-report engine/benchmarks/m6-phase1-qwen-4bit-prefill512.json
+```
+
+The [refit instructions](../../eval/README.md#refit-the-deep-stacker-with-frozen-heads) reproduce the probe, selection and calibration steps. To score the selected artifact again on Metal, use the historical report for regression comparison and a separate output directory.
+
+```sh
+version=deep-qwen7b-q4-p512-v2
+VIBECHECKER_QUICK_PREFILL=512 uv run vibechecker-eval deep \
+  --datasets raid raid-attacks asap ellipse liang --cohort test --pair-family Qwen2.5-7B \
+  --limit-per-class 72 --seed 42 --version "$version" \
+  --model-in "eval/artifacts/phase-1/$version.joblib" \
+  --trace-out "eval/artifacts/phase-1/replay/$version.test.metal.json" \
+  --reports eval/artifacts/phase-1/replay \
+  --previous eval/reports/deep-qwen7b-q4-p512-v1/report.json \
+  --bakeoff-report eval/reports/phase-1/bakeoff.json \
+  --load-report engine/benchmarks/m6-phase1-calibration-v2.json
 ```

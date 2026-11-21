@@ -118,12 +118,12 @@ All three probes fit on head fold 0 of the training partition. The canonical run
 The separate Deep cache holds numeric document features, labels, word counts, hashed document/source/stratum identifiers and the optional encoder vectors. Its metadata records dataset coverage, checkpoint digests, the runtime profile and the selection digest.
 
 ```sh
-uv run vibechecker-eval deep-cache --model-in eval/artifacts/deep-qwen7b-q4-p512-v1.joblib \
+uv run vibechecker-eval deep-cache --model-in eval/artifacts/phase-1/deep-qwen7b-q4-p512-v1.joblib \
   --features eval/artifacts/frozen-features.sqlite --cache eval/.cache \
   --datasets raid raid-attacks asap ellipse liang --seed 42 --limit-per-class 96 \
   --train-limit-per-class 160 --cal-limit-per-class 352 --attack-limit-per-class 128
 
-uv run vibechecker-eval deep-refit --model-in eval/artifacts/deep-qwen7b-q4-p512-v1.joblib \
+uv run vibechecker-eval deep-refit --model-in eval/artifacts/phase-1/deep-qwen7b-q4-p512-v1.joblib \
   --cache eval/.cache --features eval/artifacts/frozen-features.sqlite --probe eval/artifacts/encoder-canonical-guarded-v1.joblib \
   --model-out eval/artifacts/selected.joblib --selection-out eval/artifacts/validation-selection.json
 ```
@@ -133,7 +133,7 @@ Each accepted document or refusal commits separately. Rerun the same cache comma
 Repeat `--probe` to compare independently trained encoder probes in one CPU run on the same cache.
 
 ```sh
-uv run vibechecker-eval deep-refit --model-in eval/artifacts/deep-qwen7b-q4-p512-v1.joblib \
+uv run vibechecker-eval deep-refit --model-in eval/artifacts/phase-1/deep-qwen7b-q4-p512-v1.joblib \
   --cache eval/.cache --features eval/artifacts/frozen-features.sqlite \
   --probe eval/artifacts/encoder-canonical-guarded-v1.joblib --probe eval/artifacts/encoder-svm-c16-guarded-v1.joblib \
   --probe eval/artifacts/encoder-logistic-expanded-guarded-fixed-v1.joblib \
