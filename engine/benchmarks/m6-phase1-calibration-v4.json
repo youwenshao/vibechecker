@@ -1,0 +1,748 @@
+{
+  "version": "deep-qwen7b-q4-p512-v4",
+  "model_sha256": "aeafbb70201caec3029b24799faedd8fee89aacf5ef1bdf09e1eee2673b82d9b",
+  "quick_prefill": 512,
+  "backend": "mlx-metal",
+  "passed": true,
+  "path": "signed loopback HTTP",
+  "quick_concurrency": 5,
+  "quick_words": 1000,
+  "quick_word_offsets": [
+    0,
+    37,
+    83,
+    119,
+    167
+  ],
+  "deep_words": 2000,
+  "method": "nearest-rank p95, one excluded warm-up per mode",
+  "fixture_sha256": "08015ae45f7c94e230e06a5e593b0c9dfc8ee98d2dc94592e8dc571364b353bc",
+  "warmup": [
+    {
+      "ms": 703,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 12459,
+      "first_chunk_ms": 1383,
+      "chunks": 12
+    }
+  ],
+  "quick": [
+    {
+      "ms": 1560,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1586,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1658,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1656,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1987,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1648,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1514,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1659,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1720,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1978,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1582,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1554,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1641,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1640,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1978,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1493,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1520,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1672,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1686,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1959,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1681,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1553,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1526,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1666,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1991,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1731,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1453,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1732,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1732,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1945,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1487,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1527,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1677,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1674,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1947,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1518,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1544,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1706,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1706,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1978,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1515,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1550,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1702,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1702,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1979,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1529,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1501,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1687,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1687,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1967,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1747,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1595,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1567,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1744,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 2026,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1530,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1567,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1557,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1659,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1967,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1522,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1723,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1754,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1548,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1990,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1532,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1506,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1683,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1684,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1967,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1541,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1507,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1691,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1694,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1966,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1537,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1826,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1827,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1811,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 2040,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1520,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1548,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1696,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1699,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1978,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1549,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1711,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1719,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1521,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1985,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1442,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1719,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1718,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1725,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1934,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1506,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1506,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1682,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1679,
+      "first_chunk_ms": null,
+      "chunks": 0
+    },
+    {
+      "ms": 1959,
+      "first_chunk_ms": null,
+      "chunks": 0
+    }
+  ],
+  "deep": [
+    {
+      "ms": 12115,
+      "first_chunk_ms": 1031,
+      "chunks": 12
+    },
+    {
+      "ms": 12122,
+      "first_chunk_ms": 1034,
+      "chunks": 12
+    },
+    {
+      "ms": 12128,
+      "first_chunk_ms": 1033,
+      "chunks": 12
+    },
+    {
+      "ms": 12120,
+      "first_chunk_ms": 1028,
+      "chunks": 12
+    },
+    {
+      "ms": 12151,
+      "first_chunk_ms": 1035,
+      "chunks": 12
+    },
+    {
+      "ms": 12146,
+      "first_chunk_ms": 1033,
+      "chunks": 12
+    },
+    {
+      "ms": 12127,
+      "first_chunk_ms": 1031,
+      "chunks": 12
+    },
+    {
+      "ms": 12172,
+      "first_chunk_ms": 1031,
+      "chunks": 12
+    },
+    {
+      "ms": 12163,
+      "first_chunk_ms": 1032,
+      "chunks": 12
+    },
+    {
+      "ms": 12171,
+      "first_chunk_ms": 1032,
+      "chunks": 12
+    },
+    {
+      "ms": 12169,
+      "first_chunk_ms": 1030,
+      "chunks": 12
+    },
+    {
+      "ms": 12163,
+      "first_chunk_ms": 1030,
+      "chunks": 12
+    },
+    {
+      "ms": 12143,
+      "first_chunk_ms": 1035,
+      "chunks": 12
+    },
+    {
+      "ms": 12137,
+      "first_chunk_ms": 1031,
+      "chunks": 12
+    },
+    {
+      "ms": 12131,
+      "first_chunk_ms": 1032,
+      "chunks": 12
+    },
+    {
+      "ms": 12146,
+      "first_chunk_ms": 1039,
+      "chunks": 12
+    },
+    {
+      "ms": 12126,
+      "first_chunk_ms": 1027,
+      "chunks": 12
+    },
+    {
+      "ms": 12119,
+      "first_chunk_ms": 1028,
+      "chunks": 12
+    },
+    {
+      "ms": 12132,
+      "first_chunk_ms": 1030,
+      "chunks": 12
+    },
+    {
+      "ms": 12123,
+      "first_chunk_ms": 1028,
+      "chunks": 12
+    }
+  ],
+  "quick_p95_ms": 1985,
+  "deep_p95_ms": 12171,
+  "peak_bytes": 16210960640,
+  "beat_ad_job": "system/hk.beatad.px-backup",
+  "beat_ad_health": [
+    {
+      "loaded": true,
+      "runs": 6091,
+      "last_exit": 0
+    },
+    {
+      "loaded": true,
+      "runs": 6091,
+      "last_exit": 0
+    },
+    {
+      "loaded": true,
+      "runs": 6091,
+      "last_exit": 0
+    },
+    {
+      "loaded": true,
+      "runs": 6091,
+      "last_exit": 0
+    },
+    {
+      "loaded": true,
+      "runs": 6091,
+      "last_exit": 0
+    },
+    {
+      "loaded": true,
+      "runs": 6092,
+      "last_exit": 0
+    },
+    {
+      "loaded": true,
+      "runs": 6092,
+      "last_exit": 0
+    },
+    {
+      "loaded": true,
+      "runs": 6092,
+      "last_exit": 0
+    },
+    {
+      "loaded": true,
+      "runs": 6092,
+      "last_exit": 0
+    },
+    {
+      "loaded": true,
+      "runs": 6092,
+      "last_exit": 0
+    },
+    {
+      "loaded": true,
+      "runs": 6092,
+      "last_exit": 0
+    },
+    {
+      "loaded": true,
+      "runs": 6092,
+      "last_exit": 0
+    },
+    {
+      "loaded": true,
+      "runs": 6092,
+      "last_exit": 0
+    },
+    {
+      "loaded": true,
+      "runs": 6092,
+      "last_exit": 0
+    },
+    {
+      "loaded": true,
+      "runs": 6092,
+      "last_exit": 0
+    },
+    {
+      "loaded": true,
+      "runs": 6093,
+      "last_exit": 0
+    },
+    {
+      "loaded": true,
+      "runs": 6093,
+      "last_exit": 0
+    },
+    {
+      "loaded": true,
+      "runs": 6093,
+      "last_exit": 0
+    },
+    {
+      "loaded": true,
+      "runs": 6093,
+      "last_exit": 0
+    },
+    {
+      "loaded": true,
+      "runs": 6093,
+      "last_exit": 0
+    },
+    {
+      "loaded": true,
+      "runs": 6093,
+      "last_exit": 0
+    }
+  ],
+  "beat_ad_healthy": true
+}
