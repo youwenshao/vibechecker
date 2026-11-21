@@ -52,6 +52,11 @@ def test_parity_checks_sentence_offsets_artifacts_and_minimum_count():
         }
 
     a, b = trace("mlx-metal", 200), trace("mlx-cuda", 200)
+    for cpu_backend in ("mlx-cpu", "mlx-cpu-dense-q4"):
+        cpu = trace(cpu_backend, 200)
+        with pytest.raises(ValueError, match="Metal and CUDA"):
+            parity(cpu, b)
+        assert parity(cpu, b, local_cpu_cuda=True)["pass"]
     assert parity(a, b)["pass"]
     assert parity({**a, "quick_prefill": 64}, b)["quick_prefill"] == 64
     with pytest.raises(ValueError, match="identical Quick prefill"):

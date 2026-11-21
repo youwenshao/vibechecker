@@ -43,7 +43,7 @@ def fit(rows, high, *, adjust=False, guarded=False):
             if len(members) < 1000 or {r.label for r in members} != {0, 1}:
                 continue
 
-            def balanced_brier(power):
+            def balanced_brier(power, members=members):
                 return sum(
                     np.mean([(rescale(r.score, power) - y) ** 2 for r in members if r.label == y])
                     / 2
@@ -60,12 +60,11 @@ def fit(rows, high, *, adjust=False, guarded=False):
             cutoff = _band_threshold(np.asarray(humans), 0.02)
         else:
             continue
-        if cutoff >= 1:
-            policy["cutoffs"][key] = {
-                "high": cutoff,
-                "humans": len(humans),
-                "documents": len(members),
-            }
+        policy["cutoffs"][key] = {
+            "high": cutoff,
+            "humans": len(humans),
+            "documents": len(members),
+        }
     return policy
 
 

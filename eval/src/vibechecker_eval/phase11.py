@@ -11,7 +11,7 @@ from .academic_addition import matrix
 from .deep_cohort import fold
 from .deep_runner import read, write_json
 from .loaders import examples, fingerprint
-from .metrics import Observation
+from .metrics import Observation, gates
 from .prospective import DATASETS, digest, manifest, plan_digest, publish
 from .refit import load_rows
 from .refit_cache import CALIBRATION, VALIDATION
@@ -21,7 +21,6 @@ from .rewrite_refit import displayed
 from .runner import observation
 from .source_groups import source_key
 from .subgroup_policy import fit, scorecard
-
 
 REPORTS = Path("eval/reports/phase-1")
 MODEL_SHA = "aeafbb70201caec3029b24799faedd8fee89aacf5ef1bdf09e1eee2673b82d9b"
@@ -81,16 +80,16 @@ def fit_policy(args):
     mixed = model.stacker.low_threshold / 100
     cards = {name: scorecard(validation, p, mixed) for name, p in candidates.items()}
     publish(
-        dict(
-            model_sha256=MODEL_SHA,
-            cache_sha256=receipts["base_features"],
-            calibration_ids=digest(r.id for r in calibration),
-            calibration_count=len(calibration),
-            validation_ids=digest(r.id for r in validation),
-            validation_count=len(validation),
-            mixed=mixed,
-            policies=candidates,
-        ),
+        {
+            "model_sha256": MODEL_SHA,
+            "cache_sha256": receipts["base_features"],
+            "calibration_ids": digest(r.id for r in calibration),
+            "calibration_count": len(calibration),
+            "validation_ids": digest(r.id for r in validation),
+            "validation_count": len(validation),
+            "mixed": mixed,
+            "policies": candidates,
+        },
         args.out,
     )
     write_json(cards, args.validation)
@@ -113,6 +112,8 @@ def combine(audit, college, group_ids):
 def historical_groups(trace, report):
     if (
         trace["scope"] != report["scope"]
+        or trace["version"] != report["version"]
+        or report["model_sha256"] != MODEL_SHA
         or trace["model_sha256"] != MODEL_SHA
         or trace["weights"] != report["weights"]
         or trace["backend"] != report["backend"]
@@ -125,7 +126,7 @@ def historical_groups(trace, report):
 
 
 def evaluate(args):
-    from vibechecker_engine.text import count_words
+    from vibechecker_engine.text import Refusal, count_words, prepare, validate
 
     started = perf_counter()
     policy = read(args.policy)
@@ -160,7 +161,12 @@ def evaluate(args):
             elif key in original:
                 reason = "historical_scored"
             else:
-                reason = "other_final_candidate"
+                try:
+                    validate(prepare(item.text), "deep")
+                except Refusal as exc:
+                    reason = f"historical_refused/{exc.code}"
+                else:
+                    raise ValueError("An eligible unused final college essay requires reservation")
             dispositions[reason] += 1
             college_seen.add(key)
         if key in rows or (key not in original and key not in prospective):
@@ -180,6 +186,8 @@ def evaluate(args):
     )
     if {groups[r.id] for r in original_rows} & {groups[r.id] for r in audit_rows}:
         raise ValueError("Historical and prospective sources overlap")
+    if plan["pool"]["strata"].get("dataset/liang/college-human", 0):
+        raise ValueError("Independent admissions sources remain available for reservation")
     college = [r for r in original_rows if r.dataset == "liang/college-human"]
     combined = combine(audit_rows, college, groups)
     short = read(args.short)
@@ -232,25 +240,45 @@ def evaluate(args):
                     raise ValueError(f"Historical metric mismatch: {sample}/{key}/{field}")
             if actual["fpr_high"] != values["fpr_high"]:
                 raise ValueError(f"Historical high-band mismatch: {sample}/{key}")
+    previous = REPORTS.parent / "deep-qwen7b-q4-p512-v2" / "report.json"
+    if sha256(previous) != reports[0]["regression_reference"]["report_sha256"]:
+        raise ValueError("Historical regression reference differs")
+    reference_metrics = read(previous)["metrics"]
+    checks = {
+        sample: {
+            name: gates(
+                groups,
+                deep=True,
+                quick=False,
+                require_college=sample == "prospective",
+                previous=reference_metrics if sample == "original" else None,
+            )["checks"]
+            for name, groups in cards[sample].items()
+        }
+        for sample in ("original", "prospective")
+    }
     write_json(
-        dict(
-            policy_sha256=args.policy_sha256,
-            model_sha256=MODEL_SHA,
-            trace_sha256=[sha256(args.original), sha256(args.audit)],
-            reservation_sha256=plan_digest(plan),
-            short_trace_sha256=sha256(args.short),
-            short_elapsed_seconds=short["elapsed_seconds"],
-            short_product_refusals=short["product_refusals"],
-            short_words=[min(r.words for r in short_rows), max(r.words for r in short_rows)],
-            college_disposition=dict(dispositions),
-            prospective_pool_college=plan["pool"]["strata"].get("dataset/liang/college-human", 0),
-            combined_reused_historical=len(college),
-            combined_new_independent_college=0,
-            combined_ids=digest(r.id for r in combined),
-            elapsed_seconds=perf_counter() - started,
-            metrics=cards,
-            release_eligible=False,
-        ),
+        {
+            "policy_sha256": args.policy_sha256,
+            "model_sha256": MODEL_SHA,
+            "trace_sha256": [sha256(args.original), sha256(args.audit)],
+            "reservation_sha256": plan_digest(plan),
+            "short_trace_sha256": sha256(args.short),
+            "short_elapsed_seconds": short["elapsed_seconds"],
+            "short_product_refusals": short["product_refusals"],
+            "short_words": [min(r.words for r in short_rows), max(r.words for r in short_rows)],
+            "college_disposition": dict(dispositions),
+            "prospective_pool_college": plan["pool"]["strata"].get(
+                "dataset/liang/college-human", 0
+            ),
+            "combined_reused_historical": len(college),
+            "combined_new_independent_college": 0,
+            "combined_ids": digest(r.id for r in combined),
+            "elapsed_seconds": perf_counter() - started,
+            "metrics": cards,
+            "checks": checks,
+            "release_eligible": False,
+        },
         args.out,
     )
 

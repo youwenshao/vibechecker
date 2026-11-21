@@ -81,3 +81,5 @@ Release eligible: False.
 The length gate excluded 91 TOEFL essays. A cohort with no eligible essays has no estimated false-positive rate.
 
 The JSON report includes the input SHA-256 manifest, selection settings, refusal counts and timing.
+
+The [Phase 1.1 blocker report](phase-1.1/report.md) evaluates frozen subgroup cutoffs, admissions coverage and all 91 short TOEFL records.

@@ -51,11 +51,13 @@ Backend `mlx-metal`. Scored 435 held-out documents.
 | essay_auroc | — | 0.9 | unmeasured |
 | pooled_ece | 0.0087 | 0.05 | pass |
 | worst_stratum_ece | 0.1250 | 0.08 | fail |
-| human_essay_high_fpr | 0.0130 | 0.02 | pass |
+| human_essay_high_fpr | 0.0130 | 0.02 | incomplete |
 | esl_high_fpr | 0.0164 | 0.05 | pass |
 | toefl_high_fpr | — | 0.05 | unmeasured |
 | esl_native_gap | — | 0.03 | unmeasured |
 | toefl_native_gap | — | 0.03 | unmeasured |
+
+The human_essay_high_fpr estimate covers the sampled essays. The required liang/college-human cohort is absent.
 
 ## Sampling
 
@@ -74,3 +76,5 @@ Release eligible: False.
 - m6_load: passed
 
 The JSON report includes the input SHA-256 manifest, selection settings, refusal counts and timing.
+
+The [Phase 1.1 coverage analysis](../phase-1.1/report.md) includes the historical Liang cohort and records its prior use.

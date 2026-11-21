@@ -95,6 +95,15 @@ def write_report(report, directory):
     ]
     for name, gate in report["gates"]["checks"].items():
         lines.append(f"| {name} | {display(gate['value'])} | {gate['target']} | {gate['status']} |")
+    for name, gate in report["gates"]["checks"].items():
+        if "missing_cohort" in gate:
+            lines += [
+                "",
+                (
+                    f"The {name} estimate covers the sampled essays. "
+                    f"The required {gate['missing_cohort']} cohort is absent."
+                ),
+            ]
     if report["mode"] == "deep":
         sentence = report["mixed_sentence_metrics"]
         fitted = report.get("fit_selection")

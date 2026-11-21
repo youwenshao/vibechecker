@@ -86,7 +86,7 @@ def sentence_metrics(truth, scores):
     }
 
 
-def parity(current, reference):
+def parity(current, reference, *, local_cpu_cuda=False):
     from .metrics import backend_parity
 
     for key in ("model_sha256", "weights", "scope"):
@@ -104,7 +104,7 @@ def parity(current, reference):
             np.isfinite(indices) & (indices >= 0) & (indices <= 100) & (indices == np.rint(indices))
         ):
             raise ValueError("Invalid document or sentence trace")
-    result = backend_parity(current, reference)
+    result = backend_parity(current, reference, local_cpu_cuda=local_cpu_cuda)
     max_delta = 0.0
     n = 0
     for key in current["scores"]:

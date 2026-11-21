@@ -311,7 +311,11 @@ def run_deep(args, datasets):
     if previous and (previous.get("mode") != "deep" or previous.get("scope") != scope):
         raise ValueError("Regression comparison requires identical Deep evaluation cohorts")
     gate = gates(
-        summary, quick=False, deep=True, previous=previous["metrics"] if previous else None
+        summary,
+        quick=False,
+        deep=True,
+        previous=previous["metrics"] if previous else None,
+        require_college=args.cohort == "prospective",
     )
     if previous and previous.get("sentence_f1") is not None:
         delta = None if sentence["f1"] is None else previous["sentence_f1"] - sentence["f1"]

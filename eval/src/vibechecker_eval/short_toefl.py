@@ -54,12 +54,12 @@ def main():
         else:
             raise ValueError("Unexpected product admission")
         rows.append(
-            dict(
-                row=number,
-                id=fingerprint(item.text),
-                words=doc.word_count,
-                index=short_index(engine, doc),
-            )
+            {
+                "row": number,
+                "id": fingerprint(item.text),
+                "words": doc.word_count,
+                "index": short_index(engine, doc),
+            }
         )
     cutoff = engine.model.stacker.high_threshold
     groups = {}
@@ -67,17 +67,17 @@ def main():
         selected = [r for r in rows if group == "all" or length_bin(r["words"]) == group]
         groups[group] = rate(sum(r["index"] >= cutoff for r in selected), len(selected))
     write_json(
-        dict(
-            backend=engine.backend,
-            model_sha256=args.model_sha256,
-            quick_prefill=engine.extractor.quick.lm.chunk_size,
-            corpus_sha256=next(a.sha256 for a in dataset.artifacts if a.name == "toefl"),
-            product_refusals=dict(refusals),
-            cutoff=cutoff,
-            groups=groups,
-            elapsed_seconds=perf_counter() - start,
-            scores=rows,
-        ),
+        {
+            "backend": engine.backend,
+            "model_sha256": args.model_sha256,
+            "quick_prefill": engine.extractor.quick.lm.chunk_size,
+            "corpus_sha256": next(a.sha256 for a in dataset.artifacts if a.name == "toefl"),
+            "product_refusals": dict(refusals),
+            "cutoff": cutoff,
+            "groups": groups,
+            "elapsed_seconds": perf_counter() - start,
+            "scores": rows,
+        },
         args.out,
     )
 

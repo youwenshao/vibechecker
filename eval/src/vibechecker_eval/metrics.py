@@ -96,7 +96,7 @@ def summarize(rows, mixed, high):
     }
 
 
-def gates(groups, *, quick, previous=None, deep=False):
+def gates(groups, *, quick, previous=None, deep=False, require_college=False):
     gates = {}
 
     def test(name, value, target, at_least=False):
@@ -116,6 +116,13 @@ def gates(groups, *, quick, previous=None, deep=False):
         0.08,
     )
     test("human_essay_high_fpr", essay.get("fpr_high", {}).get("rate"), 0.02)
+    if require_college and not groups.get("dataset/liang/college-human", {}).get(
+        "fpr_high", {}
+    ).get("denominator"):
+        check = gates["human_essay_high_fpr"]
+        if check["status"] == "pass":
+            check["status"] = "incomplete"
+        check["missing_cohort"] = "liang/college-human"
     esl = groups.get("fairness/ESL-essay", {}).get("fpr_high", {}).get("rate")
     toefl = groups.get("dataset/liang/toefl", {}).get("fpr_high", {}).get("rate")
     native = groups.get("writer/native_proxy", {}).get("fpr_high", {}).get("rate")
@@ -156,8 +163,16 @@ def gates(groups, *, quick, previous=None, deep=False):
     }
 
 
-def backend_parity(current, reference):
-    if {current["backend"], reference["backend"]} != {"mlx-metal", "mlx-cuda"}:
+def backend_parity(current, reference, *, local_cpu_cuda=False):
+    pair = {current["backend"], reference["backend"]}
+    allowed = (
+        [{"mlx-cpu", "mlx-cuda"}, {"mlx-cpu-dense-q4", "mlx-cuda"}]
+        if local_cpu_cuda
+        else [{"mlx-metal", "mlx-cuda"}]
+    )
+    if pair not in allowed:
+        if local_cpu_cuda:
+            raise ValueError("Workstation parity requires CPU and CUDA traces")
         raise ValueError("Parity requires Metal and CUDA traces")
     if current["version"] != reference["version"] or current["manifest"] != reference["manifest"]:
         raise ValueError("Parity requires identical engine and dataset versions")

@@ -2528,7 +2528,8 @@
       "human_essay_high_fpr": {
         "value": 0.012987012987012988,
         "target": 0.02,
-        "status": "pass"
+        "status": "incomplete",
+        "missing_cohort": "liang/college-human"
       },
       "esl_high_fpr": {
         "value": 0.01639344262295082,
