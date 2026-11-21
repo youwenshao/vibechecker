@@ -1,0 +1,192 @@
+{
+  "model_sha256": "aeafbb70201caec3029b24799faedd8fee89aacf5ef1bdf09e1eee2673b82d9b",
+  "cache_sha256": "45af31948cb305156d5806ea8434f5a6746746706a335203bde05a3b69b4056c",
+  "calibration_ids": "8b4fcc1cbdc55c97b6388a4b24b1a8f34de473d7834375d4c0295d9d1c622cc7",
+  "calibration_count": 1346,
+  "validation_ids": "e121c93ef827b6f871fd9c47106f1ff27bb3c6f6d2590baa5afe7e24f9c67ce8",
+  "validation_count": 268,
+  "mixed": 0.01,
+  "policies": {
+    "v4": {
+      "base_high": 24,
+      "powers": {},
+      "cutoffs": {}
+    },
+    "threshold": {
+      "base_high": 24,
+      "powers": {},
+      "cutoffs": {
+        "length/300-599": {
+          "high": 21,
+          "humans": 714,
+          "documents": 1146
+        },
+        "length/600-1199": {
+          "high": 5,
+          "humans": 190,
+          "documents": 190
+        },
+        "pooled": {
+          "high": 21,
+          "humans": 914,
+          "documents": 1346
+        },
+        "source-length/asap/300-599": {
+          "high": 17,
+          "humans": 235,
+          "documents": 235
+        },
+        "source-length/ellipse/300-599": {
+          "high": 1,
+          "humans": 230,
+          "documents": 230
+        },
+        "source-length/ellipse/600-1199": {
+          "high": 5,
+          "humans": 82,
+          "documents": 82
+        },
+        "source-length/raid/300-599": {
+          "high": 24,
+          "humans": 248,
+          "documents": 581
+        },
+        "source-length/raid/600-1199": {
+          "high": 13,
+          "humans": 71,
+          "documents": 71
+        },
+        "source/asap": {
+          "high": 5,
+          "humans": 272,
+          "documents": 272
+        },
+        "source/ellipse": {
+          "high": 1,
+          "humans": 313,
+          "documents": 313
+        },
+        "source/raid": {
+          "high": 24,
+          "humans": 328,
+          "documents": 661
+        }
+      }
+    },
+    "guarded": {
+      "base_high": 24,
+      "powers": {},
+      "cutoffs": {
+        "length/300-599": {
+          "high": 24,
+          "humans": 714,
+          "documents": 1146
+        },
+        "length/600-1199": {
+          "high": 80,
+          "humans": 190,
+          "documents": 190
+        },
+        "pooled": {
+          "high": 24,
+          "humans": 914,
+          "documents": 1346
+        },
+        "source-length/asap/300-599": {
+          "high": 58,
+          "humans": 235,
+          "documents": 235
+        },
+        "source-length/ellipse/300-599": {
+          "high": 24,
+          "humans": 230,
+          "documents": 230
+        },
+        "source-length/raid/300-599": {
+          "high": 85,
+          "humans": 248,
+          "documents": 581
+        },
+        "source/asap": {
+          "high": 24,
+          "humans": 272,
+          "documents": 272
+        },
+        "source/ellipse": {
+          "high": 24,
+          "humans": 313,
+          "documents": 313
+        },
+        "source/raid": {
+          "high": 80,
+          "humans": 328,
+          "documents": 661
+        }
+      }
+    },
+    "adjusted": {
+      "base_high": 24,
+      "powers": {
+        "length/300-599": 1,
+        "pooled": 1
+      },
+      "cutoffs": {
+        "length/300-599": {
+          "high": 21,
+          "humans": 714,
+          "documents": 1146
+        },
+        "length/600-1199": {
+          "high": 5,
+          "humans": 190,
+          "documents": 190
+        },
+        "pooled": {
+          "high": 21,
+          "humans": 914,
+          "documents": 1346
+        },
+        "source-length/asap/300-599": {
+          "high": 17,
+          "humans": 235,
+          "documents": 235
+        },
+        "source-length/ellipse/300-599": {
+          "high": 1,
+          "humans": 230,
+          "documents": 230
+        },
+        "source-length/ellipse/600-1199": {
+          "high": 5,
+          "humans": 82,
+          "documents": 82
+        },
+        "source-length/raid/300-599": {
+          "high": 24,
+          "humans": 248,
+          "documents": 581
+        },
+        "source-length/raid/600-1199": {
+          "high": 13,
+          "humans": 71,
+          "documents": 71
+        },
+        "source/asap": {
+          "high": 5,
+          "humans": 272,
+          "documents": 272
+        },
+        "source/ellipse": {
+          "high": 1,
+          "humans": 313,
+          "documents": 313
+        },
+        "source/raid": {
+          "high": 24,
+          "humans": 328,
+          "documents": 661
+        }
+      }
+    }
+  }
+}

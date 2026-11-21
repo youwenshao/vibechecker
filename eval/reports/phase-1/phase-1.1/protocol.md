@@ -1,0 +1,14 @@
+# Phase 1.1 post-processing protocol
+
+Freeze the v4 artifact, all four checkpoints, the 512-token prefill, the original folds and the 300-word Deep minimum. Fit once on the original **1,346** ordinary calibration records after reproducing the v2 source quarantine. Use the 268 validation records for development diagnostics. Evaluate every frozen policy on both existing final traces. A failed development or final gate keeps the candidate ineligible. No final score selects a cutoff.
+
+- **v4** uses the existing displayed index and high cutoff of 24.
+- **Empirical threshold** uses the smallest integer cutoff whose inclusive high band covers at most 2% of calibration humans in its cell. Require at least 50 humans, the support for one observed error at 2%. A cutoff of 101 disables the high band.
+- **Guarded threshold** uses the existing one-sided 95% order-statistic rule with a floor of 24. A cell needs at least 149 humans to bound even zero exceedances at 2%. The bound assumes exchangeable independent controls. Its use here is a heuristic on the calibration fold.
+- **Score adjustment plus empirical threshold** fits a symmetric power of the displayed odds, testing exponents 1, ½ and 2 with endpoints fixed. Minimize class-balanced Brier score, breaking ties in favor of the identity. Round the resulting index before measuring ECE or fitting its cutoff. Follow the existing calibration support rule of 1,000 records with both labels present.
+
+For each rule try source × length, length alone, source alone, then pooled. Use the incumbent high cutoff or identity map if no cell qualifies. Use the existing length bands and the same admissions-source key for Liang human and machine essays. Ground truth, generator identity, attack type and writer background are unavailable to the decision. Corpus source is research metadata. An unknown source takes the length or pooled fallback. The mixed cutoff remains 1.
+
+Report ten-bin ECE on the displayed probability, high-band human errors and machine recall, with denominators and Wilson intervals, for every historical stratum and source × length cell. Report the worst historical stratum and worst expanded stratum separately. Thresholds alone affect decisions while ECE depends on probabilities.
+
+Check the score-blind reservation for remaining independent Liang admissions sources. If none remain, append all original scored Liang admissions controls to the 435 audit records as a coverage sensitivity analysis, check document and source disjointness, and record their prior use. This extension cannot qualify as a fresh independent pass. Measure every published TOEFL row directly through the frozen offline extractor and predictor below the admission minimum, including duplicate rows. Also report distinct normalized texts. The original held-out, subgroup, regression and hardware gates continue to apply.

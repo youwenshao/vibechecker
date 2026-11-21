@@ -1,0 +1,7070 @@
+{
+  "v4": {
+    "attack/alternative_spelling": {
+      "count": 11,
+      "ai_count": 11,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 11,
+        "denominator": 11,
+        "rate": 1.0,
+        "wilson95": [
+          0.7411670330319788,
+          1
+        ]
+      }
+    },
+    "attack/article_deletion": {
+      "count": 5,
+      "ai_count": 5,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 5,
+        "denominator": 5,
+        "rate": 1.0,
+        "wilson95": [
+          0.5655175352168389,
+          1
+        ]
+      }
+    },
+    "attack/homoglyph": {
+      "count": 1,
+      "ai_count": 1,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 1,
+        "denominator": 1,
+        "rate": 1.0,
+        "wilson95": [
+          0.20654931437724644,
+          0.9999999999999999
+        ]
+      }
+    },
+    "attack/none": {
+      "count": 233,
+      "ai_count": 45,
+      "auroc": 0.9992316784869977,
+      "tpr_at_1pct_fpr": 0.9555555555555556,
+      "ece": 0.012532188841201707,
+      "brier": 0.010903862660944206,
+      "fpr_mixed_or_above": {
+        "count": 19,
+        "denominator": 188,
+        "rate": 0.10106382978723404,
+        "wilson95": [
+          0.0656585768978924,
+          0.15244578426525615
+        ]
+      },
+      "fpr_high": {
+        "count": 3,
+        "denominator": 188,
+        "rate": 0.015957446808510637,
+        "wilson95": [
+          0.005441558415519358,
+          0.04585839979576754
+        ]
+      },
+      "recall_high": {
+        "count": 44,
+        "denominator": 45,
+        "rate": 0.9777777777777777,
+        "wilson95": [
+          0.8843331823158551,
+          0.9960664011171665
+        ]
+      }
+    },
+    "attack/number": {
+      "count": 2,
+      "ai_count": 2,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 2,
+        "denominator": 2,
+        "rate": 1.0,
+        "wilson95": [
+          0.34238022750666547,
+          1
+        ]
+      }
+    },
+    "attack/paraphrase": {
+      "count": 2,
+      "ai_count": 2,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.48,
+      "brier": 0.4608,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 1,
+        "denominator": 2,
+        "rate": 0.5,
+        "wilson95": [
+          0.09453120573423457,
+          0.9054687942657654
+        ]
+      }
+    },
+    "attack/perplexity_misspelling": {
+      "count": 4,
+      "ai_count": 4,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 4,
+        "denominator": 4,
+        "rate": 1.0,
+        "wilson95": [
+          0.5101091635454165,
+          1
+        ]
+      }
+    },
+    "attack/synonym": {
+      "count": 10,
+      "ai_count": 10,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0039999999999998925,
+      "brier": 0.00016000000000000028,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 10,
+        "denominator": 10,
+        "rate": 1.0,
+        "wilson95": [
+          0.7224672001371218,
+          0.9999999999999999
+        ]
+      }
+    },
+    "dataset/asap": {
+      "count": 37,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.002162162162162162,
+      "brier": 8.64864864864865e-05,
+      "fpr_mixed_or_above": {
+        "count": 2,
+        "denominator": 37,
+        "rate": 0.05405405405405406,
+        "wilson95": [
+          0.014950976833158144,
+          0.17704654350812637
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 37,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.09405782583719778
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "dataset/ellipse": {
+      "count": 42,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.020238095238095236,
+      "brier": 0.00845952380952381,
+      "fpr_mixed_or_above": {
+        "count": 5,
+        "denominator": 42,
+        "rate": 0.11904761904761904,
+        "wilson95": [
+          0.05193803327758352,
+          0.2500039026200924
+        ]
+      },
+      "fpr_high": {
+        "count": 1,
+        "denominator": 42,
+        "rate": 0.023809523809523808,
+        "wilson95": [
+          0.004215404134432679,
+          0.12321201573766226
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "dataset/liang/college-ai": {
+      "count": 5,
+      "ai_count": 5,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 5,
+        "denominator": 5,
+        "rate": 1.0,
+        "wilson95": [
+          0.5655175352168389,
+          1
+        ]
+      }
+    },
+    "dataset/liang/college-human": {
+      "count": 29,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.05241379310344828,
+      "brier": 0.03387586206896552,
+      "fpr_mixed_or_above": {
+        "count": 8,
+        "denominator": 29,
+        "rate": 0.27586206896551724,
+        "wilson95": [
+          0.14698755102088218,
+          0.4571713241686543
+        ]
+      },
+      "fpr_high": {
+        "count": 1,
+        "denominator": 29,
+        "rate": 0.034482758620689655,
+        "wilson95": [
+          0.006113214292762889,
+          0.17175521879319733
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "dataset/liang/hewlett": {
+      "count": 30,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 30,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.11351339317396321
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 30,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.11351339317396321
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "dataset/raid": {
+      "count": 90,
+      "ai_count": 40,
+      "auroc": 0.999,
+      "tpr_at_1pct_fpr": 0.95,
+      "ece": 0.006333333333333311,
+      "brier": 0.01333,
+      "fpr_mixed_or_above": {
+        "count": 4,
+        "denominator": 50,
+        "rate": 0.08,
+        "wilson95": [
+          0.031549514088593744,
+          0.18838246918342452
+        ]
+      },
+      "fpr_high": {
+        "count": 1,
+        "denominator": 50,
+        "rate": 0.02,
+        "wilson95": [
+          0.003539259271646375,
+          0.1049544358963745
+        ]
+      },
+      "recall_high": {
+        "count": 39,
+        "denominator": 40,
+        "rate": 0.975,
+        "wilson95": [
+          0.8711863103652634,
+          0.9955731684973185
+        ]
+      }
+    },
+    "dataset/raid-attacks": {
+      "count": 35,
+      "ai_count": 35,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0285714285714285,
+      "brier": 0.02637714285714286,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 34,
+        "denominator": 35,
+        "rate": 0.9714285714285714,
+        "wilson95": [
+          0.8546691276638682,
+          0.9949385081445558
+        ]
+      }
+    },
+    "fairness/ESL-essay": {
+      "count": 46,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.018478260869565215,
+      "brier": 0.00772391304347826,
+      "fpr_mixed_or_above": {
+        "count": 5,
+        "denominator": 46,
+        "rate": 0.10869565217391304,
+        "wilson95": [
+          0.047331458580990485,
+          0.2303782864425042
+        ]
+      },
+      "fpr_high": {
+        "count": 1,
+        "denominator": 46,
+        "rate": 0.021739130434782608,
+        "wilson95": [
+          0.00384785425805044,
+          0.11335294521510965
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "generator/chatgpt": {
+      "count": 2,
+      "ai_count": 2,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 2,
+        "denominator": 2,
+        "rate": 1.0,
+        "wilson95": [
+          0.34238022750666547,
+          1
+        ]
+      }
+    },
+    "generator/cohere": {
+      "count": 1,
+      "ai_count": 1,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 1,
+        "denominator": 1,
+        "rate": 1.0,
+        "wilson95": [
+          0.20654931437724644,
+          0.9999999999999999
+        ]
+      }
+    },
+    "generator/gpt-3": {
+      "count": 5,
+      "ai_count": 5,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 5,
+        "denominator": 5,
+        "rate": 1.0,
+        "wilson95": [
+          0.5655175352168389,
+          1
+        ]
+      }
+    },
+    "generator/gpt2": {
+      "count": 18,
+      "ai_count": 18,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.04499999999999997,
+      "brier": 0.03302777777777778,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 17,
+        "denominator": 18,
+        "rate": 0.9444444444444444,
+        "wilson95": [
+          0.7424269921812815,
+          0.9901248090216964
+        ]
+      }
+    },
+    "generator/gpt3": {
+      "count": 2,
+      "ai_count": 2,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 2,
+        "denominator": 2,
+        "rate": 1.0,
+        "wilson95": [
+          0.34238022750666547,
+          1
+        ]
+      }
+    },
+    "generator/gpt4": {
+      "count": 2,
+      "ai_count": 2,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 2,
+        "denominator": 2,
+        "rate": 1.0,
+        "wilson95": [
+          0.34238022750666547,
+          1
+        ]
+      }
+    },
+    "generator/human": {
+      "count": 188,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.018563829787234042,
+      "brier": 0.009363297872340427,
+      "fpr_mixed_or_above": {
+        "count": 19,
+        "denominator": 188,
+        "rate": 0.10106382978723404,
+        "wilson95": [
+          0.0656585768978924,
+          0.15244578426525615
+        ]
+      },
+      "fpr_high": {
+        "count": 3,
+        "denominator": 188,
+        "rate": 0.015957446808510637,
+        "wilson95": [
+          0.005441558415519358,
+          0.04585839979576754
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "generator/llama-chat": {
+      "count": 11,
+      "ai_count": 11,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 11,
+        "denominator": 11,
+        "rate": 1.0,
+        "wilson95": [
+          0.7411670330319788,
+          1
+        ]
+      }
+    },
+    "generator/mistral": {
+      "count": 12,
+      "ai_count": 12,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 12,
+        "denominator": 12,
+        "rate": 1.0,
+        "wilson95": [
+          0.7575059933447693,
+          1
+        ]
+      }
+    },
+    "generator/mpt": {
+      "count": 26,
+      "ai_count": 26,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.05538461538461538,
+      "brier": 0.04265384615384615,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 25,
+        "denominator": 26,
+        "rate": 0.9615384615384616,
+        "wilson95": [
+          0.8110722109696584,
+          0.9931780150064562
+        ]
+      }
+    },
+    "generator/mpt-chat": {
+      "count": 1,
+      "ai_count": 1,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 1,
+        "denominator": 1,
+        "rate": 1.0,
+        "wilson95": [
+          0.20654931437724644,
+          0.9999999999999999
+        ]
+      }
+    },
+    "genre/essay": {
+      "count": 143,
+      "ai_count": 5,
+      "auroc": 1.0,
+      "tpr_at_1pct_fpr": 1.0,
+      "ece": 0.01713286713286713,
+      "brier": 0.009376923076923076,
+      "fpr_mixed_or_above": {
+        "count": 15,
+        "denominator": 138,
+        "rate": 0.10869565217391304,
+        "wilson95": [
+          0.06698539778769641,
+          0.17160111353318563
+        ]
+      },
+      "fpr_high": {
+        "count": 2,
+        "denominator": 138,
+        "rate": 0.014492753623188406,
+        "wilson95": [
+          0.003983475402945302,
+          0.05129978864333428
+        ]
+      },
+      "recall_high": {
+        "count": 5,
+        "denominator": 5,
+        "rate": 1.0,
+        "wilson95": [
+          0.5655175352168389,
+          1
+        ]
+      }
+    },
+    "genre/other": {
+      "count": 125,
+      "ai_count": 75,
+      "auroc": 0.9985333333333334,
+      "tpr_at_1pct_fpr": 0.96,
+      "ece": 0.011920000000000047,
+      "brier": 0.0169832,
+      "fpr_mixed_or_above": {
+        "count": 4,
+        "denominator": 50,
+        "rate": 0.08,
+        "wilson95": [
+          0.031549514088593744,
+          0.18838246918342452
+        ]
+      },
+      "fpr_high": {
+        "count": 1,
+        "denominator": 50,
+        "rate": 0.02,
+        "wilson95": [
+          0.003539259271646375,
+          0.1049544358963745
+        ]
+      },
+      "recall_high": {
+        "count": 73,
+        "denominator": 75,
+        "rate": 0.9733333333333334,
+        "wilson95": [
+          0.9078851181224111,
+          0.9926563109938683
+        ]
+      }
+    },
+    "length/1200+": {
+      "count": 3,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 3,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.561497031755032
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 3,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.561497031755032
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "length/300-599": {
+      "count": 213,
+      "ai_count": 80,
+      "auroc": 0.9988251879699248,
+      "tpr_at_1pct_fpr": 0.9625,
+      "ece": 0.010234741784037594,
+      "brier": 0.011769953051643193,
+      "fpr_mixed_or_above": {
+        "count": 12,
+        "denominator": 133,
+        "rate": 0.09022556390977443,
+        "wilson95": [
+          0.052366540573380534,
+          0.15109123502060176
+        ]
+      },
+      "fpr_high": {
+        "count": 2,
+        "denominator": 133,
+        "rate": 0.015037593984962405,
+        "wilson95": [
+          0.004133584465173607,
+          0.053169654540548575
+        ]
+      },
+      "recall_high": {
+        "count": 78,
+        "denominator": 80,
+        "rate": 0.975,
+        "wilson95": [
+          0.9133556701442224,
+          0.9931171067970291
+        ]
+      }
+    },
+    "length/600-1199": {
+      "count": 52,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.026153846153846156,
+      "brier": 0.018399999999999996,
+      "fpr_mixed_or_above": {
+        "count": 7,
+        "denominator": 52,
+        "rate": 0.1346153846153846,
+        "wilson95": [
+          0.06676881705396269,
+          0.2527332016519341
+        ]
+      },
+      "fpr_high": {
+        "count": 1,
+        "denominator": 52,
+        "rate": 0.019230769230769232,
+        "wilson95": [
+          0.0034028080709452915,
+          0.10120511127891893
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "pooled": {
+      "count": 268,
+      "ai_count": 80,
+      "auroc": 0.9986037234042553,
+      "tpr_at_1pct_fpr": 0.9625,
+      "ece": 0.01134328358208956,
+      "brier": 0.012924626865671642,
+      "fpr_mixed_or_above": {
+        "count": 19,
+        "denominator": 188,
+        "rate": 0.10106382978723404,
+        "wilson95": [
+          0.0656585768978924,
+          0.15244578426525615
+        ]
+      },
+      "fpr_high": {
+        "count": 3,
+        "denominator": 188,
+        "rate": 0.015957446808510637,
+        "wilson95": [
+          0.005441558415519358,
+          0.04585839979576754
+        ]
+      },
+      "recall_high": {
+        "count": 78,
+        "denominator": 80,
+        "rate": 0.975,
+        "wilson95": [
+          0.9133556701442224,
+          0.9931171067970291
+        ]
+      }
+    },
+    "source-length/asap/1200+": {
+      "count": 1,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 1,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.7934506856227534
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 1,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.7934506856227534
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source-length/asap/300-599": {
+      "count": 30,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0026666666666666666,
+      "brier": 0.00010666666666666667,
+      "fpr_mixed_or_above": {
+        "count": 2,
+        "denominator": 30,
+        "rate": 0.06666666666666667,
+        "wilson95": [
+          0.01847702379127096,
+          0.21323458362616382
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 30,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.11351339317396321
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source-length/asap/600-1199": {
+      "count": 6,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 6,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.39033428790215224
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 6,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.39033428790215224
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source-length/ellipse/300-599": {
+      "count": 30,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.028333333333333332,
+      "brier": 0.011843333333333332,
+      "fpr_mixed_or_above": {
+        "count": 5,
+        "denominator": 30,
+        "rate": 0.16666666666666666,
+        "wilson95": [
+          0.07336542371848712,
+          0.33564350506415497
+        ]
+      },
+      "fpr_high": {
+        "count": 1,
+        "denominator": 30,
+        "rate": 0.03333333333333333,
+        "wilson95": [
+          0.005908590381612663,
+          0.1667039099140863
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source-length/ellipse/600-1199": {
+      "count": 12,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 12,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.24249400665523077
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 12,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.24249400665523077
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source-length/liang/college/300-599": {
+      "count": 16,
+      "ai_count": 5,
+      "auroc": 1.0,
+      "tpr_at_1pct_fpr": 1.0,
+      "ece": 0.01,
+      "brier": 0.0016,
+      "fpr_mixed_or_above": {
+        "count": 1,
+        "denominator": 11,
+        "rate": 0.09090909090909091,
+        "wilson95": [
+          0.016232172885885465,
+          0.37735843645158634
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 11,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.25883296696802116
+        ]
+      },
+      "recall_high": {
+        "count": 5,
+        "denominator": 5,
+        "rate": 1.0,
+        "wilson95": [
+          0.5655175352168389,
+          1
+        ]
+      }
+    },
+    "source-length/liang/college/600-1199": {
+      "count": 18,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.07555555555555554,
+      "brier": 0.05315555555555556,
+      "fpr_mixed_or_above": {
+        "count": 7,
+        "denominator": 18,
+        "rate": 0.3888888888888889,
+        "wilson95": [
+          0.20305246572164004,
+          0.6138095839776154
+        ]
+      },
+      "fpr_high": {
+        "count": 1,
+        "denominator": 18,
+        "rate": 0.05555555555555555,
+        "wilson95": [
+          0.009875190978303486,
+          0.25757300781871845
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source-length/liang/hewlett/300-599": {
+      "count": 28,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 28,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.1206433047658398
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 28,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.1206433047658398
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source-length/liang/hewlett/600-1199": {
+      "count": 2,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 2,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.6576197724933345
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 2,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.6576197724933345
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source-length/raid-attacks/300-599": {
+      "count": 35,
+      "ai_count": 35,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0285714285714285,
+      "brier": 0.02637714285714286,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 34,
+        "denominator": 35,
+        "rate": 0.9714285714285714,
+        "wilson95": [
+          0.8546691276638682,
+          0.9949385081445558
+        ]
+      }
+    },
+    "source-length/raid/1200+": {
+      "count": 2,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 2,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.6576197724933345
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 2,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.6576197724933345
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source-length/raid/300-599": {
+      "count": 74,
+      "ai_count": 40,
+      "auroc": 0.9985294117647059,
+      "tpr_at_1pct_fpr": 0.95,
+      "ece": 0.007702702702702674,
+      "brier": 0.01621216216216216,
+      "fpr_mixed_or_above": {
+        "count": 4,
+        "denominator": 34,
+        "rate": 0.11764705882352941,
+        "wilson95": [
+          0.046714466648824504,
+          0.2662084277037134
+        ]
+      },
+      "fpr_high": {
+        "count": 1,
+        "denominator": 34,
+        "rate": 0.029411764705882353,
+        "wilson95": [
+          0.005210906276269148,
+          0.1491557329268544
+        ]
+      },
+      "recall_high": {
+        "count": 39,
+        "denominator": 40,
+        "rate": 0.975,
+        "wilson95": [
+          0.8711863103652634,
+          0.9955731684973185
+        ]
+      }
+    },
+    "source-length/raid/600-1199": {
+      "count": 14,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 14,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.2153108027376265
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 14,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.2153108027376265
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source/asap": {
+      "count": 37,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.002162162162162162,
+      "brier": 8.64864864864865e-05,
+      "fpr_mixed_or_above": {
+        "count": 2,
+        "denominator": 37,
+        "rate": 0.05405405405405406,
+        "wilson95": [
+          0.014950976833158144,
+          0.17704654350812637
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 37,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.09405782583719778
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source/ellipse": {
+      "count": 42,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.020238095238095236,
+      "brier": 0.00845952380952381,
+      "fpr_mixed_or_above": {
+        "count": 5,
+        "denominator": 42,
+        "rate": 0.11904761904761904,
+        "wilson95": [
+          0.05193803327758352,
+          0.2500039026200924
+        ]
+      },
+      "fpr_high": {
+        "count": 1,
+        "denominator": 42,
+        "rate": 0.023809523809523808,
+        "wilson95": [
+          0.004215404134432679,
+          0.12321201573766226
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source/liang/college": {
+      "count": 34,
+      "ai_count": 5,
+      "auroc": 1.0,
+      "tpr_at_1pct_fpr": 1.0,
+      "ece": 0.044705882352941165,
+      "brier": 0.028894117647058824,
+      "fpr_mixed_or_above": {
+        "count": 8,
+        "denominator": 29,
+        "rate": 0.27586206896551724,
+        "wilson95": [
+          0.14698755102088218,
+          0.4571713241686543
+        ]
+      },
+      "fpr_high": {
+        "count": 1,
+        "denominator": 29,
+        "rate": 0.034482758620689655,
+        "wilson95": [
+          0.006113214292762889,
+          0.17175521879319733
+        ]
+      },
+      "recall_high": {
+        "count": 5,
+        "denominator": 5,
+        "rate": 1.0,
+        "wilson95": [
+          0.5655175352168389,
+          1
+        ]
+      }
+    },
+    "source/liang/hewlett": {
+      "count": 30,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 30,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.11351339317396321
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 30,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.11351339317396321
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source/raid": {
+      "count": 90,
+      "ai_count": 40,
+      "auroc": 0.999,
+      "tpr_at_1pct_fpr": 0.95,
+      "ece": 0.006333333333333311,
+      "brier": 0.01333,
+      "fpr_mixed_or_above": {
+        "count": 4,
+        "denominator": 50,
+        "rate": 0.08,
+        "wilson95": [
+          0.031549514088593744,
+          0.18838246918342452
+        ]
+      },
+      "fpr_high": {
+        "count": 1,
+        "denominator": 50,
+        "rate": 0.02,
+        "wilson95": [
+          0.003539259271646375,
+          0.1049544358963745
+        ]
+      },
+      "recall_high": {
+        "count": 39,
+        "denominator": 40,
+        "rate": 0.975,
+        "wilson95": [
+          0.8711863103652634,
+          0.9955731684973185
+        ]
+      }
+    },
+    "source/raid-attacks": {
+      "count": 35,
+      "ai_count": 35,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0285714285714285,
+      "brier": 0.02637714285714286,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 34,
+        "denominator": 35,
+        "rate": 0.9714285714285714,
+        "wilson95": [
+          0.8546691276638682,
+          0.9949385081445558
+        ]
+      }
+    },
+    "split/test": {
+      "count": 268,
+      "ai_count": 80,
+      "auroc": 0.9986037234042553,
+      "tpr_at_1pct_fpr": 0.9625,
+      "ece": 0.01134328358208956,
+      "brier": 0.012924626865671642,
+      "fpr_mixed_or_above": {
+        "count": 19,
+        "denominator": 188,
+        "rate": 0.10106382978723404,
+        "wilson95": [
+          0.0656585768978924,
+          0.15244578426525615
+        ]
+      },
+      "fpr_high": {
+        "count": 3,
+        "denominator": 188,
+        "rate": 0.015957446808510637,
+        "wilson95": [
+          0.005441558415519358,
+          0.04585839979576754
+        ]
+      },
+      "recall_high": {
+        "count": 78,
+        "denominator": 80,
+        "rate": 0.975,
+        "wilson95": [
+          0.9133556701442224,
+          0.9931171067970291
+        ]
+      }
+    },
+    "writer/ESL": {
+      "count": 46,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.018478260869565215,
+      "brier": 0.00772391304347826,
+      "fpr_mixed_or_above": {
+        "count": 5,
+        "denominator": 46,
+        "rate": 0.10869565217391304,
+        "wilson95": [
+          0.047331458580990485,
+          0.2303782864425042
+        ]
+      },
+      "fpr_high": {
+        "count": 1,
+        "denominator": 46,
+        "rate": 0.021739130434782608,
+        "wilson95": [
+          0.00384785425805044,
+          0.11335294521510965
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "writer/native_proxy": {
+      "count": 30,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 30,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.11351339317396321
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 30,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.11351339317396321
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "writer/unknown": {
+      "count": 192,
+      "ai_count": 80,
+      "auroc": 0.9982142857142857,
+      "tpr_at_1pct_fpr": 0.9625,
+      "ece": 0.01265625000000001,
+      "brier": 0.016190104166666667,
+      "fpr_mixed_or_above": {
+        "count": 14,
+        "denominator": 112,
+        "rate": 0.125,
+        "wilson95": [
+          0.07594026855583494,
+          0.19893074174437161
+        ]
+      },
+      "fpr_high": {
+        "count": 2,
+        "denominator": 112,
+        "rate": 0.017857142857142856,
+        "wilson95": [
+          0.004910811536248977,
+          0.06278048742115948
+        ]
+      },
+      "recall_high": {
+        "count": 78,
+        "denominator": 80,
+        "rate": 0.975,
+        "wilson95": [
+          0.9133556701442224,
+          0.9931171067970291
+        ]
+      }
+    }
+  },
+  "threshold": {
+    "attack/alternative_spelling": {
+      "count": 11,
+      "ai_count": 11,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 11,
+        "denominator": 11,
+        "rate": 1.0,
+        "wilson95": [
+          0.7411670330319788,
+          1
+        ]
+      }
+    },
+    "attack/article_deletion": {
+      "count": 5,
+      "ai_count": 5,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 5,
+        "denominator": 5,
+        "rate": 1.0,
+        "wilson95": [
+          0.5655175352168389,
+          1
+        ]
+      }
+    },
+    "attack/homoglyph": {
+      "count": 1,
+      "ai_count": 1,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 1,
+        "denominator": 1,
+        "rate": 1.0,
+        "wilson95": [
+          0.20654931437724644,
+          0.9999999999999999
+        ]
+      }
+    },
+    "attack/none": {
+      "count": 233,
+      "ai_count": 45,
+      "auroc": 0.9992316784869977,
+      "tpr_at_1pct_fpr": 0.9555555555555556,
+      "ece": 0.012532188841201707,
+      "brier": 0.010903862660944206,
+      "fpr_mixed_or_above": {
+        "count": 19,
+        "denominator": 188,
+        "rate": 0.10106382978723404,
+        "wilson95": [
+          0.0656585768978924,
+          0.15244578426525615
+        ]
+      },
+      "fpr_high": {
+        "count": 9,
+        "denominator": 188,
+        "rate": 0.047872340425531915,
+        "wilson95": [
+          0.025387307800360692,
+          0.08846430151787434
+        ]
+      },
+      "recall_high": {
+        "count": 44,
+        "denominator": 45,
+        "rate": 0.9777777777777777,
+        "wilson95": [
+          0.8843331823158551,
+          0.9960664011171665
+        ]
+      }
+    },
+    "attack/number": {
+      "count": 2,
+      "ai_count": 2,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 2,
+        "denominator": 2,
+        "rate": 1.0,
+        "wilson95": [
+          0.34238022750666547,
+          1
+        ]
+      }
+    },
+    "attack/paraphrase": {
+      "count": 2,
+      "ai_count": 2,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.48,
+      "brier": 0.4608,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 1,
+        "denominator": 2,
+        "rate": 0.5,
+        "wilson95": [
+          0.09453120573423457,
+          0.9054687942657654
+        ]
+      }
+    },
+    "attack/perplexity_misspelling": {
+      "count": 4,
+      "ai_count": 4,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 4,
+        "denominator": 4,
+        "rate": 1.0,
+        "wilson95": [
+          0.5101091635454165,
+          1
+        ]
+      }
+    },
+    "attack/synonym": {
+      "count": 10,
+      "ai_count": 10,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0039999999999998925,
+      "brier": 0.00016000000000000028,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 10,
+        "denominator": 10,
+        "rate": 1.0,
+        "wilson95": [
+          0.7224672001371218,
+          0.9999999999999999
+        ]
+      }
+    },
+    "dataset/asap": {
+      "count": 37,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.002162162162162162,
+      "brier": 8.64864864864865e-05,
+      "fpr_mixed_or_above": {
+        "count": 2,
+        "denominator": 37,
+        "rate": 0.05405405405405406,
+        "wilson95": [
+          0.014950976833158144,
+          0.17704654350812637
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 37,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.09405782583719778
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "dataset/ellipse": {
+      "count": 42,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.020238095238095236,
+      "brier": 0.00845952380952381,
+      "fpr_mixed_or_above": {
+        "count": 5,
+        "denominator": 42,
+        "rate": 0.11904761904761904,
+        "wilson95": [
+          0.05193803327758352,
+          0.2500039026200924
+        ]
+      },
+      "fpr_high": {
+        "count": 5,
+        "denominator": 42,
+        "rate": 0.11904761904761904,
+        "wilson95": [
+          0.05193803327758352,
+          0.2500039026200924
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "dataset/liang/college-ai": {
+      "count": 5,
+      "ai_count": 5,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 5,
+        "denominator": 5,
+        "rate": 1.0,
+        "wilson95": [
+          0.5655175352168389,
+          1
+        ]
+      }
+    },
+    "dataset/liang/college-human": {
+      "count": 29,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.05241379310344828,
+      "brier": 0.03387586206896552,
+      "fpr_mixed_or_above": {
+        "count": 8,
+        "denominator": 29,
+        "rate": 0.27586206896551724,
+        "wilson95": [
+          0.14698755102088218,
+          0.4571713241686543
+        ]
+      },
+      "fpr_high": {
+        "count": 3,
+        "denominator": 29,
+        "rate": 0.10344827586206896,
+        "wilson95": [
+          0.03581489135067803,
+          0.26385081090773255
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "dataset/liang/hewlett": {
+      "count": 30,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 30,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.11351339317396321
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 30,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.11351339317396321
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "dataset/raid": {
+      "count": 90,
+      "ai_count": 40,
+      "auroc": 0.999,
+      "tpr_at_1pct_fpr": 0.95,
+      "ece": 0.006333333333333311,
+      "brier": 0.01333,
+      "fpr_mixed_or_above": {
+        "count": 4,
+        "denominator": 50,
+        "rate": 0.08,
+        "wilson95": [
+          0.031549514088593744,
+          0.18838246918342452
+        ]
+      },
+      "fpr_high": {
+        "count": 1,
+        "denominator": 50,
+        "rate": 0.02,
+        "wilson95": [
+          0.003539259271646375,
+          0.1049544358963745
+        ]
+      },
+      "recall_high": {
+        "count": 39,
+        "denominator": 40,
+        "rate": 0.975,
+        "wilson95": [
+          0.8711863103652634,
+          0.9955731684973185
+        ]
+      }
+    },
+    "dataset/raid-attacks": {
+      "count": 35,
+      "ai_count": 35,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0285714285714285,
+      "brier": 0.02637714285714286,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 34,
+        "denominator": 35,
+        "rate": 0.9714285714285714,
+        "wilson95": [
+          0.8546691276638682,
+          0.9949385081445558
+        ]
+      }
+    },
+    "fairness/ESL-essay": {
+      "count": 46,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.018478260869565215,
+      "brier": 0.00772391304347826,
+      "fpr_mixed_or_above": {
+        "count": 5,
+        "denominator": 46,
+        "rate": 0.10869565217391304,
+        "wilson95": [
+          0.047331458580990485,
+          0.2303782864425042
+        ]
+      },
+      "fpr_high": {
+        "count": 5,
+        "denominator": 46,
+        "rate": 0.10869565217391304,
+        "wilson95": [
+          0.047331458580990485,
+          0.2303782864425042
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "generator/chatgpt": {
+      "count": 2,
+      "ai_count": 2,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 2,
+        "denominator": 2,
+        "rate": 1.0,
+        "wilson95": [
+          0.34238022750666547,
+          1
+        ]
+      }
+    },
+    "generator/cohere": {
+      "count": 1,
+      "ai_count": 1,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 1,
+        "denominator": 1,
+        "rate": 1.0,
+        "wilson95": [
+          0.20654931437724644,
+          0.9999999999999999
+        ]
+      }
+    },
+    "generator/gpt-3": {
+      "count": 5,
+      "ai_count": 5,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 5,
+        "denominator": 5,
+        "rate": 1.0,
+        "wilson95": [
+          0.5655175352168389,
+          1
+        ]
+      }
+    },
+    "generator/gpt2": {
+      "count": 18,
+      "ai_count": 18,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.04499999999999997,
+      "brier": 0.03302777777777778,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 17,
+        "denominator": 18,
+        "rate": 0.9444444444444444,
+        "wilson95": [
+          0.7424269921812815,
+          0.9901248090216964
+        ]
+      }
+    },
+    "generator/gpt3": {
+      "count": 2,
+      "ai_count": 2,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 2,
+        "denominator": 2,
+        "rate": 1.0,
+        "wilson95": [
+          0.34238022750666547,
+          1
+        ]
+      }
+    },
+    "generator/gpt4": {
+      "count": 2,
+      "ai_count": 2,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 2,
+        "denominator": 2,
+        "rate": 1.0,
+        "wilson95": [
+          0.34238022750666547,
+          1
+        ]
+      }
+    },
+    "generator/human": {
+      "count": 188,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.018563829787234042,
+      "brier": 0.009363297872340427,
+      "fpr_mixed_or_above": {
+        "count": 19,
+        "denominator": 188,
+        "rate": 0.10106382978723404,
+        "wilson95": [
+          0.0656585768978924,
+          0.15244578426525615
+        ]
+      },
+      "fpr_high": {
+        "count": 9,
+        "denominator": 188,
+        "rate": 0.047872340425531915,
+        "wilson95": [
+          0.025387307800360692,
+          0.08846430151787434
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "generator/llama-chat": {
+      "count": 11,
+      "ai_count": 11,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 11,
+        "denominator": 11,
+        "rate": 1.0,
+        "wilson95": [
+          0.7411670330319788,
+          1
+        ]
+      }
+    },
+    "generator/mistral": {
+      "count": 12,
+      "ai_count": 12,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 12,
+        "denominator": 12,
+        "rate": 1.0,
+        "wilson95": [
+          0.7575059933447693,
+          1
+        ]
+      }
+    },
+    "generator/mpt": {
+      "count": 26,
+      "ai_count": 26,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.05538461538461538,
+      "brier": 0.04265384615384615,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 25,
+        "denominator": 26,
+        "rate": 0.9615384615384616,
+        "wilson95": [
+          0.8110722109696584,
+          0.9931780150064562
+        ]
+      }
+    },
+    "generator/mpt-chat": {
+      "count": 1,
+      "ai_count": 1,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 1,
+        "denominator": 1,
+        "rate": 1.0,
+        "wilson95": [
+          0.20654931437724644,
+          0.9999999999999999
+        ]
+      }
+    },
+    "genre/essay": {
+      "count": 143,
+      "ai_count": 5,
+      "auroc": 1.0,
+      "tpr_at_1pct_fpr": 1.0,
+      "ece": 0.01713286713286713,
+      "brier": 0.009376923076923076,
+      "fpr_mixed_or_above": {
+        "count": 15,
+        "denominator": 138,
+        "rate": 0.10869565217391304,
+        "wilson95": [
+          0.06698539778769641,
+          0.17160111353318563
+        ]
+      },
+      "fpr_high": {
+        "count": 8,
+        "denominator": 138,
+        "rate": 0.057971014492753624,
+        "wilson95": [
+          0.029664427433011654,
+          0.11022033535539214
+        ]
+      },
+      "recall_high": {
+        "count": 5,
+        "denominator": 5,
+        "rate": 1.0,
+        "wilson95": [
+          0.5655175352168389,
+          1
+        ]
+      }
+    },
+    "genre/other": {
+      "count": 125,
+      "ai_count": 75,
+      "auroc": 0.9985333333333334,
+      "tpr_at_1pct_fpr": 0.96,
+      "ece": 0.011920000000000047,
+      "brier": 0.0169832,
+      "fpr_mixed_or_above": {
+        "count": 4,
+        "denominator": 50,
+        "rate": 0.08,
+        "wilson95": [
+          0.031549514088593744,
+          0.18838246918342452
+        ]
+      },
+      "fpr_high": {
+        "count": 1,
+        "denominator": 50,
+        "rate": 0.02,
+        "wilson95": [
+          0.003539259271646375,
+          0.1049544358963745
+        ]
+      },
+      "recall_high": {
+        "count": 73,
+        "denominator": 75,
+        "rate": 0.9733333333333334,
+        "wilson95": [
+          0.9078851181224111,
+          0.9926563109938683
+        ]
+      }
+    },
+    "length/1200+": {
+      "count": 3,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 3,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.561497031755032
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 3,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.561497031755032
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "length/300-599": {
+      "count": 213,
+      "ai_count": 80,
+      "auroc": 0.9988251879699248,
+      "tpr_at_1pct_fpr": 0.9625,
+      "ece": 0.010234741784037594,
+      "brier": 0.011769953051643193,
+      "fpr_mixed_or_above": {
+        "count": 12,
+        "denominator": 133,
+        "rate": 0.09022556390977443,
+        "wilson95": [
+          0.052366540573380534,
+          0.15109123502060176
+        ]
+      },
+      "fpr_high": {
+        "count": 6,
+        "denominator": 133,
+        "rate": 0.045112781954887216,
+        "wilson95": [
+          0.020837208777873893,
+          0.09492784486315231
+        ]
+      },
+      "recall_high": {
+        "count": 78,
+        "denominator": 80,
+        "rate": 0.975,
+        "wilson95": [
+          0.9133556701442224,
+          0.9931171067970291
+        ]
+      }
+    },
+    "length/600-1199": {
+      "count": 52,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.026153846153846156,
+      "brier": 0.018399999999999996,
+      "fpr_mixed_or_above": {
+        "count": 7,
+        "denominator": 52,
+        "rate": 0.1346153846153846,
+        "wilson95": [
+          0.06676881705396269,
+          0.2527332016519341
+        ]
+      },
+      "fpr_high": {
+        "count": 3,
+        "denominator": 52,
+        "rate": 0.057692307692307696,
+        "wilson95": [
+          0.019814172112271156,
+          0.15642511368960393
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "pooled": {
+      "count": 268,
+      "ai_count": 80,
+      "auroc": 0.9986037234042553,
+      "tpr_at_1pct_fpr": 0.9625,
+      "ece": 0.01134328358208956,
+      "brier": 0.012924626865671642,
+      "fpr_mixed_or_above": {
+        "count": 19,
+        "denominator": 188,
+        "rate": 0.10106382978723404,
+        "wilson95": [
+          0.0656585768978924,
+          0.15244578426525615
+        ]
+      },
+      "fpr_high": {
+        "count": 9,
+        "denominator": 188,
+        "rate": 0.047872340425531915,
+        "wilson95": [
+          0.025387307800360692,
+          0.08846430151787434
+        ]
+      },
+      "recall_high": {
+        "count": 78,
+        "denominator": 80,
+        "rate": 0.975,
+        "wilson95": [
+          0.9133556701442224,
+          0.9931171067970291
+        ]
+      }
+    },
+    "source-length/asap/1200+": {
+      "count": 1,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 1,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.7934506856227534
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 1,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.7934506856227534
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source-length/asap/300-599": {
+      "count": 30,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0026666666666666666,
+      "brier": 0.00010666666666666667,
+      "fpr_mixed_or_above": {
+        "count": 2,
+        "denominator": 30,
+        "rate": 0.06666666666666667,
+        "wilson95": [
+          0.01847702379127096,
+          0.21323458362616382
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 30,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.11351339317396321
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source-length/asap/600-1199": {
+      "count": 6,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 6,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.39033428790215224
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 6,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.39033428790215224
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source-length/ellipse/300-599": {
+      "count": 30,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.028333333333333332,
+      "brier": 0.011843333333333332,
+      "fpr_mixed_or_above": {
+        "count": 5,
+        "denominator": 30,
+        "rate": 0.16666666666666666,
+        "wilson95": [
+          0.07336542371848712,
+          0.33564350506415497
+        ]
+      },
+      "fpr_high": {
+        "count": 5,
+        "denominator": 30,
+        "rate": 0.16666666666666666,
+        "wilson95": [
+          0.07336542371848712,
+          0.33564350506415497
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source-length/ellipse/600-1199": {
+      "count": 12,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 12,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.24249400665523077
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 12,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.24249400665523077
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source-length/liang/college/300-599": {
+      "count": 16,
+      "ai_count": 5,
+      "auroc": 1.0,
+      "tpr_at_1pct_fpr": 1.0,
+      "ece": 0.01,
+      "brier": 0.0016,
+      "fpr_mixed_or_above": {
+        "count": 1,
+        "denominator": 11,
+        "rate": 0.09090909090909091,
+        "wilson95": [
+          0.016232172885885465,
+          0.37735843645158634
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 11,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.25883296696802116
+        ]
+      },
+      "recall_high": {
+        "count": 5,
+        "denominator": 5,
+        "rate": 1.0,
+        "wilson95": [
+          0.5655175352168389,
+          1
+        ]
+      }
+    },
+    "source-length/liang/college/600-1199": {
+      "count": 18,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.07555555555555554,
+      "brier": 0.05315555555555556,
+      "fpr_mixed_or_above": {
+        "count": 7,
+        "denominator": 18,
+        "rate": 0.3888888888888889,
+        "wilson95": [
+          0.20305246572164004,
+          0.6138095839776154
+        ]
+      },
+      "fpr_high": {
+        "count": 3,
+        "denominator": 18,
+        "rate": 0.16666666666666666,
+        "wilson95": [
+          0.05836576805861604,
+          0.39222038103915036
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source-length/liang/hewlett/300-599": {
+      "count": 28,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 28,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.1206433047658398
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 28,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.1206433047658398
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source-length/liang/hewlett/600-1199": {
+      "count": 2,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 2,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.6576197724933345
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 2,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.6576197724933345
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source-length/raid-attacks/300-599": {
+      "count": 35,
+      "ai_count": 35,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0285714285714285,
+      "brier": 0.02637714285714286,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 34,
+        "denominator": 35,
+        "rate": 0.9714285714285714,
+        "wilson95": [
+          0.8546691276638682,
+          0.9949385081445558
+        ]
+      }
+    },
+    "source-length/raid/1200+": {
+      "count": 2,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 2,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.6576197724933345
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 2,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.6576197724933345
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source-length/raid/300-599": {
+      "count": 74,
+      "ai_count": 40,
+      "auroc": 0.9985294117647059,
+      "tpr_at_1pct_fpr": 0.95,
+      "ece": 0.007702702702702674,
+      "brier": 0.01621216216216216,
+      "fpr_mixed_or_above": {
+        "count": 4,
+        "denominator": 34,
+        "rate": 0.11764705882352941,
+        "wilson95": [
+          0.046714466648824504,
+          0.2662084277037134
+        ]
+      },
+      "fpr_high": {
+        "count": 1,
+        "denominator": 34,
+        "rate": 0.029411764705882353,
+        "wilson95": [
+          0.005210906276269148,
+          0.1491557329268544
+        ]
+      },
+      "recall_high": {
+        "count": 39,
+        "denominator": 40,
+        "rate": 0.975,
+        "wilson95": [
+          0.8711863103652634,
+          0.9955731684973185
+        ]
+      }
+    },
+    "source-length/raid/600-1199": {
+      "count": 14,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 14,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.2153108027376265
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 14,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.2153108027376265
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source/asap": {
+      "count": 37,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.002162162162162162,
+      "brier": 8.64864864864865e-05,
+      "fpr_mixed_or_above": {
+        "count": 2,
+        "denominator": 37,
+        "rate": 0.05405405405405406,
+        "wilson95": [
+          0.014950976833158144,
+          0.17704654350812637
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 37,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.09405782583719778
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source/ellipse": {
+      "count": 42,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.020238095238095236,
+      "brier": 0.00845952380952381,
+      "fpr_mixed_or_above": {
+        "count": 5,
+        "denominator": 42,
+        "rate": 0.11904761904761904,
+        "wilson95": [
+          0.05193803327758352,
+          0.2500039026200924
+        ]
+      },
+      "fpr_high": {
+        "count": 5,
+        "denominator": 42,
+        "rate": 0.11904761904761904,
+        "wilson95": [
+          0.05193803327758352,
+          0.2500039026200924
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source/liang/college": {
+      "count": 34,
+      "ai_count": 5,
+      "auroc": 1.0,
+      "tpr_at_1pct_fpr": 1.0,
+      "ece": 0.044705882352941165,
+      "brier": 0.028894117647058824,
+      "fpr_mixed_or_above": {
+        "count": 8,
+        "denominator": 29,
+        "rate": 0.27586206896551724,
+        "wilson95": [
+          0.14698755102088218,
+          0.4571713241686543
+        ]
+      },
+      "fpr_high": {
+        "count": 3,
+        "denominator": 29,
+        "rate": 0.10344827586206896,
+        "wilson95": [
+          0.03581489135067803,
+          0.26385081090773255
+        ]
+      },
+      "recall_high": {
+        "count": 5,
+        "denominator": 5,
+        "rate": 1.0,
+        "wilson95": [
+          0.5655175352168389,
+          1
+        ]
+      }
+    },
+    "source/liang/hewlett": {
+      "count": 30,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 30,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.11351339317396321
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 30,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.11351339317396321
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source/raid": {
+      "count": 90,
+      "ai_count": 40,
+      "auroc": 0.999,
+      "tpr_at_1pct_fpr": 0.95,
+      "ece": 0.006333333333333311,
+      "brier": 0.01333,
+      "fpr_mixed_or_above": {
+        "count": 4,
+        "denominator": 50,
+        "rate": 0.08,
+        "wilson95": [
+          0.031549514088593744,
+          0.18838246918342452
+        ]
+      },
+      "fpr_high": {
+        "count": 1,
+        "denominator": 50,
+        "rate": 0.02,
+        "wilson95": [
+          0.003539259271646375,
+          0.1049544358963745
+        ]
+      },
+      "recall_high": {
+        "count": 39,
+        "denominator": 40,
+        "rate": 0.975,
+        "wilson95": [
+          0.8711863103652634,
+          0.9955731684973185
+        ]
+      }
+    },
+    "source/raid-attacks": {
+      "count": 35,
+      "ai_count": 35,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0285714285714285,
+      "brier": 0.02637714285714286,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 34,
+        "denominator": 35,
+        "rate": 0.9714285714285714,
+        "wilson95": [
+          0.8546691276638682,
+          0.9949385081445558
+        ]
+      }
+    },
+    "split/test": {
+      "count": 268,
+      "ai_count": 80,
+      "auroc": 0.9986037234042553,
+      "tpr_at_1pct_fpr": 0.9625,
+      "ece": 0.01134328358208956,
+      "brier": 0.012924626865671642,
+      "fpr_mixed_or_above": {
+        "count": 19,
+        "denominator": 188,
+        "rate": 0.10106382978723404,
+        "wilson95": [
+          0.0656585768978924,
+          0.15244578426525615
+        ]
+      },
+      "fpr_high": {
+        "count": 9,
+        "denominator": 188,
+        "rate": 0.047872340425531915,
+        "wilson95": [
+          0.025387307800360692,
+          0.08846430151787434
+        ]
+      },
+      "recall_high": {
+        "count": 78,
+        "denominator": 80,
+        "rate": 0.975,
+        "wilson95": [
+          0.9133556701442224,
+          0.9931171067970291
+        ]
+      }
+    },
+    "writer/ESL": {
+      "count": 46,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.018478260869565215,
+      "brier": 0.00772391304347826,
+      "fpr_mixed_or_above": {
+        "count": 5,
+        "denominator": 46,
+        "rate": 0.10869565217391304,
+        "wilson95": [
+          0.047331458580990485,
+          0.2303782864425042
+        ]
+      },
+      "fpr_high": {
+        "count": 5,
+        "denominator": 46,
+        "rate": 0.10869565217391304,
+        "wilson95": [
+          0.047331458580990485,
+          0.2303782864425042
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "writer/native_proxy": {
+      "count": 30,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 30,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.11351339317396321
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 30,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.11351339317396321
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "writer/unknown": {
+      "count": 192,
+      "ai_count": 80,
+      "auroc": 0.9982142857142857,
+      "tpr_at_1pct_fpr": 0.9625,
+      "ece": 0.01265625000000001,
+      "brier": 0.016190104166666667,
+      "fpr_mixed_or_above": {
+        "count": 14,
+        "denominator": 112,
+        "rate": 0.125,
+        "wilson95": [
+          0.07594026855583494,
+          0.19893074174437161
+        ]
+      },
+      "fpr_high": {
+        "count": 4,
+        "denominator": 112,
+        "rate": 0.03571428571428571,
+        "wilson95": [
+          0.013974612394677233,
+          0.08824663845319758
+        ]
+      },
+      "recall_high": {
+        "count": 78,
+        "denominator": 80,
+        "rate": 0.975,
+        "wilson95": [
+          0.9133556701442224,
+          0.9931171067970291
+        ]
+      }
+    }
+  },
+  "guarded": {
+    "attack/alternative_spelling": {
+      "count": 11,
+      "ai_count": 11,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 11,
+        "denominator": 11,
+        "rate": 1.0,
+        "wilson95": [
+          0.7411670330319788,
+          1
+        ]
+      }
+    },
+    "attack/article_deletion": {
+      "count": 5,
+      "ai_count": 5,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 5,
+        "denominator": 5,
+        "rate": 1.0,
+        "wilson95": [
+          0.5655175352168389,
+          1
+        ]
+      }
+    },
+    "attack/homoglyph": {
+      "count": 1,
+      "ai_count": 1,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 1,
+        "denominator": 1,
+        "rate": 1.0,
+        "wilson95": [
+          0.20654931437724644,
+          0.9999999999999999
+        ]
+      }
+    },
+    "attack/none": {
+      "count": 233,
+      "ai_count": 45,
+      "auroc": 0.9992316784869977,
+      "tpr_at_1pct_fpr": 0.9555555555555556,
+      "ece": 0.012532188841201707,
+      "brier": 0.010903862660944206,
+      "fpr_mixed_or_above": {
+        "count": 19,
+        "denominator": 188,
+        "rate": 0.10106382978723404,
+        "wilson95": [
+          0.0656585768978924,
+          0.15244578426525615
+        ]
+      },
+      "fpr_high": {
+        "count": 2,
+        "denominator": 188,
+        "rate": 0.010638297872340425,
+        "wilson95": [
+          0.002922269566028722,
+          0.03795241346076682
+        ]
+      },
+      "recall_high": {
+        "count": 43,
+        "denominator": 45,
+        "rate": 0.9555555555555556,
+        "wilson95": [
+          0.8517248923056479,
+          0.9877258732932798
+        ]
+      }
+    },
+    "attack/number": {
+      "count": 2,
+      "ai_count": 2,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 2,
+        "denominator": 2,
+        "rate": 1.0,
+        "wilson95": [
+          0.34238022750666547,
+          1
+        ]
+      }
+    },
+    "attack/paraphrase": {
+      "count": 2,
+      "ai_count": 2,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.48,
+      "brier": 0.4608,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 1,
+        "denominator": 2,
+        "rate": 0.5,
+        "wilson95": [
+          0.09453120573423457,
+          0.9054687942657654
+        ]
+      }
+    },
+    "attack/perplexity_misspelling": {
+      "count": 4,
+      "ai_count": 4,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 4,
+        "denominator": 4,
+        "rate": 1.0,
+        "wilson95": [
+          0.5101091635454165,
+          1
+        ]
+      }
+    },
+    "attack/synonym": {
+      "count": 10,
+      "ai_count": 10,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0039999999999998925,
+      "brier": 0.00016000000000000028,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 10,
+        "denominator": 10,
+        "rate": 1.0,
+        "wilson95": [
+          0.7224672001371218,
+          0.9999999999999999
+        ]
+      }
+    },
+    "dataset/asap": {
+      "count": 37,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.002162162162162162,
+      "brier": 8.64864864864865e-05,
+      "fpr_mixed_or_above": {
+        "count": 2,
+        "denominator": 37,
+        "rate": 0.05405405405405406,
+        "wilson95": [
+          0.014950976833158144,
+          0.17704654350812637
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 37,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.09405782583719778
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "dataset/ellipse": {
+      "count": 42,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.020238095238095236,
+      "brier": 0.00845952380952381,
+      "fpr_mixed_or_above": {
+        "count": 5,
+        "denominator": 42,
+        "rate": 0.11904761904761904,
+        "wilson95": [
+          0.05193803327758352,
+          0.2500039026200924
+        ]
+      },
+      "fpr_high": {
+        "count": 1,
+        "denominator": 42,
+        "rate": 0.023809523809523808,
+        "wilson95": [
+          0.004215404134432679,
+          0.12321201573766226
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "dataset/liang/college-ai": {
+      "count": 5,
+      "ai_count": 5,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 5,
+        "denominator": 5,
+        "rate": 1.0,
+        "wilson95": [
+          0.5655175352168389,
+          1
+        ]
+      }
+    },
+    "dataset/liang/college-human": {
+      "count": 29,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.05241379310344828,
+      "brier": 0.03387586206896552,
+      "fpr_mixed_or_above": {
+        "count": 8,
+        "denominator": 29,
+        "rate": 0.27586206896551724,
+        "wilson95": [
+          0.14698755102088218,
+          0.4571713241686543
+        ]
+      },
+      "fpr_high": {
+        "count": 1,
+        "denominator": 29,
+        "rate": 0.034482758620689655,
+        "wilson95": [
+          0.006113214292762889,
+          0.17175521879319733
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "dataset/liang/hewlett": {
+      "count": 30,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 30,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.11351339317396321
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 30,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.11351339317396321
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "dataset/raid": {
+      "count": 90,
+      "ai_count": 40,
+      "auroc": 0.999,
+      "tpr_at_1pct_fpr": 0.95,
+      "ece": 0.006333333333333311,
+      "brier": 0.01333,
+      "fpr_mixed_or_above": {
+        "count": 4,
+        "denominator": 50,
+        "rate": 0.08,
+        "wilson95": [
+          0.031549514088593744,
+          0.18838246918342452
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 50,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.07134759913335506
+        ]
+      },
+      "recall_high": {
+        "count": 38,
+        "denominator": 40,
+        "rate": 0.95,
+        "wilson95": [
+          0.8349612263085947,
+          0.9861793326138512
+        ]
+      }
+    },
+    "dataset/raid-attacks": {
+      "count": 35,
+      "ai_count": 35,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0285714285714285,
+      "brier": 0.02637714285714286,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 34,
+        "denominator": 35,
+        "rate": 0.9714285714285714,
+        "wilson95": [
+          0.8546691276638682,
+          0.9949385081445558
+        ]
+      }
+    },
+    "fairness/ESL-essay": {
+      "count": 46,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.018478260869565215,
+      "brier": 0.00772391304347826,
+      "fpr_mixed_or_above": {
+        "count": 5,
+        "denominator": 46,
+        "rate": 0.10869565217391304,
+        "wilson95": [
+          0.047331458580990485,
+          0.2303782864425042
+        ]
+      },
+      "fpr_high": {
+        "count": 1,
+        "denominator": 46,
+        "rate": 0.021739130434782608,
+        "wilson95": [
+          0.00384785425805044,
+          0.11335294521510965
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "generator/chatgpt": {
+      "count": 2,
+      "ai_count": 2,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 2,
+        "denominator": 2,
+        "rate": 1.0,
+        "wilson95": [
+          0.34238022750666547,
+          1
+        ]
+      }
+    },
+    "generator/cohere": {
+      "count": 1,
+      "ai_count": 1,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 1,
+        "denominator": 1,
+        "rate": 1.0,
+        "wilson95": [
+          0.20654931437724644,
+          0.9999999999999999
+        ]
+      }
+    },
+    "generator/gpt-3": {
+      "count": 5,
+      "ai_count": 5,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 5,
+        "denominator": 5,
+        "rate": 1.0,
+        "wilson95": [
+          0.5655175352168389,
+          1
+        ]
+      }
+    },
+    "generator/gpt2": {
+      "count": 18,
+      "ai_count": 18,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.04499999999999997,
+      "brier": 0.03302777777777778,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 17,
+        "denominator": 18,
+        "rate": 0.9444444444444444,
+        "wilson95": [
+          0.7424269921812815,
+          0.9901248090216964
+        ]
+      }
+    },
+    "generator/gpt3": {
+      "count": 2,
+      "ai_count": 2,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 2,
+        "denominator": 2,
+        "rate": 1.0,
+        "wilson95": [
+          0.34238022750666547,
+          1
+        ]
+      }
+    },
+    "generator/gpt4": {
+      "count": 2,
+      "ai_count": 2,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 2,
+        "denominator": 2,
+        "rate": 1.0,
+        "wilson95": [
+          0.34238022750666547,
+          1
+        ]
+      }
+    },
+    "generator/human": {
+      "count": 188,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.018563829787234042,
+      "brier": 0.009363297872340427,
+      "fpr_mixed_or_above": {
+        "count": 19,
+        "denominator": 188,
+        "rate": 0.10106382978723404,
+        "wilson95": [
+          0.0656585768978924,
+          0.15244578426525615
+        ]
+      },
+      "fpr_high": {
+        "count": 2,
+        "denominator": 188,
+        "rate": 0.010638297872340425,
+        "wilson95": [
+          0.002922269566028722,
+          0.03795241346076682
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "generator/llama-chat": {
+      "count": 11,
+      "ai_count": 11,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 11,
+        "denominator": 11,
+        "rate": 1.0,
+        "wilson95": [
+          0.7411670330319788,
+          1
+        ]
+      }
+    },
+    "generator/mistral": {
+      "count": 12,
+      "ai_count": 12,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 12,
+        "denominator": 12,
+        "rate": 1.0,
+        "wilson95": [
+          0.7575059933447693,
+          1
+        ]
+      }
+    },
+    "generator/mpt": {
+      "count": 26,
+      "ai_count": 26,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.05538461538461538,
+      "brier": 0.04265384615384615,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 24,
+        "denominator": 26,
+        "rate": 0.9230769230769231,
+        "wilson95": [
+          0.7585844622837155,
+          0.9786449115277231
+        ]
+      }
+    },
+    "generator/mpt-chat": {
+      "count": 1,
+      "ai_count": 1,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 1,
+        "denominator": 1,
+        "rate": 1.0,
+        "wilson95": [
+          0.20654931437724644,
+          0.9999999999999999
+        ]
+      }
+    },
+    "genre/essay": {
+      "count": 143,
+      "ai_count": 5,
+      "auroc": 1.0,
+      "tpr_at_1pct_fpr": 1.0,
+      "ece": 0.01713286713286713,
+      "brier": 0.009376923076923076,
+      "fpr_mixed_or_above": {
+        "count": 15,
+        "denominator": 138,
+        "rate": 0.10869565217391304,
+        "wilson95": [
+          0.06698539778769641,
+          0.17160111353318563
+        ]
+      },
+      "fpr_high": {
+        "count": 2,
+        "denominator": 138,
+        "rate": 0.014492753623188406,
+        "wilson95": [
+          0.003983475402945302,
+          0.05129978864333428
+        ]
+      },
+      "recall_high": {
+        "count": 5,
+        "denominator": 5,
+        "rate": 1.0,
+        "wilson95": [
+          0.5655175352168389,
+          1
+        ]
+      }
+    },
+    "genre/other": {
+      "count": 125,
+      "ai_count": 75,
+      "auroc": 0.9985333333333334,
+      "tpr_at_1pct_fpr": 0.96,
+      "ece": 0.011920000000000047,
+      "brier": 0.0169832,
+      "fpr_mixed_or_above": {
+        "count": 4,
+        "denominator": 50,
+        "rate": 0.08,
+        "wilson95": [
+          0.031549514088593744,
+          0.18838246918342452
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 50,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.07134759913335506
+        ]
+      },
+      "recall_high": {
+        "count": 72,
+        "denominator": 75,
+        "rate": 0.96,
+        "wilson95": [
+          0.8888701291759652,
+          0.9863039357398556
+        ]
+      }
+    },
+    "length/1200+": {
+      "count": 3,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 3,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.561497031755032
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 3,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.561497031755032
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "length/300-599": {
+      "count": 213,
+      "ai_count": 80,
+      "auroc": 0.9988251879699248,
+      "tpr_at_1pct_fpr": 0.9625,
+      "ece": 0.010234741784037594,
+      "brier": 0.011769953051643193,
+      "fpr_mixed_or_above": {
+        "count": 12,
+        "denominator": 133,
+        "rate": 0.09022556390977443,
+        "wilson95": [
+          0.052366540573380534,
+          0.15109123502060176
+        ]
+      },
+      "fpr_high": {
+        "count": 1,
+        "denominator": 133,
+        "rate": 0.007518796992481203,
+        "wilson95": [
+          0.0013284876076292557,
+          0.041359297739266915
+        ]
+      },
+      "recall_high": {
+        "count": 77,
+        "denominator": 80,
+        "rate": 0.9625,
+        "wilson95": [
+          0.8954527990995514,
+          0.9871654310800883
+        ]
+      }
+    },
+    "length/600-1199": {
+      "count": 52,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.026153846153846156,
+      "brier": 0.018399999999999996,
+      "fpr_mixed_or_above": {
+        "count": 7,
+        "denominator": 52,
+        "rate": 0.1346153846153846,
+        "wilson95": [
+          0.06676881705396269,
+          0.2527332016519341
+        ]
+      },
+      "fpr_high": {
+        "count": 1,
+        "denominator": 52,
+        "rate": 0.019230769230769232,
+        "wilson95": [
+          0.0034028080709452915,
+          0.10120511127891893
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "pooled": {
+      "count": 268,
+      "ai_count": 80,
+      "auroc": 0.9986037234042553,
+      "tpr_at_1pct_fpr": 0.9625,
+      "ece": 0.01134328358208956,
+      "brier": 0.012924626865671642,
+      "fpr_mixed_or_above": {
+        "count": 19,
+        "denominator": 188,
+        "rate": 0.10106382978723404,
+        "wilson95": [
+          0.0656585768978924,
+          0.15244578426525615
+        ]
+      },
+      "fpr_high": {
+        "count": 2,
+        "denominator": 188,
+        "rate": 0.010638297872340425,
+        "wilson95": [
+          0.002922269566028722,
+          0.03795241346076682
+        ]
+      },
+      "recall_high": {
+        "count": 77,
+        "denominator": 80,
+        "rate": 0.9625,
+        "wilson95": [
+          0.8954527990995514,
+          0.9871654310800883
+        ]
+      }
+    },
+    "source-length/asap/1200+": {
+      "count": 1,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 1,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.7934506856227534
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 1,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.7934506856227534
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source-length/asap/300-599": {
+      "count": 30,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0026666666666666666,
+      "brier": 0.00010666666666666667,
+      "fpr_mixed_or_above": {
+        "count": 2,
+        "denominator": 30,
+        "rate": 0.06666666666666667,
+        "wilson95": [
+          0.01847702379127096,
+          0.21323458362616382
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 30,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.11351339317396321
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source-length/asap/600-1199": {
+      "count": 6,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 6,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.39033428790215224
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 6,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.39033428790215224
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source-length/ellipse/300-599": {
+      "count": 30,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.028333333333333332,
+      "brier": 0.011843333333333332,
+      "fpr_mixed_or_above": {
+        "count": 5,
+        "denominator": 30,
+        "rate": 0.16666666666666666,
+        "wilson95": [
+          0.07336542371848712,
+          0.33564350506415497
+        ]
+      },
+      "fpr_high": {
+        "count": 1,
+        "denominator": 30,
+        "rate": 0.03333333333333333,
+        "wilson95": [
+          0.005908590381612663,
+          0.1667039099140863
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source-length/ellipse/600-1199": {
+      "count": 12,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 12,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.24249400665523077
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 12,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.24249400665523077
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source-length/liang/college/300-599": {
+      "count": 16,
+      "ai_count": 5,
+      "auroc": 1.0,
+      "tpr_at_1pct_fpr": 1.0,
+      "ece": 0.01,
+      "brier": 0.0016,
+      "fpr_mixed_or_above": {
+        "count": 1,
+        "denominator": 11,
+        "rate": 0.09090909090909091,
+        "wilson95": [
+          0.016232172885885465,
+          0.37735843645158634
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 11,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.25883296696802116
+        ]
+      },
+      "recall_high": {
+        "count": 5,
+        "denominator": 5,
+        "rate": 1.0,
+        "wilson95": [
+          0.5655175352168389,
+          1
+        ]
+      }
+    },
+    "source-length/liang/college/600-1199": {
+      "count": 18,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.07555555555555554,
+      "brier": 0.05315555555555556,
+      "fpr_mixed_or_above": {
+        "count": 7,
+        "denominator": 18,
+        "rate": 0.3888888888888889,
+        "wilson95": [
+          0.20305246572164004,
+          0.6138095839776154
+        ]
+      },
+      "fpr_high": {
+        "count": 1,
+        "denominator": 18,
+        "rate": 0.05555555555555555,
+        "wilson95": [
+          0.009875190978303486,
+          0.25757300781871845
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source-length/liang/hewlett/300-599": {
+      "count": 28,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 28,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.1206433047658398
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 28,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.1206433047658398
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source-length/liang/hewlett/600-1199": {
+      "count": 2,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 2,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.6576197724933345
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 2,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.6576197724933345
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source-length/raid-attacks/300-599": {
+      "count": 35,
+      "ai_count": 35,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0285714285714285,
+      "brier": 0.02637714285714286,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 34,
+        "denominator": 35,
+        "rate": 0.9714285714285714,
+        "wilson95": [
+          0.8546691276638682,
+          0.9949385081445558
+        ]
+      }
+    },
+    "source-length/raid/1200+": {
+      "count": 2,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 2,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.6576197724933345
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 2,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.6576197724933345
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source-length/raid/300-599": {
+      "count": 74,
+      "ai_count": 40,
+      "auroc": 0.9985294117647059,
+      "tpr_at_1pct_fpr": 0.95,
+      "ece": 0.007702702702702674,
+      "brier": 0.01621216216216216,
+      "fpr_mixed_or_above": {
+        "count": 4,
+        "denominator": 34,
+        "rate": 0.11764705882352941,
+        "wilson95": [
+          0.046714466648824504,
+          0.2662084277037134
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 34,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.10151455415331875
+        ]
+      },
+      "recall_high": {
+        "count": 38,
+        "denominator": 40,
+        "rate": 0.95,
+        "wilson95": [
+          0.8349612263085947,
+          0.9861793326138512
+        ]
+      }
+    },
+    "source-length/raid/600-1199": {
+      "count": 14,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 14,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.2153108027376265
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 14,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.2153108027376265
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source/asap": {
+      "count": 37,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.002162162162162162,
+      "brier": 8.64864864864865e-05,
+      "fpr_mixed_or_above": {
+        "count": 2,
+        "denominator": 37,
+        "rate": 0.05405405405405406,
+        "wilson95": [
+          0.014950976833158144,
+          0.17704654350812637
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 37,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.09405782583719778
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source/ellipse": {
+      "count": 42,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.020238095238095236,
+      "brier": 0.00845952380952381,
+      "fpr_mixed_or_above": {
+        "count": 5,
+        "denominator": 42,
+        "rate": 0.11904761904761904,
+        "wilson95": [
+          0.05193803327758352,
+          0.2500039026200924
+        ]
+      },
+      "fpr_high": {
+        "count": 1,
+        "denominator": 42,
+        "rate": 0.023809523809523808,
+        "wilson95": [
+          0.004215404134432679,
+          0.12321201573766226
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source/liang/college": {
+      "count": 34,
+      "ai_count": 5,
+      "auroc": 1.0,
+      "tpr_at_1pct_fpr": 1.0,
+      "ece": 0.044705882352941165,
+      "brier": 0.028894117647058824,
+      "fpr_mixed_or_above": {
+        "count": 8,
+        "denominator": 29,
+        "rate": 0.27586206896551724,
+        "wilson95": [
+          0.14698755102088218,
+          0.4571713241686543
+        ]
+      },
+      "fpr_high": {
+        "count": 1,
+        "denominator": 29,
+        "rate": 0.034482758620689655,
+        "wilson95": [
+          0.006113214292762889,
+          0.17175521879319733
+        ]
+      },
+      "recall_high": {
+        "count": 5,
+        "denominator": 5,
+        "rate": 1.0,
+        "wilson95": [
+          0.5655175352168389,
+          1
+        ]
+      }
+    },
+    "source/liang/hewlett": {
+      "count": 30,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 30,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.11351339317396321
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 30,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.11351339317396321
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source/raid": {
+      "count": 90,
+      "ai_count": 40,
+      "auroc": 0.999,
+      "tpr_at_1pct_fpr": 0.95,
+      "ece": 0.006333333333333311,
+      "brier": 0.01333,
+      "fpr_mixed_or_above": {
+        "count": 4,
+        "denominator": 50,
+        "rate": 0.08,
+        "wilson95": [
+          0.031549514088593744,
+          0.18838246918342452
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 50,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.07134759913335506
+        ]
+      },
+      "recall_high": {
+        "count": 38,
+        "denominator": 40,
+        "rate": 0.95,
+        "wilson95": [
+          0.8349612263085947,
+          0.9861793326138512
+        ]
+      }
+    },
+    "source/raid-attacks": {
+      "count": 35,
+      "ai_count": 35,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0285714285714285,
+      "brier": 0.02637714285714286,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 34,
+        "denominator": 35,
+        "rate": 0.9714285714285714,
+        "wilson95": [
+          0.8546691276638682,
+          0.9949385081445558
+        ]
+      }
+    },
+    "split/test": {
+      "count": 268,
+      "ai_count": 80,
+      "auroc": 0.9986037234042553,
+      "tpr_at_1pct_fpr": 0.9625,
+      "ece": 0.01134328358208956,
+      "brier": 0.012924626865671642,
+      "fpr_mixed_or_above": {
+        "count": 19,
+        "denominator": 188,
+        "rate": 0.10106382978723404,
+        "wilson95": [
+          0.0656585768978924,
+          0.15244578426525615
+        ]
+      },
+      "fpr_high": {
+        "count": 2,
+        "denominator": 188,
+        "rate": 0.010638297872340425,
+        "wilson95": [
+          0.002922269566028722,
+          0.03795241346076682
+        ]
+      },
+      "recall_high": {
+        "count": 77,
+        "denominator": 80,
+        "rate": 0.9625,
+        "wilson95": [
+          0.8954527990995514,
+          0.9871654310800883
+        ]
+      }
+    },
+    "writer/ESL": {
+      "count": 46,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.018478260869565215,
+      "brier": 0.00772391304347826,
+      "fpr_mixed_or_above": {
+        "count": 5,
+        "denominator": 46,
+        "rate": 0.10869565217391304,
+        "wilson95": [
+          0.047331458580990485,
+          0.2303782864425042
+        ]
+      },
+      "fpr_high": {
+        "count": 1,
+        "denominator": 46,
+        "rate": 0.021739130434782608,
+        "wilson95": [
+          0.00384785425805044,
+          0.11335294521510965
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "writer/native_proxy": {
+      "count": 30,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 30,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.11351339317396321
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 30,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.11351339317396321
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "writer/unknown": {
+      "count": 192,
+      "ai_count": 80,
+      "auroc": 0.9982142857142857,
+      "tpr_at_1pct_fpr": 0.9625,
+      "ece": 0.01265625000000001,
+      "brier": 0.016190104166666667,
+      "fpr_mixed_or_above": {
+        "count": 14,
+        "denominator": 112,
+        "rate": 0.125,
+        "wilson95": [
+          0.07594026855583494,
+          0.19893074174437161
+        ]
+      },
+      "fpr_high": {
+        "count": 1,
+        "denominator": 112,
+        "rate": 0.008928571428571428,
+        "wilson95": [
+          0.001577854703292192,
+          0.04884846830888309
+        ]
+      },
+      "recall_high": {
+        "count": 77,
+        "denominator": 80,
+        "rate": 0.9625,
+        "wilson95": [
+          0.8954527990995514,
+          0.9871654310800883
+        ]
+      }
+    }
+  },
+  "adjusted": {
+    "attack/alternative_spelling": {
+      "count": 11,
+      "ai_count": 11,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 11,
+        "denominator": 11,
+        "rate": 1.0,
+        "wilson95": [
+          0.7411670330319788,
+          1
+        ]
+      }
+    },
+    "attack/article_deletion": {
+      "count": 5,
+      "ai_count": 5,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 5,
+        "denominator": 5,
+        "rate": 1.0,
+        "wilson95": [
+          0.5655175352168389,
+          1
+        ]
+      }
+    },
+    "attack/homoglyph": {
+      "count": 1,
+      "ai_count": 1,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 1,
+        "denominator": 1,
+        "rate": 1.0,
+        "wilson95": [
+          0.20654931437724644,
+          0.9999999999999999
+        ]
+      }
+    },
+    "attack/none": {
+      "count": 233,
+      "ai_count": 45,
+      "auroc": 0.9992316784869977,
+      "tpr_at_1pct_fpr": 0.9555555555555556,
+      "ece": 0.012532188841201707,
+      "brier": 0.010903862660944206,
+      "fpr_mixed_or_above": {
+        "count": 19,
+        "denominator": 188,
+        "rate": 0.10106382978723404,
+        "wilson95": [
+          0.0656585768978924,
+          0.15244578426525615
+        ]
+      },
+      "fpr_high": {
+        "count": 9,
+        "denominator": 188,
+        "rate": 0.047872340425531915,
+        "wilson95": [
+          0.025387307800360692,
+          0.08846430151787434
+        ]
+      },
+      "recall_high": {
+        "count": 44,
+        "denominator": 45,
+        "rate": 0.9777777777777777,
+        "wilson95": [
+          0.8843331823158551,
+          0.9960664011171665
+        ]
+      }
+    },
+    "attack/number": {
+      "count": 2,
+      "ai_count": 2,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 2,
+        "denominator": 2,
+        "rate": 1.0,
+        "wilson95": [
+          0.34238022750666547,
+          1
+        ]
+      }
+    },
+    "attack/paraphrase": {
+      "count": 2,
+      "ai_count": 2,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.48,
+      "brier": 0.4608,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 1,
+        "denominator": 2,
+        "rate": 0.5,
+        "wilson95": [
+          0.09453120573423457,
+          0.9054687942657654
+        ]
+      }
+    },
+    "attack/perplexity_misspelling": {
+      "count": 4,
+      "ai_count": 4,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 4,
+        "denominator": 4,
+        "rate": 1.0,
+        "wilson95": [
+          0.5101091635454165,
+          1
+        ]
+      }
+    },
+    "attack/synonym": {
+      "count": 10,
+      "ai_count": 10,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0039999999999998925,
+      "brier": 0.00016000000000000028,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 10,
+        "denominator": 10,
+        "rate": 1.0,
+        "wilson95": [
+          0.7224672001371218,
+          0.9999999999999999
+        ]
+      }
+    },
+    "dataset/asap": {
+      "count": 37,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.002162162162162162,
+      "brier": 8.64864864864865e-05,
+      "fpr_mixed_or_above": {
+        "count": 2,
+        "denominator": 37,
+        "rate": 0.05405405405405406,
+        "wilson95": [
+          0.014950976833158144,
+          0.17704654350812637
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 37,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.09405782583719778
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "dataset/ellipse": {
+      "count": 42,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.020238095238095236,
+      "brier": 0.00845952380952381,
+      "fpr_mixed_or_above": {
+        "count": 5,
+        "denominator": 42,
+        "rate": 0.11904761904761904,
+        "wilson95": [
+          0.05193803327758352,
+          0.2500039026200924
+        ]
+      },
+      "fpr_high": {
+        "count": 5,
+        "denominator": 42,
+        "rate": 0.11904761904761904,
+        "wilson95": [
+          0.05193803327758352,
+          0.2500039026200924
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "dataset/liang/college-ai": {
+      "count": 5,
+      "ai_count": 5,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 5,
+        "denominator": 5,
+        "rate": 1.0,
+        "wilson95": [
+          0.5655175352168389,
+          1
+        ]
+      }
+    },
+    "dataset/liang/college-human": {
+      "count": 29,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.05241379310344828,
+      "brier": 0.03387586206896552,
+      "fpr_mixed_or_above": {
+        "count": 8,
+        "denominator": 29,
+        "rate": 0.27586206896551724,
+        "wilson95": [
+          0.14698755102088218,
+          0.4571713241686543
+        ]
+      },
+      "fpr_high": {
+        "count": 3,
+        "denominator": 29,
+        "rate": 0.10344827586206896,
+        "wilson95": [
+          0.03581489135067803,
+          0.26385081090773255
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "dataset/liang/hewlett": {
+      "count": 30,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 30,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.11351339317396321
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 30,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.11351339317396321
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "dataset/raid": {
+      "count": 90,
+      "ai_count": 40,
+      "auroc": 0.999,
+      "tpr_at_1pct_fpr": 0.95,
+      "ece": 0.006333333333333311,
+      "brier": 0.01333,
+      "fpr_mixed_or_above": {
+        "count": 4,
+        "denominator": 50,
+        "rate": 0.08,
+        "wilson95": [
+          0.031549514088593744,
+          0.18838246918342452
+        ]
+      },
+      "fpr_high": {
+        "count": 1,
+        "denominator": 50,
+        "rate": 0.02,
+        "wilson95": [
+          0.003539259271646375,
+          0.1049544358963745
+        ]
+      },
+      "recall_high": {
+        "count": 39,
+        "denominator": 40,
+        "rate": 0.975,
+        "wilson95": [
+          0.8711863103652634,
+          0.9955731684973185
+        ]
+      }
+    },
+    "dataset/raid-attacks": {
+      "count": 35,
+      "ai_count": 35,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0285714285714285,
+      "brier": 0.02637714285714286,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 34,
+        "denominator": 35,
+        "rate": 0.9714285714285714,
+        "wilson95": [
+          0.8546691276638682,
+          0.9949385081445558
+        ]
+      }
+    },
+    "fairness/ESL-essay": {
+      "count": 46,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.018478260869565215,
+      "brier": 0.00772391304347826,
+      "fpr_mixed_or_above": {
+        "count": 5,
+        "denominator": 46,
+        "rate": 0.10869565217391304,
+        "wilson95": [
+          0.047331458580990485,
+          0.2303782864425042
+        ]
+      },
+      "fpr_high": {
+        "count": 5,
+        "denominator": 46,
+        "rate": 0.10869565217391304,
+        "wilson95": [
+          0.047331458580990485,
+          0.2303782864425042
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "generator/chatgpt": {
+      "count": 2,
+      "ai_count": 2,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 2,
+        "denominator": 2,
+        "rate": 1.0,
+        "wilson95": [
+          0.34238022750666547,
+          1
+        ]
+      }
+    },
+    "generator/cohere": {
+      "count": 1,
+      "ai_count": 1,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 1,
+        "denominator": 1,
+        "rate": 1.0,
+        "wilson95": [
+          0.20654931437724644,
+          0.9999999999999999
+        ]
+      }
+    },
+    "generator/gpt-3": {
+      "count": 5,
+      "ai_count": 5,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 5,
+        "denominator": 5,
+        "rate": 1.0,
+        "wilson95": [
+          0.5655175352168389,
+          1
+        ]
+      }
+    },
+    "generator/gpt2": {
+      "count": 18,
+      "ai_count": 18,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.04499999999999997,
+      "brier": 0.03302777777777778,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 17,
+        "denominator": 18,
+        "rate": 0.9444444444444444,
+        "wilson95": [
+          0.7424269921812815,
+          0.9901248090216964
+        ]
+      }
+    },
+    "generator/gpt3": {
+      "count": 2,
+      "ai_count": 2,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 2,
+        "denominator": 2,
+        "rate": 1.0,
+        "wilson95": [
+          0.34238022750666547,
+          1
+        ]
+      }
+    },
+    "generator/gpt4": {
+      "count": 2,
+      "ai_count": 2,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 2,
+        "denominator": 2,
+        "rate": 1.0,
+        "wilson95": [
+          0.34238022750666547,
+          1
+        ]
+      }
+    },
+    "generator/human": {
+      "count": 188,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.018563829787234042,
+      "brier": 0.009363297872340427,
+      "fpr_mixed_or_above": {
+        "count": 19,
+        "denominator": 188,
+        "rate": 0.10106382978723404,
+        "wilson95": [
+          0.0656585768978924,
+          0.15244578426525615
+        ]
+      },
+      "fpr_high": {
+        "count": 9,
+        "denominator": 188,
+        "rate": 0.047872340425531915,
+        "wilson95": [
+          0.025387307800360692,
+          0.08846430151787434
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "generator/llama-chat": {
+      "count": 11,
+      "ai_count": 11,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 11,
+        "denominator": 11,
+        "rate": 1.0,
+        "wilson95": [
+          0.7411670330319788,
+          1
+        ]
+      }
+    },
+    "generator/mistral": {
+      "count": 12,
+      "ai_count": 12,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 12,
+        "denominator": 12,
+        "rate": 1.0,
+        "wilson95": [
+          0.7575059933447693,
+          1
+        ]
+      }
+    },
+    "generator/mpt": {
+      "count": 26,
+      "ai_count": 26,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.05538461538461538,
+      "brier": 0.04265384615384615,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 25,
+        "denominator": 26,
+        "rate": 0.9615384615384616,
+        "wilson95": [
+          0.8110722109696584,
+          0.9931780150064562
+        ]
+      }
+    },
+    "generator/mpt-chat": {
+      "count": 1,
+      "ai_count": 1,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 1,
+        "denominator": 1,
+        "rate": 1.0,
+        "wilson95": [
+          0.20654931437724644,
+          0.9999999999999999
+        ]
+      }
+    },
+    "genre/essay": {
+      "count": 143,
+      "ai_count": 5,
+      "auroc": 1.0,
+      "tpr_at_1pct_fpr": 1.0,
+      "ece": 0.01713286713286713,
+      "brier": 0.009376923076923076,
+      "fpr_mixed_or_above": {
+        "count": 15,
+        "denominator": 138,
+        "rate": 0.10869565217391304,
+        "wilson95": [
+          0.06698539778769641,
+          0.17160111353318563
+        ]
+      },
+      "fpr_high": {
+        "count": 8,
+        "denominator": 138,
+        "rate": 0.057971014492753624,
+        "wilson95": [
+          0.029664427433011654,
+          0.11022033535539214
+        ]
+      },
+      "recall_high": {
+        "count": 5,
+        "denominator": 5,
+        "rate": 1.0,
+        "wilson95": [
+          0.5655175352168389,
+          1
+        ]
+      }
+    },
+    "genre/other": {
+      "count": 125,
+      "ai_count": 75,
+      "auroc": 0.9985333333333334,
+      "tpr_at_1pct_fpr": 0.96,
+      "ece": 0.011920000000000047,
+      "brier": 0.0169832,
+      "fpr_mixed_or_above": {
+        "count": 4,
+        "denominator": 50,
+        "rate": 0.08,
+        "wilson95": [
+          0.031549514088593744,
+          0.18838246918342452
+        ]
+      },
+      "fpr_high": {
+        "count": 1,
+        "denominator": 50,
+        "rate": 0.02,
+        "wilson95": [
+          0.003539259271646375,
+          0.1049544358963745
+        ]
+      },
+      "recall_high": {
+        "count": 73,
+        "denominator": 75,
+        "rate": 0.9733333333333334,
+        "wilson95": [
+          0.9078851181224111,
+          0.9926563109938683
+        ]
+      }
+    },
+    "length/1200+": {
+      "count": 3,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 3,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.561497031755032
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 3,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.561497031755032
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "length/300-599": {
+      "count": 213,
+      "ai_count": 80,
+      "auroc": 0.9988251879699248,
+      "tpr_at_1pct_fpr": 0.9625,
+      "ece": 0.010234741784037594,
+      "brier": 0.011769953051643193,
+      "fpr_mixed_or_above": {
+        "count": 12,
+        "denominator": 133,
+        "rate": 0.09022556390977443,
+        "wilson95": [
+          0.052366540573380534,
+          0.15109123502060176
+        ]
+      },
+      "fpr_high": {
+        "count": 6,
+        "denominator": 133,
+        "rate": 0.045112781954887216,
+        "wilson95": [
+          0.020837208777873893,
+          0.09492784486315231
+        ]
+      },
+      "recall_high": {
+        "count": 78,
+        "denominator": 80,
+        "rate": 0.975,
+        "wilson95": [
+          0.9133556701442224,
+          0.9931171067970291
+        ]
+      }
+    },
+    "length/600-1199": {
+      "count": 52,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.026153846153846156,
+      "brier": 0.018399999999999996,
+      "fpr_mixed_or_above": {
+        "count": 7,
+        "denominator": 52,
+        "rate": 0.1346153846153846,
+        "wilson95": [
+          0.06676881705396269,
+          0.2527332016519341
+        ]
+      },
+      "fpr_high": {
+        "count": 3,
+        "denominator": 52,
+        "rate": 0.057692307692307696,
+        "wilson95": [
+          0.019814172112271156,
+          0.15642511368960393
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "pooled": {
+      "count": 268,
+      "ai_count": 80,
+      "auroc": 0.9986037234042553,
+      "tpr_at_1pct_fpr": 0.9625,
+      "ece": 0.01134328358208956,
+      "brier": 0.012924626865671642,
+      "fpr_mixed_or_above": {
+        "count": 19,
+        "denominator": 188,
+        "rate": 0.10106382978723404,
+        "wilson95": [
+          0.0656585768978924,
+          0.15244578426525615
+        ]
+      },
+      "fpr_high": {
+        "count": 9,
+        "denominator": 188,
+        "rate": 0.047872340425531915,
+        "wilson95": [
+          0.025387307800360692,
+          0.08846430151787434
+        ]
+      },
+      "recall_high": {
+        "count": 78,
+        "denominator": 80,
+        "rate": 0.975,
+        "wilson95": [
+          0.9133556701442224,
+          0.9931171067970291
+        ]
+      }
+    },
+    "source-length/asap/1200+": {
+      "count": 1,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 1,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.7934506856227534
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 1,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.7934506856227534
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source-length/asap/300-599": {
+      "count": 30,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0026666666666666666,
+      "brier": 0.00010666666666666667,
+      "fpr_mixed_or_above": {
+        "count": 2,
+        "denominator": 30,
+        "rate": 0.06666666666666667,
+        "wilson95": [
+          0.01847702379127096,
+          0.21323458362616382
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 30,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.11351339317396321
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source-length/asap/600-1199": {
+      "count": 6,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 6,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.39033428790215224
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 6,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.39033428790215224
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source-length/ellipse/300-599": {
+      "count": 30,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.028333333333333332,
+      "brier": 0.011843333333333332,
+      "fpr_mixed_or_above": {
+        "count": 5,
+        "denominator": 30,
+        "rate": 0.16666666666666666,
+        "wilson95": [
+          0.07336542371848712,
+          0.33564350506415497
+        ]
+      },
+      "fpr_high": {
+        "count": 5,
+        "denominator": 30,
+        "rate": 0.16666666666666666,
+        "wilson95": [
+          0.07336542371848712,
+          0.33564350506415497
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source-length/ellipse/600-1199": {
+      "count": 12,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 12,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.24249400665523077
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 12,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.24249400665523077
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source-length/liang/college/300-599": {
+      "count": 16,
+      "ai_count": 5,
+      "auroc": 1.0,
+      "tpr_at_1pct_fpr": 1.0,
+      "ece": 0.01,
+      "brier": 0.0016,
+      "fpr_mixed_or_above": {
+        "count": 1,
+        "denominator": 11,
+        "rate": 0.09090909090909091,
+        "wilson95": [
+          0.016232172885885465,
+          0.37735843645158634
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 11,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.25883296696802116
+        ]
+      },
+      "recall_high": {
+        "count": 5,
+        "denominator": 5,
+        "rate": 1.0,
+        "wilson95": [
+          0.5655175352168389,
+          1
+        ]
+      }
+    },
+    "source-length/liang/college/600-1199": {
+      "count": 18,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.07555555555555554,
+      "brier": 0.05315555555555556,
+      "fpr_mixed_or_above": {
+        "count": 7,
+        "denominator": 18,
+        "rate": 0.3888888888888889,
+        "wilson95": [
+          0.20305246572164004,
+          0.6138095839776154
+        ]
+      },
+      "fpr_high": {
+        "count": 3,
+        "denominator": 18,
+        "rate": 0.16666666666666666,
+        "wilson95": [
+          0.05836576805861604,
+          0.39222038103915036
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source-length/liang/hewlett/300-599": {
+      "count": 28,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 28,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.1206433047658398
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 28,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.1206433047658398
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source-length/liang/hewlett/600-1199": {
+      "count": 2,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 2,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.6576197724933345
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 2,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.6576197724933345
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source-length/raid-attacks/300-599": {
+      "count": 35,
+      "ai_count": 35,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0285714285714285,
+      "brier": 0.02637714285714286,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 34,
+        "denominator": 35,
+        "rate": 0.9714285714285714,
+        "wilson95": [
+          0.8546691276638682,
+          0.9949385081445558
+        ]
+      }
+    },
+    "source-length/raid/1200+": {
+      "count": 2,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 2,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.6576197724933345
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 2,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.6576197724933345
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source-length/raid/300-599": {
+      "count": 74,
+      "ai_count": 40,
+      "auroc": 0.9985294117647059,
+      "tpr_at_1pct_fpr": 0.95,
+      "ece": 0.007702702702702674,
+      "brier": 0.01621216216216216,
+      "fpr_mixed_or_above": {
+        "count": 4,
+        "denominator": 34,
+        "rate": 0.11764705882352941,
+        "wilson95": [
+          0.046714466648824504,
+          0.2662084277037134
+        ]
+      },
+      "fpr_high": {
+        "count": 1,
+        "denominator": 34,
+        "rate": 0.029411764705882353,
+        "wilson95": [
+          0.005210906276269148,
+          0.1491557329268544
+        ]
+      },
+      "recall_high": {
+        "count": 39,
+        "denominator": 40,
+        "rate": 0.975,
+        "wilson95": [
+          0.8711863103652634,
+          0.9955731684973185
+        ]
+      }
+    },
+    "source-length/raid/600-1199": {
+      "count": 14,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 14,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.2153108027376265
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 14,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.2153108027376265
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source/asap": {
+      "count": 37,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.002162162162162162,
+      "brier": 8.64864864864865e-05,
+      "fpr_mixed_or_above": {
+        "count": 2,
+        "denominator": 37,
+        "rate": 0.05405405405405406,
+        "wilson95": [
+          0.014950976833158144,
+          0.17704654350812637
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 37,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.09405782583719778
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source/ellipse": {
+      "count": 42,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.020238095238095236,
+      "brier": 0.00845952380952381,
+      "fpr_mixed_or_above": {
+        "count": 5,
+        "denominator": 42,
+        "rate": 0.11904761904761904,
+        "wilson95": [
+          0.05193803327758352,
+          0.2500039026200924
+        ]
+      },
+      "fpr_high": {
+        "count": 5,
+        "denominator": 42,
+        "rate": 0.11904761904761904,
+        "wilson95": [
+          0.05193803327758352,
+          0.2500039026200924
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source/liang/college": {
+      "count": 34,
+      "ai_count": 5,
+      "auroc": 1.0,
+      "tpr_at_1pct_fpr": 1.0,
+      "ece": 0.044705882352941165,
+      "brier": 0.028894117647058824,
+      "fpr_mixed_or_above": {
+        "count": 8,
+        "denominator": 29,
+        "rate": 0.27586206896551724,
+        "wilson95": [
+          0.14698755102088218,
+          0.4571713241686543
+        ]
+      },
+      "fpr_high": {
+        "count": 3,
+        "denominator": 29,
+        "rate": 0.10344827586206896,
+        "wilson95": [
+          0.03581489135067803,
+          0.26385081090773255
+        ]
+      },
+      "recall_high": {
+        "count": 5,
+        "denominator": 5,
+        "rate": 1.0,
+        "wilson95": [
+          0.5655175352168389,
+          1
+        ]
+      }
+    },
+    "source/liang/hewlett": {
+      "count": 30,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 30,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.11351339317396321
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 30,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.11351339317396321
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "source/raid": {
+      "count": 90,
+      "ai_count": 40,
+      "auroc": 0.999,
+      "tpr_at_1pct_fpr": 0.95,
+      "ece": 0.006333333333333311,
+      "brier": 0.01333,
+      "fpr_mixed_or_above": {
+        "count": 4,
+        "denominator": 50,
+        "rate": 0.08,
+        "wilson95": [
+          0.031549514088593744,
+          0.18838246918342452
+        ]
+      },
+      "fpr_high": {
+        "count": 1,
+        "denominator": 50,
+        "rate": 0.02,
+        "wilson95": [
+          0.003539259271646375,
+          0.1049544358963745
+        ]
+      },
+      "recall_high": {
+        "count": 39,
+        "denominator": 40,
+        "rate": 0.975,
+        "wilson95": [
+          0.8711863103652634,
+          0.9955731684973185
+        ]
+      }
+    },
+    "source/raid-attacks": {
+      "count": 35,
+      "ai_count": 35,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0285714285714285,
+      "brier": 0.02637714285714286,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "recall_high": {
+        "count": 34,
+        "denominator": 35,
+        "rate": 0.9714285714285714,
+        "wilson95": [
+          0.8546691276638682,
+          0.9949385081445558
+        ]
+      }
+    },
+    "split/test": {
+      "count": 268,
+      "ai_count": 80,
+      "auroc": 0.9986037234042553,
+      "tpr_at_1pct_fpr": 0.9625,
+      "ece": 0.01134328358208956,
+      "brier": 0.012924626865671642,
+      "fpr_mixed_or_above": {
+        "count": 19,
+        "denominator": 188,
+        "rate": 0.10106382978723404,
+        "wilson95": [
+          0.0656585768978924,
+          0.15244578426525615
+        ]
+      },
+      "fpr_high": {
+        "count": 9,
+        "denominator": 188,
+        "rate": 0.047872340425531915,
+        "wilson95": [
+          0.025387307800360692,
+          0.08846430151787434
+        ]
+      },
+      "recall_high": {
+        "count": 78,
+        "denominator": 80,
+        "rate": 0.975,
+        "wilson95": [
+          0.9133556701442224,
+          0.9931171067970291
+        ]
+      }
+    },
+    "writer/ESL": {
+      "count": 46,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.018478260869565215,
+      "brier": 0.00772391304347826,
+      "fpr_mixed_or_above": {
+        "count": 5,
+        "denominator": 46,
+        "rate": 0.10869565217391304,
+        "wilson95": [
+          0.047331458580990485,
+          0.2303782864425042
+        ]
+      },
+      "fpr_high": {
+        "count": 5,
+        "denominator": 46,
+        "rate": 0.10869565217391304,
+        "wilson95": [
+          0.047331458580990485,
+          0.2303782864425042
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "writer/native_proxy": {
+      "count": 30,
+      "ai_count": 0,
+      "auroc": null,
+      "tpr_at_1pct_fpr": null,
+      "ece": 0.0,
+      "brier": 0.0,
+      "fpr_mixed_or_above": {
+        "count": 0,
+        "denominator": 30,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.11351339317396321
+        ]
+      },
+      "fpr_high": {
+        "count": 0,
+        "denominator": 30,
+        "rate": 0.0,
+        "wilson95": [
+          0,
+          0.11351339317396321
+        ]
+      },
+      "recall_high": {
+        "count": 0,
+        "denominator": 0,
+        "rate": null,
+        "wilson95": null
+      }
+    },
+    "writer/unknown": {
+      "count": 192,
+      "ai_count": 80,
+      "auroc": 0.9982142857142857,
+      "tpr_at_1pct_fpr": 0.9625,
+      "ece": 0.01265625000000001,
+      "brier": 0.016190104166666667,
+      "fpr_mixed_or_above": {
+        "count": 14,
+        "denominator": 112,
+        "rate": 0.125,
+        "wilson95": [
+          0.07594026855583494,
+          0.19893074174437161
+        ]
+      },
+      "fpr_high": {
+        "count": 4,
+        "denominator": 112,
+        "rate": 0.03571428571428571,
+        "wilson95": [
+          0.013974612394677233,
+          0.08824663845319758
+        ]
+      },
+      "recall_high": {
+        "count": 78,
+        "denominator": 80,
+        "rate": 0.975,
+        "wilson95": [
+          0.9133556701442224,
+          0.9931171067970291
+        ]
+      }
+    }
+  }
+}
