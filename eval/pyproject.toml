@@ -6,6 +6,7 @@ dependencies = ["vibechecker-engine", "pyyaml>=6", "numpy>=1.26", "scikit-learn>
 
 [project.scripts]
 vibechecker-eval = "vibechecker_eval.cli:main"
+vibechecker-academic-addition = "vibechecker_eval.academic_addition:main"
 
 [tool.uv.sources]
 vibechecker-engine = { workspace = true }

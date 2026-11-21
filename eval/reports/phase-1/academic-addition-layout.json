@@ -1,0 +1,21 @@
+{
+  "machine_projection": "calibration-v4-academic/raid-academic-stack-cal-v1.jsonl.gz",
+  "machine_manifest": "calibration-v4-academic/raid-academic-stack-cal-v1.manifest.json",
+  "human_projection": "calibration-v4-academic/pre2020-academic-human-v1.jsonl.gz",
+  "human_manifest": "calibration-v4-academic/pre2020-academic-human-v1.manifest.json",
+  "subjects": "calibration-v4-academic/raid-academic-subjects-v1.json",
+  "v1_parent": "deep-qwen7b-q4-p512-v1.joblib",
+  "v2_incumbent": "deep-qwen7b-q4-p512-v2.joblib",
+  "v2_selection": "calibration-v2/selection.json",
+  "v3_selection": "calibration-v3/selection.json",
+  "probe": "calibration-v3/rewrite-probe-v1/origin-probe-v1.joblib",
+  "base_features": "calibration-v2/stack.sqlite",
+  "rewrite_sidecar": "calibration-v3/rewrite-stack.sqlite",
+  "rewrite_supplement": "calibration-v2/rewrite-origin-v1/verified-cohort.sqlite",
+  "band_controls": "calibration-v3/human-controls.sqlite",
+  "academic_plan": "calibration-v3/academic-development-plan.json",
+  "academic_features": "calibration-v3/academic-development.sqlite",
+  "academic_binding": "calibration-v3/academic-development-features.json",
+  "encoder_original": "calibration-v2/encoder.sqlite",
+  "encoder_expanded": "calibration-v2/expanded-probe-v1/encoder-expanded.sqlite"
+}

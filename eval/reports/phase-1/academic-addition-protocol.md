@@ -20,4 +20,36 @@ Use the fixed text-only rewrite-origin probe, SHA256 `f091eed2f254fdd5285ec8cf6e
 
 Replay the unsupplemented v3 candidates at the corresponding anchors as the paired algorithm controls, and include the published v2 research incumbent as the fallback. Compare the exact 268 primary rows and 64 balanced books/news stress pairs using the same published gates, fixed source identities, smallest strata, raw probabilities, serving-rounded indices, thresholds and group-level paired diagnostics as v3. Report raw and calibrated academic results by source, origin, transformation and domain, including high-band human false positives with denominators and uncertainty. Report results on the 66 independent machine-origin rewritten groups and their clean machine controls separately from the disjoint human academic development pool. Track per-source error alongside pooled loss so a strong result from one archive cannot conceal failure on another.
 
-The release owner freezes both candidate configurations, source projections, admission evidence and comparison rules before new development predictions. Selection and any final evaluation remain separate decisions. [Unchanged release comparison](rewrite-calibration-protocol.md)
+The release owner freezes both candidate configurations, source projections, admission evidence and comparison rules before new development predictions. Each anchor must also preserve at least 90% of v2 high detections on the 66 independent machine rewrites and separately on the 54 exact clean machine parents. It may incur no additional high-band false positives on the disjoint native academic development cohort. Report the hits and denominators with 95% Wilson intervals. Among admissible candidates, select the lowest ordinary worst-stratum ECE, then ordinary pooled ECE, then books/news paired-stress Brier, then numeric anchor. If both anchors are rejected, retain the exact v2 research artifact. Record selection reasons and the artifact SHA. The release owner controls any subsequent final evaluation. [Unchanged release comparison](rewrite-calibration-protocol.md)
+
+## Operator entrypoint
+
+The `vibechecker-academic-addition` executable and `python -m vibechecker_eval.academic_addition` accept the same arguments. The layout contains paths relative to the research workspace. The binder hashes the actual bytes for all inputs, including the study-specific native-paper projection and the subject map for the RAID source papers. The planner verifies the publisher lineage, deduplicates by document and source, and checks scientific comparability before any feature extraction. A declared match to a particular machine group is preserved. The public source plan records actual numbers alongside configured targets. [Artifact layout](academic-addition-layout.json)
+
+```sh
+vibechecker-academic-addition bind --root . \
+  --layout eval/reports/phase-1/academic-addition-layout.json \
+  --study calibration-v4-academic/study.json
+
+vibechecker-academic-addition plan \
+  --study calibration-v4-academic/study.json --study-sha256 "$STUDY_SHA" \
+  --plan calibration-v4-academic/plan.json --receipt calibration-v4-academic/input-receipt.json
+```
+
+Review `training.available`, `training.accepted`, per-role pair counts, the independent human subject coverage and `ready` in the plan. The release owner records the study and plan hashes before numeric extraction. Run the bounded extractor in the original M6 Metal/512 environment. The comparison uses the completed numeric receipt, requires the exact stored input commitments and produces two research artifacts for the release owner to review.
+
+```sh
+vibechecker-academic-addition collect \
+  --study calibration-v4-academic/study.json --study-sha256 "$STUDY_SHA" \
+  --plan calibration-v4-academic/plan.json --plan-sha256 "$PLAN_SHA" \
+  --sidecar calibration-v4-academic/academic-additions.sqlite \
+  --binding calibration-v4-academic/academic-additions-binding.json
+
+vibechecker-academic-addition compare \
+  --study calibration-v4-academic/study.json --study-sha256 "$STUDY_SHA" \
+  --plan calibration-v4-academic/plan.json --plan-sha256 "$PLAN_SHA" \
+  --sidecar calibration-v4-academic/academic-additions.sqlite \
+  --binding calibration-v4-academic/academic-additions-binding.json --binding-sha256 "$BINDING_SHA" \
+  --cache ../eval/.cache --candidate-dir calibration-v4-academic/candidates \
+  --model-out calibration-v4-academic/selected.joblib --out calibration-v4-academic/comparison.json
+```

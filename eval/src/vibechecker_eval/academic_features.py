@@ -51,7 +51,7 @@ def verify_cache(db, rows, complete=False):
 
 
 def collect(args):
-    from vibechecker_engine.deep import DEEP_FEATURE_NAMES, DeepExtractor, DeepModel
+    from vibechecker_engine.deep import DEEP_FEATURE_NAMES, DeepModel
     from vibechecker_engine.signals import ENCODER_VECTOR_VERSION
 
     source = json.loads(args.prior_report.read_bytes())
@@ -112,7 +112,14 @@ def collect(args):
         )
     }:
         raise ValueError("Academic numeric sidecar must use a separate path")
-    with sqlite3.connect(args.sidecar) as db:
+    write_json(extract_numeric(args.sidecar, rows, parent, protocol, provenance), args.out)
+
+
+def extract_numeric(path, rows, parent, protocol, provenance):
+    from vibechecker_engine.deep import DEEP_FEATURE_NAMES, DeepExtractor
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with sqlite3.connect(path) as db:
         db.execute(
             "CREATE TABLE IF NOT EXISTS meta(id INTEGER PRIMARY KEY CHECK(id=1), provenance TEXT NOT NULL,complete INTEGER NOT NULL,content_sha256 TEXT)"
         )
@@ -139,9 +146,7 @@ def collect(args):
                 or extractor.quick.lm.chunk_size != protocol["quick_prefill"]
             ):
                 raise ValueError("Expected the original Metal/512 extraction profile")
-            for i, row in _progress(
-                "Independent academic development features", pending, len(pending)
-            ):
+            for i, row in _progress("Academic features", pending, len(pending)):
                 raw = extractor.extract(row["text"])
                 features = finite(
                     parent.heads.features(raw), len(DEEP_FEATURE_NAMES), "<f8"
@@ -165,18 +170,15 @@ def collect(args):
             _, digest, kinds = verify_cache(db, rows, complete=True)
         with db:
             db.execute("UPDATE meta SET complete=1,content_sha256=? WHERE id=1", (digest,))
-    write_json(
-        {
-            "provenance": provenance,
-            "documents": len(rows),
-            "groups": len({r["group"] for r in members}),
-            "kinds": kinds,
-            "content_sha256": digest,
-            "sidecar_sha256": sha256(args.sidecar),
-            "candidate_predictions_computed": False,
-        },
-        args.out,
-    )
+    return {
+        "provenance": provenance,
+        "documents": len(rows),
+        "groups": len({r["group"] for r in rows}),
+        "kinds": kinds,
+        "content_sha256": digest,
+        "sidecar_sha256": sha256(path),
+        "candidate_predictions_computed": False,
+    }
 
 
 def main(argv=None):
