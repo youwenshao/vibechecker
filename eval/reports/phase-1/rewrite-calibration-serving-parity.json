@@ -1,0 +1,21 @@
+{
+  "model_sha256": "8c8a23e4ecb5bdaaccee57516fb1d8f1b0703106748668b8af09e936846c915b",
+  "selection_sha256": "64e0bf423206b9d5406db375694fff30cc56b0a358971a96824ecc0e58526f88",
+  "selected": "incumbent",
+  "backend": "mlx-metal",
+  "quick_prefill": 512,
+  "scoring": {
+    "primary_validation": {
+      "documents": 268,
+      "exact_index_matches": 268
+    },
+    "matched_stress": {
+      "documents": 128,
+      "exact_index_matches": 128
+    }
+  },
+  "bootstrap_curves": {
+    "pooled": 200,
+    "300-599": 200
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "model_sha256": "8c8a23e4ecb5bdaaccee57516fb1d8f1b0703106748668b8af09e936846c915b",
+  "selection_sha256": "64e0bf423206b9d5406db375694fff30cc56b0a358971a96824ecc0e58526f88",
+  "selected": "incumbent",
+  "backend": "mlx-metal",
+  "quick_prefill": 512,
+  "independent_controls": {
+    "scheme": "independent-human-calibration-42-v1",
+    "database_sha256": "4eb4bb77c5cd21f879b8b84838b34eff75e8c908430b37855c8929438f4701c6",
+    "runtime": {
+      "engine_source_sha256": "df82c5ac6314d568f7d87cdcb3ed4d40586a71880b3448a71e78379fb556aa1c",
+      "packages": {
+        "mlx": "0.32.4",
+        "mlx-lm": "0.32.2",
+        "numpy": "2.5.5",
+        "scikit-learn": "1.9.1",
+        "torch": "2.15.0",
+        "transformers": "5.23.0"
+      }
+    },
+    "selection_sha256": "b65557c6c36273e7d90784cc5734cf3c2c73a2ef192862013bccfe9265934e5a",
+    "parent_sha256": "8c8a23e4ecb5bdaaccee57516fb1d8f1b0703106748668b8af09e936846c915b",
+    "selected": {
+      "ellipse": 224,
+      "asap": 224,
+      "persuade": 192,
+      "raid": 96
+    },
+    "excluded_intersections": {
+      "raid": 22,
+      "ellipse": 10,
+      "asap": 1
+    },
+    "refusals_after_exclusions": {
+      "asap": 38,
+      "ellipse": 18,
+      "persuade": 3,
+      "raid": 3
+    },
+    "accepted": {
+      "ellipse": 196,
+      "persuade": 189,
+      "asap": 185,
+      "raid": 71
+    },
+    "source_aliases": {
+      "group_count": 200,
+      "passage_count": 98,
+      "scheme": "normalized-human-source-aliases-v1",
+      "sha256": "df5312e7d74b4973030b5c7914c25d9f93db4acc3d9de753c45a684dbea4ea8f"
+    },
+    "manifest": {
+      "asap": {
+        "sha256": [
+          "aec01e98eb16cc3bc3828010ca053a09daecc2821dd2105f8a7333089271beb4"
+        ],
+        "version": "060ab225ca0984c0bf43ff222bf6bb2bc6195b6f"
+      },
+      "ellipse": {
+        "sha256": [
+          "782344e99668a3ff508d7410c0eb6e36da70f3b28f81c96e367f1ca04924b06c"
+        ],
+        "version": "710963bbf1acf23a28e40643d9f937d06f047dd4"
+      },
+      "liang": {
+        "sha256": [
+          "ca1993970a87c5e95cd1e5a90da0cec1fc85c3c3719de7d809af90bb44de1391",
+          "711b5b1adf0ca5beedb68dcf028b59298b25aaab312e4dc395e6862ae02b19de",
+          "c1e3ad86e5165c6ed650abf0e29729f8b06847737c6dd154e24e1c27d51e2cbd",
+          "86dea70272f44201446d8fa200b65cee61bb49e14b9a342a12d131709cdf7f29"
+        ],
+        "version": "1d05ed8242d4694a0ed7b73a79c52be8864470f9"
+      },
+      "persuade": {
+        "sha256": [
+          "f61319edd8bf16a982711ea0399fad59c05afaec05cdf0767f16a2c05c467e23"
+        ],
+        "version": "5bdbad1175d1d5adec082b3f1c4e3ce37b7bd1bf"
+      },
+      "raid": {
+        "sha256": [
+          "c5467bca6fc7f5c728c676450c7f84ce401df6c6ccc6d82c47e3b5f3c6d6fce4"
+        ],
+        "version": "train-none-2024-06-04"
+      },
+      "raid-attacks": {
+        "sha256": [
+          "ec962e229a2bf0d1726e7ed1852be01e1b808dfb395294cbcb62307eea63c514"
+        ],
+        "version": "5008b2d167f74bfd4ceff6b3b0512b7097d7cbb1"
+      }
+    }
+  },
+  "incumbent_specificity": {
+    "high_index": 12,
+    "high_fpr": {
+      "raid": {
+        "count": 2,
+        "denominator": 71,
+        "rate": 0.028169014084507043,
+        "wilson95": [
+          0.007759263582683758,
+          0.09701500116649192
+        ]
+      },
+      "persuade": {
+        "count": 1,
+        "denominator": 189,
+        "rate": 0.005291005291005291,
+        "wilson95": [
+          0.0009346037378160973,
+          0.02935690544499591
+        ]
+      }
+    }
+  },
+  "selected_specificity": {
+    "high_index": 12,
+    "high_fpr": {
+      "raid": {
+        "count": 2,
+        "denominator": 71,
+        "rate": 0.028169014084507043,
+        "wilson95": [
+          0.007759263582683758,
+          0.09701500116649192
+        ]
+      },
+      "persuade": {
+        "count": 1,
+        "denominator": 189,
+        "rate": 0.005291005291005291,
+        "wilson95": [
+          0.0009346037378160973,
+          0.02935690544499591
+        ]
+      }
+    }
+  }
+}
