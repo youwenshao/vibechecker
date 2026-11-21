@@ -24,13 +24,15 @@ Of 123 eligible native papers, 37 lacked a mapped field and 12 shared a known au
 
 The private M6 study directory is `~/vibechecker/phase1-check/calibration-v4-academic/`. Its archive `academic-source-selection-scripts-v1.tar.gz` contains the extraction and matching code. The JSON record lists the archive and member hashes, publisher metadata snapshots, projections and study receipts. It commits to all 34 frozen Crossref responses. The upstream APIs can update records over time. The frozen responses and projections preserve the study used here.
 
-From the repository root, run the following against the study directory. The check reads the stored bytes and prints filenames only if a checksum fails. Replaying the study's `bind` and `plan` commands with these inputs reproduces the 7/5/4 role counts. [Operator commands](academic-addition-protocol.md)
+From the repository root, run the following against the study directory to verify the frozen input files, archived selection code and original Crossref responses. Replaying the study's `bind` and `plan` commands with these inputs reproduces the 7/5/4 role counts. [Operator commands](academic-addition-protocol.md)
 
 ```sh
 python - "$HOME/vibechecker/phase1-check/calibration-v4-academic" <<'PY'
+import gzip
 import hashlib
 import json
 import sys
+import tarfile
 from pathlib import Path
 
 study = Path(sys.argv[1])
@@ -42,5 +44,19 @@ for group in record["snapshot_files_sha256"].values():
 for name, checksum in expected.items():
     if hashlib.sha256((study / name).read_bytes()).hexdigest() != checksum:
         raise SystemExit(f"Checksum mismatch in {name}")
+
+with tarfile.open(study / archive["name"], "r:gz") as bundle:
+    actual = {f.name: hashlib.sha256(bundle.extractfile(f).read()).hexdigest() for f in bundle}
+if actual != archive["members_sha256"]:
+    raise SystemExit("Selection scripts differ from their source record")
+
+intake = json.loads((study / "human-crossref-intake-v1.json").read_text())
+responses = {q["query_sha256"]: q["response_sha256"] for q in intake["query_plan"] if "response_sha256" in q}
+if len(responses) != record["crossref_response_cache"]["file_count"]:
+    raise SystemExit("Unexpected number of publisher responses")
+for key, checksum in responses.items():
+    path = study / "crossref-queries-v1" / f"{key}.json.gz"
+    if hashlib.sha256(gzip.decompress(path.read_bytes())).hexdigest() != checksum:
+        raise SystemExit(f"Checksum mismatch in {path.name}")
 PY
 ```
