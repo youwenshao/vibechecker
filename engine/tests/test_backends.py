@@ -176,6 +176,7 @@ def test_equal_length_encoder_batches_preserve_outputs():
         cls_token_id=1,
         sep_token_id=2,
         local_attention=8,
+        classifier_pooling="mean",
     )
     config._attn_implementation = "eager"
     model = ModernBertForSequenceClassification(config).eval()
@@ -191,3 +192,35 @@ def test_equal_length_encoder_batches_preserve_outputs():
     actual, actual_windows = encoder.score("fixture")
     assert actual == pytest.approx(expected, abs=1e-7)
     np.testing.assert_allclose(actual_windows, expected_windows, atol=1e-7)
+
+    # The native classifier head receives one mean vector per window. Use its
+    # actual inputs and logits as the independent oracle for the optional probe.
+    native = []
+    hook = model.head.register_forward_pre_hook(
+        lambda module, args: native.append(args[0].detach().clone())
+    )
+    try:
+        with torch.inference_mode():
+            logits = [
+                model(
+                    torch.tensor([row]), attention_mask=torch.ones(1, len(row), dtype=torch.long)
+                ).logits[0]
+                for row in ids
+            ]
+    finally:
+        hook.remove()
+    evidence = encoder.evidence("fixture")
+    weights = [len(row) - sum(mask) for row, mask in zip(ids, masks, strict=True)]
+    pooled = np.average(torch.cat(native).numpy(), weights=weights, axis=0)
+    margins = torch.stack([out[1] - out[0] for out in logits]).numpy()
+    assert evidence.probability == pytest.approx(expected, abs=1e-7)
+    np.testing.assert_allclose(evidence.window_margins, margins, atol=1e-6)
+    assert evidence.margin == pytest.approx(np.average(margins, weights=weights), abs=1e-6)
+    np.testing.assert_allclose(evidence.embedding, pooled, atol=1e-6)
+    np.testing.assert_allclose(evidence.vector, np.r_[pooled, evidence.margin], atol=1e-6)
+    assert evidence.vector.dtype == np.float32
+    with torch.no_grad():
+        model.classifier.bias[1] += 32
+    saturated = encoder.evidence("fixture")
+    assert saturated.probability == 1.0
+    np.testing.assert_allclose(saturated.window_margins, evidence.window_margins + 32, atol=1e-5)

@@ -13,7 +13,14 @@ import numpy as np
 from .backends.base import PairBackend, PairStats
 from .backends.pair import MLXPairBackend, binoculars, fast_detect_gpt
 from .heads import DeepHeads, waveform_signals
-from .signals import DISPLAY_FEATURES, FEATURE_NAMES, FeatureExtractor, FeatureRow, _samples
+from .signals import (
+    DISPLAY_FEATURES,
+    ENCODER_VECTOR_VERSION,
+    FEATURE_NAMES,
+    FeatureExtractor,
+    FeatureRow,
+    _samples,
+)
 from .stacker import QuickStacker, save_artifact
 from .text import Prepared, prepare, validate
 
@@ -36,6 +43,24 @@ class DeepStacker(QuickStacker):
         "sentence_head": 1,
         "ghostbuster": 1,
     }
+
+
+class ProbeDeepStacker(DeepStacker):
+    FEATURES = (*DEEP_FEATURE_NAMES, "frozen_encoder_probe")
+    MONOTONIC: ClassVar = {**DeepStacker.MONOTONIC, "frozen_encoder_probe": 1}
+
+
+def probe_features(heads, probe, raw, sentence_scores=None):
+    features = heads.features(raw, sentence_scores)
+    if probe is None:
+        return features
+    vector = raw.encoder_vector
+    if vector is None or vector.ndim != 1 or not np.isfinite(vector).all():
+        raise ValueError("The fitted probe requires a finite frozen encoder representation")
+    probability = float(probe.predict_proba(vector[None, :])[0, 1])
+    if not 0 <= probability <= 1:
+        raise ValueError("The frozen encoder probe produced an invalid probability")
+    return (*features, probability)
 
 
 def check_tokenizers(observer, performer):
@@ -145,24 +170,36 @@ class DeepDocument:
     ghost: tuple[float, ...]
     flag_features: tuple[float, ...]
 
+    @property
+    def encoder_vector(self):
+        return self.quick.encoder_vector
+
 
 class DeepExtractor:
-    def __init__(self, quick, pair, identity):
+    def __init__(self, quick, pair, identity, *, include_encoder_evidence=False):
         if quick.backend != pair.backend.name:
             raise ValueError("Quick and pair models must be on the same backend")
         self.quick, self.pair, self.backend = quick, pair, quick.backend
         self.identity = identity
+        self.include_encoder_evidence = include_encoder_evidence
 
     @classmethod
-    def from_env(cls, quick_extractor=None):
+    def from_env(cls, quick_extractor=None, *, include_encoder_evidence=False):
         return cls(
             quick_extractor or FeatureExtractor.from_env(),
             PairExtractor.from_env(),
             weight_manifest(),
+            include_encoder_evidence=include_encoder_evidence,
         )
 
-    def aggregate(self, doc, parts, waveforms):
-        quick = self.quick.extract_prepared(doc)
+    def aggregate(self, doc, parts, waveforms, *, include_encoder_evidence=None):
+        if include_encoder_evidence is None:
+            include_encoder_evidence = self.include_encoder_evidence
+        quick = (
+            self.quick.extract_prepared(doc, include_encoder_evidence=True)
+            if include_encoder_evidence
+            else self.quick.extract_prepared(doc)
+        )
         stats = PairStats.concatenate(parts)
         e3, e4 = fast_detect_gpt(stats), binoculars(stats)
         # Ghostbuster-style vector operations on the two observed-token log
@@ -204,10 +241,31 @@ class DeepModel:
     heads: DeepHeads
     stacker: DeepStacker
     identity: dict[str, dict[str, str]]
+    probe: object | None = None
+
+    def features(self, raw, sentence_scores=None):
+        return probe_features(self.heads, self.probe, raw, sentence_scores)
 
     def verify(self, extractor):
+        if self.probe is not None and not np.array_equal(
+            getattr(self.probe, "classes_", []), [0, 1]
+        ):
+            raise ValueError("Expected a fitted human/machine encoder probe in class order 0, 1")
         if set(self.identity) != set(MODEL_KEYS) or self.identity != extractor.identity:
             raise ValueError("Deep model was trained against different checkpoint files")
+
+        if (
+            getattr(self, "refit_provenance", None) is not None
+            and self.fit_selection["quick_prefill"] != extractor.quick.lm.chunk_size
+        ):
+            raise ValueError("Refitted Deep model requires its training prefill size")
+
+        provenance = getattr(self.probe, "training_provenance_", None)
+        if provenance and (
+            provenance.get("vector_version") != ENCODER_VECTOR_VERSION
+            or provenance.get("encoder_sha256") != self.identity["ENCODER"].get("model.safetensors")
+        ):
+            raise ValueError("Frozen probe was fitted with a different encoder or vector schema")
 
     def save(self, path):
         save_artifact(self, path)
@@ -220,7 +278,8 @@ class DeepModel:
             or not isinstance(getattr(model, "identity", None), dict)
             or set(model.identity) != set(MODEL_KEYS)
             or not isinstance(model.stacker, DeepStacker)
-            or model.stacker.feature_names != DEEP_FEATURE_NAMES
+            or model.stacker.feature_names
+            != (DEEP_FEATURE_NAMES if model.probe is None else ProbeDeepStacker.FEATURES)
         ):
             raise ValueError("Incompatible Deep model")
         return model
@@ -250,9 +309,11 @@ class DeepEngine:
             sentences.extend(items)
             yield {"type": "sentences", "items": items}
             yield {"type": "progress", "stage": "deep", "done": index, "total": total}
-        raw = self.extractor.aggregate(doc, parts, waveforms)
+        raw = self.extractor.aggregate(
+            doc, parts, waveforms, include_encoder_evidence=self.model.probe is not None
+        )
         scores = [s["score"] for s in sentences]
-        result = self.model.stacker.predict(heads.features(raw, scores), doc.word_count)
+        result = self.model.stacker.predict(self.model.features(raw, scores), doc.word_count)
         flags = heads.flags(raw)
         if "esl" in flags:
             # A caution can only widen the interval. Never feed the predicted

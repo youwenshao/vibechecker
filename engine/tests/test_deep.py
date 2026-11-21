@@ -11,7 +11,9 @@ from vibechecker_engine.deep import (
     DeepModel,
     DeepStacker,
     PairExtractor,
+    ProbeDeepStacker,
     check_tokenizers,
+    probe_features,
     weight_manifest,
 )
 from vibechecker_engine.signals import FeatureRow
@@ -199,3 +201,70 @@ def test_reject_changed_weights_before_serving(tmp_path, monkeypatch):
     (tmp_path / "PAIR_PERFORMER" / "model.safetensors").write_bytes(b"different")
     with pytest.raises(ValueError, match="different checkpoint"):
         DeepEngine(SimpleNamespace(identity=weight_manifest()), model)
+
+
+def test_optional_encoder_probe_keeps_wire_schema_and_legacy_features(tmp_path, monkeypatch):
+    from types import SimpleNamespace
+
+    from sklearn.linear_model import LogisticRegression
+
+    class WithEvidence(Quick):
+        def extract_prepared(self, doc, *, include_encoder_evidence=False):
+            base = super().extract_prepared(doc)
+            return (
+                replace(base, encoder_vector=np.array([0.8, -0.1], dtype=np.float32))
+                if include_encoder_evidence
+                else base
+            )
+
+    text = "This ordinary book had quite a different ending than we had imagined. " * 30
+    extractor = DeepExtractor(
+        WithEvidence(),
+        PairExtractor(CPUPair(), Tokenizer()),
+        TEST_IDENTITY,
+        include_encoder_evidence=True,
+    )
+    raw = extractor.extract(text)
+    base = train_model(raw)
+    probe = LogisticRegression().fit(
+        [[0.0, 1.0], [2.0, -1.0], [0.1, 1.1], [1.9, -1.1]], [0, 1, 0, 1]
+    )
+    values = probe_features(base.heads, probe, raw)
+    assert values[:-1] == base.features(raw)
+    assert values[-1] == probe.predict_proba([raw.encoder_vector])[0, 1]
+    rng = np.random.default_rng(932)
+    labels = np.tile([0, 1], 20)
+    train, cal = [rng.normal(size=(len(labels), len(values))) for _ in range(2)]
+    stacker = ProbeDeepStacker.fit(train, labels, cal, labels, [350] * len(labels))
+    fitted = DeepModel(base.heads, stacker, TEST_IDENTITY, probe=probe)
+    artifact = tmp_path / "with-probe.joblib"
+    fitted.save(artifact)
+    served = DeepModel.load(artifact)
+    predict = served.stacker.predict
+
+    def predict_streamed(streamed_features, word_count):
+        np.testing.assert_allclose(streamed_features, values, rtol=0, atol=1e-12)
+        return predict(streamed_features, word_count)
+
+    monkeypatch.setattr(served.stacker, "predict", predict_streamed)
+    result = DeepEngine(extractor, served).analyze(text)
+    baseline = DeepEngine(extractor, base).analyze(text)
+    assert [s["id"] for s in result["signals"]] == [s["id"] for s in baseline["signals"]]
+    assert result["sentences"] == baseline["sentences"]
+    assert set(result) == set(baseline)
+    with pytest.raises(ValueError, match="representation"):
+        fitted.features(replace(raw, quick=replace(raw.quick, encoder_vector=None)))
+    mismatched = replace(fitted, probe=None)
+    mismatched.save(artifact)
+    with pytest.raises(ValueError, match="Incompatible"):
+        DeepModel.load(artifact)
+    fitted.refit_provenance = {"winner": "probe"}
+    fitted.fit_selection = {"quick_prefill": 512}
+    extractor.quick.lm = SimpleNamespace(chunk_size=64)
+    with pytest.raises(ValueError, match="training prefill"):
+        fitted.verify(extractor)
+    extractor.quick.lm.chunk_size = 512
+    fitted.verify(extractor)
+    probe.training_provenance_ = {"vector_version": "different", "encoder_sha256": "a" * 64}
+    with pytest.raises(ValueError, match="vector schema"):
+        fitted.verify(extractor)

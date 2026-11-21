@@ -297,6 +297,7 @@ def run_deep(args, datasets):
         "scope": scope,
         "fit_counts": fit_counts,
         "fit_selection": getattr(model, "fit_selection", None),
+        "refit_provenance": getattr(model, "refit_provenance", None),
         "skipped": dict(sorted(skipped.items())),
         "thresholds": {"mixed": mixed, "high": high},
         "metrics": summary,

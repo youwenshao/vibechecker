@@ -87,3 +87,58 @@ If a candidate was rejected before scoring, record the preflight with `vibecheck
 uv run vibechecker-eval bakeoff eval/reports/{qwen-bf16,qwen-4,qwen-6}/report.json \
   --rejected eval/reports/phase-1/8bit-memory-preflight.json --out eval/artifacts/bakeoff.json
 ```
+
+## Refit the Deep stacker with frozen heads
+
+The original Deep model supplies checkpoint identities, source order and the fitted sentence, E7 and caution heads. Set the same checkpoint paths used by Deep, including `VIBECHECKER_ENCODER`. The M6 run used Metal with a 512-token Quick prefill. Both probes use a private cache of 769-value encoder vectors keyed by document hash. The two guarded M6 fits read the completed cache. For a fresh cache, omit `--cached-only` on the first command to extract the vectors.
+
+```sh
+export VIBECHECKER_BACKEND=mlx-metal
+export VIBECHECKER_QUICK_PREFILL=512
+
+uv run python -m vibechecker_eval.encoder_probe --candidate canonical --cached-only \
+  --datasets raid raid-attacks asap ellipse liang --cache eval/.cache --seed 42 \
+  --human-cap 1200 --clean-cap 320 --attack-cap 64 --features eval/artifacts/encoder.sqlite \
+  --model-out eval/artifacts/encoder-canonical-guarded-v1.joblib --report eval/artifacts/encoder-canonical-guarded-v1.json
+
+uv run python -m vibechecker_eval.encoder_probe --candidate svm-c16 --cached-only \
+  --datasets raid raid-attacks asap ellipse liang --cache eval/.cache --seed 42 \
+  --human-cap 1200 --clean-cap 320 --attack-cap 64 --features eval/artifacts/encoder.sqlite \
+  --model-out eval/artifacts/encoder-svm-c16-guarded-v1.joblib --report eval/artifacts/encoder-svm-c16-guarded-v1.json
+```
+
+Both probes fit on head fold 0 of the training partition. The canonical run selects among linear and approximate RBF candidates on an inner source-separated development fold. The exact RBF SVM uses `C=16` and fits a sigmoid to out-of-fold margins from three source-group folds. Each fold fits its own scaling, PCA and SVM, keeping all variations of a source together. The SVM rebuilds these folds for the final fit on the full permitted head-training set.
+
+The separate Deep cache holds numeric document features, labels, word counts, hashed document/source/stratum identifiers and the optional encoder vectors. Its metadata records dataset coverage, checkpoint digests, the runtime profile and the selection digest.
+
+```sh
+uv run vibechecker-eval deep-cache --model-in eval/artifacts/deep-qwen7b-q4-p512-v1.joblib \
+  --features eval/artifacts/frozen-features.sqlite --cache eval/.cache \
+  --datasets raid raid-attacks asap ellipse liang --seed 42 --limit-per-class 96 \
+  --train-limit-per-class 160 --cal-limit-per-class 352 --attack-limit-per-class 128
+
+uv run vibechecker-eval deep-refit --model-in eval/artifacts/deep-qwen7b-q4-p512-v1.joblib \
+  --cache eval/.cache --features eval/artifacts/frozen-features.sqlite --probe eval/artifacts/encoder-canonical-guarded-v1.joblib \
+  --model-out eval/artifacts/selected.joblib --selection-out eval/artifacts/validation-selection.json
+```
+
+Each accepted document or refusal commits separately. Rerun the same cache command to continue after interruption. A changed sampling plan, model, corpus or numerical profile needs a separate cache path. Omit `--probe` for a stacker-only comparison. Use `--without-encoder-vectors` when building a cache intended only for that comparison. The CPU refit reads the completed cache and the original artifact. Both commands accept `--commercial-only` and verify the original licensing scope.
+
+Repeat `--probe` to compare independently trained encoder probes in one CPU run on the same cache.
+
+```sh
+uv run vibechecker-eval deep-refit --model-in eval/artifacts/deep-qwen7b-q4-p512-v1.joblib \
+  --cache eval/.cache --features eval/artifacts/frozen-features.sqlite \
+  --probe eval/artifacts/encoder-canonical-guarded-v1.joblib --probe eval/artifacts/encoder-svm-c16-guarded-v1.joblib \
+  --model-out eval/artifacts/selected.joblib --selection-out eval/artifacts/validation-selection.json
+```
+
+The parent and two stacker-only candidates are evaluated once. Each unique probe artifact adds four candidates and shares its cached probabilities across those fits. The report groups them by probe SHA-256, includes training provenance and the best admissible candidate for each probe, and records the validation document digest and gate-relative error for every candidate. A different scored document set invalidates the comparison.
+
+Training uses fold 1 of the original training-source partition. Calibration uses the calibration partition. Each cap applies to one source and class. Training and calibration sample distinct source groups across generator/attack combinations. The attack cap limits the RAID attack shard in each fit partition. Mixed-role or label-conflicting document hashes and source groups shared with reserved partitions are excluded from fitting. The validation reservoir and generator grouping match `deep --cohort validation`. The final test fold is absent from the cache.
+
+Each refit verifies the original corpus manifest and looks for normalized human passages assigned to several publisher groups across all splits and lengths. It removes the linked groups and their generated variants from its stacker training and calibration rows. The CPU runner preserves the input SQLite records and validation cohort. Both probe producers apply the same source-group quarantine to their training reservoir. Their saved provenance must match the refit's complete alias summary. The selection report records the source-alias digest and counts, document and group digests for excluded and effective fit rows, and the retained validation membership. The original heads remain frozen; their source overlap with held-out groups requires a separate audit of the original fit.
+
+Each candidate retains the original eight displayed signals. The base candidates vary gradient-boosting complexity. Optional probe candidates append the probability from an independently fitted frozen-encoder probe. Two candidates assign a fixed weight of 0.50 or 0.75 to its log-odds before fitting the balanced-prior isotonic and 200 bootstrap calibrators. During refit, the probe and Deep cache must identify the same extraction backend, complete encoder files, prefill profile, representation version, dataset manifest and reserved head-training fold. The fitted model can then be evaluated across backends for parity.
+
+The selection report identifies the parent and winner by SHA-256 and records each candidate’s settings, document metrics, worst stratum and gate results. Selection requires improvement in both validation ECE measures and preservation of other passing quality gates. Among qualifying candidates it minimizes the larger error relative to the 0.05 pooled and 0.08 stratum gates. If none qualifies, the output is an exact copy of the parent. Use `deep --model-in eval/artifacts/selected.joblib --cohort test` with the original final-test seed, limits and dataset order to produce the independent scorecard.

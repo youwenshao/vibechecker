@@ -54,7 +54,28 @@ def main(argv=None):
         "--basis", required=True, help="Describe the measurement or projection inputs"
     )
     preflight.add_argument("--out", type=Path, required=True)
-    for name in ("baseline", "quick", "deep", "fetch", "sync"):
+    refit = cmds.add_parser(
+        "deep-refit", help="Fit and compare stackers using a completed numeric feature cache"
+    )
+    refit.add_argument("--features", required=True, type=Path)
+    refit.add_argument(
+        "--cache",
+        type=Path,
+        default=Path("eval/.cache"),
+        help="Pinned corpus artifacts for auditing source aliases before refitting",
+    )
+    refit.add_argument("--registry", type=Path)
+    refit.add_argument("--model-in", required=True, type=Path)
+    refit.add_argument("--model-out", required=True, type=Path)
+    refit.add_argument("--selection-out", required=True, type=Path)
+    refit.add_argument(
+        "--probe",
+        type=Path,
+        action="append",
+        help="Supervised frozen-encoder probe. Repeat to compare multiple artifacts on the same validation cohort.",
+    )
+    refit.add_argument("--commercial-only", action="store_true")
+    for name in ("baseline", "quick", "deep", "deep-cache", "fetch", "sync"):
         cmd = cmds.add_parser(name)
         cmd.add_argument("--cache", type=Path, default=Path("eval/.cache"))
         cmd.add_argument("--registry", type=Path)
@@ -64,10 +85,29 @@ def main(argv=None):
             default=["liang"]
             if name == "baseline"
             else ["raid", "raid-attacks", "asap", "ellipse", "liang"]
-            if name == "deep"
+            if name in {"deep", "deep-cache"}
             else ["raid", "liang"],
         )
         cmd.add_argument("--commercial-only", action="store_true")
+        if name == "deep-cache":
+            cmd.add_argument("--features", type=Path, required=True)
+            cmd.add_argument("--model-in", type=Path, required=True)
+            cmd.add_argument("--seed", type=int, default=42)
+            cmd.add_argument("--limit-per-class", type=int, default=64)
+            cmd.add_argument(
+                "--train-limit-per-class",
+                type=int,
+                help="Fit cap per dataset/class, stratified by generator and attack",
+            )
+            cmd.add_argument(
+                "--cal-limit-per-class", type=int, help="Calibration cap per dataset/class"
+            )
+            cmd.add_argument(
+                "--attack-limit-per-class",
+                type=int,
+                help="Additional cap per RAID attack-shard class in fitting and calibration",
+            )
+            cmd.add_argument("--without-encoder-vectors", action="store_true")
         if name in {"baseline", "quick", "deep"}:
             cmd.add_argument("--limit-per-class", type=int, default=0 if name == "baseline" else 64)
             cmd.add_argument("--seed", type=int, default=42)
@@ -103,6 +143,11 @@ def main(argv=None):
             cmd.add_argument("direction", choices=["push", "pull"])
             cmd.add_argument("--bucket", default="vibechecker-artifacts")
     args = parser.parse_args(argv)
+    if args.command == "deep-refit":
+        from .refit import run_refit
+
+        print(json.dumps(run_refit(args)))
+        return 0
     if args.command in {"falcon-reference", "bakeoff", "memory-preflight"}:
         from .deep_runner import read, write_json
         from .experiments import bakeoff, memory_preflight, reference
@@ -124,6 +169,21 @@ def main(argv=None):
             result = reference(args)
         return int(not result["pass"])
     datasets = select(registry(args.registry), args.datasets, args.commercial_only)
+    if args.command == "deep-cache":
+        from .refit_cache import collect
+
+        if any(
+            n is not None and n < 0
+            for n in (
+                args.limit_per_class,
+                args.train_limit_per_class,
+                args.cal_limit_per_class,
+                args.attack_limit_per_class,
+            )
+        ):
+            parser.error("Sample limit must be nonnegative")
+        print(json.dumps(collect(args, datasets)))
+        return 0
     if args.command == "sync":
         sync_r2(datasets, args.cache, args.direction, args.bucket)
     elif args.command == "fetch":

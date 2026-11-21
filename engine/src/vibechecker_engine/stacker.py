@@ -8,6 +8,7 @@ from typing import ClassVar
 
 import joblib
 import numpy as np
+from scipy.special import expit, logit
 from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.isotonic import IsotonicRegression
 from threadpoolctl import threadpool_limits
@@ -74,8 +75,23 @@ def _band_threshold(human_indices, fpr):
 
 
 @dataclass
+class ProbeAnchoredClassifier:
+    """Keep a fixed positive contribution from the independently trained probe."""
+
+    estimator: HistGradientBoostingClassifier
+    probe_weight: float
+
+    def predict_proba(self, matrix):
+        # ProbeDeepStacker reserves the final feature for the supervised probe probability.
+        margin = self.estimator.decision_function(matrix)
+        probe_margin = logit(np.clip(np.asarray(matrix)[:, -1], 1e-7, 1 - 1e-7))
+        positive = expit((1 - self.probe_weight) * margin + self.probe_weight * probe_margin)
+        return np.column_stack((1 - positive, positive))
+
+
+@dataclass
 class QuickStacker:
-    classifier: HistGradientBoostingClassifier
+    classifier: HistGradientBoostingClassifier | ProbeAnchoredClassifier
     calibrators: dict[str, Calibration]
     human_reference: np.ndarray
     low_threshold: int
@@ -87,20 +103,40 @@ class QuickStacker:
     MONOTONIC: ClassVar = {"encoder_probability": 1}
 
     @classmethod
-    def fit(cls, train_x, train_y, cal_x, cal_y, cal_word_counts, *, seed=42):
+    def fit(
+        cls,
+        train_x,
+        train_y,
+        cal_x,
+        cal_y,
+        cal_word_counts,
+        *,
+        seed=42,
+        max_leaf_nodes=31,
+        l2_regularization=0.0,
+        probe_anchor=0.0,
+    ):
         train, labels = _arrays(train_x, train_y, cls.FEATURES)
         calibration, truth = _arrays(cal_x, cal_y, cls.FEATURES)
         if len(cal_word_counts) != len(truth):
             raise ValueError("Calibration word counts must match the calibration rows")
         constraints = [cls.MONOTONIC.get(name, 0) for name in cls.FEATURES]
+        if not 0 <= probe_anchor < 1 or (
+            probe_anchor and cls.FEATURES[-1] != "frozen_encoder_probe"
+        ):
+            raise ValueError("Anchoring requires an appended fitted probe and weight in [0, 1)")
         model = HistGradientBoostingClassifier(
             monotonic_cst=constraints,
             random_state=seed,
+            max_leaf_nodes=max_leaf_nodes,
+            l2_regularization=l2_regularization,
             early_stopping=False,
             min_samples_leaf=max(2, min(20, len(labels) // 12)),
         )
         with threadpool_limits(limits=1, user_api="openmp"):
             model.fit(train, labels)
+            if probe_anchor:
+                model = ProbeAnchoredClassifier(model, probe_anchor)
             raw = model.predict_proba(calibration)[:, 1]
 
         rng = np.random.default_rng(seed)

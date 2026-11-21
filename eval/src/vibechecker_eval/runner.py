@@ -10,7 +10,9 @@ from .metrics import Observation, backend_parity, gates, summarize
 from .registry import sha256
 
 
-def sample(stream, limit, seed, count_words, *, quick_length=True, length_range=None):
+def sample(
+    stream, limit, seed, count_words, *, quick_length=True, length_range=None, on_eligible=None
+):
     """Reservoir sampling keeps evaluation memory bounded even on the full RAID corpus."""
     selected = defaultdict(list)
     counts, skipped = Counter(), Counter()
@@ -23,6 +25,8 @@ def sample(stream, limit, seed, count_words, *, quick_length=True, length_range=
             skipped[f"{item.dataset}/length"] += 1
             continue
         digest = fingerprint(item.text)
+        if on_eligible is not None:
+            on_eligible(item, n, digest, digest in seen)
         if digest in seen:
             skipped[f"{item.dataset}/duplicate"] += 1
             continue
@@ -95,7 +99,14 @@ def write_report(report, directory):
         sentence = report["mixed_sentence_metrics"]
         fitted = report.get("fit_selection")
         lines += ["", "## Sampling", ""]
-        if fitted:
+        if fitted and "train_limit_per_class" in fitted:
+            lines.append(
+                f"The refitted stacker used seed {fitted['seed']}, a training limit of "
+                f"{fitted['train_limit_per_class']} and a calibration limit of "
+                f"{fitted['cal_limit_per_class']} per source and class. "
+                f"Dataset order was {', '.join(fitted['dataset_order'])}."
+            )
+        elif fitted:
             lines.append(
                 f"Training used seed {fitted['seed']} and a reservoir limit of "
                 f"{fitted['limit_per_class_per_dataset_split']} per class, dataset and split "

@@ -30,6 +30,7 @@ class FeatureRow:
     word_count: int
     flags: tuple[str, ...]
     samples: dict[str, list[float]]
+    encoder_vector: np.ndarray | None = None
 
 
 def stylometry(doc: Prepared) -> tuple[float, ...]:
@@ -76,6 +77,22 @@ def token_features(stats, offsets, doc):
     )
 
 
+ENCODER_VECTOR_VERSION = "modernbert-window-mean-margin-v1"
+
+
+@dataclass(frozen=True)
+class EncoderEvidence:
+    embedding: np.ndarray
+    margin: float
+    window_margins: np.ndarray
+    probability: float
+    samples: list[float]
+
+    @property
+    def vector(self):
+        return np.append(self.embedding, np.float32(self.margin))
+
+
 class Encoder:
     def __init__(self, model, tokenizer, device):
         self.model = model
@@ -102,7 +119,22 @@ class Encoder:
         return cls(model, tokenizer, device)
 
     def score(self, text):
+        return self._evaluate(text, embeddings=False)
+
+    def evidence(self, text) -> EncoderEvidence:
+        """Read the mean-pooled last layer and binary margin in the same encoder pass."""
+        return self._evaluate(text, embeddings=True)
+
+    def _evaluate(self, text, *, embeddings):
         import torch
+
+        if embeddings and (
+            self.model.config.model_type != "modernbert"
+            or self.model.config.classifier_pooling != "mean"
+        ):
+            raise ValueError(
+                "Encoder representations require the mean-pooled ModernBERT checkpoint"
+            )
 
         windows = self.tokenizer(
             text,
@@ -112,7 +144,7 @@ class Encoder:
             return_special_tokens_mask=True,
             verbose=False,
         )
-        scores = []
+        scores, vectors, margins = [], [], []
         windows_ids = windows["input_ids"]
         sizes = [
             len(ids) - sum(mask)
@@ -124,12 +156,36 @@ class Encoder:
             for _, equal_length in groupby(windows_ids, key=len):
                 for batch in batched(equal_length, self.batch_windows):
                     tensor = torch.tensor(batch, device=self.device)
-                    logits = self.model(
-                        input_ids=tensor, attention_mask=torch.ones_like(tensor)
-                    ).logits
+                    mask = torch.ones_like(tensor)
+                    if embeddings:
+                        # The checkpoint's classifier pools the last hidden state
+                        # before its GELU head. Explicit inference avoids retaining
+                        # all 22 layers or installing hooks on a shared model.
+                        hidden = self.model.model(
+                            input_ids=tensor, attention_mask=mask
+                        ).last_hidden_state
+                        pooled = (hidden * mask.unsqueeze(-1)).sum(dim=1) / mask.sum(
+                            dim=1, keepdim=True
+                        )
+                        logits = self.model.classifier(self.model.drop(self.model.head(pooled)))
+                        vectors.append(pooled)
+                        margins.append(logits[:, 1] - logits[:, 0])
+                    else:
+                        logits = self.model(input_ids=tensor, attention_mask=mask).logits
                     scores.append(torch.softmax(logits.float(), dim=-1)[:, 1])
         scores = torch.cat(scores).cpu().tolist()
-        return float(np.average(scores, weights=sizes)), _samples(scores)
+        probability = float(np.average(scores, weights=sizes))
+        samples = _samples(scores)
+        if not embeddings:
+            return probability, samples
+        hidden = torch.cat(vectors).float().cpu().numpy()
+        margin = torch.cat(margins).float().cpu().numpy()
+        vector = np.average(hidden, axis=0, weights=sizes).astype(np.float32)
+        if not np.isfinite(vector).all() or not np.isfinite(margin).all():
+            raise ValueError("Nonfinite frozen encoder representation")
+        return EncoderEvidence(
+            vector, float(np.average(margin, weights=sizes)), margin, probability, samples
+        )
 
 
 class FeatureExtractor:
@@ -163,7 +219,7 @@ class FeatureExtractor:
         validate(doc)
         return self.extract_prepared(doc)
 
-    def extract_prepared(self, doc: Prepared) -> FeatureRow:
+    def extract_prepared(self, doc: Prepared, *, include_encoder_evidence=False) -> FeatureRow:
         encoded = self.tokenizer(
             doc.normalized, return_offsets_mapping=True, add_special_tokens=False, verbose=False
         )
@@ -175,7 +231,13 @@ class FeatureExtractor:
             offsets = offsets[1:]
         stats = self.lm.token_stats(ids)
         features, samples = token_features(stats, offsets, doc)
-        encoder, samples["e6"] = self.encoder.score(doc.normalized)
+        encoder_vector = None
+        if include_encoder_evidence:
+            evidence = self.encoder.evidence(doc.normalized)
+            encoder, samples["e6"] = evidence.probability, evidence.samples
+            encoder_vector = evidence.vector
+        else:
+            encoder, samples["e6"] = self.encoder.score(doc.normalized)
         chunk_ratios = []
         for chunk in doc.chunks:
             words = [
@@ -187,4 +249,4 @@ class FeatureExtractor:
         values = (*features, encoder, *stylometry(doc))
         if not np.all(np.isfinite(values)):
             raise ValueError("Detector produced a non-finite feature")
-        return FeatureRow(values, doc.word_count, doc.flags, samples)
+        return FeatureRow(values, doc.word_count, doc.flags, samples, encoder_vector)
