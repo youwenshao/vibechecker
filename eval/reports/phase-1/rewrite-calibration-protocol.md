@@ -1,0 +1,17 @@
+# Independent calibration comparison
+
+The incumbent is the frozen seven-leaf Qwen v2 artifact, SHA-256 `8c8a23e4ecb5bdaaccee57516fb1d8f1b0703106748668b8af09e936846c915b`. On 221 historical test documents its pooled ECE was 0.0211 and its worst-stratum ECE was 0.2500. This comparison was specified after those aggregate results and before fitting the release-length rewrite candidates.
+
+## Training and selection
+
+- Use the pinned RAID conversion and the publisher's source links to pair a paraphrase of a human passage with a paraphrase of generated text derived from the same source. The head, stack, isotonic calibration and matched stress controls use disjoint groups. Record the actual eligible count at each step.
+- Train the optional text-only rewrite probe on head-fold training groups. Compare it with the fixed expanded logistic probe using the same supplemented training and calibration sets. Keep Qwen weights and sentence heads frozen. Compare seven-leaf stackers with L2 regularization of one and positive probe anchors of 0.5 and 0.75.
+- Fit isotonic calibration at the existing 50/50 reference prior with 200 bootstrap curves. Evaluate the index on the original 268 validation documents. Retain every previously passing primary validation gate, reduce the largest validation stratum ECE, and improve matched rewrite Brier score and paired-origin concordance without reducing pooled matched-rewrite AUROC. Favor candidates meeting both calibration gates, followed by the worst normalized distance to those gates, matched Brier score and a deterministic tie-break.
+- Independently estimate one global high-band cutoff using previously unused ASAP and ELLIPSE calibration essays. For each fitted candidate use the smallest attainable integer cutoff whose observed upper-tail count meets a one-sided 95% binomial order-statistic rule at 2% through the rounded index. The cutoff may only rise. Keep the original mixed-band cutoff and report the high-band machine hits on validation before and after. Require a positive count and at least 90% of the machine hits retained against both the original cutoff and the v2 incumbent. The rule is an operating-point estimator for the sampled mixture. Corpus shift and candidate selection limit its interpretation outside that sample.
+- Reserve additional unused RAID and PERSUADE human controls solely for a specificity check after selection. PERSUADE passages matching the original five datasets are excluded by normalized text. The production predictor receives the same text-only evidence for every writer and domain.
+
+## Held-out measurements
+
+Freeze the winning artifact hash and its validation evidence before accessing either final outcome. Use the same M6 Qwen 4-bit checkpoints and prefill size of 512. Verify the historical cohort's model digest, label counts, stratum membership and sentence parity. Score the separately reserved 512-document envelope with the same frozen model. It has no source-component overlap with the earlier historical envelope or development folds. Its eligible size is determined by the normal English-language check. [Reservation](prospective-audit-reservation.json)
+
+Apply all existing release gates to both evaluations, including pooled ECE ≤0.05 and worst measured stratum ECE ≤0.08. Report sparse strata, refusals, human false positives and machine coverage. If no candidate passes the internal comparison, retain the published v2 scorecard. Hosted GPU use remains on hold.
