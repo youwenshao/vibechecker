@@ -1,0 +1,7 @@
+# Academic supplement result
+
+The registered comparison selected the .75 probe anchor, model SHA256 `aeafbb70201caec3029b24799faedd8fee89aacf5ef1bdf09e1eee2673b82d9b`. On the 268 ordinary validation documents it had pooled ECE .01134 and worst-stratum ECE .48. The .50 anchor's worst-stratum ECE stayed at the incumbent's .50, so it failed the improvement criterion. The selected model's worst-stratum result still exceeds the .08 release target. [Frozen selection](academic-addition-selection.json)
+
+At its high index cutoff of 24 the selected model detected 78/80 machine-origin documents on ordinary validation, 66/66 independent academic rewrites and 54/54 exact clean machine parents. On 64 matched books/news source pairs it had Brier .04252, AUROC .98950 and within-pair concordance .96875. Three of four independent pre-2020 native academic papers scored high under both v2 and the selected model. The observed human false-positive rate was 75%, with a 95% Wilson interval of 30.1%–95.4%. [Selection and source-specific denominators](academic-addition-selection.json)
+
+The bound M6 Metal/512 extractor completed all 28 new documents in 53 seconds. Seven source-matched pairs entered stack fitting and five entered isotonic calibration. Four native human references were reserved for development. A fresh CPU reload reproduced all 531 displayed numeric indexes and the corresponding quality metrics. [Input membership](academic-addition-input.json) · [Numeric extraction](academic-addition-features.json) · [Scoring parity](academic-addition-numeric-parity.json)

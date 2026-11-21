@@ -1,0 +1,29 @@
+{
+  "scheme": "academic-frozen-scoring-parity-v1",
+  "selected": "academic-anchor0.75",
+  "model_sha256": "aeafbb70201caec3029b24799faedd8fee89aacf5ef1bdf09e1eee2673b82d9b",
+  "selection_sha256": "6603c6b6e3e0d16412e0bd8da5b543f96eca26beecedbd6cc081b11cf620cbe6",
+  "study_sha256": "b8c016ede7a96517b7375d79ae9655f738c4e10458d2492d60c8b58bfac66eb0",
+  "numeric_parity": {
+    "original_primary": {
+      "documents": 268,
+      "exact_index_matches": 268
+    },
+    "matched_books_news_stress": {
+      "documents": 128,
+      "exact_index_matches": 128
+    },
+    "independent_academic_machine": {
+      "documents": 131,
+      "exact_index_matches": 131
+    },
+    "independent_native_human": {
+      "documents": 4,
+      "exact_index_matches": 4
+    }
+  },
+  "bootstraps": {
+    "pooled": 200,
+    "300-599": 200
+  }
+}

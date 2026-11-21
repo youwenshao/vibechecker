@@ -203,3 +203,34 @@ def test_frozen_selection_uses_all_four_tie_breaks_and_falls_back():
         assert select_winner({"a": eligible, "b": lesser}) == "a"
     assert select_winner({"a": eligible, "b": case(0.2, 0.02, 0.1, 0.5)}) == "b"
     assert select_winner({"a": case(0, 0, 0, 0.5, ["specificity"])}) == "incumbent"
+
+
+def test_raw_replay_checks_serving_interval_and_display_signal_features():
+    from types import SimpleNamespace
+
+    from vibechecker_eval.academic_parity import compare_raw
+
+    class Probe:
+        def predict_proba(self, vectors):
+            return np.tile([[0.98, 0.02]], (len(vectors), 1))
+
+    stacker = SimpleNamespace(
+        predict=lambda *_: {
+            "index": 17,
+            "band": "low",
+            "interval": {"low": 10, "high": 22},
+            "signals": [{"id": "e1", "value": 0.41}],
+        }
+    )
+    row = SimpleNamespace(features=np.zeros(13), encoder=np.zeros(769), words=330)
+    observed = {
+        "wordCount": 330,
+        "index": 17,
+        "band": "low",
+        "interval": {"low": 5, "high": 27},
+        "flags": ["esl"],
+        "signals": [{"id": "e1", "value": 0.41, "samples": [0.5]}],
+    }
+    assert compare_raw(stacker, Probe(), observed, row) == 0
+    with pytest.raises(ValueError, match="differs"):
+        compare_raw(stacker, Probe(), {**observed, "index": 18}, row)

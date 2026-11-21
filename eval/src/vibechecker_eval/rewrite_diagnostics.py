@@ -120,15 +120,13 @@ def integrity(rows):
     }
 
 
-def native_academic(rows, cache):
+def published_paraphrases(rows, cache):
     """Map only allowed, pre-existing training/calibration/development IDs to publisher passages."""
     import pyarrow.dataset as ds
-    from pyarrow import csv
 
-    catalog = registry()
-    clean_art, attack_art = (catalog[k].artifacts[0] for k in ("raid", "raid-attacks"))
-    clean_path, attack_path = (cache / a.sha256 for a in (clean_art, attack_art))
-    if sha256(clean_path) != clean_art.sha256 or sha256(attack_path) != attack_art.sha256:
+    attack_art = registry()["raid-attacks"].artifacts[0]
+    attack_path = cache / attack_art.sha256
+    if sha256(attack_path) != attack_art.sha256:
         raise ValueError("Native publisher byte identity mismatch")
     attacks = ds.dataset(attack_path, format="parquet")
     # Scan source identifiers alone to recover the frozen cache's one-way group mapping.
@@ -165,6 +163,19 @@ def native_academic(rows, cache):
                 "Expected one native paraphrase matching selected document, label and source"
             )
         selected.append((r, found[0]))
+    return selected
+
+
+def native_academic(rows, cache):
+    import pyarrow.dataset as ds
+    from pyarrow import csv
+
+    selected = published_paraphrases(rows, cache)
+    clean_art = registry()["raid"].artifacts[0]
+    clean_path = cache / clean_art.sha256
+    if sha256(clean_path) != clean_art.sha256:
+        raise ValueError("Native clean publisher byte identity differs")
+    scoped = ds.field("source_id").isin(sorted({d["source_id"] for _, d in selected}))
     parent_ids = {d["adv_source_id"] for _, d in selected}
     clean = ds.dataset(
         clean_path,
