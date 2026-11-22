@@ -103,7 +103,7 @@ class Lenses(BaseModel):
         extra='forbid',
     )
     version: Literal[1]
-    turnitin: Literal['masked'] | Literal[0] | Turnitin | None
+    turnitin: Literal['masked'] | Literal[0] | Turnitin | None = None
     gptzero: Gptzero
     zerogpt: Zerogpt
     grammarly: Grammarly

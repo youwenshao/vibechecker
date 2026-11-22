@@ -206,7 +206,6 @@
               },
               "required": [
                 "version",
-                "turnitin",
                 "gptzero",
                 "zerogpt",
                 "grammarly",

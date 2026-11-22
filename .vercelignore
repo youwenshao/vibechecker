@@ -11,15 +11,16 @@
 # Anchor the Python package so apps/web/app/api/engine/heartbeat is uploaded.
 /engine
 # Ship only the aggregate scorecards used by the web app.
+# The CLI tests directories without a trailing slash, so re-included directories must not end in one.
 /eval/*
-!/eval/reports/
+!/eval/reports
 /eval/reports/*
-!/eval/reports/phase-1/
-!/eval/reports/phase-2/
-!/eval/reports/quick-m6-fp32-v0/
+!/eval/reports/phase-1
+!/eval/reports/phase-2
+!/eval/reports/quick-m6-fp32-v0
 /eval/reports/*/*
 !/eval/reports/phase-1/report.json
-!/eval/reports/phase-1/prospective/
+!/eval/reports/phase-1/prospective
 /eval/reports/phase-1/prospective/*
 !/eval/reports/phase-1/prospective/report.json
 !/eval/reports/phase-2/lenses.json

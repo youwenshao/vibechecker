@@ -21,7 +21,8 @@ const Index = z.int().min(0).max(100);
 const LensBand = z.enum(["low", "mixed", "high"]);
 export const Lenses = z.strictObject({
   version: z.literal(1),
-  turnitin: z.union([z.literal("masked"), z.literal(0), z.int().min(20).max(100)]).nullable(),
+  // The inference service drops null fields, so a Quick result omits this key.
+  turnitin: z.union([z.literal("masked"), z.literal(0), z.int().min(20).max(100)]).nullish(),
   gptzero: LensBand,
   zerogpt: LensBand,
   grammarly: LensBand,

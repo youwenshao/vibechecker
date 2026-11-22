@@ -10,7 +10,7 @@ const usage = new Map();
 const base64 = value => Buffer.from(JSON.stringify(value)).toString("base64url");
 const result = {
   index: 62, interval: { low: 48, high: 75 }, band: "mixed", wordCount: 180,
-  lenses:{version:1,turnitin:null,gptzero:"mixed",zerogpt:"high",grammarly:"mixed",veriguide:"low"},
+  lenses:{version:1,gptzero:"mixed",zerogpt:"high",grammarly:"mixed",veriguide:"low"},
   signals: [
     { id: "e1", value: 18.8, humanReference: 25.3 },
     { id: "e2", value: 2.46, humanReference: 2.9 },
