@@ -69,3 +69,23 @@ For nightly backups, set `BACKUP_DATABASE_URL` to a TLS PostgreSQL session conne
 The staging key fingerprint is `B57DADD7AE82BCF499A2A540C9CCEE7743370C88`. The operator’s Windows keyring is under `%USERPROFILE%\.gnupg\vibechecker-staging`, with the passphrase protected by the same Windows account at `%LOCALAPPDATA%\VibeChecker\staging-backup-key.dpapi`. The restore supplied the unwrapped passphrase to Git for Windows GnuPG on a private stdin pipe with a Windows CRLF line ending.
 
 The archive checks ran on demand. The restore database was removed after comparison. The backup workflow's dump command was also exercised against the staging session pooler after correcting its handling of PostgreSQL connection URIs. Nightly workflow execution and the operator’s zh-HK editorial review are still open.
+
+## Production launch on 2026-11-22
+
+[Production](https://vibechecker.io) serves commit `152b1b6` from deployment `dpl_LwYbkw6hZQzR2zo16J9HfFyci6KY`, with the club rebrand and the frozen Phase 1.1 v4 model. `www.vibechecker.io` redirects to the apex. The operator overrode the release gate to launch on the staging backend. Production uses the staging Supabase project `mdotrrzexmescyiqjhjm`, the same `ESSAY_KEK` and the M6 primary, so both environments share accounts, quotas, cached results and saved essays. Only `APP_ORIGIN` and `TURNSTILE_HOSTNAMES` differ. Neither environment sets a fallback inference URL or Sentry DSNs.
+
+The M6 posts its heartbeat to `https://staging.vibechecker.io/api/engine/heartbeat`, which updates the shared `engine_status` row. Production sends checks to the M6 only while that row is fresh. Without a fallback, production reports both engines as busy when the M6 or the staging heartbeat route is unavailable.
+
+`staging.vibechecker.io` is a production domain in the Vercel project, so the first production deployment moved it. It was reassigned to the Phase 2 preview `dpl_5om1h4fFxBaQuSz8ucbtA9huxXCH`. Repeat this after each production deployment until staging has its own environment.
+
+The inference service omits null fields, so live Quick results arrive without `lenses.turnitin`. The contract required the key, and every live Quick check failed validation and fell through to the missing fallback. Commit `152b1b6` makes the key optional, and the browser fixture now omits it like the service. The `62d5f97` staging build predates the fix and was not redeployed.
+
+| Check | Observation |
+| --- | --- |
+| Preflight | `pnpm verify`, all 18 production-build Playwright scenarios and the Windows Python suite passed, with 99 tests passing and one skipped. Hardware parity needs Metal or CUDA and was not rerun. |
+| Pages | Both locales of the home, methodology, policy and history pages, the icon and `/api/quota` returned 200 over TLS. |
+| Quick check | A 1,000-word public-domain excerpt from Thoreau’s *Civil Disobedience* scored 0 with a range of 0–10 in the browser. The M6 answered the first request. The result showed the interval, explanation, detector limitations and caution. |
+| Inference | Five signed probes with the same text returned Metal results with a median of 820 ms and a 95th percentile of 2,397 ms. Signed health returned 200 and unsigned health returned 403. |
+| Logs | The deployment recorded no function logs during the check. Request logs showed no server errors and no essay text. |
+
+Before production sign-in, add `https://vibechecker.io/api/auth/callback**` to the Supabase Auth redirect URLs.
