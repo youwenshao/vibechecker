@@ -5,6 +5,7 @@ import subprocess
 from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from urllib.parse import parse_qsl, unquote, urlsplit
 
 import boto3
 
@@ -20,8 +21,33 @@ DUMP_OPTIONS = [
 ]
 
 
-def encrypt_dump(command, recipient, archive, gpg="gpg"):
-    with subprocess.Popen(command, stdout=subprocess.PIPE) as dump:
+def database_environment(uri):
+    connection = urlsplit(uri)
+    if connection.scheme not in {"postgres", "postgresql"} or not connection.hostname:
+        raise ValueError("Expected a PostgreSQL connection URI with a hostname")
+    settings = {
+        "PGHOST": connection.hostname,
+        "PGPORT": str(connection.port or 5432),
+        "PGUSER": unquote(connection.username or ""),
+        "PGPASSWORD": unquote(connection.password or ""),
+        "PGDATABASE": unquote(connection.path.lstrip("/")) or "postgres",
+    }
+    options = {
+        "sslmode": "PGSSLMODE",
+        "sslrootcert": "PGSSLROOTCERT",
+        "channel_binding": "PGCHANNELBINDING",
+        "connect_timeout": "PGCONNECT_TIMEOUT",
+        "application_name": "PGAPPNAME",
+    }
+    for name, value in parse_qsl(connection.query, keep_blank_values=True, strict_parsing=True):
+        if name not in options:
+            raise ValueError("Unsupported PostgreSQL URI query parameter")
+        settings[options[name]] = value
+    return settings
+
+
+def encrypt_dump(command, recipient, archive, gpg="gpg", *, dump_env=None):
+    with subprocess.Popen(command, stdout=subprocess.PIPE, env=dump_env) as dump:
         try:
             subprocess.run(
                 [
@@ -65,19 +91,19 @@ def main():
     with TemporaryDirectory() as temp:
         recipient, archive = Path(temp) / "recipient.asc", Path(temp) / "backup.gpg"
         recipient.write_text(os.environ["BACKUP_PUBLIC_KEY"], encoding="ascii")
-        # PGDATABASE is a connection URI. Passing it by environment keeps credentials out of argv.
+        # libpq treats PGDATABASE as a literal database name. Forward each setting by name.
+        settings = database_environment(os.environ["PGDATABASE"])
         command = [
             "docker",
             "run",
             "--rm",
-            "-e",
-            "PGDATABASE",
+            *(arg for key in settings for arg in ("-e", key)),
             "--entrypoint",
             "pg_dump",
             "supabase/postgres:17.12.0.002",
             *DUMP_OPTIONS,
         ]
-        encrypt_dump(command, recipient, archive)
+        encrypt_dump(command, recipient, archive, dump_env={**os.environ, **settings})
         s3.upload_file(str(archive), bucket, f"database/{today}.dump.gpg")
 
 

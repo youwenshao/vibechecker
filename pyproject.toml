@@ -16,7 +16,8 @@ vibechecker-inference = { workspace = true }
 vibechecker-eval = { workspace = true }
 
 [tool.pytest.ini_options]
-testpaths = ["engine/tests", "services/inference/tests", "eval/tests"]
+pythonpath = ["."]
+testpaths = ["engine/tests", "services/inference/tests", "eval/tests", "ops/tests"]
 
 [tool.ruff]
 line-length = 100
