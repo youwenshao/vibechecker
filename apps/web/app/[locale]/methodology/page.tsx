@@ -1,6 +1,7 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Dial, Icon } from "../../../components/Icons";
 import { BaseRate } from "../../../components/BaseRate";
+import { Masthead, SiteFooter } from "../../../components/Chrome";
+import { HouseRule } from "../../../components/ResultView";
 import deep from "../../../../../eval/reports/phase-1/report.json";
 import audit from "../../../../../eval/reports/phase-1/prospective/report.json";
 import quick from "../../../../../eval/reports/quick-m6-fp32-v0/report.json";
@@ -110,21 +111,16 @@ export default async function Methodology({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale });
-  const home = "/" + locale;
   const percent = new Intl.NumberFormat(locale, {style:"percent", maximumFractionDigits:2}).format;
   return <>
     <a className="skip" href="#method">{t("method.skip")}</a>
-    <header className="masthead"><div className="mast-inner">
-      <a className="wordmark" href={home} aria-label={t("chrome.home")}><Dial/>{t("chrome.brand")}<span className="wordmark-dot">.</span></a>
-      <nav><a className="method-link" href={home}>{t("method.check")}</a><a href={locale === "en" ? "/zh-HK/methodology" : "/en/methodology"}
-        lang={locale === "en" ? "zh-HK" : "en"}><Icon name="globe"/>{t("chrome.locale")}</a></nav>
-    </div></header>
+    <Masthead current="methodology"/>
     <main id="method" className="method-page" tabIndex={-1}>
       <h1>{t("chrome.methodology")}</h1><p className="method-lead">{t("method.intro")}</p>
-      <p className="caution">{t("chrome.foot")}</p>
+      <HouseRule/>
       <Evidence report={deep} mode="deep" locale={locale}/>
       <AuditComparison locale={locale}/>
-      <section id="lenses" className="report-evidence"><h2>{t("lenses.source")}</h2>
+      <section id="lenses" className="report-evidence lens-sources"><h2>{t("lenses.source")}</h2>
         {lensIds.map(id=>{
           const vendor=lensVendors[id], row=lensEvidence[id];
           return <section key={id}><h3>{t("lenses.style",{vendor})}</h3><p>{t("lenses."+id)}</p>
@@ -142,6 +138,6 @@ export default async function Methodology({ params }: Props) {
       <details className="quick-evidence"><summary>{t("method.quick")}</summary><Evidence report={quick} mode="quick" locale={locale}/></details>
       <section className="base-rate"><h2>{t("method.priorTitle")}</h2><p>{t("method.priorBody", { prior: deep.prior * 100 })}</p><BaseRate/></section>
     </main>
-    <footer><a className="footer-brand" href={home}>{t("chrome.brand")}.</a><a className="text-button" href={home}>{t("method.check")}<Icon name="arrow"/></a></footer>
+    <SiteFooter/>
   </>;
 }

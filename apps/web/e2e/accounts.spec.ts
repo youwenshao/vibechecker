@@ -21,7 +21,7 @@ test("claims a device check, saves only by opt-in, and deletes the check, histor
     await page.getByRole("textbox", { name: "Your essay" }).fill(essay);
     if (save) await page.getByRole("checkbox").check();
     await page.getByRole("button", { name: "Check my essay" }).click();
-    await expect(page.getByRole("heading", { name: "Robot-smell index" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Robot vibes", exact: true })).toBeVisible();
     return page.evaluate(
       async () =>
         new Promise<string>((resolve) => {
@@ -41,7 +41,7 @@ test("claims a device check, saves only by opt-in, and deletes the check, histor
     );
   }
   const id = await check();
-  await page.getByRole("link", { name: "Check history" }).click();
+  await page.getByRole("link", { name: "History", exact: true }).click();
   const email = "phase2-" + Date.now() + "@example.test";
   await page.getByLabel("Email address").fill(email);
   const started = page.waitForResponse((r) => r.url().endsWith("/api/auth/start"));
@@ -62,7 +62,7 @@ test("claims a device check, saves only by opt-in, and deletes the check, histor
   const stored = await (await request.get("http://127.0.0.1:4328/stored?id=" + newId)).json();
   expect(stored.p_envelope.wrapped).toBeTruthy();
   expect(JSON.stringify(stored)).not.toContain("harbour");
-  await page.getByRole("link", { name: "Check history" }).click();
+  await page.getByRole("link", { name: "History", exact: true }).click();
   await page.getByRole("button", { name: "View result" }).click();
   await page.getByText("Saved essay", { exact: true }).click();
   await expect(page.getByText(essay.trim(), { exact: true })).toBeVisible();
@@ -70,7 +70,7 @@ test("claims a device check, saves only by opt-in, and deletes the check, histor
   await page.getByRole("button", { name: "Confirm deletion" }).click();
   await expect(page.getByText("Your saved results will appear here.")).toBeVisible();
   await check(true);
-  await page.getByRole("link", { name: "Check history" }).click();
+  await page.getByRole("link", { name: "History", exact: true }).click();
   await page.getByRole("button", { name: "Delete account", exact: true }).click();
   await page.getByRole("button", { name: "Confirm deletion" }).click();
   await expect(page.getByLabel("Email address")).toBeVisible();

@@ -1,40 +1,27 @@
 import type { ReactNode } from "react";
 import { getTranslations } from "next-intl/server";
-import { Dial, Icon } from "./Icons";
+import { Masthead, SiteFooter } from "./Chrome";
 
 export async function SectionPage({
   locale,
-  path,
+  current,
+  className,
   children,
 }: {
   locale: string;
-  path: string;
+  current?: "history" | "methodology";
+  className?: string;
   children: ReactNode;
 }) {
   const t = await getTranslations({ locale });
-  const other = locale === "en" ? "zh-HK" : "en";
   return (
     <>
-      <header className="masthead">
-        <div className="mast-inner">
-          <a className="wordmark" href={"/" + locale}>
-            <Dial />
-            {t("chrome.brand")}.
-          </a>
-          <nav>
-            <a href={"/" + locale}>{t("method.check")}</a>
-            <a href={"/" + other + "/" + path} lang={other}>
-              <Icon name="globe" />
-              {t("chrome.locale")}
-            </a>
-          </nav>
-        </div>
-      </header>
-      <main className="method-page account-page">{children}</main>
-      <footer>
-        <a href={"/" + locale + "/privacy"}>{t("policy.privacy")}</a>
-        <a href={"/" + locale + "/terms"}>{t("policy.terms")}</a>
-      </footer>
+      <a className="skip" href="#main">{t("chrome.jump")}</a>
+      <Masthead current={current} />
+      <main id="main" tabIndex={-1} className={className ? "wrap " + className : "wrap"}>
+        {children}
+      </main>
+      <SiteFooter />
     </>
   );
 }

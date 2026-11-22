@@ -47,10 +47,10 @@ test("word gate, keyboard disclosure, streamed result and device erasure", async
   await expect(check).toBeEnabled();
   await check.focus();
   await page.keyboard.press("Enter");
-  await expect(page.getByRole("heading", { name: "Robot-smell index" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Robot vibes", exact: true })).toBeVisible();
   await expect(page.getByText("Likely range 48–75")).toBeVisible();
-  await expect(page.getByText("Mixed signals", { exact: true })).toBeVisible();
-  await expect(page.getByText("A detector score is a reason to look closer, never proof.", { exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Mixed signals" })).toBeVisible();
+  await expect(page.locator(".house-rule").getByText("A detector score is a reason to look closer, never proof.", { exact: true })).toBeVisible();
   for (const name of ["Why this score?", "Why can detectors be wrong?"]) {
     const trigger = page.getByRole("button", { name, exact: true });
     await trigger.focus();
@@ -62,12 +62,12 @@ test("word gate, keyboard disclosure, streamed result and device erasure", async
   }
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
   await page.reload();
-  await expect(page.getByRole("heading", { name: "Robot-smell index" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Robot vibes", exact: true })).toBeVisible();
   await page.getByRole("button", { name: "Forget on this device" }).click();
   await expect(box).toBeEmpty();
   await page.reload();
   await expect(box).toBeEmpty();
-  await expect(page.getByRole("heading", { name: "Robot-smell index" })).toHaveCount(0);
+  await expect(page.getByRole("heading", { name: "Robot vibes", exact: true })).toHaveCount(0);
 });
 
 test("reduced motion and text-file import", async ({ page }) => {
@@ -187,7 +187,7 @@ test("Deep streams a Unicode sentence, supports keyboard inspection and restores
   const marker = map.locator(".sentence-marker").first();
   await expect(marker).toHaveText(first);
   await expect(map.getByText("1 sentence read so far")).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Robot-smell index" })).toHaveCount(0);
+  await expect(page.getByRole("heading", { name: "Robot vibes", exact: true })).toHaveCount(0);
   expect(await marker.evaluate((el) => el.getAnimations().length)).toBe(0);
   await marker.focus();
   await expect(map.getByRole("tooltip")).toContainText("Word likelihood gap");

@@ -1,7 +1,21 @@
 "use client";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import type { CheckResult, Mode } from "@vibechecker/contracts";
+import { Icon } from "./Icons";
+
+export function KitSection({ note, children }: { note?: string; children: ReactNode }) {
+  const t = useTranslations("kit");
+  return <section className="kit plate" aria-labelledby="kit-title">
+    <div>
+      <span className="eyebrow">{t("title")}</span>
+      <h2 id="kit-title">{t("heading")}</h2>
+      <p>{t("advice")}</p>
+      {note && <p className="kit-note">{note}</p>}
+    </div>
+    <div className="kit-actions">{children}</div>
+  </section>;
+}
 
 export function EvidenceKit({
   result,
@@ -63,11 +77,12 @@ export function EvidenceKit({
     }
   }
   return (
-    <div className="kit-control">
-      <button className="pill" disabled={state === "busy"} onClick={download}>
+    <>
+      <button type="button" className="btn btn-primary" disabled={state === "busy"} onClick={download}>
+        <Icon name="download" />
         {t(state === "busy" ? "kit.busy" : "kit.download")}
       </button>
       {state === "failed" && <p role="alert">{t("kit.fail")}</p>}
-    </div>
+    </>
   );
 }

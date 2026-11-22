@@ -26,11 +26,19 @@ describe("UI checks", () => {
   });
   it("meets AA contrast for foreground/background pairs used by the theme", () => {
     const token = (name: string) => css.match(new RegExp("--color-" + name + ": (#[a-f0-9]{6})"))![1];
-    for (const background of ["paper", "panel", "accent", "heat-1", "heat-2", "heat-3"]) {
-      expect(contrast(token("ink"), token(background))).toBeGreaterThanOrEqual(4.5);
+    const pairs: [string, string[]][] = [
+      ["ink", ["paper", "paper-2", "lilac-50", "lilac-100", "lime", "lime-100", "lime-200", "magenta-100", "royal-100"]],
+      ["muted", ["paper", "paper-2", "lilac-100"]],
+      ["magenta-600", ["paper", "paper-2"]],
+      ["royal-600", ["paper", "paper-2", "lilac-100"]],
+      ["lilac-700", ["paper", "lilac-50", "lilac-100"]],
+      ["lime", ["night", "ink"]],
+      ["paper", ["ink", "night", "royal-600", "magenta-600"]],
+    ];
+    for (const [text, backgrounds] of pairs) {
+      for (const background of backgrounds) {
+        expect(contrast(token(text), token(background)), text + " on " + background).toBeGreaterThanOrEqual(4.5);
+      }
     }
-    const muted = css.match(/--muted: (#[a-f0-9]{6})/)![1];
-    for (const background of ["paper", "panel"]) expect(contrast(muted, token(background))).toBeGreaterThanOrEqual(4.5);
-    expect(contrast("#55534a", "#e4e2da")).toBeGreaterThanOrEqual(4.5);
   });
 });

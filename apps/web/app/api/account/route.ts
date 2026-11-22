@@ -16,7 +16,8 @@ export async function GET(req: Request) {
     const cursor = before
       ? z.tuple([z.iso.datetime({ offset: true }), z.uuid()]).parse(JSON.parse(before))
       : null;
-    const columns = "id,mode,word_count,engine_version,expires_at";
+    const columns =
+      "id,mode,word_count,engine_version,expires_at,index:result->index,band:result->>band,interval:result->interval";
     const query = new URLSearchParams({
       select: columns,
       user_id: "eq." + owner,

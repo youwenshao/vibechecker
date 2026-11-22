@@ -5,6 +5,12 @@ import { SectionPage } from "../../../components/SectionPage";
 export function generateStaticParams() {
   return [{ policy: "privacy" }, { policy: "terms" }];
 }
+export async function generateMetadata({ params }: { params: Promise<{ locale: string; policy: string }> }) {
+  const { locale, policy } = await params;
+  if (policy !== "privacy" && policy !== "terms") notFound();
+  const t = await getTranslations({ locale });
+  return { title: `${t("policy." + policy)} · ${t("chrome.brand")}` };
+}
 export default async function Policy({
   params,
 }: {
@@ -17,7 +23,7 @@ export default async function Policy({
   const sections =
     policy === "privacy" ? ["data", "purpose", "transfers", "rights"] : ["use", "limits", "beta"];
   return (
-    <SectionPage locale={locale} path={policy}>
+    <SectionPage locale={locale} className="method-page policy-page">
       <h1>{t(policy)}</h1>
       {sections.map((k) => (
         <section className="report-evidence" key={k}>
@@ -26,7 +32,7 @@ export default async function Policy({
           {k === "purpose" && <p>{t("features")}</p>}
         </section>
       ))}
-      <a href="mailto:hello@vibechecker.io">hello@vibechecker.io</a>
+      <a className="mail" href="mailto:hello@vibechecker.io">hello@vibechecker.io</a>
     </SectionPage>
   );
 }

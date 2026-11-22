@@ -118,7 +118,8 @@ createServer(async (req, res) => {
         for(const row of rows)stored.delete(row.p_id);return json(null);
       }
       return json(rows.reverse().map(row=>({id:row.p_id,mode:row.p_mode,engine_version:row.p_version,
-        word_count:row.p_result.wordCount,result:row.p_result,expires_at:new Date(Date.now()+30*86400000).toISOString()})));
+        word_count:row.p_result.wordCount,index:row.p_result.index,band:row.p_result.band,interval:row.p_result.interval,
+        result:row.p_result,expires_at:new Date(Date.now()+30*86400000).toISOString()})));
     }
     case "/rest/v1/rpc/read_saved_essay": {
       const row=stored.get(input.p_id);return json(row?.p_owner===input.p_owner ? row.p_envelope : null);

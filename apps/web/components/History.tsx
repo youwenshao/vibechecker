@@ -1,14 +1,17 @@
 "use client";
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import type { CheckResult, Mode } from "@vibechecker/contracts";
-import { deviceChecks, forgetOne, forgetOwner, saveCheck } from "../lib/device";
+import { deviceChecks, deviceTtl, forgetOne, forgetOwner, saveCheck, type DeviceCheck } from "../lib/device";
+import { sentenceHeats, tonightGlyph } from "../lib/brand";
 import { Verification } from "./Verification";
 import { LensPanel } from "./LensPanel";
-import { CautionText } from "./CautionText";
 import { Signals } from "./Instruments";
-import { EvidenceKit } from "./EvidenceKit";
+import { EvidenceKit, KitSection } from "./EvidenceKit";
 import { SentenceHeatmap } from "./SentenceHeatmap";
+import { Icon } from "./Icons";
+import { Flags, HouseRule, InfoDialog, ResultHero, type Panel } from "./ResultView";
+import { Flyer, PassStage, ThumbFlyer, ThumbPass, type Reading } from "./ResultObjects";
 
 type Row = {
   id: string;
@@ -16,6 +19,9 @@ type Row = {
   engine_version: string;
   expires_at: string;
   word_count: number;
+  index?: number | null;
+  band?: CheckResult["band"] | null;
+  interval?: CheckResult["interval"] | null;
 };
 type Listing = { owner: string | null; rows?: Row[]; more?: boolean };
 type Detail = { id: string; result: CheckResult; text: string | null; local: boolean; row: Row };
@@ -39,18 +45,22 @@ async function list(before?: Row): Promise<Listing> {
   if (!res.ok) throw Error("History unavailable");
   return res.json();
 }
+const issued = (row: Row) => Date.parse(row.expires_at) - deviceTtl;
 
 export function History() {
   const t = useTranslations(),
     locale = useLocale();
   const [data, setData] = useState<Listing>();
   const [detail, setDetail] = useState<Detail>();
+  const [device, setDevice] = useState<DeviceCheck[]>([]);
   const [message, setMessage] = useState("");
   const [busy, setBusy] = useState(false);
   const [email, setEmail] = useState(""),
     [token, setToken] = useState(""),
     [challenge, setChallenge] = useState(0);
   const [pending, setPending] = useState<Removal>();
+  const [panel, setPanel] = useState<Panel>("why");
+  const dialog = useRef<HTMLDialogElement>(null);
   useEffect(() => {
     let live = true;
     async function init() {
@@ -73,6 +83,8 @@ export function History() {
         } catch {
           if (live) setMessage("account.claimError");
         }
+        const records = await deviceChecks().catch(() => []);
+        if (live) setDevice(records.filter((record) => record.owner === owner));
       } else if (new URLSearchParams(location.search).has("auth") && live)
         setMessage("account.expired");
       if (live) setData(current);
@@ -111,8 +123,8 @@ export function History() {
   function open(row: Row) {
     void perform(async () => {
       const response = await action({ action: "read", id: row.id });
-      const device = response.text == null ? await deviceChecks().catch(() => []) : [];
-      const local = device.find((item) => item.checkId === row.id && item.owner === data?.owner);
+      const records = response.text == null ? await deviceChecks().catch(() => []) : [];
+      const local = records.find((item) => item.checkId === row.id && item.owner === data?.owner);
       setDetail({
         row,
         id: row.id,
@@ -120,6 +132,7 @@ export function History() {
         text: response.text ?? local?.text ?? null,
         local: Boolean(local),
       });
+      scrollTo({ top: 0 });
     });
   }
   function remove(cmd: Removal) {
@@ -133,155 +146,222 @@ export function History() {
       setMessage("account.done");
     });
   }
-  const formatDate = (date: string) =>
-    new Intl.DateTimeFormat(locale, { dateStyle: "medium" }).format(new Date(date));
-  return (
+  function openPanel(value: Panel) {
+    setPanel(value);
+    dialog.current?.showModal();
+  }
+  const formatDate = (at: number) => new Intl.DateTimeFormat(locale, { dateStyle: "medium" }).format(at);
+  const heatsFor = (row: Row, slots?: number) =>
+    sentenceHeats(device.find((record) => record.checkId === row.id)?.result.sentences, slots);
+  const rows = data?.rows ?? [];
+  const latest = rows[0];
+
+  const signIn = (
+    <div className="account-card plate">
+      <form onSubmit={(e) => login("email", e)}>
+        <label htmlFor="email">{t("account.email")}</label>
+        <input
+          id="email"
+          type="email"
+          autoComplete="email"
+          value={email}
+          required
+          maxLength={320}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <Verification key={challenge} mode="auth" onToken={setToken} />
+        <div className="account-actions">
+          <button type="submit" className="btn btn-primary" disabled={busy || !token}>
+            {t("account.magic")}
+          </button>
+          <button type="button" className="btn" disabled={busy || !token} onClick={() => login("google")}>
+            {t("account.google")}
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+
+  const latestObject = latest && (() => {
+    const at = issued(latest);
+    const reading: Reading = {
+      index: latest.index ?? 0,
+      interval: latest.interval ?? { low: 0, high: 100 },
+      band: latest.band ?? "mixed",
+      wordCount: latest.word_count,
+      sentences: device.find((record) => record.checkId === latest.id)?.result.sentences,
+    };
+    return (
+      <div className="history-latest">
+        {latest.mode === "deep" ? (
+          <PassStage result={reading} at={at} id={latest.id} />
+        ) : (
+          <div className="result-flyer">
+            <Flyer result={reading} at={at} />
+          </div>
+        )}
+        <p className="latest">
+          <span>{t("account.latest")}</span>
+          <span>{t("account.expires", { date: formatDate(Date.parse(latest.expires_at)) })}</span>
+        </p>
+      </div>
+    );
+  })();
+
+  const ledger = (
+    <div className="history-grid">
+      {latestObject}
+      <div>
+        <ul className="ledger plate" aria-label={t("account.listLabel")}>
+          {rows.map((row) => {
+            const at = issued(row);
+            const band = row.band ? t(`result.bands.${row.band}`) : undefined;
+            const date = "date-" + row.id;
+            return (
+              <li key={row.id}>
+                {row.mode === "deep" ? (
+                  <ThumbPass index={row.index} heats={heatsFor(row, 8)} glyph={tonightGlyph(at)} />
+                ) : (
+                  <ThumbFlyer index={row.index} band={band} />
+                )}
+                <div className="l-main">
+                  <span className="l-date" id={date}>
+                    {formatDate(at)} · {t(row.mode === "deep" ? "account.guestPass" : "account.handStamp")}
+                  </span>
+                  <b>
+                    {row.index ?? "–"}
+                    <small>/100</small>
+                  </b>
+                  <span>
+                    {[band, row.interval && `${row.interval.low}–${row.interval.high}`, t("home.count", { n: row.word_count })]
+                      .filter(Boolean)
+                      .join(" · ")}
+                  </span>
+                </div>
+                <div className="l-act">
+                  <button type="button" className="btn" disabled={busy} onClick={() => open(row)}>
+                    {t("account.open")}
+                    <Icon name="arrow" />
+                  </button>
+                  <button
+                    type="button"
+                    className="icon-btn"
+                    disabled={busy}
+                    aria-label={t("account.remove")}
+                    aria-describedby={date}
+                    onClick={() => setPending({ action: "delete", id: row.id })}
+                  >
+                    <Icon name="trash" />
+                  </button>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+        {data?.more && (
+          <div className="ledger-foot">
+            <button
+              type="button"
+              className="btn"
+              disabled={busy}
+              onClick={() =>
+                void perform(async () => {
+                  const next = await list(rows.at(-1));
+                  setData({ ...next, rows: [...rows, ...(next.rows ?? [])] });
+                })
+              }
+            >
+              {t("account.more")}
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+
+  const detailView = detail && (
     <>
-      <h1>{t("account.title")}</h1>
+      <div className="detail-top">
+        <button type="button" className="btn btn-quiet" onClick={() => setDetail(undefined)}>
+          <Icon name="back" />
+          {t("account.close")}
+        </button>
+      </div>
+      <ResultHero
+        result={detail.result}
+        mode={detail.row.mode}
+        at={issued(detail.row)}
+        id={detail.id}
+        level={2}
+        onPanel={openPanel}
+      />
+      <HouseRule className="result-rule" />
+      <Flags result={detail.result} />
+      {detail.text && detail.result.sentences?.length ? (
+        <SentenceHeatmap text={detail.text} sentences={detail.result.sentences} streaming={false} />
+      ) : null}
+      {detail.row.mode === "deep" ? (
+        <>
+          <LensPanel result={detail.result} mode="deep" />
+          <Signals result={detail.result} />
+        </>
+      ) : (
+        <>
+          <Signals result={detail.result} />
+          <LensPanel result={detail.result} mode="quick" />
+        </>
+      )}
+      {detail.text ? (
+        <details className="saved-essay">
+          <summary>{t(detail.local ? "account.local" : "account.text")}</summary>
+          <p className="saved-text">{detail.text}</p>
+        </details>
+      ) : (
+        <p className="no-text">{t("account.noText")}</p>
+      )}
+      <KitSection>
+        <EvidenceKit
+          result={detail.result}
+          mode={detail.row.mode}
+          version={detail.row.engine_version}
+          date={issued(detail.row)}
+        />
+      </KitSection>
+    </>
+  );
+
+  return (
+    <div data-mode={detail?.row.mode ?? latest?.mode ?? "deep"}>
+      <div className="history-head">
+        <div>
+          <span className="eyebrow">{t("account.eyebrow")}</span>
+          <h1>{t("account.title")}</h1>
+        </div>
+        <p>{t(data?.owner ? "account.retention" : "account.intro")}</p>
+      </div>
       {message && (
-        <p role="status" className="notice">
+        <p role="status" className="notice history-notice">
           {t(message)}
         </p>
       )}
       {!data ? (
         <p>{t("account.loading")}</p>
       ) : !data.owner ? (
-        <section className="account-card">
-          <p>{t("account.intro")}</p>
-          <form onSubmit={(e) => login("email", e)}>
-            <label htmlFor="email">{t("account.email")}</label>
-            <input
-              id="email"
-              type="email"
-              autoComplete="email"
-              value={email}
-              required
-              maxLength={320}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <Verification key={challenge} mode="auth" onToken={setToken} />
-            <div className="account-actions">
-              <button className="primary" disabled={busy || !token}>
-                {t("account.magic")}
-              </button>
-              <button
-                className="pill"
-                type="button"
-                disabled={busy || !token}
-                onClick={() => login("google")}
-              >
-                {t("account.google")}
-              </button>
-            </div>
-          </form>
-        </section>
+        signIn
       ) : (
         <>
-          <p>{t("account.retention")}</p>
-          {detail ? (
-            <section className="account-card">
-              <button className="text-button" onClick={() => setDetail(undefined)}>
-                {t("account.close")}
-              </button>
-              <h2>
-                {t("result.title")} · {detail.result.index}/100
-              </h2>
-              <p>{t("result.range", detail.result.interval)}</p>
-              <p className="caution">
-                <CautionText />
-              </p>
-              {(["why", "wrong"] as const).map((k) => (
-                <details key={k}>
-                  <summary>{t("result." + k)}</summary>
-                  <p>{t("result." + k + "Body")}</p>
-                </details>
-              ))}
-              {detail.result.flags.length > 0 && (
-                <section className="flags">
-                  <h3>{t("result.flags")}</h3>
-                  <ul>
-                    {detail.result.flags.map((flag) => (
-                      <li key={flag}>{t("result." + flag)}</li>
-                    ))}
-                  </ul>
-                </section>
-              )}
-              <Signals result={detail.result} />
-              <LensPanel result={detail.result} />
-              {detail.text ? (
-                <details>
-                  <summary>{t(detail.local ? "account.local" : "account.text")}</summary>
-                  <p className="saved-text">{detail.text}</p>
-                </details>
-              ) : (
-                <p>{t("account.noText")}</p>
-              )}
-              {detail.text && detail.result.sentences && (
-                <SentenceHeatmap
-                  text={detail.text}
-                  sentences={detail.result.sentences}
-                  streaming={false}
-                />
-              )}
-              <EvidenceKit
-                result={detail.result}
-                mode={detail.row.mode}
-                version={detail.row.engine_version}
-                date={Date.parse(detail.row.expires_at) - 30 * 86400000}
-              />
-            </section>
-          ) : (
-            <>
-              {!data.rows?.length && <p className="account-card">{t("account.empty")}</p>}
-              <ul className="history-list">
-                {data.rows?.map((row) => (
-                  <li key={row.id}>
-                    <div>
-                      <strong>
-                        {t("home." + row.mode)} · {t("home.count", { n: row.word_count })}
-                      </strong>
-                      <p>{t("account.expires", { date: formatDate(row.expires_at) })}</p>
-                    </div>
-                    <div className="account-actions">
-                      <button disabled={busy} className="pill" onClick={() => open(row)}>
-                        {t("account.open")}
-                      </button>
-                      <button
-                        disabled={busy}
-                        className="text-button"
-                        onClick={() => setPending({ action: "delete", id: row.id })}
-                      >
-                        {t("account.remove")}
-                      </button>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-              {data.more && (
-                <button
-                  className="pill"
-                  disabled={busy}
-                  onClick={() =>
-                    void perform(async () => {
-                      const next = await list(data.rows?.at(-1));
-                      setData({ ...next, rows: [...(data.rows ?? []), ...(next.rows ?? [])] });
-                    })
-                  }
-                >
-                  {t("account.more")}
-                </button>
-              )}
-            </>
-          )}
-          <div className="account-actions">
+          {detail ? detailView : rows.length ? ledger : <p className="account-card plate">{t("account.empty")}</p>}
+          <div className="ledger-foot account-actions">
             <button
-              className="pill"
+              type="button"
+              className="btn btn-quiet"
               disabled={busy}
               onClick={() =>
                 void perform(async () => {
                   await action({ action: "signOut" });
                   setDetail(undefined);
                   setPending(undefined);
+                  setDevice([]);
                   setData({ owner: null });
                 })
               }
@@ -290,17 +370,19 @@ export function History() {
             </button>
             {(["deleteAll", "deleteAccount"] as const).map((k) => (
               <button
+                type="button"
                 key={k}
-                className="text-button"
+                className="btn btn-quiet"
                 disabled={busy}
                 onClick={() => setPending({ action: k })}
               >
+                <Icon name="trash" />
                 {t(k === "deleteAll" ? "account.all" : "account.account")}
               </button>
             ))}
           </div>
           {pending && (
-            <section className="notice" aria-live="polite">
+            <div className="confirm" aria-live="polite">
               <p>
                 {t(
                   {
@@ -310,16 +392,19 @@ export function History() {
                   }[pending.action],
                 )}
               </p>
-              <button className="pill" disabled={busy} onClick={() => remove(pending)}>
-                {t("account.confirm")}
-              </button>
-              <button className="text-button" disabled={busy} onClick={() => setPending(undefined)}>
-                {t("account.cancel")}
-              </button>
-            </section>
+              <div className="account-actions">
+                <button type="button" className="btn btn-primary" disabled={busy} onClick={() => remove(pending)}>
+                  {t("account.confirm")}
+                </button>
+                <button type="button" className="btn btn-quiet" disabled={busy} onClick={() => setPending(undefined)}>
+                  {t("account.cancel")}
+                </button>
+              </div>
+            </div>
           )}
         </>
       )}
-    </>
+      <InfoDialog panel={panel} dialog={dialog} />
+    </div>
   );
 }
