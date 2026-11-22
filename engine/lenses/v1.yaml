@@ -1,0 +1,49 @@
+version: 1
+model: deep-qwen7b-q4-p512-v4
+model_sha256: aeafbb70201caec3029b24799faedd8fee89aacf5ef1bdf09e1eee2673b82d9b
+scales:
+  perplexity: 20
+  sentence_length_sd: 10
+  phrase_words: 100
+turnitin:
+  source: https://in.turnitin.com/blog/understanding-the-false-positive-rate-for-sentences-of-our-ai-writing-detection-capability
+  target: 0.04
+  high: 0.4939557494775336
+gptzero:
+  weights:
+    predictable: 0.5
+    steady: 0.5
+  source: https://gptzero.me/news/esl-and-ai-detection/
+  target: 0.011
+  mixed_target: 0.077
+  high: 0.6741056882117785
+  mixed: 0.6329647681906716
+zerogpt:
+  weights:
+    predictable: 0.5
+    encoder: 0.5
+  source: https://github.com/mattc95/2026-AI-DETECTOR-BENCHMARK
+  target: 0.184
+  high: 0.7803650443605655
+  mixed: 0.703240507581772
+grammarly:
+  weights:
+    encoder: 0.5
+    uniform: 0.5
+  source: https://www.grammarly.com/ai-detector
+  high: 0.7658000731424356
+  mixed: 0.7025225814413297
+veriguide:
+  weights:
+    encoder: 0.5
+    overlap: 0.5
+  source: https://veriguide.org/
+  phrases:
+  - in conclusion
+  - on the other hand
+  - it is important to note
+  - in recent years
+  - in addition to
+  - in this essay
+  high: 0.49545446038246155
+  mixed: 0.49019190789370687

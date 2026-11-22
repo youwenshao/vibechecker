@@ -7,6 +7,7 @@ name = "vibechecker-engine"
 version = "0.1.0"
 requires-python = ">=3.12,<3.13"
 dependencies = [
+    "pyyaml>=6",
     "joblib>=1.4,<2",
     "lingua-language-detector>=2.1,<3",
     "numpy>=2,<3",
@@ -25,3 +26,6 @@ test = ["pytest>=8", "hypothesis>=6"]
 
 [project.scripts]
 vibechecker-benchmark = "vibechecker_engine.benchmark:main"
+
+[tool.hatch.build.targets.wheel.force-include]
+"lenses" = "vibechecker_engine/lenses"

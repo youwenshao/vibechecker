@@ -1,0 +1,115 @@
+{
+  "model": "deep-qwen7b-q4-p512-v4",
+  "model_sha256": "aeafbb70201caec3029b24799faedd8fee89aacf5ef1bdf09e1eee2673b82d9b",
+  "feature_cache_sha256": "45af31948cb305156d5806ea8434f5a6746746706a335203bde05a3b69b4056c",
+  "sentence_trace_sha256": [
+    "d461161cd5470c3c20b351c0ee3fe22887f79c1b4fb4a108e31fd269d5c9539e",
+    "f15462c5c40ce5a78bfb29c531922e0b4c42511913bb83ed13be5c27205758e1"
+  ],
+  "sentence_backend": "mlx-metal",
+  "lenses": {
+    "turnitin": {
+      "source": "https://in.turnitin.com/blog/understanding-the-false-positive-rate-for-sentences-of-our-ai-writing-detection-capability",
+      "fit_n": 3651,
+      "held_out_n": 3695,
+      "high": 205,
+      "high_rate": 0.05548037889039242,
+      "target": 0.04,
+      "within_two_points": true
+    },
+    "gptzero": {
+      "source": "https://gptzero.me/news/esl-and-ai-detection/",
+      "fit_n": 334,
+      "held_out_n": 46,
+      "high": 1,
+      "high_rate": 0.021739130434782608,
+      "target": 0.011,
+      "within_two_points": true
+    },
+    "zerogpt": {
+      "source": "https://github.com/mattc95/2026-AI-DETECTOR-BENCHMARK",
+      "fit_n": 585,
+      "held_out_n": 138,
+      "high": 23,
+      "high_rate": 0.16666666666666666,
+      "target": 0.184,
+      "within_two_points": true
+    },
+    "grammarly": {
+      "source": "https://www.grammarly.com/ai-detector",
+      "fit_n": 585,
+      "held_out_n": 138,
+      "high": 30,
+      "high_rate": 0.21739130434782608,
+      "target": null,
+      "within_two_points": null
+    },
+    "veriguide": {
+      "source": "https://veriguide.org/",
+      "fit_n": 585,
+      "held_out_n": 138,
+      "high": 25,
+      "high_rate": 0.18115942028985507,
+      "target": null,
+      "within_two_points": null
+    }
+  },
+  "sentence_validation": {
+    "membership_sha256": "00308d246d4b41c6c658ea5d50c2c4df4927f36c1ae53ca7401e3048bcf9fafe",
+    "reference_sha256": "c45859ef7376c3833ee966f59420cd448f1f64f2ecda79ace7891c57df6e1408",
+    "documents": {
+      "calibration": 160,
+      "validation": 138
+    },
+    "essay_candidate": {
+      "cutoff": 0.4939557494775336,
+      "fit_n": 3651,
+      "held_out_n": 3695,
+      "high": 205,
+      "high_rate": 0.05548037889039242,
+      "target": 0.04,
+      "within_two_points": true
+    },
+    "adopted_essay_candidate": true,
+    "original_broad_control": {
+      "cutoff": 0.6479138648068669,
+      "fit_n": 4088,
+      "held_out_n": 6965,
+      "high": 127,
+      "high_rate": 0.01823402727925341,
+      "target": 0.04,
+      "within_two_points": false
+    },
+    "broad_at_essay_cutoff": {
+      "original": {
+        "fit_n": 3651,
+        "held_out_n": 4088,
+        "high": 413,
+        "high_rate": 0.10102739726027397,
+        "target": 0.04,
+        "within_two_points": false
+      },
+      "prospective": {
+        "fit_n": 3651,
+        "held_out_n": 6965,
+        "high": 436,
+        "high_rate": 0.06259870782483848,
+        "target": 0.04,
+        "within_two_points": false
+      }
+    },
+    "broad_at_shipped_cutoff": {
+      "fit_n": 3651,
+      "held_out_n": 6965,
+      "high": 436,
+      "high_rate": 0.06259870782483848,
+      "target": 0.04,
+      "within_two_points": false
+    }
+  },
+  "turnitin_highlights": {
+    "human": 436,
+    "total": 2408,
+    "human_share": 0.18106312292358803
+  }
+}

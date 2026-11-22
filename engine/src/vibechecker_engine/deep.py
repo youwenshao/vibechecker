@@ -13,6 +13,7 @@ import numpy as np
 from .backends.base import PairBackend, PairStats
 from .backends.pair import MLXPairBackend, binoculars, fast_detect_gpt
 from .heads import DeepHeads, waveform_signals
+from .lenses import lens_results, parameters
 from .signals import (
     DISPLAY_FEATURES,
     ENCODER_VECTOR_VERSION,
@@ -286,14 +287,22 @@ class DeepModel:
 
 
 class DeepEngine:
-    def __init__(self, extractor, model):
+    def __init__(self, extractor, model, *, include_lenses=False):
         model.verify(extractor)
         self.extractor, self.model, self.backend = extractor, model, extractor.backend
+        self.include_lenses = include_lenses
 
     @classmethod
     def from_env(cls, quick_extractor=None):
-        model = DeepModel.load(os.environ["VIBECHECKER_DEEP_MODEL"])
-        return cls(DeepExtractor.from_env(quick_extractor), model)
+        path = Path(os.environ["VIBECHECKER_DEEP_MODEL"])
+        config = parameters()
+        with path.open("rb") as stream:
+            matches = hashlib.file_digest(stream, "sha256").hexdigest() == config["model_sha256"]
+        if os.getenv("ENGINE_VERSION") == config["model"] and not matches:
+            raise ValueError("The served Deep version requires its frozen Phase 1.1 artifact")
+        return cls(
+            DeepExtractor.from_env(quick_extractor), DeepModel.load(path), include_lenses=matches
+        )
 
     def stream(self, doc: Prepared):
         validate(doc, "deep")
@@ -331,6 +340,13 @@ class DeepEngine:
         for signal in result["signals"]:
             if samples.get(signal["id"]):
                 signal["samples"] = samples[signal["id"]]
+        if self.include_lenses:
+            sentence_words_and_scores = [
+                (s.word_count, score) for s, score in zip(doc.sentences, scores, strict=True)
+            ]
+            result["lenses"] = lens_results(
+                raw.quick.values, doc.normalized, doc.word_count, sentence_words_and_scores
+            )
         yield {
             "type": "result",
             "result": {

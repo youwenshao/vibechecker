@@ -10,7 +10,7 @@ type Turnstile = {
 };
 declare global { interface Window { turnstile?: Turnstile } }
 
-export function Verification({ mode, onToken }: { mode: Mode; onToken: (token: string) => void }) {
+export function Verification({ mode, onToken }: { mode: Mode | "auth"; onToken: (token: string) => void }) {
   const root = useRef<HTMLDivElement>(null);
   const [ready, setReady] = useState(false);
   const [failed, setFailed] = useState(false);

@@ -18,6 +18,15 @@ export const SentenceScore = z.strictObject({
 });
 export type SentenceScore = z.infer<typeof SentenceScore>;
 const Index = z.int().min(0).max(100);
+const LensBand = z.enum(["low", "mixed", "high"]);
+export const Lenses = z.strictObject({
+  version: z.literal(1),
+  turnitin: z.union([z.literal("masked"), z.literal(0), z.int().min(20).max(100)]).nullable(),
+  gptzero: LensBand,
+  zerogpt: LensBand,
+  grammarly: LensBand,
+  veriguide: LensBand,
+});
 const Signal = z.strictObject({
   id: SignalId,
   value: z.number(),
@@ -25,6 +34,7 @@ const Signal = z.strictObject({
   samples: z.array(z.number()).min(2).max(16).optional(),
 });
 export const CheckResult = z.strictObject({
+  lenses: Lenses.optional(),
   index: Index,
   interval: z.strictObject({ low: Index, high: Index }),
   band: z.enum(["low", "mixed", "high"]),

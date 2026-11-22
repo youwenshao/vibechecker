@@ -11,10 +11,14 @@
     "e2e": "playwright test"
   },
   "dependencies": {
-    "@vibechecker/contracts": "workspace:*",
     "@fontsource-variable/instrument-sans": "^5.2.0",
     "@fontsource-variable/jetbrains-mono": "^5.2.0",
     "@fontsource-variable/noto-sans-hk": "^5.2.0",
+    "@react-pdf/renderer": "4.9.0",
+    "@sentry/nextjs": "11.16.0",
+    "@supabase/ssr": "0.12.7",
+    "@supabase/supabase-js": "2.119.2",
+    "@vibechecker/contracts": "workspace:*",
     "mammoth": "^1.13.0",
     "motion": "^14.14.0",
     "next": "16.4.6",

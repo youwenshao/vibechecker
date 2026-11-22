@@ -2,14 +2,14 @@ import { CheckResult, InferenceEvent, type Mode, type SentenceScore } from "@vib
 import { z } from "zod";
 
 export type Verdict = z.infer<typeof CheckResult>;
-export type Receipt = { result: Verdict; checkId: string; claimToken: string };
+export type Receipt = { result: Verdict; checkId: string; claimToken: string; engineVersion?:string; owner?:string|null };
 export type Stage = "loading" | "scoring" | "fallback";
 interface StreamObserver {
   stage: (stage: Stage) => void;
   sentences: (items: SentenceScore[]) => void;
   reset: () => void;
 }
-const completed = z.object({ result: CheckResult, checkId: z.uuid(), claimToken: z.string().min(1) });
+const completed = z.object({ result: CheckResult, checkId: z.uuid(), claimToken: z.string().min(1), engineVersion:z.string().optional(), owner:z.uuid().nullish() });
 
 export class CheckError extends Error {
   constructor(readonly code: string, readonly retryToken?: string) {
@@ -18,12 +18,12 @@ export class CheckError extends Error {
 }
 
 async function readAttempt(
-  text: string, mode: Mode, turnstileToken: string, observer: StreamObserver, retryToken?: string,
+  text: string, mode: Mode, turnstileToken: string, observer: StreamObserver, saveText: boolean, retryToken?: string,
 ): Promise<Receipt> {
   const response = await fetch("/api/checks", {
     method: "POST",
     headers: { "Content-Type": "application/json", Accept: "application/x-ndjson" },
-    body: JSON.stringify({ text, mode, turnstileToken, retryToken }),
+    body: JSON.stringify({ text, mode, turnstileToken, saveText, retryToken }),
   });
   if (!response.ok || !response.body) {
     const error = await response.json().catch(() => null);
@@ -63,13 +63,13 @@ async function readAttempt(
   }
 }
 
-export async function checkEssay(text: string, mode: Mode, token: string, observer: StreamObserver) {
+export async function checkEssay(text: string, mode: Mode, token: string, observer: StreamObserver, saveText = false) {
   try {
-    return await readAttempt(text, mode, token, observer);
+    return await readAttempt(text, mode, token, observer, saveText);
   } catch (error) {
     if (!(error instanceof CheckError) || !error.retryToken) throw error;
     observer.reset();
     observer.stage("fallback");
-    return readAttempt(text, mode, token, observer, error.retryToken);
+    return readAttempt(text, mode, token, observer, saveText, error.retryToken);
   }
 }

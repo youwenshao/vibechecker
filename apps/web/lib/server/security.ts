@@ -102,7 +102,7 @@ export async function readBody(req: Request, max: number) {
   return new TextDecoder("utf-8", { fatal: true }).decode(Buffer.concat(chunks));
 }
 
-export async function verifyTurnstile(token: string, ip: string, mode: Mode) {
+export async function verifyTurnstile(token: string, ip: string, mode: Mode | "auth") {
   const override = process.env.TURNSTILE_VERIFY_URL;
   if (
     override &&

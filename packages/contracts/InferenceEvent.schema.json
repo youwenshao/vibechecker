@@ -140,6 +140,80 @@
         "result": {
           "type": "object",
           "properties": {
+            "lenses": {
+              "type": "object",
+              "properties": {
+                "version": {
+                  "type": "number",
+                  "const": 1
+                },
+                "turnitin": {
+                  "anyOf": [
+                    {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "const": "masked"
+                        },
+                        {
+                          "type": "number",
+                          "const": 0
+                        },
+                        {
+                          "type": "integer",
+                          "minimum": 20,
+                          "maximum": 100
+                        }
+                      ]
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "gptzero": {
+                  "type": "string",
+                  "enum": [
+                    "low",
+                    "mixed",
+                    "high"
+                  ]
+                },
+                "zerogpt": {
+                  "type": "string",
+                  "enum": [
+                    "low",
+                    "mixed",
+                    "high"
+                  ]
+                },
+                "grammarly": {
+                  "type": "string",
+                  "enum": [
+                    "low",
+                    "mixed",
+                    "high"
+                  ]
+                },
+                "veriguide": {
+                  "type": "string",
+                  "enum": [
+                    "low",
+                    "mixed",
+                    "high"
+                  ]
+                }
+              },
+              "required": [
+                "version",
+                "turnitin",
+                "gptzero",
+                "zerogpt",
+                "grammarly",
+                "veriguide"
+              ],
+              "additionalProperties": false
+            },
             "index": {
               "type": "integer",
               "minimum": 0,

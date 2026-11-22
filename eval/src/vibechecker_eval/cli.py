@@ -9,6 +9,13 @@ from .registry import fetch, registry, select, sync_r2
 def main(argv=None):
     parser = argparse.ArgumentParser(prog="vibechecker-eval")
     cmds = parser.add_subparsers(dest="command", required=True)
+    lenses = cmds.add_parser("fit-lenses")
+    for name in ("features", "historical", "prospective", "cache", "out"):
+        lenses.add_argument("--" + name, type=Path, required=True)
+    lenses.add_argument("--params", type=Path, default=Path("engine/lenses/v1.yaml"))
+    lenses.add_argument("--essay-sentences", type=Path, default=Path("eval/reports/phase-2/essay-sentences.json.gz"))
+    lenses.add_argument("--commercial-only", action="store_true")
+    lenses.add_argument("--enforce", action="store_true", help="Fail if any measured target misses tolerance")
     reference = cmds.add_parser("falcon-reference")
     reference.add_argument(
         "--pairs", type=int, default=64, help="Paired passages; zero uses all 2,207"
@@ -150,6 +157,10 @@ def main(argv=None):
             cmd.add_argument("direction", choices=["push", "pull"])
             cmd.add_argument("--bucket", default="vibechecker-artifacts")
     args = parser.parse_args(argv)
+    if args.command == "fit-lenses":
+        from .lenses import run as fit_lenses
+
+        return fit_lenses(args)
     if args.command == "deep-refit":
         from .refit import run_refit
 

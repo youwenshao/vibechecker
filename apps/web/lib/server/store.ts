@@ -1,7 +1,7 @@
 import type { Backend, CheckResult, Mode } from "@vibechecker/contracts";
 import { env } from "./security";
 
-async function rest(path: string, payload?: unknown) {
+export async function rest(path: string, payload?: unknown) {
   const key = env("SUPABASE_SERVICE_ROLE_KEY");
   const response = await fetch(new URL("/rest/v1/" + path, env("SUPABASE_URL")), {
     method: payload === undefined ? "GET" : "POST",
@@ -20,8 +20,8 @@ async function rest(path: string, payload?: unknown) {
   return raw ? JSON.parse(raw) : null;
 }
 
-export async function consumeQuota(device: string, address: string, mode: Mode): Promise<boolean> {
-  return (await rest("rpc/consume_quota", { p_device: device, p_address: address, p_mode: mode })) === true;
+export async function consumeQuota(device: string, address: string, mode: Mode, member: boolean): Promise<boolean> {
+  return (await rest("rpc/check_quota", { p_device: device, p_address: address, p_mode: mode, p_member:member })) === true;
 }
 export async function spendRetry(hash: string): Promise<boolean> {
   return (await rest("rpc/use_retry", { p_nonce: hash })) === true;
@@ -46,6 +46,8 @@ export async function heartbeat(version: string, time: number) {
   });
 }
 export interface Completed {
+  owner: string | null;
+  envelope: import("./envelope").Envelope | null;
   mode: Mode;
   id: string;
   key: string;
@@ -56,6 +58,8 @@ export interface Completed {
 }
 export async function storeCheck(entry: Completed) {
   const payload = {
+    p_owner: entry.owner,
+    p_envelope: entry.envelope,
     p_id: entry.id,
     p_key: entry.key,
     p_claim_hash: entry.claimHash,
@@ -66,8 +70,8 @@ export async function storeCheck(entry: Completed) {
   };
   // The check ID makes a retry safe after an ambiguous network timeout.
   try {
-    await rest("rpc/store_check", payload);
+    await rest("rpc/store_account_check", payload);
   } catch {
-    await rest("rpc/store_check", payload);
+    await rest("rpc/store_account_check", payload);
   }
 }

@@ -1,5 +1,7 @@
 import os
 
+from .lenses import lens_results
+
 from .signals import FEATURE_NAMES, FeatureExtractor, FeatureRow
 from .stacker import QuickStacker, length_bin
 from .text import Refusal
@@ -33,4 +35,9 @@ class QuickEngine:
             samples = features.samples.get(signal["id"])
             if samples:
                 signal["samples"] = samples
-        return {**result, "wordCount": features.word_count, "flags": list(features.flags)}
+        return {
+            **result,
+            "wordCount": features.word_count,
+            "flags": list(features.flags),
+            "lenses": lens_results(features.values, text, features.word_count),
+        }

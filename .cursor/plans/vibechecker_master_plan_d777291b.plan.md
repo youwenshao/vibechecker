@@ -28,10 +28,10 @@ todos:
     status: completed
   - id: p2-lenses-kit
     content: "Phase 2: five lenses fitted and validated with disclaimers and footnotes, LensPanel, one-page evidence-kit PDF"
-    status: pending
+    status: completed
   - id: p2-accounts
     content: "Phase 2: Supabase Auth, claim flow, history, deletion, opt-in encrypted save, retention jobs, privacy policy and terms, zh-HK pass, voice pass, Sentry"
-    status: pending
+    status: completed
   - id: launch
     content: "Hardening and launch: acceptance checklist evidence, v1.0.0 release eval, fallback/backup/alert drills, cost report, security review, soft then public launch"
     status: pending
@@ -746,6 +746,8 @@ The [Phase 1 verification record](../../docs/plans/phase-1-evidence.md) covers t
 - 2.5 Privacy policy and Terms. The PDPO section covers data, purposes, retention, processors, and transfers to Singapore and the US.
 - 2.6 zh-HK translation pass (your review) and the locale switcher.
 - 2.7 Voice pass on every string; Sentry with scrubbing; QuotaMeter.
+
+The [Phase 2 verification record](../../docs/plans/phase-2-evidence.md) covers the beta implementation on the frozen Phase 1.1 model. All three numerically specified lens targets passed on their essay holdouts. The Turnitin-style lens exceeded tolerance on the mixed-genre replays. The other two lenses have qualitative evidence only. Hosted sign-in and zh-HK editorial review remain staging sign-off items.
 
 **Hardening and launch (4-17 Jan):**
 

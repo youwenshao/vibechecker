@@ -1,0 +1,13 @@
+# Phase 2 · Beta on the frozen Phase 1.1 model
+
+1. Fit local lens transforms using the frozen feature cache and sentence traces. Verify held-out human false positives against published operating points (±2 percentage points). Record counts, sources, unsupported comparisons and qualitative-only lenses. Preserve the existing verdict, gates and refusal rules.
+2. Extend the result contract compatibly. Exercise Quick, Deep, older receipts, lens masking and a one-page browser PDF in English and zh-HK.
+3. Verify profile creation, owner access, one-time anonymous claims, 30-day expiry, envelope encryption and deletion in isolated Postgres before connecting account controls. Exercise session refresh, magic link, Google and Turnstile.
+4. Exercise account history and deletion through the web entry points. Localize navigation, policies, limitations and the daily quota. Verify the Sentry allowlist with sensitive input.
+5. Run contract drift, TypeScript, unit, Python, database and browser checks. Record evidence and deployment settings.
+
+The preliminary CUDA half-split estimated 46/2,345 false sentence flags (1.96%) at threshold 0.707723, just outside the 4% ±2-point target. For the final sentence fit use all human sentences in the original M6 v4 trace, then apply that single threshold to the independently reserved M6 prospective trace. Use the Phase 1.1 trace digests and document/source membership checks. Publish the result even if it misses, with no threshold adjustment on the prospective trace.
+
+The broad M6 fit returned 127/6,965 (1.82%). Both broad traces include non-essay genres. For a separate essay-domain estimate, reserve 160 calibration essays in normalized document hash order and all eligible validation essays from the Phase 1 cache. Exclude documents from both broad traces, enforce distinct source groups, and freeze membership before inference. Fit the 4% point once on calibration sentences. Evaluate the fixed cutoff on the essay validation fold and replay it on both broad traces. Adopt it for the essay beta only if the essay holdout meets the two-point tolerance. Publish every replay and qualify any claim of transfer across genres.
+
+Every result and PDF carries “A detector score is a reason to look closer, never proof.” Scores include an interval and accessible explanations. Quick requires 150 English words and Deep requires 300. Lenses use published descriptions only. Text stays out of telemetry and permanent plaintext storage. Signed-in users can explicitly save a 30-day encrypted copy. Preserve the free tiers, research-use restrictions, strict TypeScript, keyboard access, non-colour cues and reduced motion.

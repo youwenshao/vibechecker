@@ -1,6 +1,24 @@
 name: Engine and web checks
 on: [push, pull_request]
 jobs:
+  database:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check migrations, owner policies and expiry
+        run: |
+          DB=$(docker run -d -e POSTGRES_PASSWORD=local-test-only supabase/postgres:17.12.0.002 \
+            postgres -c shared_preload_libraries=pg_cron -c cron.database_name=postgres)
+          trap 'docker rm -fv "$DB" >/dev/null' EXIT
+          for attempt in {1..60}; do
+            docker exec "$DB" pg_isready -h 127.0.0.1 -U postgres -d postgres -q && break
+            sleep 1
+          done
+          for file in supabase/migrations/*.sql supabase/tests/phase_{zero,one}.sql; do
+            docker exec -i "$DB" psql -Xq -v ON_ERROR_STOP=1 -U supabase_admin -d postgres < "$file"
+          done
+          docker exec -i "$DB" psql -XqAt -v ON_ERROR_STOP=1 -U supabase_admin -d postgres < supabase/tests/phase_two.sql > /tmp/phase-two.tap
+          prove --exec cat /tmp/phase-two.tap
   verify:
     runs-on: ubuntu-latest
     steps:

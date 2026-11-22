@@ -4,6 +4,7 @@ import { BaseRate } from "../../../components/BaseRate";
 import deep from "../../../../../eval/reports/phase-1/report.json";
 import audit from "../../../../../eval/reports/phase-1/prospective/report.json";
 import quick from "../../../../../eval/reports/quick-m6-fp32-v0/report.json";
+import {lensVendors, lensIds, lensEvidence, sentenceAudit, sentenceHighlights} from "../../../lib/lenses";
 
 type Rate = { denominator: number; rate: number | null; wilson95: number[] | null };
 type Report = {
@@ -110,6 +111,7 @@ export default async function Methodology({ params }: Props) {
   setRequestLocale(locale);
   const t = await getTranslations({ locale });
   const home = "/" + locale;
+  const percent = new Intl.NumberFormat(locale, {style:"percent", maximumFractionDigits:2}).format;
   return <>
     <a className="skip" href="#method">{t("method.skip")}</a>
     <header className="masthead"><div className="mast-inner">
@@ -122,6 +124,21 @@ export default async function Methodology({ params }: Props) {
       <p className="caution">{t("chrome.foot")}</p>
       <Evidence report={deep} mode="deep" locale={locale}/>
       <AuditComparison locale={locale}/>
+      <section id="lenses" className="report-evidence"><h2>{t("lenses.source")}</h2>
+        {lensIds.map(id=>{
+          const vendor=lensVendors[id], row=lensEvidence[id];
+          return <section key={id}><h3>{t("lenses.style",{vendor})}</h3><p>{t("lenses."+id)}</p>
+            <p>{row.target===null?t("lenses.qual"):t("lenses.measure",{n:row.held_out_n,hits:row.high,target:new Intl.NumberFormat(locale,{style:"percent",maximumFractionDigits:1}).format(row.target)})+" "+t(row.within_two_points?"lenses.pass":"lenses.fail")}</p>
+            {id==="turnitin" && <>
+              <p>{t("lenses.essayAudit",{docs:sentenceAudit.documents.validation,hits:sentenceAudit.essay_candidate.high,
+                n:sentenceAudit.essay_candidate.held_out_n,rate:percent(sentenceAudit.essay_candidate.high_rate)})}</p>
+              <p>{t("lenses.broadAudit",{hits:sentenceAudit.broad_at_shipped_cutoff.high,
+                n:sentenceAudit.broad_at_shipped_cutoff.held_out_n,rate:percent(sentenceAudit.broad_at_shipped_cutoff.high_rate)})}</p>
+              <p>{t("lenses.denominator",{hits:sentenceHighlights.human,n:sentenceHighlights.total,
+                share:percent(sentenceHighlights.human_share)})}</p>
+            </>}
+            <a href={row.source}>{vendor}</a></section>;
+        })}</section>
       <details className="quick-evidence"><summary>{t("method.quick")}</summary><Evidence report={quick} mode="quick" locale={locale}/></details>
       <section className="base-rate"><h2>{t("method.priorTitle")}</h2><p>{t("method.priorBody", { prior: deep.prior * 100 })}</p><BaseRate/></section>
     </main>

@@ -7,14 +7,23 @@ import type { Mode } from "@vibechecker/contracts";
 import { SentenceHeatmap, type DisplaySentence } from "./SentenceHeatmap";
 import { StatusTicker } from "./StatusTicker";
 import { CheckError, checkEssay, type Stage } from "../lib/check-stream";
-import { deviceTtl, forgetChecks, latestCheck, saveCheck, type DeviceCheck } from "../lib/device";
+import { deviceTtl, latestCheck, forgetChecks, saveCheck, type DeviceCheck } from "../lib/device";
+import { LensPanel } from "./LensPanel";
+import { CautionText } from "./CautionText";
+import { EvidenceKit } from "./EvidenceKit";
 import { Dial, Icon } from "./Icons";
 import { Signals, VerdictGauge } from "./Instruments";
 import { Verification } from "./Verification";
 
 type Panel = "how" | "why" | "wrong";
-type ErrorKey = "too_short" | "too_long" | "not_english" | "quota" | "turnstile" | "busy" | "internal" | "file";
-const errors = new Set<ErrorKey>(["too_short", "too_long", "not_english", "quota", "turnstile", "busy", "internal", "file"]);
+type Quota = { owner: string | null; usage: Record<Mode, number>; limits: Record<Mode, number> };
+
+async function readQuota(): Promise<Quota | null> {
+  const response = await fetch("/api/quota", {cache:"no-store"});
+  return response.ok ? response.json() : null;
+}
+type ErrorKey = "too_short" | "too_long" | "not_english" | "quota" | "turnstile" | "busy" | "internal" | "file" | "auth_required";
+const errors = new Set<ErrorKey>(["too_short", "too_long", "not_english", "quota", "turnstile", "busy", "internal", "file", "auth_required"]);
 
 export function Checker() {
   const t = useTranslations();
@@ -26,6 +35,8 @@ export function Checker() {
   const minimum = mode === "quick" ? 150 : 300;
   const maximum = mode === "quick" ? 5000 : 2500;
   const [token, setToken] = useState("");
+  const [quota, setQuota] = useState<Quota>();
+  const [saveText, setSaveText] = useState(false);
   const [challenge, setChallenge] = useState(0);
   const [error, setError] = useState<ErrorKey>();
   const [storageError, setStorageError] = useState<"storageError" | "forgetError">();
@@ -46,7 +57,9 @@ export function Checker() {
 
   useEffect(() => {
     let mounted = true;
-    latestCheck().then((check) => {
+    readQuota().catch(() => null).then(async current => {
+      if (mounted && current) setQuota(current);
+      const check = await latestCheck(current?.owner);
       if (mounted && !touched.current && check) {
         setSaved(check);
         setText(check.text);
@@ -95,7 +108,7 @@ export function Checker() {
         stage: setStage,
         sentences: (items) => setSentences((prev) => [...prev, ...items.map((item, i) => ({ ...item, stagger: i }))]),
         reset: () => { setSentences([]); setAttempt((n) => n + 1); },
-      });
+      }, saveText && Boolean(quota?.owner));
       const now = Date.now();
       const check = { ...receipt, mode, text, createdAt: now, expiresAt: now + deviceTtl };
       try { await saveCheck(check); } catch { setStorageError("storageError"); }
@@ -105,6 +118,10 @@ export function Checker() {
       const code = e instanceof CheckError ? e.code as ErrorKey : "internal";
       setError(errors.has(code) ? code : "internal");
     } finally {
+      readQuota().then(current => {
+        if (current) setQuota(current);
+      }).catch(() => {});
+      setSaveText(false);
       setSentences([]);
       setToken("");
       setChallenge((n) => n + 1);
@@ -136,7 +153,7 @@ export function Checker() {
       <a className="wordmark" href={locale === "en" ? "/" : "/zh-HK"} aria-label={t("chrome.home")}>
         <Dial />{t("chrome.brand")}<span className="wordmark-dot" aria-hidden="true">.</span>
       </a>
-      <nav><a className="method-link" href={`/${locale}/methodology`}>{t("chrome.methodology")}</a>
+      <nav><a href={`/${locale}/history`}>{t("account.title")}</a><a className="method-link" href={`/${locale}/methodology`}>{t("chrome.methodology")}</a>
         <a href={locale === "en" ? "/zh-HK" : "/"} lang={locale === "en" ? "zh-HK" : "en"}><Icon name="globe" />{t("chrome.locale")}</a></nav>
     </div></header>
     <main id="main" tabIndex={-1}>
@@ -176,6 +193,9 @@ export function Checker() {
                 : words >= minimum ? t(token ? (mode === "quick" ? "home.ready" : "home.readyDeep") : "home.verification") : null}</p>}</div>
             <button type="submit" className="primary" disabled={busy || reading || !token || words < minimum || words > maximum}>{t(busy ? "home.checking" : "home.check")}<Icon name="arrow"/></button>
           </div>
+          {quota && <div className="quota-meter"><meter min={0} max={quota.limits[mode]} value={Math.max(0,quota.limits[mode]-quota.usage[mode])} aria-label={t("home."+mode)}/>
+            <span>{t("account.quota",{mode:t("home."+mode),left:Math.max(0,quota.limits[mode]-quota.usage[mode]),limit:quota.limits[mode]})}</span></div>}
+          {quota?.owner && <label className="save-choice"><input type="checkbox" checked={saveText} disabled={busy} onChange={e=>setSaveText(e.target.checked)}/>{t("account.save")}</label>}
           {words >= minimum && words <= maximum && <Verification key={mode + challenge} mode={mode} onToken={setToken} />}
           {error && <p role="alert" className="notice">{error === "too_short" ? t("errors.too_short", { n: minimum }) : t(`errors.${error}`, { n: maximum })}</p>}
         </form>
@@ -191,20 +211,22 @@ export function Checker() {
             {(["why", "wrong"] as const).map((name) => <button className="pill" key={name} onClick={() => openPanel(name)}>{t(`result.${name}`)}<Icon name="arrow"/></button>)}
           </div>
         </div><VerdictGauge result={result}/></section>
-        <aside className="caution"><Icon name="bolt"/><p>{t("chrome.foot")}</p></aside>
+        <aside className="caution"><Icon name="bolt"/><p><CautionText/></p></aside>
         {result.flags.length > 0 && <section className="flags"><h2>{t("result.flags")}</h2>
           <ul>{result.flags.map((flag) => <li key={flag}>{t(`result.${flag}`)}</li>)}</ul></section>}
       </div>}
       {((busy && mode === "deep") || result?.sentences?.length) ? <div className="report heat-report">
         <SentenceHeatmap key={attempt} text={text} sentences={result?.sentences ?? sentences} streaming={busy}/>
       </div> : null}
-      {result && <div className="report signals-report"><Signals result={result}/></div>}
+      {result && saved && <div className="report signals-report"><Signals result={result}/><LensPanel result={result}/>
+        <EvidenceKit result={result} mode={saved.mode??"quick"} version={saved.engineVersion} date={saved.createdAt}/></div>}
       {saved && <div className="device-controls">
         <p>{storageError ? t(`home.${storageError}`) : t("result.saved")}</p>
         <button type="button" className="text-button" disabled={busy || reading} onClick={() => void forget()}><Icon name="erase"/>{t("home.forget")}</button>
       </div>}
     </main>
     <footer><span className="footer-brand">{t("chrome.brand")}.</span>{!result && !busy && <p>{t("chrome.foot")}</p>}
+      <a href={`/${locale}/privacy`}>{t("policy.privacy")}</a><a href={`/${locale}/terms`}>{t("policy.terms")}</a>
       <button className="text-button" onClick={() => openPanel("how")}>{t("chrome.how")}</button></footer>
     <dialog ref={dialog} aria-labelledby="panel-title">
       <div className="dialog-head"><h2 id="panel-title">{panelTitle}</h2>

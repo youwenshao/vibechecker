@@ -1,6 +1,9 @@
 import { randomBytes, randomUUID } from "node:crypto";
 import { isIP } from "node:net";
-import { after, NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { viewer } from "../../../lib/server/auth";
+import { reportServiceFailure } from "../../../lib/telemetry";
+import { encryptEssay } from "../../../lib/server/envelope";
 import { z } from "zod";
 import { AnalyzeRequest, Backend, CheckResult, type SentenceScore, Version } from "@vibechecker/contracts";
 import { events, routeInference, validScore, validSentences } from "../../../lib/inference/router";
@@ -19,12 +22,12 @@ import {
   primaryHeartbeat,
   spendRetry,
   storeCheck,
-  type Completed,
 } from "../../../lib/server/store";
 
 export const runtime = "nodejs";
 export const maxDuration = 180;
 const Submission = AnalyzeRequest.extend({
+  saveText: z.boolean().optional(),
   turnstileToken: z.string().max(2048),
   retryToken: z.string().max(240).optional(),
 });
@@ -50,10 +53,12 @@ export async function POST(req: NextRequest) {
 
   const { text, mode, turnstileToken, retryToken } = data;
   try {
+    const owner = await viewer();
+    if (data.saveText && !owner) return error("auth_required", 401);
     const version = Version.parse(env("ENGINE_VERSION"));
     // A Deep result contains offsets into this exact UTF-16 string.
     const keyText = mode === "deep" ? text : text.replace(/\r\n?/g, "\n").normalize("NFC");
-    const key = digest("cache", version, mode, keyText);
+    const key = digest("cache", "lenses-v1", version, mode, keyText);
     const device = deviceIdentity(req.cookies.get("vc_device")?.value);
     // Vercel overwrites this header at ingress. Local requests share a development ceiling.
     const forwarded = process.env.VERCEL
@@ -66,14 +71,15 @@ export async function POST(req: NextRequest) {
     } else {
       if (!turnstileToken || !(await verifyTurnstile(turnstileToken, ip, mode)))
         return error("turnstile", 403);
-      if (!(await consumeQuota(digest("quota", device.id), digest("ip", ip), mode)))
+      if (!(await consumeQuota(digest("quota", device.id), digest("ip", ip), mode, Boolean(owner))))
         return error("quota", 429);
     }
     const checkId = randomUUID();
     const claimToken = randomBytes(32).toString("base64url");
-    let completed: Completed | undefined;
-    const finish = (backend: Backend, result: CheckResult) => {
-      completed = {
+    const finish = async (backend: Backend, result: CheckResult) => {
+      // A receipt can immediately be claimed, read or deleted, including on cache hits.
+      await storeCheck({
+        owner, envelope: data.saveText && owner ? encryptEssay(text, checkId, owner) : null,
         id: checkId,
         mode,
         key,
@@ -81,15 +87,15 @@ export async function POST(req: NextRequest) {
         version,
         backend,
         result,
-      };
-      return line({ type: "result", result, checkId, claimToken, backend, engineVersion: version });
+      });
+      return line({ type: "result", result, checkId, claimToken, owner, backend, engineVersion: version });
     };
     const found = await cached(key);
     let stream: Uint8Array | ReadableStream<Uint8Array>;
     if (found) {
       const result = CheckResult.parse(found.result);
       if (!validScore(result, mode, text)) return error("internal", 503);
-      stream = finish(Backend.parse(found.backend), result);
+      stream = await finish(Backend.parse(found.backend), result);
     } else {
       const abort = new AbortController();
       const { response, primary } = await routeInference(text, {
@@ -124,7 +130,7 @@ export async function POST(req: NextRequest) {
               if (!validScore(event.result, mode, text)) throw Error("Invalid result");
               if (mode === "deep" && (remainingChunks !== 0 || JSON.stringify(sentences) !== JSON.stringify(event.result.sentences)))
                 throw Error("Incomplete sentence stream");
-              yield finish(backend, event.result);
+              yield await finish(backend, event.result);
               return;
             } else if (event.type === "sentences" && backend && mode === "deep") {
               if (remainingChunks === 0 || !event.items.length || !validSentences(text, event.items, sentences.at(-1)?.end))
@@ -137,6 +143,7 @@ export async function POST(req: NextRequest) {
             } else throw Error("Unexpected inference event");
           }
         } catch {
+          await reportServiceFailure("checks");
           /* A truncated or invalid response uses the same retry path. */
         }
         yield failure();
@@ -154,9 +161,6 @@ export async function POST(req: NextRequest) {
         },
       });
     }
-    after(async () => {
-      if (completed) await storeCheck(completed);
-    });
     const res = new NextResponse(stream instanceof Uint8Array ? Buffer.from(stream) : stream, {
       headers: {
         "content-type": "application/x-ndjson",
@@ -174,6 +178,7 @@ export async function POST(req: NextRequest) {
     return res;
   } catch {
     // Outbound errors and malformed upstream payloads must never echo request content.
+    await reportServiceFailure("checks");
     return error("busy", 503);
   }
 }

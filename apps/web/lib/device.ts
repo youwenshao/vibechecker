@@ -34,9 +34,25 @@ async function transaction<T>(work: (store: IDBObjectStore, setResult: (value: T
   }
 }
 
-export const latestCheck = () => transaction<DeviceCheck | undefined>((store, set) => {
+export const latestCheck = (owner?:string|null) => transaction<DeviceCheck | undefined>((store, set) => {
   const request = store.index("createdAt").openCursor(null, "prev");
-  request.onsuccess = () => set(request.result?.value);
+  request.onsuccess = () => {
+    const cursor=request.result;
+    if(cursor?.value.owner && cursor.value.owner!==owner) cursor.continue();
+    else set(cursor?.value);
+  };
 });
 export const saveCheck = (check: DeviceCheck) => transaction<void>((store) => { store.put(check); });
 export const forgetChecks = () => transaction<void>((store) => { store.clear(); });
+export const deviceChecks = () => transaction<DeviceCheck[]>((store,set) => {
+  const request=store.index("createdAt").getAll();
+  request.onsuccess=()=>set(request.result.reverse());
+});
+export const forgetOne = (id:string) => transaction<void>(store => {store.delete(id);});
+export const forgetOwner = (owner:string) => transaction<void>(store=>{
+  const request=store.openCursor();
+  request.onsuccess=()=>{
+    const cursor=request.result;
+    if(cursor) {if(cursor.value.owner===owner) cursor.delete(); cursor.continue();}
+  };
+});

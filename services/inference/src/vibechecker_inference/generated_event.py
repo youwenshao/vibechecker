@@ -70,6 +70,46 @@ class InferenceEvent3(BaseModel):
     items: list[Item] = Field(..., min_length=1)
 
 
+class Turnitin(RootModel[int]):
+    root: int = Field(..., ge=20, le=100)
+
+
+class Gptzero(StrEnum):
+    low = 'low'
+    mixed = 'mixed'
+    high = 'high'
+
+
+class Zerogpt(StrEnum):
+    low = 'low'
+    mixed = 'mixed'
+    high = 'high'
+
+
+class Grammarly(StrEnum):
+    low = 'low'
+    mixed = 'mixed'
+    high = 'high'
+
+
+class Veriguide(StrEnum):
+    low = 'low'
+    mixed = 'mixed'
+    high = 'high'
+
+
+class Lenses(BaseModel):
+    model_config = ConfigDict(
+        extra='forbid',
+    )
+    version: Literal[1]
+    turnitin: Literal['masked'] | Literal[0] | Turnitin | None
+    gptzero: Gptzero
+    zerogpt: Zerogpt
+    grammarly: Grammarly
+    veriguide: Veriguide
+
+
 class Interval(BaseModel):
     model_config = ConfigDict(
         extra='forbid',
@@ -155,6 +195,7 @@ class Result(BaseModel):
     model_config = ConfigDict(
         extra='forbid',
     )
+    lenses: Lenses | None = None
     index: int = Field(..., ge=0, le=100)
     interval: Interval
     band: Band

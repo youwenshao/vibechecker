@@ -42,6 +42,11 @@ begin
     and expires_at=now()+interval '30 days' from public.checks where claim_token_hash='test-claim');
   foreach app_role in array array['anon','authenticated'] loop
     foreach table_name in array array['checks','result_cache','engine_status','quota_usage','retry_usage'] loop
+      if app_role='authenticated' and table_name='checks' then
+        -- Phase 2 grants owner reads/deletes. The pgTAP suite checks policy behaviour.
+        assert not has_table_privilege(app_role,'public.checks','insert,update');
+        continue;
+      end if;
       assert not has_table_privilege(app_role,'public.' || table_name,'select,insert,update,delete');
     end loop;
     foreach proc in array array[

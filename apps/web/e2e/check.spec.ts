@@ -43,6 +43,8 @@ test("word gate, keyboard disclosure, streamed result and device erasure", async
   await expect(page.getByText("148 more words for a Quick check.")).toBeVisible();
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
   await box.fill(essay);
+  // Verification resolves asynchronously before keyboard focus can land on submit.
+  await expect(check).toBeEnabled();
   await check.focus();
   await page.keyboard.press("Enter");
   await expect(page.getByRole("heading", { name: "Robot-smell index" })).toBeVisible();
