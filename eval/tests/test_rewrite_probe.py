@@ -54,7 +54,8 @@ def test_pair_origin_probe_is_portable_and_preserves_the_downward_ceiling(tmp_pa
         )
         path = tmp_path / (name + ".joblib")
         joblib.dump(model, path)
-        np.testing.assert_array_equal(joblib.load(path).predict_proba(x), p)
+        # BLAS kernels can round reloaded arrays differently on some CPUs.
+        np.testing.assert_allclose(joblib.load(path).predict_proba(x), p, rtol=0, atol=1e-12)
         with pytest.raises(ValueError, match="769"):
             model.predict_proba(np.zeros((1, 768)))
     assert np.all(
