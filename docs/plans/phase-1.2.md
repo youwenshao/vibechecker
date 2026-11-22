@@ -1,0 +1,45 @@
+# Phase 1.2 · Calibration, admissions essays and RTX sentence parity
+
+**Draft against `64b369a`. Deep v4 remains ineligible.** Budget one calibration challenger, one score-blind admissions reservation and one numerical fix attempt. Freeze the protocol before fitting, and freeze the candidate before reading audit scores. Close with a measured result or a named blocker for each item. The original Phase 1 gates govern every decision. [Phase 1.1 blocker report](../../eval/reports/phase-1/phase-1.1/report.md) · [Deep gates and calibration rules](../rfcs/004-calibration-and-uncertainty.md)
+
+Reserve the admissions sample while tracing the RTX failures. Settle any change to the scoring implementation before fitting the calibrator. Use one frozen combination of code and artifact for the final replays and the fresh audit.
+
+## 1. Fit one probability calibrator
+
+The historical worst ten-bin expected calibration error (ECE) was **0.1800** on four paraphrases. The prospective worst was **0.1250** on eight Cohere documents. The 23 long Liang admissions essays reached **0.1378** in the expanded source-by-length analysis. Moving the high cutoff changed false positives and recall while leaving the probabilities used for ECE intact. [Subgroup scorecards](../../eval/reports/phase-1/phase-1.1/metrics.json)
+
+- Use v4 as the control. Recover its **unrounded** stacker probabilities on the exact v4 calibration membership, including its registered supplements and source-alias exclusions. Verify the parent artifact, fold and feature hashes. Keep the classifier, heads, mixed cutoff of 1 and inclusive high cutoff of 24 fixed.
+- Fit one alternative isotonic curve with seed 42. Give each class half the total weight. Within each class, give each represented corpus source equal weight and divide that weight equally among its rows. Apply the same weighting inside each supported length bin and each of the existing 200 stratified bootstrap fits. Retain the 1,000-row, both-class support rule, pooled fallback, interval widths and displayed-index rounding. Source labels affect fitting only. This tests whether a few large sources dominate the probability fit.
+- Use the 268 development documents to select once. Advance only if worst-group ECE improves over v4, previously passing development gates still pass, human-essay high FPR is ≤2%, and the existing machine-hit retention checks pass. Otherwise stop calibration and retain v4 as the audit control. Freeze the chosen artifact digest and executable revision. The 221 historical and 435 prospective documents have known results and serve as regression replays. Neither replay selects a curve or threshold. [v4 fit and validation](../../eval/reports/phase-1/academic-addition-result.md)
+- For an advancing candidate, replay both cohorts once. Show pooled and worst original-stratum ECE, worst source × length ECE, counts and bin contributions for the worst groups. Report human high-band counts with Wilson intervals and same-cohort regressions against v2. Keep sparse strata visible. Show machine hits separately for Cohere and Cohere Chat. The Phase 1.1 guarded cutoff reduced the latter from 9/9 to 7/9.
+
+## 2. Reserve genuinely fresh admissions essays
+
+All 70 pinned Liang admissions essays have prior assignments. Thirty went to development, 36 were scored historically and four triggered the language refusal. The guarded policy flagged **4/36** on Liang and **5/267** when those same essays were added to the earlier audit. The 36 remain historical controls. [Admissions source inventory](../../eval/reports/phase-1/college-source-coverage.md)
+
+1. Review at most two candidate collections of authentic human US undergraduate application essays. Require research-use rights, documented human provenance and enough author or source-family information to check independence. An archive with unavailable human texts, university coursework or generated responses cannot supply this sample. If neither collection qualifies, record the access or provenance blocker and finish the other work.
+2. Before scoring, screen at most 300 distinct candidate authors through normal Deep English and length admission. Target **200 eligible authors**, one essay each, with **72 at 300–599 words and 128 at 600–1,199**, matching Liang's historical 13:23 length mix. Use a seeded order within each band. Exclude shared authors, linked drafts, reprints and normalized or near-duplicate texts across all training, calibration, validation and prior audit memberships. Freeze source revisions, eligibility, exclusion counts, overlap checks, seed and membership hashes. Record any shortfall before unblinding. Keep essay text out of receipts and logs.
+3. Score the reserved sample once with the frozen candidate, or v4 if calibration stopped. Report false positives, denominator and 95% Wilson interval by source, length and overall. At 200 essays, four flags are exactly 2%. Also report historical Liang separately and the combined count with the 231 earlier prospective human essays, identifying the reused component. A sample below target remains informative with its achieved coverage and interval.
+
+An independently sourced admissions sample tests generalization to that genre. Keep its real dataset identifier. The existing prospective gate explicitly requires `liang/college-human` and stays incomplete without qualifying fresh Liang coverage. A favorable pooled estimate cannot override that status or a historical failure. [Prospective gate and missing cohort](../../eval/reports/phase-1/prospective/report.md)
+
+## 3. Localize the two RTX discrepancies
+
+The RTX 5090 matched all 221 document indexes and 5,236 UTF-16 spans. These are the two distinct over-tolerance sentences. The hardware receipt contains their full document hashes. [Phase 1.1 hardware receipt](../../eval/reports/phase-1/phase-1.1/hardware.json)
+
+| Document hash prefix | UTF-16 span | RTX | Expanded-Q4 CPU | M6 Metal |
+|---|---:|---:|---:|---:|
+| `d271c647` | 360–3044 | 0.228442 | 0.272296 (Δ 0.043854) | 0.253382 (Δ 0.024940) |
+| `abf72836` | 0–17 | 0.447979 | 0.422627 (Δ 0.025352) | Within 0.02 of RTX |
+
+1. Reconstruct both full documents from the pinned research cache. Replay each twice on RTX, expanded-Q4 CPU and M6 Metal with the v4 weights, tokenizer, prefill 512 and locked runtimes. Compare token positions, chunk boundaries, paired-model token statistics, the four waveform channels, sentence-head pooling and the final score. Feed identical cached waveforms to the same frozen head to distinguish upstream numerical drift from a readout difference. Preserve numeric summaries and hashes only.
+2. If the first divergent stage is reproducible, try **one** general correction there, with a regression test covering both spans and a passing control. Keep the tolerances and learned weights fixed. If the cause remains unresolved or either witness still fails, record the first divergent stage, observed deltas and backend pair, then stop. A correction affecting M6 features invalidates the corresponding cached calibration inputs. Rebuild and verify them before fitting, or keep the calibration and parity results separate.
+3. If both witnesses pass, run **one full confirmation per backend** on the same frozen candidate and all 221 documents. Require identical membership and UTF-16 spans, maximum index difference ≤1 and maximum sentence difference ≤0.02 across all 5,236 spans for each local comparison. Report counts above tolerance, worst spans, hardware, durations and trace hashes. Budget for the prior CPU runtime of 6 h 38 min. Identify the CPU path as `mlx-cpu-dense-q4`. On the tailnet workstation, pause only `beat-ad-beta-backup-1` during GPU work, log pause and restore times, restore on exit or failure, and verify it is running and unpaused.
+
+## Decision and evidence
+
+Publish the frozen protocol and hashes, source reservation or access blocker, subgroup scorecards, parity traces by digest and a decision report under `eval/reports/phase-1/phase-1.2/`. Record commands, counts, intervals, run times and any missing measurement. On implementation, rerun the 108 existing M6 Python tests plus focused regression tests, `pnpm verify` (13 web tests) and the 13 Playwright tests.
+
+Apply the original gates separately to each applicable scorecard. Pooled ECE must be ≤0.05, worst-stratum ECE ≤0.08, human-essay high FPR ≤2%, essay AUROC ≥0.90, ESL and TOEFL high FPR each ≤5%, and each native-comparison gap ≤0.03. Maximum same-cohort metric and sentence-F1 regressions are each ≤0.01. Keep the 300-word Deep minimum and attribute the 24/91 below-minimum TOEFL result to v4. Release-length TOEFL and other missing comparisons retain their recorded status.
+
+Update only the gate evidence supported by the frozen run. Stop after this pass with all failed or incomplete gates listed. The Modal hold continues to cover the Falcon L40S bf16 reference, hosted training and hosted parity. Deep remains ineligible. Release and Phase 2 are outside this plan. [Phase 1 evidence](phase-1-evidence.md)
