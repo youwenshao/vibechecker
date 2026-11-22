@@ -55,4 +55,17 @@ Set the client and server Sentry DSNs to enable error reporting. For the nightly
 
 For nightly backups, set `BACKUP_DATABASE_URL` to a TLS PostgreSQL session connection with read access to the application tables and auth users and identities. Configure the backup bucket, its own scoped R2 credentials and an ASCII-armored OpenPGP public encryption key. Keep the private key offline. Enable the schedule with `BACKUP_ENABLED=true`. Configure the bucket’s `database/` prefix to expire at 14 days as a backstop if scheduling stops. The workflow also prunes by UTC date. To verify an offline restore, apply the same migrations to an empty isolated database, then pipe `gpg --decrypt backup.dump.gpg` to `pg_restore --data-only --disable-triggers --single-transaction --exit-on-error --dbname="$RESTORE_DATABASE_URL"` with a privileged restore role. The separately stored `ESSAY_KEK` is needed to read opt-in essays afterward. [Backup workflow](../../.github/workflows/backup.yml)
 
-Live provider delivery, hosted configuration and the operator’s zh-HK editorial review remain staging sign-off items. The changes in this branch do not authorize a public detector release.
+## Staging verification on 2026-11-22
+
+[Staging](https://staging.vibechecker.io) served Phase 2 application commit `62d5f97` with the frozen Phase 1.1 v4 model. The Phase 1.2 work stayed on `codex/phase-1-deep`.
+
+| Check | Live observation |
+| --- | --- |
+| Email | After signing out of the Google session, requested a fresh email and opened its link in the same browser. The callback at `https://staging.vibechecker.io/api/auth/callback?locale=en` returned to the authenticated history page with both test checks and a Sign out control. Supabase recorded `magiclink` at 06:38:57 UTC for the same account. |
+| Google | Added `https://mdotrrzexmescyiqjhjm.supabase.co/auth/v1/callback` to the web client's authorised redirect URIs. A fresh sign-in returned to the authenticated staging history page with a Sign out control. Supabase recorded an `oauth` session at 06:16:50 UTC and linked the Google identity to the test account. |
+| Feature export | Downloaded `vibechecker-artifacts/features/2026-11-22.parquet` from R2. All 2,997 bytes matched the exporter output. PyArrow decoded the expected schema and one Deep row from `deep-qwen7b-q4-p512-v4`. SHA-256 `3afc3079398a7d31c7e99e36cd1d87babb277765abd6694a186b7e5d856747a9`. |
+| Backup restore | Downloaded `vibechecker-staging-backups/database/2026-11-22.dump.gpg` from R2 and decrypted it with the dedicated staging key. Restored it in one transaction into an empty PostgreSQL 17 database with the application migrations and the hosted Auth schema version. Counts matched the source snapshot across all ten tables, including one user, one identity, two checks and one feature row. Content digests also matched for checks and features. Ciphertext SHA-256 `b7a7474c1fe0d847f9adb226239e2d1babe51ab0aa7476f536a058518ec72a2e`. |
+
+The staging key fingerprint is `B57DADD7AE82BCF499A2A540C9CCEE7743370C88`. The operator’s Windows keyring is under `%USERPROFILE%\.gnupg\vibechecker-staging`, with the passphrase protected by the same Windows account at `%LOCALAPPDATA%\VibeChecker\staging-backup-key.dpapi`. The restore supplied the unwrapped passphrase to Git for Windows GnuPG on a private stdin pipe with a Windows CRLF line ending.
+
+The archive checks ran on demand. The restore database was removed after comparison. The backup workflow's dump command was also exercised against the staging session pooler after correcting its handling of PostgreSQL connection URIs. Nightly workflow execution and the operator’s zh-HK editorial review are still open.
