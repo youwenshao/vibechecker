@@ -16,7 +16,25 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) notFound();
   const t = await getTranslations({ locale, namespace: "home" });
-  return { title: t("pageTitle"), description: t("subline") };
+  return {
+    applicationName: "VibeChecker",
+    title: t("pageTitle"),
+    description: t("subline"),
+    openGraph: { siteName: "VibeChecker", title: t("pageTitle"), description: t("subline") },
+    icons: {
+      icon: [
+        { url: "/icon.svg", type: "image/svg+xml", sizes: "any" },
+        { url: "/icon.png", type: "image/png", sizes: "512x512" },
+        {
+          url: "/brand/icon-night-cream.png",
+          type: "image/png",
+          sizes: "1024x1024",
+          media: "(prefers-color-scheme: dark)",
+        },
+      ],
+      apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+    },
+  };
 }
 
 export default async function Layout({ children, params }: Props & { children: ReactNode }) {

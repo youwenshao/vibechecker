@@ -6,7 +6,7 @@ import type { Mode } from "@vibechecker/contracts";
 import { readEssay, wordCount } from "../lib/essay";
 import { CheckError, checkEssay, type Stage } from "../lib/check-stream";
 import { deviceTtl, forgetChecks, latestCheck, saveCheck, type DeviceCheck } from "../lib/device";
-import { Masthead, SiteFooter } from "./Chrome";
+import { GoogleNotice, Masthead, SiteFooter } from "./Chrome";
 import { EvidenceKit, KitSection } from "./EvidenceKit";
 import { DoorSteps, HomeTitle, SampleCard } from "./Home";
 import { Icon } from "./Icons";
@@ -214,6 +214,7 @@ export function Checker() {
         </form>
         {busy && <StatusBox stage={stage} />}
         <p className="privacy"><Icon name="lock" />{t("home.privacy")}</p>
+        <GoogleNotice />
         {saved && <div className="device-controls"><p>{savedNote}</p>{forgetButton}</div>}
       </div>
       <SampleCard mode={mode} />

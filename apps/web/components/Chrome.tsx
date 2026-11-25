@@ -11,6 +11,13 @@ export function Wordmark({ href, label }: { href?: string; label?: string }) {
   return href ? <a className="wordmark" href={href} aria-label={label}>{body}</a> : <span className="wordmark">{body}</span>;
 }
 
+export function GoogleNotice() {
+  const t = useTranslations("home");
+  return <p className="google-notice">{t.rich("googleNotice", {
+    link: (chunks) => <a href={t("privacyUrl")}>{chunks}</a>,
+  })}</p>;
+}
+
 export function Masthead({ current }: { current?: "history" | "methodology" }) {
   const t = useTranslations("chrome");
   const locale = useLocale();

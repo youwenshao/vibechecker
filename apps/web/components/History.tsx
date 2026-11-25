@@ -12,6 +12,7 @@ import { SentenceHeatmap } from "./SentenceHeatmap";
 import { Icon } from "./Icons";
 import { Flags, HouseRule, InfoDialog, ResultHero, type Panel } from "./ResultView";
 import { Flyer, PassStage, ThumbFlyer, ThumbPass, type Reading } from "./ResultObjects";
+import { GoogleNotice } from "./Chrome";
 
 type Row = {
   id: string;
@@ -178,6 +179,7 @@ export function History() {
             {t("account.google")}
           </button>
         </div>
+        <GoogleNotice />
       </form>
     </div>
   );

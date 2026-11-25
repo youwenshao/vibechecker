@@ -20,6 +20,24 @@ function keys(value: Record<string, unknown>, prefix = ""): string[] {
 }
 describe("UI checks", () => {
   it("has complete English and Hong Kong Chinese catalogues", () => expect(keys(en)).toEqual(keys(zh)));
+  it("names VibeChecker and states the OAuth limits in English", () => {
+    expect(en.chrome.brand).toBe("vibechecker");
+    expect(en.home.pageTitle.startsWith("VibeChecker")).toBe(true);
+    expect(en.home.subline.startsWith("VibeChecker")).toBe(true);
+    expect(en.home.subline).toContain("estimates whether an English essay resembles AI-written text");
+    expect(en.home.subline).toContain("without an account");
+    expect(en.home.googleNotice).toContain("does not use Google APIs or Google user data");
+    expect(en.home.googleNotice).toContain("non-consensual intimate imagery");
+    expect(en.home.privacyUrl).toBe("https://vibechecker.io/en/privacy");
+    expect(en.policy.operator).toContain("VibeChecker");
+    expect(en.policy.google).toContain("Google account email address");
+    expect(en.policy.googleLimits).toContain("non-consensual intimate imagery");
+    expect(en.policy.rightsTitle).toContain("PDPO");
+    expect(zh.chrome.brand).toBe("vibechecker");
+    expect(zh.home.subline.startsWith("VibeChecker")).toBe(true);
+    expect(zh.home.privacyUrl).toBe("https://vibechecker.io/zh-HK/privacy");
+    expect(zh.policy.transfersTitle).toBe("服務供應商及跨境傳送");
+  });
   it("counts Unicode words, internal apostrophes and hyphens", () => {
     expect(wordCount("cafe\u0301 — 2026, student’s, shelf-life. 😀")).toBe(4);
     expect(wordCount("　")).toBe(0);

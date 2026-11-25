@@ -21,7 +21,8 @@ export default async function Policy({
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "policy" });
   const sections =
-    policy === "privacy" ? ["data", "purpose", "transfers", "rights"] : ["use", "limits", "beta"];
+    policy === "privacy" ? ["operator", "data", "purpose", "google", "transfers", "rights"] : ["use", "limits", "beta"];
+  const more: Record<string, string[]> = { purpose: ["features"], google: ["googleLimits"] };
   return (
     <SectionPage locale={locale} className="method-page policy-page">
       <h1>{t(policy)}</h1>
@@ -29,7 +30,7 @@ export default async function Policy({
         <section className="report-evidence" key={k}>
           <h2>{t(k + "Title")}</h2>
           <p>{t(k)}</p>
-          {k === "purpose" && <p>{t("features")}</p>}
+          {(more[k] ?? []).map((name) => <p key={name}>{t(name)}</p>)}
         </section>
       ))}
       <a className="mail" href="mailto:hello@vibechecker.io">hello@vibechecker.io</a>
